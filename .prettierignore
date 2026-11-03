@@ -1,0 +1,8 @@
+# Installed by the Angular skills installer; third-party content, not our formatting.
+.agents/
+
+# Build and dependency output
+node_modules/
+dist/
+.angular/
+coverage/

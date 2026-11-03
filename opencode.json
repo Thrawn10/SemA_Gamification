@@ -1,0 +1,39 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": ["docs/angular/best-practices.md"],
+  "mcp": {
+    "servers": {
+      "angular-cli": {
+        "type": "local",
+        "command": ["npx", "-y", "@angular/cli", "mcp"]
+      }
+    }
+  },
+  "permissions": [
+    {
+      "action": "read",
+      "resource": "*.env",
+      "effect": "ask"
+    },
+    {
+      "action": "read",
+      "resource": "*.env.*",
+      "effect": "ask"
+    },
+    {
+      "action": "read",
+      "resource": "*.env.example",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "git push*",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "rm -rf*",
+      "effect": "deny"
+    }
+  ]
+}
