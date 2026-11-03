@@ -1,0 +1,1088 @@
+{
+  "lehrberuf": {
+    "code": "EDB",
+    "name": "Entwickler/in digitales Business EFZ",
+    "fachrichtung": null,
+    "lehrdauerJahre": 4
+  },
+  "bildungsplanJahr": 2024,
+  "version": 1,
+  "quelle": "Vorlage_Bildungsplan EdB 2024.xlsx",
+  "bereiche": [
+    {
+      "code": "A",
+      "titel": "Begleiten von Projekten",
+      "kompetenzen": [
+        {
+          "code": "a1",
+          "titel": "Ausgangslage eines Geschäftsvorhabens ermitteln und Erfolgskriterien festlegen",
+          "beschreibung": "Entwickler/innen digitales Business EFZ analysieren die Bedürfnisse von Anspruchsgruppen und bestimmen Kriterien an Projekten. Dies mit dem Ziel, eine Ausgangslage umfassend zu verstehen: Zu Beginn eines Vorhabens liegen konkrete Anforderungen von Anspruchs- und Zielgruppen vor (z.B. Kunde möchte schnell und einfach kommunizieren können, Kunde möchte ein alternatives Login, online-Ablauf für Eingabe von Steuerdokumenten optimieren). Entwickler/innen digitales Business EFZ erarbeiten anhand dieser Anforderungen das Problem Statement. Die Ergebnisse halten sie schriftlich fest, z.B. auf einer digitalen Kollaborationsplattform. Sie verifizieren das Problem Statement mit den Anforderungsstellenden oder mit weiteren relevanten Stakeholdern (z.B. Partner, Kunden). Anschliessend definieren sie die Akzeptanzkriterien (Wann ist eine Lösung gut genug? z.B. «die neue Face-ID muss aktiviert und deaktiviert werden können») sowie den Leistungsumfang gemeinsam mit den Auftragsstellenden. Dabei ist eine wertfreie, unvoreingenommene Herangehensweise von Bedeutung. Gemeinsam mit ihrem Team legen sie Erfolgskriterien fest; dadurch können Projekte oder Lösungen am Schluss auf ihre Wirkung überprüft werden. Schliesslich schätzen sie die notwendigen Investitionen ab. Dazu greifen sie auf Vergleichsanforderungen oder auf ihre Erfahrungen zurück. Ausserdem berücksichtigen sie die Entwicklung von Kosten im Verhältnis zum generierten Mehrwert (einfacher Business Case - Return on Investment).",
+          "module": {
+            "basislehrjahr": ["215"],
+            "berufsfachschule": [],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "a1.1",
+              "text": "Sie ermitteln die Ausgangslage (Problem Statement) aufgrund von vorliegenden Anforderungen und beschreiben diese sachlich und nachvollziehbar (wann, wer, zu welchem Zeitpunkt tritt ein Problem auf?).",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a1.2",
+              "text": "Sie verifizieren die definierte Ausgangslage (Problem Statement) mit den Anforderungsstellenden und weiteren relevanten Stakeholdern.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a1.3",
+              "text": "Sie definieren Akzeptanzkriterien und Leistungsumfänge mit den Anforderungsstellenden.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a1.4",
+              "text": "Sie legen mit dem Team qualitativ und quantitativ messbare Erfolgskriterien fest.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a1.5",
+              "text": "Sie erstellen eine Schätzung der notwendigen Investitionen (z.B. anhand von Vergleichsanforderungen, Erfahrungen).",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "a2",
+          "titel": "Ideen für innovative Geschäftslösungen entwerfen",
+          "beschreibung": "Entwickler/innen digitales Business EFZ nutzen kreative Ansätze und Methoden, um Ideen für innovative Geschäftslösungen zu entwerfen: Sie arbeiten typischerweise in agilen Organisationen, in denen oftmals andere Herangehensweisen im Vordergrund stehen als in klassischen Projektstrukturen. Dementsprechend verfügen Entwickler/innen digitales Business EFZ über ein Repertoire an kreativen Methoden (z.B. Design Thinking, Story Mapping, Double Diamond, Customer Journey, Prototyping), die sie in der Entwicklung von Lösungen einsetzen. Sie führen Brainstormings durch, visualisieren Optionen, planen Experimente, um Annahmen zu prüfen und bewerten geeignete Lösungen. Entwickler/innen digitales Business EFZ gehen diese Prozesse offen, neugierig und engagiert an. Sie sind in der Lage, sich bewusst in die Perspektive von anderen Personen (z.B. Nutzer/innen) zu versetzen.",
+          "module": {
+            "basislehrjahr": ["210", "45"],
+            "berufsfachschule": [],
+            "uek": [
+              "338 Lösungen kreativ und innovativ entwickeln (Wahlpflicht)",
+              "394 Digitale Transformation untersuchen (Wahlpflicht)",
+              "395 Ideen und Szenarien für digitale Geschäftsmodelle evaluieren (Wahlpflicht)"
+            ]
+          },
+          "leistungsziele": [
+            {
+              "code": "a2.1",
+              "text": "Sie sammeln erste Ideen (z.B. mittels Brainstormings) und versetzen sich dafür bewusst in unterschiedliche Perspektiven.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a2.2",
+              "text": "Sie visualisieren mögliche fachliche Lösungen mit geeigneten Hilfsmitteln (z.B. digitales Whiteboard, Post-it, Zeichnung, Mockup, Prototypen).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a2.3",
+              "text": "Sie planen iterativ kleine Experimente im realen Umfeld und führen diese durch, um rasch Rückmeldungen zu sammeln und Optimierungen abzuleiten (z.B. Usability Testing, AB-Testing).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a2.4",
+              "text": "Sie bewerten mit dem Team fachliche Lösungen mittels Akzeptanzkriterien und geeigneten Methoden (z.B. Kundenfeedback) unter Berücksichtigung der technologischen und wirtschaftlichen Machbarkeit, der ökologischen Auswirkungen sowie der personellen Verfügbarkeit.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a2.5",
+              "text": "Sie bestimmen im Team die fachliche Lösungsvariante anhand von geeigneten Entscheidungs-Methoden (z.B. Entscheidungsmatrix, WSJF).",
+              "taxonomie": "K4"
+            }
+          ]
+        },
+        {
+          "code": "a3",
+          "titel": "Projektplanung von digitalen Business-Projekten entsprechend dem gewählten Vorgehensmodell anpassen",
+          "beschreibung": "Entwickler/innen digitales Business EFZ wählen den Projektzielen und -anforderungen entsprechende Vorgehensmodelle aus (z.B. Wasserfall, Scrum, Kanban, SAFe). Der Entscheid wird gemeinsam im Team gefällt: Sie analysieren die gegebenen Konditionen und Parameter eines Projekts (z.B. Teamstruktur, Dynamik der Anforderungen, Entwicklungsstruktur, Teamgrösse). Anschliessend erstellen sie eine Abwägung zwischen plangetriebenen und agilen (iterativen, inkrementellen) Vorgehensmodellen und entscheiden sich im Team für eine Variante. Sie zeigen sich offen und flexibel in Bezug auf die Wahl des geeigneten Modells. Bei Bedarf passen sie das Modell projektspezifisch an",
+          "module": {
+            "basislehrjahr": ["214"],
+            "berufsfachschule": [],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "a3.1",
+              "text": "Sie analysieren vom Auftraggebenden vorgegebene Konditionen und Parameter.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a3.2",
+              "text": "Sie wägen Vor- und Nachteile von verschiedenen plangetriebenen resp. agilen (iterativen, inkrementellen) Vorgehensmodellen in Bezug auf Projekte ab und wählen im Team passende Modelle.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a3.3",
+              "text": "Sie passen Vorgehensmodelle projektspezifisch an (Process-Tailoring).",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "a4",
+          "titel": "Einfache Projekte und deren Aufgaben im Bereich digitales Business planen",
+          "beschreibung": "Entwickler/innen digitales Business EFZ planen einfache Projekte sowie Aufgaben gemäss gewähltem Vorgehensmodell: Um grössere Aufgaben greifbar zu machen, unterteilen sie diese in kleinere, besser einschätzbare Tätigkeiten. Sie kategorisieren die Aktivitäten anhand von Typ, Aufwand und Dauer und schätzen deren Komplexitätsgrad ab. Weiter klären sie, inwiefern die Tätigkeiten sequenziell (in einer spezifischen Abfolge) voneinander abhängig sind und bestimmen eine zeitliche Reihenfolge. Zum Schluss gruppieren sie die Aktivitäten in Bündel und priorisieren diese, um Zwischenziele effektiv und im zeitlichen Rahmen zu erreichen. Sie arbeiten dabei strukturiert und gehen systematisch vor.",
+          "module": {
+            "basislehrjahr": ["213"],
+            "berufsfachschule": [],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "a4.1",
+              "text": "Sie teilen Gesamtaufgaben in kleinere, besser einschätzbare und einer Ressource zuteilbare Aktivitäten auf (z.B. anhand Story-Map und SMART oder INVEST Methode).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a4.2",
+              "text": "Sie identifizieren Aktivitäten nach Typ, Aufwand oder Dauer.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a4.3",
+              "text": "Sie schätzen Aufwand, Dauer und Komplexitätsgrad von Aktivitäten ab.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a4.4",
+              "text": "Sie klären die sequenziellen Abhängigkeiten von Aktivitäten und definieren die zeitliche Reihenfolge.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a4.5",
+              "text": "Sie gruppieren und priorisieren Aktivitäten zur Erreichung eines Zwischenziels anhand von zeitlichen oder funktionellen Vorgaben.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "a5",
+          "titel": "Fortschritt von Projekten im Bereich digitales Business überprüfen und festhalten",
+          "beschreibung": "Entwickler/innen digitales Business EFZ überprüfen laufend den Fortschritt von Projekten oder ihrer Aufgaben darin und halten diesen gemäss projektspezifischem Vorgehensmodell fest: Sie bewerten den aktuellen Stand der ihnen zugewiesenen Aufträge. Anschliessend sammeln sie alle Bewertungen, kategorisieren und priorisieren diese und erarbeiten falls nötig Vorschläge für Korrekturmassnahmen. Schliesslich halten sie den Fortschritt schriftlich sowie visuell fest und definieren zusammen mit den Entscheidungsträgern das weitere Vorgehen.",
+          "module": {
+            "basislehrjahr": ["212"],
+            "berufsfachschule": [],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "a5.1",
+              "text": "Sie bringen Bewertungen zum aktuellen Stand der ihnen zugewiesenen Aufträge ein (persönlich oder über ein Tool).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a5.2",
+              "text": "Sie kategorisieren und priorisieren gesammelte Bewertungen.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a5.3",
+              "text": "Sie konsolidieren Bewertungen und erarbeiten ggf. Vorschläge für Korrekturmassnahmen.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "a5.4",
+              "text": "Sie halten Fortschritte gemäss projektspezifischem Vorgehensmodell schriftlich fest und stellen diese visuell dar.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a5.5",
+              "text": "Sie definieren in Absprache mit Entscheidungsträgern das weitere Vorgehen.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "a6",
+          "titel": "Erfolg und Wirkung von Geschäftslösungen überprüfen und bei Bedarf Optimierungsmassnahmen einleiten",
+          "beschreibung": "Entwickler/innen digitales Business EFZ überprüfen Erfolg und Wirkung eines Projekts und leiten aufgrund der Ergebnisse Massnahmen für die Optimierung von eingeführten Lösungen ein: Sie bewerten den Erfolg eines Projekts, indem sie den Output der eingeführten Lösung mit den investierten Ressourcen (Input) vergleichen. Die Ergebnisse dokumentieren sie in geeigneter Form. Zusätzlich überprüfen sie die Wirkung der umgesetzten Lösung anhand der zu Projektbeginn definierten Erfolgskriterien. Schliesslich halten sie die wichtigsten Erkenntnisse als Konklusion fest und leiten korrektive Massnahmen als Empfehlungen ab. Sie gehen analytisch vor und sind auch bereit, die eigene Leistung kritisch zu beurteilen. Sie leben damit eine aktive und offene Fehlerkultur.",
+          "module": {
+            "basislehrjahr": ["211"],
+            "berufsfachschule": [],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "a6.1",
+              "text": "Sie bewerten ein Projekt im Team mittels einer Analyse von Input (z.B. investierte Ressourcen, Effektivität der investierten Ressourcen) und Output (z.B. Umfang des Produkts, Verhältnis von Ressourcen, Leistungen und Wirkungen, Qualität der Leistungen).",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a6.2",
+              "text": "Sie dokumentieren die Ergebnisse der Projektanalyse in geeigneter Form (z.B. Bericht, Online-Kollaborationsplattform) nachvollziehbar und übersichtlich.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a6.3",
+              "text": "Sie prüfen den Erfolg sowie die Wirkung einer eingeführten Lösung anhand der zu Beginn definierten qualitativen und quantitativen Erfolgskriterien (z.B. Businesserfolg, ökologische Faktoren, Nutzung von Systemen).",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a6.4",
+              "text": "Sie halten im Team die wichtigen Erkenntnisse als Schlussfolgerung fest und leiten daraus Empfehlungen und Optimierungen ab.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a6.5",
+              "text": "Sie kommunizieren das Resultat sowie die Empfehlungen überzeugend.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a6.6",
+              "text": "Sie beurteilen ihre eigene Leistung kritisch in Bezug auf den erreichten Erfolg.",
+              "taxonomie": "K3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "B",
+      "titel": "Darstellen, Automatisieren und Optimieren von Geschäftsprozessen",
+      "kompetenzen": [
+        {
+          "code": "b1",
+          "titel": "Geschäftsprozesse erfassen und beschreiben",
+          "beschreibung": "Entwickler/innen digitales Business EFZ bestimmen die wichtigsten Faktoren von Geschäftsprozessen und beschreiben diese in einer sinnvollen Übersicht. Je nach Betrieb und Arbeitsumfeld kann es sich dabei um ganz unterschiedliche Geschäftsprozesse handeln, z.B. Buchungs-, Logistik- oder Zahlungsabläufe, Produktions-, Bestell-, Personal oder Self-ServiceProzesse: Sie analysieren die Ausgangslage sowie den Prozess in einem spezifischen Geschäftsfeld und tragen die wichtigsten Informationen zusammen. Somit verschaffen sich Entwickler/innen digitales Business EFZ einen allgemeinen Überblick und klären grundlegende Fragen (z.B. Was ist der Auftrag? Wer sind die Zielgruppen? In welchem Kontext befindet sich der Prozess? Welches sind die Bedürfnisse der Akteure?). Für ein tiefergehendes Verständnis erfassen sie Zusammenhänge und halten relevante Informationen in sinnvollen Kategorien fest, welche sie anschliessend in einer Dokumentation nachvollziehbar beschreiben und sichtbar machen. Um das Resultat zu validieren, besprechen sie die Dokumentation mit dem Team oder externen Personen und holen dadurch Rückmeldungen für die Optimierung ein.",
+          "module": {
+            "basislehrjahr": ["217"],
+            "berufsfachschule": [],
+            "uek": [
+              "348 Geschäftsprozesse erfassen, modellieren und kritische Punkte ermitteln",
+              "394 Digitale Transformation untersuchen (Wahlpflicht)",
+              "395 Ideen und Szenarien für digitale Geschäftsmodelle evaluieren (Wahlpflicht)"
+            ]
+          },
+          "leistungsziele": [
+            {
+              "code": "b1.1",
+              "text": "Sie verschaffen sich einen Überblick über Prozesse, indem sie relevante Parameter und Faktoren (z.B. Auftrag, Zielgruppe, Kontext, involvierte Akteure, Schnittstellen, Zeitfenster, Durchlaufzeit) bestimmen.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "b1.2",
+              "text": "Sie befragen Akteure zielgerichtet und aufmerksam und versetzen sich dadurch in eine konkrete Situation hinein.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b1.3",
+              "text": "Sie strukturieren Informationen anhand von sinnvoll definierten Kategorien (z.B. Durchlaufzeiten, Arbeitskosten, Energie- und Materialeinsatz, Abfallaufkommen).",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "b1.4",
+              "text": "Sie dokumentieren Prozesse präzise und nachvollziehbar, sowohl als Beschreibung wie auch visuell.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b1.5",
+              "text": "Sie besprechen Geschäftsprozesse im Team oder mit externen Personen und holen gezielt Rückmeldungen ein.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "b2",
+          "titel": "Geschäftsprozesse modellieren",
+          "beschreibung": "Entwickler/innen digitales Business EFZ modellieren Geschäftsprozesse in der betriebseigenen Notationssprache und stellen damit Abläufe nachvollziehbar dar: Sie differenzieren Geschäftsprozesse in logische, aufeinanderfolgende Schritte und ordnen die jeweiligen Notationselemente zu. Anhand dieser Vorbereitung modellieren sie den jeweiligen Prozess im entsprechenden Tool und mit der geeigneten Notationssprache und dokumentieren diesen abschliessend in einer Beschreibung oder Visualisierung. Somit werden abstrakte Geschäftsprozesse für Drittpersonen verständlich gemacht.",
+          "module": {
+            "basislehrjahr": ["69"],
+            "berufsfachschule": [],
+            "uek": ["348 Geschäftsprozesse erfassen, modellieren und kritische Punkte ermitteln"]
+          },
+          "leistungsziele": [
+            {
+              "code": "b2.1",
+              "text": "Sie analysieren die einzelnen Schritte von Geschäftsprozessen und ordnen diese den entsprechenden Notationselementen zu.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "b2.2",
+              "text": "Sie modellieren Geschäftsprozesse in einer geeigneten Notationssprache und mit dem entsprechenden Tool.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b2.3",
+              "text": "Sie erstellen verständliche Beschreibungen und Visualisierungen von modellierten Geschäftsprozessen.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "b3",
+          "titel": "Kundenerlebnisse darstellen und mit Geschäftsprozessen vergleichen",
+          "beschreibung": "Entwickler/innen digitales Business EFZ analysieren, beschreiben und vergleichen Kundenerlebnisse in Geschäftsprozessen und schaffen somit eine Grundlage für deren Optimierung: Sie versetzen sich in die Perspektive von Kunden (Wer sind sie? Was wollen sie? Welche Erwartungen haben sie?) und analysieren deren Erlebnis eines spezifischen Geschäftsprozesses. Dazu setzen sie geeignete Werkzeuge und Methoden ein (z.B. Customer Journey, Kundentypologien, Personas). Die Erkenntnisse validieren sie anhand von Rückmeldungen beteiligter Akteure. Anschliessend untersuchen sie die Unterschiede zwischen idealen und realen Kundenerlebnissen und ermitteln relevante Abweichungen. Die Ergebnisse dokumentieren sie schriftlich als Grundlage zur Optimierung von Geschäftsprozessen.",
+          "module": {
+            "basislehrjahr": ["219"],
+            "berufsfachschule": [],
+            "uek": ["348 Geschäftsprozesse erfassen, modellieren und kritische Punkte ermitteln"]
+          },
+          "leistungsziele": [
+            {
+              "code": "b3.1",
+              "text": "Sie klären grundlegende Fragen ab (z.B. Wer ist die Kundin /der Kunde? Welches sind die Erwartungen? Welchen Nutzen wünscht sich die Kundin /der Kunde?).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b3.2",
+              "text": "Sie analysieren bestehende Kundenerlebnisse (Service Design, End to End Betrachtung) umfassend und mit geeigneten Methoden (z.B. Customer Journey, Kundentypologien, Personas).",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "b3.3",
+              "text": "Sie stellen Kundenerlebnisse nachvollziehbar dar (z.B. auf Whiteboard, PowerPoint, mit visuellen Tools).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b3.4",
+              "text": "Sie holen sich gezielte Rückmeldungen von Beteiligten anhand von Interviews oder Umfragen ein.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b3.5",
+              "text": "Sie vergleichen die gewünschten mit den tatsächlichen Kundenerlebnissen im Geschäftsprozess und identifizieren Unterschiede.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "b3.6",
+              "text": "Sie halten Ergebnisse fest und kommunizieren diese im Team sowie mit Auftraggebenden.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "b4",
+          "titel": "Kritische Punkte in Geschäftsprozessen dokumentieren",
+          "beschreibung": "Entwickler/innen digitales Business EFZ ermitteln, beschreiben, begründen und dokumentieren kritische Punkte in Geschäftsprozessen: Sie identifizieren die kritischen Punkte (Pain-Points) in einem Geschäftsprozess, indem sie anhand der Dokumentation oder im Gespräch mit involvierten Akteuren Abhängigkeiten oder potenzielle Ineffizienzen untersuchen (z.B. mittels reverse Brainstorming). Sie überprüfen den Prozess auf allfällige Schwachstellen, Engpässe oder ungewollte Auswirkungen. Dabei wenden sie ihr analytisches und logisches Denken an. Die kritischen Punkte halten sie schriftlich fest und begründen, weshalb diese im Kontext des Prozesses fehleranfällig sind. Entwickler/innen digitales Business EFZ besprechen ihre Ergebnisse mit Auftraggebenden oder weiteren Personen. Dadurch erhalten sie eine Grundlage für das weitere Vorgehen oder für mögliche Optimierungen.",
+          "module": {
+            "basislehrjahr": ["220"],
+            "berufsfachschule": [],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "b4.1",
+              "text": "Sie identifizieren kritische Punkte (Pain-Points, wie z.B. Abhängigkeiten, Ineffizienzen, Risiken, Chancen) anhand von Interviews oder Dokumentations-Analysen in Geschäftsprozessen.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "b4.2",
+              "text": "Sie beschreiben kritische Punkte und halten diese als Beschreibung sowie visuell fest.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b4.3",
+              "text": "Sie begründen, weshalb kritische Punkte im Kontext eines Geschäftsprozesses als solche analysiert wurden.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b4.4",
+              "text": "Sie sprechen sich mit Auftraggebenden ab als Grundlage für weitere Schritte oder Optimierungen.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "b5",
+          "titel": "Lösungs- und Optimierungsmöglichkeiten für Geschäftsprozesse im Team entwickeln und festlegen",
+          "beschreibung": "Entwickler/innen digitales Business EFZ entwickeln im Team Lösungs- und Optimierungsmöglichkeiten für vorgängig analysierte Geschäftsprozesse (z.B. in Bezug auf die Automatisierung, die effiziente Gestaltung oder die Umsetzung von Wertschöpfungspotenzialen): Sie tragen alle relevanten Grundlagen und Dokumentationen zusammen und bereiten diese für das Team auf. Anhand von Brainstorming-Sessions sammeln sie im Team verschiedene Optionen für die Optimierung von Geschäftsprozessen. Dazu sind sie in der Lage, andere Perspektiven einzunehmen. Anschliessend entwickeln sie Kriterien zur Bewertung und prüfen diese im Team. Sie bewerten die verschiedenen Lösungsvarianten und ermöglichen dadurch eine fundierte Entscheidung. Aufbauend leiten sie konkrete und sinnvoll begründete Massnahmen ab, welche sie den Auftraggebenden als Lösungspaket vorlegen können. Um wertgenerierende Lösungen zu finden, hinterfragen sie Bestehendes kritisch. Sie berücksichtigen ausserdem Aspekte der ökologischen Nachhaltigkeit, wie etwa den Ressourcenverbrauch oder die Energieeffizienz von Prozessen.",
+          "module": {
+            "basislehrjahr": ["222"],
+            "berufsfachschule": [],
+            "uek": [
+              "368 Lösungsmöglichkeiten für Kundenerlebnisse erarbeiten",
+              "394 Digitale Transformation untersuchen (Wahlpflicht)",
+              "395 Ideen und Szenarien für digitale Geschäftsmodelle evaluieren (Wahlpflicht)"
+            ]
+          },
+          "leistungsziele": [
+            {
+              "code": "b5.1",
+              "text": "Sie bereiten verfügbare und relevante Grundlagen für die weitere Verwendung gründlich auf.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b5.2",
+              "text": "Sie sammeln im Team Ideen und Optionen (z.B. in Brainstorming-Sessions) zur Optimierung von Geschäftsprozessen. Dabei hinterfragen sie etablierte Handlungsmuster und achten auf Nachhaltigkeit (z.B. Ressourceneffizienz, Energieverbrauch von Prozessen).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b5.3",
+              "text": "Sie ermitteln Vereinfachungs- und Automatisierungsmöglichkeiten und deren Voraussetzungen.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "b5.4",
+              "text": "Sie entwickeln aussagekräftige Kriterien zur Bewertung von Lösungsmöglichkeiten und prüfen diese im Team.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "b5.5",
+              "text": "Sie bewerten im Team die verschiedenen Lösungsmöglichkeiten anhand der definierten Kriterien.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b5.6",
+              "text": "Sie leiten Massnahmen zur Überprüfung der Wirksamkeit der priorisierten Lösungsoptionen ab (z.B. Prototyping, Minimum Viable Product, Pilotbetrieb) und formulieren diese mitsamt schlüssiger Begründung.",
+              "taxonomie": "K5"
+            }
+          ]
+        },
+        {
+          "code": "b6",
+          "titel": "Einfache Geschäftsprozesse automatisieren",
+          "beschreibung": "Entwickler/innen digitales Business EFZ automatisieren Geschäftsprozesse und ermöglichen damit eine Effizienzsteigerung durch die Vereinfachung von Abläufen (z.B. automatisierte Datenauswertung von Nutzerangaben): Sie erstellen anhand von kritischen Punkten sowie möglichen Lösungsvarianten Umsetzungspläne für die Automatisierung. Dafür gehen sie analytisch und lösungsorientiert vor. Verschiedene Plattformen und Technologien haben unterschiedliche Vorteile und prägen die finale Funktion der Umsetzung massgebend. Deswegen evaluieren sie die verfügbaren Werkzeuge anhand von sinnvollen Bewertungskriterien und setzen die Automatisierung entsprechend um. Sie setzen dabei Standard-Tools ein (z.B. Microsoft Power Automate, Camunda, Integromat, IFTTT oder Zapier) und verfügen über ein Basiswissen in der Programmierung. Schliesslich testen sie die automatisierten Prozesse und nehmen allfällige Anpassungen vor.",
+          "module": {
+            "basislehrjahr": ["224"],
+            "berufsfachschule": [],
+            "uek": [
+              "325 Prozesse mit einer Programmiersprache automatisieren",
+              "248 ICT-Lösungen mit aktuellen",
+              "Technologien realisieren",
+              "(Wahlpflicht)"
+            ]
+          },
+          "leistungsziele": [
+            {
+              "code": "b6.1",
+              "text": "Sie erstellen anhand von kritischen Punkten (Pain Points) und entsprechenden Lösungsvarianten Umsetzungspläne für die Automatisierung von Geschäftsprozessen.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "b6.2",
+              "text": "Sie vergleichen die verfügbaren Plattformen und Technologien anhand von sinnvollen Bewertungskriterien und bestimmen geeignete Optionen.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "b6.3",
+              "text": "Sie setzen Automatisierungen mit passenden (\"no code\" oder \"low code\") Instrumenten um.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b6.4",
+              "text": "Sie prüfen umgesetzte Automatisierungen und nehmen bei Bedarf Anpassungen vor.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "b7",
+          "titel": "Automatisierungsaufträge mit Spezialistinnen und Spezialisten koordinieren",
+          "beschreibung": "Entwickler/innen digitales Business EFZ koordinieren die Umsetzung von anspruchsvollen Automatisierungen mit Spezialistinnen oder Spezialisten und stellen die einwandfreie Funktion sicher: Sie erstellen nachvollziehbare Pflichtenhefte, um den jeweiligen Auftrag zu spezifizieren. Das heisst, sie bestimmen Rahmendbedingungen und Anforderungen von Automatisierungsprozessen als Grundlage für die Auslagerung an Spezialistinnen oder Spezialisten. Anschliessend ermitteln sie mögliche interne oder externe Spezialistinnen und Spezialisten, die für die Umsetzung in Frage kommen und geben die Ausführung an eine geeignete Person oder Firma in Auftrag. Sie stehen bei Rückfragen oder Unklarheiten als Anlaufstelle zur Verfügung, betreuen die Umsetzung und validieren laufend den Fortschritt. Schliesslich prüfen sie den finalen, automatisierten Prozess und stellen sicher, dass dieser einwandfrei funktioniert.",
+          "module": {
+            "basislehrjahr": ["226"],
+            "berufsfachschule": [],
+            "uek": ["248 ICT-Lösungen mit aktuellen Technologien realisieren (Wahlpflicht)"]
+          },
+          "leistungsziele": [
+            {
+              "code": "b7.1",
+              "text": "Sie definieren die Anforderungen an Automatisierungsaufträge nachvollziehbar.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "b7.2",
+              "text": "Sie ermitteln anhand der definierten Anforderungen mögliche interne oder externe Spezialistinnen oder Spezialisten für die Umsetzung von Aufträgen.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "b7.3",
+              "text": "Sie erteilen Aufträge an Spezialistinnen oder Spezialisten, betreuen deren Ausführung, validieren laufend den Fortschritt und dokumentieren das Resultat der Validierung.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b7.4",
+              "text": "Sie prüfen den finalen automatisierten Gesamtprozess und stellen sicher, dass dieser einwandfrei funktioniert.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "b8",
+          "titel": "Anforderungen an automatisierte Geschäftsprozesse überprüfen",
+          "beschreibung": "Entwickler/innen digitales Business EFZ überprüfen automatisierte Geschäftsprozesse und stellen sicher, dass die vordefinierten Anforderungen in der Umsetzung eingehalten werden: Sie identifizieren die zu prüfende Situation von automatisierten Geschäftsprozessen. Das heisst, sie ermitteln konkrete Anwendungsfälle, die einer Prüfung unterzogen werden müssen, um zu bestimmen, ob die Anforderungen eingehalten wurden. Anschliessend führen sie die Prüfung durch und dokumentieren die Resultate. Falls Probleme auftreten oder sich Optimierungen aufdrängen, definieren sie Massnahmen zur Problembehebung und führen diese wenn möglich selbstständig aus. Entwickler/innen digitales Business EFZ zeichnen sich dabei durch ihre Gründlichkeit und ihr Qualitätsbewusstsein aus. Sobald alle Probleme behoben sind und der Prozess einwandfrei funktioniert, koordinieren sie die Systemabnahme mit den Auftraggebenden.",
+          "module": {
+            "basislehrjahr": ["227"],
+            "berufsfachschule": [],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "b8.1",
+              "text": "Sie identifizieren anhand der Anforderungen die zu prüfenden Anwendungsfälle in automatisierten Geschäftsprozessen.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "b8.2",
+              "text": "Sie prüfen das anforderungskonforme Verhalten von automatisierten Geschäftsprozessen anhand der identifizierten Anwendungsfälle.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b8.3",
+              "text": "Sie dokumentieren Prüfresultate nachvollziehbar.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b8.4",
+              "text": "Sie definieren Massnahmen zur Fehlerbehebung oder Optimierung.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "b8.5",
+              "text": "Sie koordinieren die Abnahme von automatisierten Geschäftsprozessen mit den Auftraggebenden.",
+              "taxonomie": "K3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "C",
+      "titel": "Analysieren von Daten",
+      "kompetenzen": [
+        {
+          "code": "c1",
+          "titel": "Daten für einen Analyseauftrag im Team definieren und das Vorgehen für die Datenerhebung erarbeiten",
+          "beschreibung": "Entwickler/innen digitales Business EFZ identifizieren relevante Daten für Analysen und ermitteln, wie diese erhoben werden können. Dabei kann es sich sowohl um Geschäftsdaten (z.B. Einkaufsdaten, Besucher- und Verkaufszahlen, Lagerbestandsdaten, Benutzer- und Nutzungsdaten) wie auch um andere Daten oder Kennzahlen handeln (z.B. Marktkennzahlen): Sie setzen sich mit der vorliegenden Problem- und Fragestellung von Analyseaufträgen auseinander und besprechen Unklarheiten im Team. Dabei schaffen sie sich ein Verständnis der Bedürfnisse und Intentionen der Kundinnen und Kunden und ordnen die Erkenntnisse in einem Gesamtkontext ein. Um die Analyse am Schluss aussagekräftig zu bewerten, definieren sie messbare Ziele oder Kriterien. Anschliessend bestimmen sie relevante Daten und deren mögliche Quellen (woher erhalten wir die Daten? Wie können sie erhoben werden?). Zusätzlich ermitteln sie allfällige Kosten von Erhebungen, entwickeln passende Methoden und bestimmen den qualitativen Soll-Zustand der Daten. Unter Berücksichtigung der rechtlichen Rahmenbedingungen definieren sie die Anforderungen an den Datenschutz. Die Ergebnisse, d.h. die definierten Daten, Methoden und Anforderungen kommunizieren sie im Team und lassen diese validieren. Sie gehen auf Rückmeldungen ein und können diese gewinnbringend zur Verbesserung der eigenen Arbeit nutzen.",
+          "module": {
+            "basislehrjahr": ["228"],
+            "berufsfachschule": [],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "c1.1",
+              "text": "Sie erfassen die Problem- und Fragestellungen von Aufträgen und besprechen Unklarheiten mit dem Team.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c1.2",
+              "text": "Sie ermitteln und definieren dem Auftrag entsprechende messbare sowie aussagekräftige Ziele für die Analyse von Daten.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "c1.3",
+              "text": "Sie identifizieren relevante Daten, die benötigte Qualität und mögliche Quellen.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "c1.4",
+              "text": "Sie führen eine Kostenevaluation für Datenbeschaffungen durch.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c1.5",
+              "text": "Sie definieren Anforderungen an den Datenschutz unter Berücksichtigung der rechtlichen Rahmenbedingungen.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c1.6",
+              "text": "Sie legen geeignete Methoden für Datenerhebungen fest (z.B. Interviews, Umfragen, Workshops, Meetings).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c1.7",
+              "text": "Sie kommunizieren dem Team ihre Ergebnisse (relevante Daten, Methoden, Anforderungen) und begründen diese nachvollziehbar.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c1.8",
+              "text": "Sie nehmen kritische Rückmeldungen und Optimierungsvorschläge entgegen und passen ihren Vorgehensvorschlag entsprechend an.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "c2",
+          "titel": "Bestehende Daten aus verschiedenen Quellen sammeln oder bei externen Stellen einholen",
+          "beschreibung": "Entwickler/innen digitales Business EFZ erstellen eine sinnvolle Zusammenstellung bereits vorhandener Daten: Sie bestimmen, welche Ressourcen (z.B. Benutzer/innen, Stellen, Zugänge) für das Sammeln der gewünschten Daten benötigt werden. Sie fordern die Daten unter Einhaltung der rechtlichen Vorgaben sowie Datenschutzbestimmungen bei internen (z.B. Kompetenzzentren) oder externen Stellen (z.B. Bundesamt für Statistik, Marktforschungsinstitut, Open Data, Gartner) an. Falls Daten in für sie zugänglichen Systemen gespeichert sind (z.B. ERP, Data Warehouse), beschaffen sie sich diese selbstständig. Sie gehen mit den Daten verantwortungsvoll um und achten auf die Einhaltung von betrieblichen Richtlinien und Datenschutzbestimmungen.",
+          "module": {
+            "basislehrjahr": ["229"],
+            "berufsfachschule": [],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "c2.1",
+              "text": "Sie klären mit den nötigen Stellen die rechtlichen Vorgaben und Datenschutzbestimmungen, welche für ihr Vorhaben relevant sind.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c2.2",
+              "text": "Sie organisieren den Zugang zu benötigten Daten (z.B. Zugriff/Berechtigung einholen; wie komme ich an die Daten?).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c2.3",
+              "text": "Sie fordern benötigte Daten bei internen oder externen Stellen an und formulieren dabei klare Anforderungen (z.B. Umfang, Form, Terminierung).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c2.4",
+              "text": "Sie beschaffen sich selbstständig relevante Daten, die in zugänglichen Systemen gespeichert sind (z.B. Auswertungen, Reportings).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c2.5",
+              "text": "Sie speichern sensible Daten in einem geschützten Bereich ab.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "c3",
+          "titel": "Daten erheben",
+          "beschreibung": "Falls Daten und Informationen nicht bereits vorhanden sind, erheben Entwickler/innen digitales Business EFZ die Daten selbstständig: Sie planen die Durchführung der Datenerhebung und führen diese mit der passenden Methode durch. Typischerweise kommen dabei Interviews oder einfache Umfragen zum Einsatz. Die erhobenen Daten speichern sie in geeigneter Form und Qualität ab. Bei der Datenerhebung gehen sie analytisch und mit dem nötigen Fingerspitzengefühl vor.",
+          "module": {
+            "basislehrjahr": ["230"],
+            "berufsfachschule": [],
+            "uek": ["376 Daten erheben und auswerten"]
+          },
+          "leistungsziele": [
+            {
+              "code": "c3.1",
+              "text": "Sie planen anhand der Anforderungen die Durchführung der Datenerhebung (inkl. Herangehensweise, Quellen und Datenzielformat).",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "c3.2",
+              "text": "Sie erheben Daten mittels Interviews mit ausgewählten Personen.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c3.3",
+              "text": "Sie erheben Daten mittels einer einfachen Umfrage.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c3.4",
+              "text": "Sie speichern die erhobenen Daten in geeigneter Form und Qualität ab.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "c4",
+          "titel": "Daten strukturieren und zusammenführen",
+          "beschreibung": "Entwickler/innen digitales Business EFZ erstellen ein einfaches Datenmodell, in dem sie Daten aus unterschiedlichen Quellen strukturiert zusammenführen (z.B. Reports aus Systemen ziehen, Gemeinsamkeiten erkennen): Sie analysieren die Struktur von Daten und vergleichen diese miteinander. So bestimmen sie allfällige Gemeinsamkeiten, anhand deren sie ein passendes Datenmodell für einfache Analysen entwerfen können (z.B. ERM, Objekt). Bei komplexeren Fragestellungen holen sie Unterstützung von internen Spezialistinnen oder Spezialisten. Nach der Umsetzung laden sie die Daten der vorliegenden Struktur entsprechend in das Datenmodell. Sie setzen dabei ihre analytischen Fähigkeiten und ihr vernetztes Denken ein und achten auf eine exakte Vorgehensweise.",
+          "module": {
+            "basislehrjahr": ["232"],
+            "berufsfachschule": [],
+            "uek": ["248 ICT-Lösungen mit aktuellen", "Technologien realisieren", "(Wahlpflicht)"]
+          },
+          "leistungsziele": [
+            {
+              "code": "c4.1",
+              "text": "Sie analysieren die Struktur von Daten, vergleichen diese und identifizieren allfällige Gemeinsamkeiten.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "c4.2",
+              "text": "Sie entwerfen einfache Datenmodelle für einfache Analysen (z.B. ERM, Objekt).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c4.3",
+              "text": "Sie laden Daten, der Struktur entsprechend, in vorbereitete Datenmodelle.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "c5",
+          "titel": "Daten bereinigen",
+          "beschreibung": "Entwickler/innen digitales Business EFZ bereinigen Daten und stellen damit deren Plausibilität und Qualität sicher: Sie führen einfache Datenbereinigungen durch, indem sie ungewollte Redundanzen löschen, nicht benötigte Datensätze entfernen und fehlerhafte oder leere Datensätze aufarbeiten. Bei komplexen Datenbereinigungen holen sie Unterstützung bei internen Spezialistinnen und Spezialisten. Anschliessend kontrollieren sie das Format und analysieren die übrigen Daten auf Art, Aussage und Güte. Sie gehen präzise vor und achten darauf, dass sie die inhaltlichen Zusammenhänge nachvollziehen können (z.B. verstehe ich die Bedeutung eines Attributs? Liefern die Datenquellen die geforderte Qualität?).",
+          "module": {
+            "basislehrjahr": ["233"],
+            "berufsfachschule": [],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "c5.1",
+              "text": "Sie überprüfen Daten auf Redundanzen und löschen ungewollte Wiederholungen.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c5.2",
+              "text": "Sie entfernen Datensätze, welche für die jeweilige Analyse nicht benötigt werden.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c5.3",
+              "text": "Sie erkennen fehlerhafte oder leere Datensätze und bereinigen diese.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c5.4",
+              "text": "Sie kontrollieren die Formatierung und Einheiten von Datensätzen und passen diese falls nötig an.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c5.5",
+              "text": "Sie analysieren bestehende Daten anhand von diversen Faktoren (z.B. Art, Aussage, Güte) und überprüfen sie auf deren Qualität und Plausibilität hinsichtlich der definierten Ziele.",
+              "taxonomie": "K4"
+            }
+          ]
+        },
+        {
+          "code": "c6",
+          "titel": "Daten auswerten und einfache Reporte erstellen",
+          "beschreibung": "Entwickler/innen digitales Business EFZ erstellen gut verständliche Auswertungen von Daten: Sie bestimmen geeignete Werkzeuge, werten die Daten mit Hilfe von gezielten Abfragen aus, erstellen übersichtliche Reporte gemäss der Fragestellung und ziehen eine prägnante Schlussfolgerung. Die Ergebnisse dokumentieren sie so, dass sie für andere nachvollziehbar sind. Sie können auch auf komplexe Fragestellungen eingehen und holen sich bei Bedarf Unterstützung.",
+          "module": {
+            "basislehrjahr": ["235"],
+            "berufsfachschule": [],
+            "uek": [
+              "376 Daten erheben und auswerten",
+              "248 ICT-Lösungen mit aktuellen Technologien realisieren (Wahlpflicht)",
+              "393 Daten mit künstlicher Intelligenz (KI) /Machine Learning (ML) auswerten (Wahlpflicht)"
+            ]
+          },
+          "leistungsziele": [
+            {
+              "code": "c6.1",
+              "text": "Sie bestimmen geeignete Werkzeuge (z.B. Power BI, Tableau, Qlik) für die Auswertung von Daten.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c6.2",
+              "text": "Sie werten Daten mit Hilfe von gezielten Abfragen aus (z.B. mittels SQL).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c6.3",
+              "text": "Sie erstellen einfache und übersichtliche Reporte gemäss den definierten Zielen und Fragestellungen.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c6.4",
+              "text": "Sie ziehen eine prägnante Schlussfolgerung aus der Auswertung von Daten und halten diese verständlich und nachvollziehbar fest.",
+              "taxonomie": "K5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "D",
+      "titel": "Kommunizieren von Ergebnissen",
+      "kompetenzen": [
+        {
+          "code": "d1",
+          "titel": "Ausgewertete Daten visualisieren und kommentieren",
+          "beschreibung": "Entwickler/innen digitales Business EFZ stellen ausgewertete Daten visuell dar und kommentieren diese. Dazu setzen sie geeignete Visualisierungstools ein: Sie bestimmen geeignete Darstellungsformen, um die Daten aufzubereiten, entweder für das Team oder für Auftraggebende. Mittels geeigneter Tools erstellen sie erste Visualisierungen, holen im Team Rückmeldungen ein und überarbeiten den Entwurf entsprechend. Sie kommentieren Resultate sowie abgeleitete Erkenntnisse und fügen allenfalls weitere Erläuterungen bei, wie z.B. die Fragestellung, Datenquellen oder das Vorgehen. Schliesslich fassen sie ihre Ergebnisse in einem Bericht oder in einer Präsentation zusammen. Sie achten dabei auf eine zielgruppengerechte Darstellung.",
+          "module": {
+            "basislehrjahr": ["237"],
+            "berufsfachschule": [],
+            "uek": [
+              "310 Einen Workshop selbständig methodisch vorbereiten und durchführen (Wahlpflicht)"
+            ]
+          },
+          "leistungsziele": [
+            {
+              "code": "d1.1",
+              "text": "Sie bestimmen optimale Darstellungsformen (z.B. Tabellen, Diagramme, Text) anhand der jeweiligen Bedürfnisse der Zielgruppen.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "d1.2",
+              "text": "Sie erstellen Visualisierungen mit verschiedenen aktuellen Tools und holen Rückmeldungen im Team ein.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d1.3",
+              "text": "Sie kommentieren Resultate und abgeleitete Erkenntnisse sowie allenfalls weitere Erläuterungen nachvollziehbar.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d1.4",
+              "text": "Sie bereiten die Darstellung für ihr Team oder für Auftraggebende zielgruppengerecht auf (z.B. Bericht, Präsentation).",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "d2",
+          "titel": "Ausgewertete Daten im Team interpretieren und Lösungsvorschläge erarbeiten",
+          "beschreibung": "Entwickler/innen digitales Business EFZ diskutieren und analysieren ausgewertete Daten im Team und leiten gemeinsam Lösungsvorschläge ab: Sie informieren ihr Team über Erkenntnisse, welche im bisherigen Auswertungsprozess vorliegen. Sie beantworten Fragen, holen Rückmeldungen ein und nehmen gemeinsam eine Interpretation vor. Sie legen eine geeignete Methode für die Lösungserarbeitung fest und führen diese anschliessend durch. Sie berücksichtigen dabei die jeweiligen Kundenvorstellungen und Erkenntnisse aus der Auswertung. Entwickler/innen digitales Business EFZ gehen die Lösungserarbeitung aktiv, offen, neugierig und experimentierfreudig an. Abschliessend protokollieren sie die Team-Diskussionen in einem geeigneten Format.",
+          "module": {
+            "basislehrjahr": ["237"],
+            "berufsfachschule": [],
+            "uek": [
+              "310 Einen Workshop selbständig methodisch vorbereiten und durchführen (Wahlpflicht)"
+            ]
+          },
+          "leistungsziele": [
+            {
+              "code": "d2.1",
+              "text": "Ausgewertete Daten im Team interpretieren und Lösungsvorschläge erarbeiten.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d2.2",
+              "text": "Sie holen Rückmeldungen im Team ein und formulieren gemeinsam eine Interpretation.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "d2.3",
+              "text": "Sie legen fest, mit welchen Methoden die Lösungserarbeitung durchgeführt werden soll.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d2.4",
+              "text": "Sie diskutieren und erarbeiten mit dem Team mögliche Lösungsvorschläge anhand der definierten Methoden. Sie berücksichtigen dabei die jeweiligen Kundenvorstellungen und Erkenntnisse aus der Auswertung.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "g2.5",
+              "text": "Sie protokollieren Diskussionen in einem geeigneten Format (z.B. Bericht, Protokoll, Intranet).",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "d3",
+          "titel": "Lösungsvorschläge den Auftraggebenden präsentieren und erläutern",
+          "beschreibung": "Entwickler/innen digitales Business EFZ präsentieren Lösungen und erläutern diese verständlich: Sie bestimmen die Rahmenbedingungen (z.B. Ort, Raum, Zeit, Verfügbarkeit, Ressourcen) und passen Präsentationen entsprechend an. Zur Vorbereitung informieren sie sich über die Zielgruppe und gestalten die Präsentation so, dass sie für die Adressaten verständlich ist und auf deren Situation eingeht. Die Präsentation halten sie sicher, prägnant und überzeugend. Sie nutzen geeignete Hilfsmittel sowie Visualisierungsmethoden, um die Aussagen zu unterstreichen. Sie beantworten allfällige Fragen und bestimmen mit den Auftraggebenden weitere Schritte.",
+          "module": {
+            "basislehrjahr": ["238"],
+            "berufsfachschule": [],
+            "uek": [
+              "310 Einen Workshop selbständig methodisch vorbereiten und durchführen (Wahlpflicht)"
+            ]
+          },
+          "leistungsziele": [
+            {
+              "code": "d3.1",
+              "text": "Sie ermitteln gemeinsam mit Auftraggebenden Gefäss und Form für eine Präsentation.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d3.2",
+              "text": "Sie erstellen prägnante und übersichtliche Präsentationen mithilfe von gezielt eingesetzten Visualisierungsmitteln.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d3.3",
+              "text": "Sie präsentieren Lösungen sicher und überzeugend.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d3.4",
+              "text": "Sie beantworten allfällige Fragen von Auftraggebenden nachvollziehbar.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d3.5",
+              "text": "Sie bestimmen mit Auftraggebenden weitere Schritte, insofern dies nötig ist.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d3.6",
+              "text": "Sie ergänzen Präsentationsunterlagen und legen diese strukturiert ab.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "d4",
+          "titel": "Meetings und Workshops planen und moderieren",
+          "beschreibung": "Entwickler/innen digitales Business EFZ planen und moderieren sowohl interne wie auch externe Meetings und Workshops: Sie treffen zunächst alle notwendigen Vorbereitungen. Unter anderem definieren sie die Teilnehmenden, koordinieren die Terminfindung, bestimmen vorgängige Verantwortlichkeiten, organisieren die Logistik (z.B. Technik, Infrastruktur, Hilfsmittel) und erstellen einen detaillierten Ablauf. Sie machen sich bewusste Überlegungen zu den kulturellen, sprachlichen und körperlichen Voraussetzungen der teilnehmenden Personen und treffen allenfalls nötige Massnahmen (z.B. Übersetzung, Zugang zu den Räumlichkeiten). Sie moderieren das Meeting oder den Workshop kompetent und setzen geeignete Hilfsmittel ein, wie z.B. Beamer, Flipchart oder Whiteboard. Sie achten darauf, das Zeitmanagement einzuhalten und die Ziele zu erreichen. Nach dem Meeting oder dem Workshop halten sie die Ergebnisse in geeigneter Form fest, z.B. in einem klassischen Protokoll, in einem Fotoprotokoll oder mittels Audio- oder Videoaufnahmen. Schliesslich informieren sie die Teilnehmenden und stellen ihnen die Ergebnisse zu.",
+          "module": {
+            "basislehrjahr": ["239"],
+            "berufsfachschule": [],
+            "uek": [
+              "310 Einen Workshop selbständig methodisch vorbereiten und durchführen (Wahlpflicht)"
+            ]
+          },
+          "leistungsziele": [
+            {
+              "code": "d4.1",
+              "text": "Sie definieren den Teilnehmerkreis für Meetings und Workshops und koordinieren die Terminfindung.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d4.2",
+              "text": "Sie legen Ziele fest, bestimmen Verantwortlichkeiten und stellen sicher, dass alle notwendigen Vorbereitungen getroffen werden (Zuständigkeiten für Inhalte, Traktanden, Einladungen, Protokoll).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d4.3",
+              "text": "Sie definieren eine geeignete Veranstaltungsform (analog, online, hybrid) und organisieren benötigte Hilfsmittel (z.B. Flipchart, Whiteboard, Beamer).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d4.4",
+              "text": "Sie organisieren die benötigte Infrastruktur und Technik frühzeitig und zuverlässig.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d4.5",
+              "text": "Sie erstellen eine detaillierte Zeit- und Ablaufplanung (z.B. Zeitmanagement, Agenda, Drehbuch).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d4.6",
+              "text": "Sie moderieren ein Meeting oder einen Workshop zielgerichtet und effizient.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d4.7",
+              "text": "Sie halten die Ergebnisse in geeigneter Form klar strukturiert fest (z.B. Protokoll, Fotoprotokoll, Audio- oder Videoaufnahmen) und stellen es Teilnehmenden zeitnah zur Verfügung.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d4.8",
+              "text": "Sie moderieren einfache Meetings auf Englisch und/oder in einer zweiten Landessprache.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d4.9",
+              "text": "Sie holen Feedback ein, reflektieren Erkenntnisse und halten diese in geeigneter Form fest.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d4.10",
+              "text": "Sie berücksichtigen Diversity-Aspekte (z.B. Kulturelle Hintergründe, körperliche Beeinträchtigungen, Sprache oder Geschlechteridentität) bei der Planung und Durchführung von Meetings und Workshops.",
+              "taxonomie": "K3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "E",
+      "titel": "Einführen von Lösungen im digitalen Umfeld",
+      "kompetenzen": [
+        {
+          "code": "e1",
+          "titel": "Benutzerdokumentationen für digitale Lösungen erstellen",
+          "beschreibung": "Entwickler/innen digitales Business EFZ erstellen Benutzerdokumentationen und -anleitungen, um die effektive Nutzung von Lösungen sicherzustellen: Sie verschaffen sich alle notwendigen Informationen zur Erstellung der Benutzerdokumentation. Sie identifizieren die wesentlichen Elemente und priorisieren dadurch relevante gegenüber irrelevanten Inhalten. Anschliessend erstellen sie, unter Einhaltung der strukturellen und formalen Richtlinien, gut verständliche und klar strukturierte Benutzeranleitungen. Dafür nutzen sie geeignete Visualisierungsmethoden und Tools, um Aussagen wirksam darzustellen und mit Kontextinformationen zu ergänzen. Sie achten darauf, adressatengerechte Formulierungen zu verwenden.",
+          "module": {
+            "basislehrjahr": ["240"],
+            "berufsfachschule": [],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "e1.1",
+              "text": "Sie verschaffen sich alle notwendigen Informationen (z.B. Zugriffsregelungen, Systemübersicht, Verantwortlichkeiten) zur Erstellung von Benutzerdokumentationen.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "e1.2",
+              "text": "Sie priorisieren, durch die Identifikation von wesentlichen Elementen, relevante Informationen gegenüber unwichtigen im Hinblick auf die Zielgruppe.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "e1.3",
+              "text": "Sie erstellen gut verständliche, klar strukturierte und zielgruppengerechte Benutzeranleitungen mit Hilfe passender Tools (z.B. Wiki, Office). Sie halten sich dabei an strukturelle und formale Richtlinien sowie Vorlagen von Auftraggebenden (z.B. Dokumente, eLearning, Tutorials, Wiki).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "e1.4",
+              "text": "Sie nutzen geeignete Visualisierungsmethoden, um Aussagen wirksam darzustellen.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "e2",
+          "titel": "Schulungsunterlagen für die Einführung von digitalen Lösungen erarbeiten",
+          "beschreibung": "Entwickler/innen digitales Business EFZ entwickeln und formalisieren Schulungsunterlagen zu neuen Lösungen anhand des Auftrags und der Kundenwünsche: Sie identifizieren die Zielgruppe der zu entwickelnden Schulungsunterlagen und erarbeiten verständliche Schulungsunterlagen in einem geeigneten Format. Dabei versetzen sie sich in die Position der Benutzerinnen und Benutzer und achten auf eine zielgruppengerechte Darstellung. Die Schulungsunterlagen visualisieren sie mit unterschiedlichen Medien und Methoden. Anschliessend lassen sie die Unterlagen von Expertinnen oder Experten validieren und passen die Unterlagen den Rückmeldungen an. Schliesslich testen sie das finalisierte Produkt und koordinieren die Abnahme.",
+          "module": {
+            "basislehrjahr": ["240"],
+            "berufsfachschule": [],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "e2.1",
+              "text": "Sie identifizieren die Zielgruppe der zu entwickelnden Schulungsunterlagen.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "e2.2",
+              "text": "Sie erarbeiten Schulungsunterlagen verständlich und in zielgruppengerechten Formaten (z.B. Dokument, Video).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "e2.3",
+              "text": "Sie validieren Schulungsunterlagen durch den Einbezug von Expertinnen und Experten und überarbeiten diese anhand der Rückmeldungen.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "e2.4",
+              "text": "Sie testen finalisierte Unterlagen und koordinieren die Abnahme.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "e3",
+          "titel": "Benutzerinnen und Benutzer im Umgang mit digitalen Lösungen befähigen",
+          "beschreibung": "Entwickler/innen digitales Business EFZ befähigen Benutzerinnen und Benutzer so, dass sie Lösungen eigenständig und effizient nutzen können: Sie bereiten die Schulungsunterlagen für die definierte Zielgruppe auf und bereiten die Schulungssequenz methodisch und didaktisch vor. Während der Schulung gehen sie auf die Teilnehmenden ein, erklären die Lösung aus verschiedenen Perspektiven und mit diversen Herangehensweisen. Somit gelingt es ihnen, Benutzerinnen und Benutzer mit unterschiedlichen Hintergründen im Umgang mit neuen Lösungen zu befähigen. Sie beantworten allfällige Fragen und holen Rückmeldungen ein, um Schulung sowie Unterlagen fortlaufend zu verbessern.",
+          "module": {
+            "basislehrjahr": ["241"],
+            "berufsfachschule": [],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "e3.1",
+              "text": "Sie bereiten Schulungsunterlagen für die definierte Zielgruppe auf.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "e3.2",
+              "text": "Sie bereiten eine Schulungssequenz methodisch und didaktisch vor (z.B. anhand von Anwendungssituationen).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "e3.3",
+              "text": "Sie gehen auf individuelle Fragen von Teilnehmenden empathisch ein.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "e3.4",
+              "text": "Sie führen die vorbereitete Schulungssequenz mithilfe der Schulungsunterlagen durch, so dass Teilnehmende anschliessend in der Lage sind, die Lösung eigenständig zu nutzen.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "e3.5",
+              "text": "Sie holen Rückmeldungen ein, um die Schulungsunterlagen und -sequenzen weiter zu optimieren.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "e4",
+          "titel": "Die Inbetriebnahme von digitalen Lösungen vorbereiten und unterstützen",
+          "beschreibung": "Entwickler/innen digitales Business EFZ treffen notwendige Vorbereitungen und unterstützen die Inbetriebnahme, damit Systemübergaben reibungslos und sicher stattfinden: Sie treffen alle nötigen Vorbereitungen zur sicheren, reibungslosen Übergabe in den operativen Betrieb. Während der ersten Betriebszeit von neuen Lösungen unterstützen sie die Inbetriebnahme und führen bei Bedarf Problemanalysen und -behebungen durch. Schliesslich übergeben sie alle relevanten Informationen, Projektergebnisse, Testsysteme und Hilfsmittel an die Betriebs- und Wartungsorganisationen weiter. Dabei stellen sie sicher, dass nichts vergessen geht.",
+          "module": {
+            "basislehrjahr": ["242"],
+            "berufsfachschule": [],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "e4.1",
+              "text": "Sie treffen alle nötigen Vorbereitungen zur sicheren und reibungslosen Übergabe in den operativen Betrieb.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "e4.2",
+              "text": "Sie unterstützen die Inbetriebnahme von Lösungen während der ersten Betriebszeit und führen bei Bedarf Problemanalysen und -behebungen durch.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "e4.3",
+              "text": "Sie übergeben Lieferergebnisse an Betriebs- und Supportorganisationen und stellen dabei sicher, dass nichts vergessen geht.",
+              "taxonomie": "K3"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

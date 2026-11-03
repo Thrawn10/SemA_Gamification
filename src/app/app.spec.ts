@@ -1,23 +1,45 @@
+import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { App } from './app';
+import { SitzungDienst } from './dienste/sitzung-dienst';
+
+const abgemeldet = {
+  istAngemeldet: signal(false),
+  rolle: signal(null),
+  benutzer: signal(null),
+  abmelden: () => Promise.resolve(),
+};
 
 describe('App', () => {
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       imports: [App],
-    }).compileComponents();
+      providers: [provideRouter([]), { provide: SitzungDienst, useValue: abgemeldet }],
+    });
+    await TestBed.compileComponents();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  afterEach(() => {
+    TestBed.resetTestingModule();
   });
 
-  it('should render title', async () => {
+  it('zeigt die Marke und den Anmelde-Link ohne Sitzung', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, SemAPrototyp');
+    const inhalt = fixture.nativeElement as HTMLElement;
+
+    expect(inhalt.querySelector('.app-kopf__marke')?.textContent).toContain('Skilltree');
+    expect(inhalt.querySelector('.app-kopf__anmeldung')?.textContent).toContain('Anmelden');
+    expect(inhalt.querySelector('nav')).toBeNull();
+  });
+
+  it('verlinkt den Hauptinhalt für Tastaturnutzung', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const inhalt = fixture.nativeElement as HTMLElement;
+
+    expect(inhalt.querySelector('.skip-link')?.getAttribute('href')).toBe('#hauptinhalt');
+    expect(inhalt.querySelector('main')?.id).toBe('hauptinhalt');
   });
 });

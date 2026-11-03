@@ -1,0 +1,208 @@
+.seitenleiste__hintergrund {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgb(0 0 0 / 35%);
+}
+
+.seitenleiste {
+  position: fixed;
+  inset-block: 0;
+  inset-inline-end: 0;
+  z-index: 51;
+  display: flex;
+  flex-direction: column;
+  inline-size: min(34rem, 100vw);
+  background: var(--farbe-flaeche);
+  border-inline-start: 1px solid var(--farbe-rand);
+  box-shadow: -8px 0 30px rgb(0 0 0 / 18%);
+}
+
+.seitenleiste__kopf {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--abstand-3);
+  padding: var(--abstand-4);
+  border-block-end: 1px solid var(--farbe-rand);
+}
+
+.seitenleiste__kopf h2 {
+  font-size: 1.15rem;
+}
+
+.seitenleiste__krume {
+  color: var(--farbe-text-leise);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.seitenleiste__schliessen {
+  flex: none;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border: 1px solid var(--farbe-rand);
+  border-radius: var(--radius-rund);
+  background: var(--farbe-flaeche);
+  color: var(--farbe-text);
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.seitenleiste__schliessen:hover {
+  background: var(--farbe-hover);
+}
+
+.seitenleiste__inhalt {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-4);
+  overflow-y: auto;
+  padding: var(--abstand-4);
+}
+
+.seitenleiste__kennzahlen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--abstand-4);
+  padding: var(--abstand-3);
+  border-radius: var(--radius-mittel);
+  background: var(--farbe-flaeche-leise);
+}
+
+.seitenleiste__kennzahlen > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.seitenleiste__zahl {
+  font-size: 1.3rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.seitenleiste__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--abstand-2);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--abstand-2);
+  padding: var(--abstand-1) var(--abstand-3);
+  border: 1px solid var(--farbe-rand-stark);
+  border-radius: var(--radius-rund);
+  background: var(--farbe-flaeche);
+  color: var(--farbe-text);
+  font-size: 0.82rem;
+  cursor: pointer;
+  text-align: start;
+}
+
+.chip:hover {
+  background: var(--farbe-hover);
+}
+
+.chip--breit {
+  inline-size: 100%;
+  border-radius: var(--radius-mittel);
+}
+
+.chip--breit span:nth-child(2) {
+  flex: 1;
+}
+
+.seitenleiste__anleitung {
+  padding: var(--abstand-3);
+  border-inline-start: 4px solid var(--farbe-akzent);
+  border-radius: var(--radius-klein);
+  background: var(--farbe-akzent-leise);
+}
+
+.seitenleiste__anleitung h3 {
+  font-size: 0.9rem;
+  margin-block-end: var(--abstand-1);
+}
+
+.seitenleiste__anleitung ol {
+  font-size: 0.86rem;
+}
+
+.seitenleiste h3 {
+  font-size: 1rem;
+}
+
+.seitenleiste__ziele {
+  border-block-start: 1px solid var(--farbe-rand);
+}
+
+.seitenleiste__beschreibung {
+  padding: var(--abstand-3);
+  border: 1px solid var(--farbe-rand);
+  border-radius: var(--radius-mittel);
+  font-size: 0.88rem;
+}
+
+.seitenleiste__beschreibung summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.seitenleiste__beschreibung p {
+  margin-block-start: var(--abstand-2);
+}
+
+.seitenleiste__daten {
+  display: grid;
+  gap: var(--abstand-2);
+  margin: 0;
+}
+
+.seitenleiste__daten > div {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: var(--abstand-2);
+}
+
+.seitenleiste__daten dt {
+  color: var(--farbe-text-leise);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.seitenleiste__daten dd {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.seitenleiste__formular {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-3);
+  padding: var(--abstand-3);
+  border: 1px solid var(--farbe-rand);
+  border-radius: var(--radius-mittel);
+  background: var(--farbe-flaeche-leise);
+}
+
+.seitenleiste__aktionen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--abstand-2);
+}
+
+.seitenleiste__meilenstein {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-3);
+}
+
+@media (max-width: 760px) {
+  .seitenleiste {
+    inline-size: 100vw;
+    border-inline-start: 0;
+  }
+}

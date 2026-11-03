@@ -1,0 +1,28 @@
+@if (eintraege().length === 0) {
+  <p class="untertitel">Noch kein Verlauf.</p>
+} @else {
+  <ol class="verlauf">
+    @for (eintrag of eintraege(); track eintrag.id) {
+      <li class="verlauf__eintrag" [class.verlauf__eintrag--inaktiv]="!eintrag.aktiv">
+        <p class="verlauf__aktion">
+          {{ eintrag.aktion }}
+          @if (eintrag.anfrageStatus) {
+            <span class="verlauf__status">({{ statusText(eintrag) }})</span>
+          }
+        </p>
+        <p class="verlauf__meta">
+          {{ eintrag.akteurName }} · {{ eintrag.zeitpunkt | date: 'dd.MM.yyyy HH:mm' }}
+        </p>
+        @if (eintrag.kommentar) {
+          <p class="verlauf__text">{{ eintrag.kommentar }}</p>
+        }
+        @if (eintrag.begruendung) {
+          <p class="verlauf__text"><strong>Begründung:</strong> {{ eintrag.begruendung }}</p>
+        }
+        @if (!eintrag.aktiv) {
+          <p class="verlauf__hinweis">Zurückgenommen</p>
+        }
+      </li>
+    }
+  </ol>
+}

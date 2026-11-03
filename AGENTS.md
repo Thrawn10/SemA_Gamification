@@ -81,9 +81,10 @@ When unsure how an API behaves in this version, call the MCP tool `search_docume
 - Dev server: `npm start` (= `ng serve`)
 - Build: `npm run build` (= `ng build`)
 - Unit/component tests (single run): `npx ng test --no-watch`
+- Component structure check: `npm run check:components`
 - Format check: `npx prettier --check .`; write: `npx prettier --write .`
 - Lint: **not available yet**; `ng lint` fails until angular-eslint is added. Until then the gate
-  is `ng build`, the test suite and Prettier.
+  is `ng build`, the test suite, `npm run check:components` and Prettier.
 - E2E: not configured.
 
 With the MCP server available, `run_target`, `devserver_start`, `devserver_wait_for_build` and
@@ -134,11 +135,16 @@ features do not import each other (use a shared abstraction or the router).
 - No hard-coded colors, spacing, or font sizes: use design tokens.
 - Do not add a dependency without recording why in `docs/architecture/DECISIONS.md`.
 - Prefer the Angular CLI (`ng generate`) for scaffolding so files follow the workspace schematics.
+- Every Angular component is four files: `<name>.ts`, `<name>.html`, `<name>.scss`, `<name>.spec.ts`.
+  Never put the template or the styles in the TypeScript file (no inline `template:`/`styles:`), even
+  for small components; use `templateUrl` and `styleUrl` with relative paths. The script
+  `npm run check:components` enforces this (D-018).
 
 ## Definition of done (per task)
 
 1. Implements the mapped requirement IDs completely (check against `requirements.md`).
-2. `ng build` and the test suite pass with no new warnings; `npx prettier --check .` is clean.
+2. `ng build` and the test suite pass with no new warnings; `npx prettier --check .` and
+   `npm run check:components` are clean.
 3. New logic has tests; new components have at least one component test.
 4. Keyboard accessible, visible focus, sufficient contrast, responsive at mobile/tablet/desktop
    widths; passes AXE checks.

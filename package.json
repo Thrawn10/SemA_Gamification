@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "check:components": "node tools/pruefe-komponenten.mjs",
+    "check": "npm run check:components && npx prettier --check .",
+    "import:bildungsplaene": "node tools/bildungsplan-import.mjs"
   },
   "private": true,
   "packageManager": "npm@12.0.2",

@@ -1,0 +1,73 @@
+.skilltree-kopf {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--abstand-4);
+  padding: var(--abstand-4);
+  border: 1px solid var(--farbe-rand);
+  border-radius: var(--radius-gross);
+  background: var(--farbe-flaeche);
+  box-shadow: var(--schatten-karte);
+}
+
+.skilltree-kopf__person h1 {
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+}
+
+.skilltree-kopf__beruf {
+  color: var(--farbe-text-leise);
+  font-weight: 600;
+}
+
+.skilltree-kopf__daten {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--abstand-2) var(--abstand-5);
+  margin: var(--abstand-3) 0 0;
+}
+
+.skilltree-kopf__daten > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.skilltree-kopf__daten dt {
+  color: var(--farbe-text-leise);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.skilltree-kopf__daten dd {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.skilltree-kopf__fortschritt {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--abstand-1);
+  min-inline-size: 12rem;
+}
+
+.skilltree-kopf__prozent {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.skilltree-kopf__fortschritt st-fortschritt {
+  inline-size: 100%;
+}
+
+@media (max-width: 620px) {
+  .skilltree-kopf__fortschritt {
+    align-items: flex-start;
+    inline-size: 100%;
+  }
+}

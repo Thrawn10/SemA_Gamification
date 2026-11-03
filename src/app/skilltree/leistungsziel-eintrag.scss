@@ -1,0 +1,141 @@
+.lz {
+  border-block-end: 1px solid var(--farbe-rand);
+}
+
+.lz:last-child {
+  border-block-end: 0;
+}
+
+.lz__kopf {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--abstand-2);
+  padding-block: var(--abstand-2);
+}
+
+.lz__aufklappen {
+  display: flex;
+  flex: 1;
+  gap: var(--abstand-2);
+  min-inline-size: 12rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.lz__code {
+  flex: none;
+  font-family: var(--schrift-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--farbe-akzent);
+}
+
+.lz__text {
+  font-size: 0.9rem;
+}
+
+.lz__aufklappen:hover .lz__text {
+  text-decoration: underline;
+}
+
+.lz__stand {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--abstand-2);
+}
+
+.lz__angefragt {
+  padding: 0 var(--abstand-2);
+  border-radius: var(--radius-rund);
+  background: var(--farbe-akzent-leise);
+  color: var(--farbe-akzent);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.lz__details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-3);
+  padding: var(--abstand-2) 0 var(--abstand-4) 0;
+}
+
+.lz__daten {
+  display: grid;
+  gap: var(--abstand-2);
+  margin: 0;
+}
+
+.lz__daten > div {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: var(--abstand-2);
+}
+
+.lz__daten dt {
+  color: var(--farbe-text-leise);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.lz__daten dd {
+  margin: 0;
+  font-size: 0.86rem;
+}
+
+.lz__lernorte {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-inline-start: 1rem;
+}
+
+.lz__formular {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-3);
+  padding: var(--abstand-3);
+  border: 1px solid var(--farbe-rand);
+  border-radius: var(--radius-mittel);
+  background: var(--farbe-flaeche-leise);
+}
+
+.lz__aktionen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--abstand-2);
+}
+
+.lz__vorschlaege {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--abstand-1);
+}
+
+.lz__status {
+  font-size: 0.85rem;
+  color: var(--farbe-text-leise);
+}
+
+.lz__klein {
+  font-size: 0.75rem;
+  color: var(--farbe-text-leise);
+}
+
+.lz__verlauf h4 {
+  margin-block: var(--abstand-1);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 520px) {
+  .lz__daten > div {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,84 @@
+:root {
+  color-scheme: light dark;
+
+  --farbe-hintergrund: #f4f6f8;
+  --farbe-flaeche: #ffffff;
+  --farbe-flaeche-leise: #eef1f4;
+  --farbe-text: #16202b;
+  --farbe-text-leise: #556170;
+  --farbe-rand: #d7dde4;
+  --farbe-rand-stark: #7f8a99;
+  --farbe-akzent: #1f6f5c;
+  --farbe-akzent-text: #ffffff;
+  --farbe-akzent-leise: #e3f1ec;
+  --farbe-hover: #e9edf1;
+  --farbe-fokus: #0b5fbe;
+
+  --ampel-rot: #b3261e;
+  --ampel-rot-flaeche: #fbe9e7;
+  --ampel-orange: #9a5b00;
+  --ampel-orange-flaeche: #fff2dd;
+  --ampel-gruen: #246b3a;
+  --ampel-gruen-flaeche: #e4f4e8;
+
+  --farbe-gefahr: #b3261e;
+  --farbe-gefahr-flaeche: #fbe9e7;
+
+  /* Prototype control bar: violet is reserved for N-11 and used nowhere else. */
+  --ctl: #6d28d9;
+  --ctl-flaeche: #f3e8ff;
+  --ctl-rand: #c4b5fd;
+  --ctl-text: #3b0764;
+
+  --abstand-1: 0.25rem;
+  --abstand-2: 0.5rem;
+  --abstand-3: 0.75rem;
+  --abstand-4: 1rem;
+  --abstand-5: 1.5rem;
+  --abstand-6: 2rem;
+  --abstand-7: 3rem;
+
+  --radius-klein: 0.375rem;
+  --radius-mittel: 0.75rem;
+  --radius-gross: 1rem;
+  --radius-rund: 999px;
+
+  --schatten-karte: 0 1px 2px rgb(16 24 40 / 6%), 0 8px 24px rgb(16 24 40 / 5%);
+  --schrift: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --schrift-mono: 'Cascadia Mono', 'SFMono-Regular', Consolas, monospace;
+  --max-breite: 1280px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --farbe-hintergrund: #10151b;
+    --farbe-flaeche: #182028;
+    --farbe-flaeche-leise: #212b35;
+    --farbe-text: #e9eef4;
+    --farbe-text-leise: #a7b3c1;
+    --farbe-rand: #2c3743;
+    --farbe-rand-stark: #6b7b8f;
+    --farbe-akzent: #6fd0b4;
+    --farbe-akzent-text: #08251e;
+    --farbe-akzent-leise: #163a32;
+    --farbe-hover: #222d38;
+    --farbe-fokus: #7ab7ff;
+
+    --ampel-rot: #ff8a80;
+    --ampel-rot-flaeche: #3a1b19;
+    --ampel-orange: #ffc46b;
+    --ampel-orange-flaeche: #3a2a12;
+    --ampel-gruen: #8be0a4;
+    --ampel-gruen-flaeche: #14321d;
+
+    --farbe-gefahr: #ff8a80;
+    --farbe-gefahr-flaeche: #3a1b19;
+
+    --ctl: #c4b5fd;
+    --ctl-flaeche: #241a38;
+    --ctl-rand: #6d28d9;
+    --ctl-text: #ede9fe;
+
+    --schatten-karte: 0 1px 2px rgb(0 0 0 / 40%), 0 8px 24px rgb(0 0 0 / 25%);
+  }
+}

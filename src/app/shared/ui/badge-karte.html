@@ -1,0 +1,35 @@
+<article
+  class="badge-karte"
+  [class.badge-karte--offen]="ansicht().status === 'OFFEN'"
+  [class.badge-karte--inaktiv]="ansicht().status === 'INAKTIV'"
+>
+  <span
+    class="badge-karte__medaille"
+    [class.badge-karte__medaille--eckig]="eckig()"
+    aria-hidden="true"
+    >★</span
+  >
+  <div class="badge-karte__inhalt">
+    <h4>{{ ansicht().definition.titel }}</h4>
+    <p>{{ ansicht().definition.kriterium }}</p>
+    @switch (ansicht().status) {
+      @case ('ERHALTEN') {
+        <p class="badge-karte__meta">
+          Erhalten am {{ ansicht().vergabe?.vergebenAm | date: 'dd.MM.yyyy' }}
+          @if (ansicht().vergabe?.ausStartstand) {
+            · aus Startstand
+          }
+        </p>
+      }
+      @case ('INAKTIV') {
+        <p class="badge-karte__meta">
+          Derzeit nicht erfüllt seit
+          {{ ansicht().vergabe?.inaktivSeit | date: 'dd.MM.yyyy' }} · {{ fortschrittText() }}
+        </p>
+      }
+      @default {
+        <p class="badge-karte__meta">{{ fortschrittText() }}</p>
+      }
+    }
+  </div>
+</article>

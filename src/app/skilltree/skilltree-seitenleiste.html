@@ -1,0 +1,291 @@
+@if (inhalt(); as daten) {
+  <div class="seitenleiste__hintergrund" (click)="schliessen.emit()"></div>
+  <aside
+    #dialog
+    class="seitenleiste"
+    role="dialog"
+    aria-modal="true"
+    tabindex="-1"
+    [attr.aria-labelledby]="'seitenleiste-titel'"
+    (keydown.escape)="schliessen.emit()"
+    (keydown.tab)="tabFangen($event)"
+  >
+    <header class="seitenleiste__kopf">
+      <div>
+        @switch (daten.art) {
+          @case ('kompetenz') {
+            <p class="seitenleiste__krume">
+              Bereich {{ daten.bereich.bereich.code }} · {{ daten.bereich.bereich.titel }}
+            </p>
+            <h2 id="seitenleiste-titel">
+              {{ daten.kompetenz.kompetenz.code }} · {{ daten.kompetenz.kompetenz.titel }}
+              <st-anforderung id="S-A03" />
+            </h2>
+          }
+          @case ('ast') {
+            <p class="seitenleiste__krume">Ast</p>
+            <h2 id="seitenleiste-titel">
+              Bereich {{ daten.bereich.bereich.code }} · {{ daten.bereich.bereich.titel }}
+            </h2>
+          }
+          @case ('meilenstein') {
+            <p class="seitenleiste__krume">Meilenstein</p>
+            <h2 id="seitenleiste-titel">
+              {{ meilensteinText(daten.meilenstein.code).name }} ·
+              {{ meilensteinText(daten.meilenstein.code).untertitel }}
+              <st-anforderung id="S-L06" />
+            </h2>
+          }
+        }
+      </div>
+      <button
+        type="button"
+        class="seitenleiste__schliessen"
+        aria-label="Seitenleiste schliessen"
+        (click)="schliessen.emit()"
+      >
+        ×
+      </button>
+    </header>
+
+    <div class="seitenleiste__inhalt">
+      @switch (daten.art) {
+        @case ('kompetenz') {
+          <section class="seitenleiste__kennzahlen" aria-label="Kennzahlen">
+            <div>
+              <span class="seitenleiste__zahl">{{ daten.kompetenz.fortschritt }} %</span>
+              <span class="untertitel">Fortschritt</span>
+            </div>
+            <div>
+              <st-ampel [ampel]="daten.kompetenz.ampel" />
+              <span class="untertitel">Ampel</span>
+            </div>
+            <div>
+              <span class="seitenleiste__zahl">{{ daten.kompetenz.wert.toFixed(1) }}</span>
+              <span class="untertitel">Kompetenzwert (0–6)</span>
+            </div>
+          </section>
+
+          <nav class="seitenleiste__chips" aria-label="Nachbarknoten">
+            @if (daten.davor; as davor) {
+              <button type="button" class="chip" (click)="knotenGewaehlt.emit(davor.kompetenz.id)">
+                <span aria-hidden="true">←</span> Davor: {{ davor.kompetenz.code }}
+              </button>
+            }
+            @if (daten.danach; as danach) {
+              <button type="button" class="chip" (click)="knotenGewaehlt.emit(danach.kompetenz.id)">
+                Danach: {{ danach.kompetenz.code }} <span aria-hidden="true">→</span>
+              </button>
+            }
+          </nav>
+
+          <section class="seitenleiste__anleitung">
+            <h3>So geht es</h3>
+            @if (ansicht().rolle === 'LERNENDE') {
+              <ol>
+                <li>Knoten und Leistungsziel lesen.</li>
+                <li>Leistungsziel aufklappen.</li>
+                <li>Bestätigung für die nächste Stufe anfragen.</li>
+              </ol>
+            } @else {
+              <ol>
+                <li>Leistungsziel prüfen und aufklappen.</li>
+                <li>Stufe wählen (vorausgewählt ist die nächste).</li>
+                <li>Bestätigen – ohne Seitenwechsel.</li>
+              </ol>
+            }
+          </section>
+
+          <section>
+            <h3>Leistungsziele <st-anforderung id="S-A05" /></h3>
+            <div class="seitenleiste__ziele">
+              @for (lz of daten.kompetenz.leistungsziele; track lz.leistungsziel.id) {
+                <st-leistungsziel-eintrag
+                  [ausbildungId]="ansicht().ausbildung.id"
+                  [lz]="lz"
+                  [kompetenz]="daten.kompetenz.kompetenz"
+                  [rolle]="ansicht().rolle"
+                  [kannBestaetigen]="ansicht().kannBestaetigen"
+                  [startOffen]="lz.leistungsziel.id === startLz()"
+                  (aktualisiert)="aktualisiert.emit()"
+                />
+              }
+            </div>
+          </section>
+
+          <details class="seitenleiste__beschreibung">
+            <summary>Beschreibung der Kompetenz</summary>
+            <p>{{ daten.kompetenz.kompetenz.beschreibung }}</p>
+          </details>
+        }
+
+        @case ('ast') {
+          <section class="seitenleiste__kennzahlen" aria-label="Kennzahlen des Bereichs">
+            <div>
+              <span class="seitenleiste__zahl">{{ daten.bereich.fortschritt }} %</span>
+              <span class="untertitel">Fortschritt</span>
+            </div>
+            <div>
+              <st-ampel [ampel]="daten.bereich.ampel" />
+              <span class="untertitel">Ampel</span>
+            </div>
+            <div>
+              <span class="seitenleiste__zahl">{{ daten.bereich.roteKompetenzen }}</span>
+              <span class="untertitel">rote Kompetenzen</span>
+            </div>
+          </section>
+          <section>
+            <h3>Kompetenzen im Ast</h3>
+            <ul class="seitenleiste__liste">
+              @for (kompetenz of daten.bereich.kompetenzen; track kompetenz.kompetenz.id) {
+                <li>
+                  <button
+                    type="button"
+                    class="chip chip--breit"
+                    (click)="knotenGewaehlt.emit(kompetenz.kompetenz.id)"
+                  >
+                    <strong>{{ kompetenz.kompetenz.code }}</strong>
+                    <span>{{ kompetenz.kompetenz.titel }}</span>
+                    <st-ampel [ampel]="kompetenz.ampel" [kompakt]="true" />
+                  </button>
+                </li>
+              }
+            </ul>
+          </section>
+        }
+
+        @case ('meilenstein') {
+          <section class="seitenleiste__meilenstein">
+            <p>{{ beschreibung(daten.meilenstein.code) }}</p>
+            <dl class="seitenleiste__daten">
+              <div>
+                <dt>Status</dt>
+                <dd>
+                  @if (daten.meilenstein.erreicht) {
+                    Erreicht am
+                    {{ daten.meilenstein.erreichtAm | date: 'dd.MM.yyyy' }}
+                  } @else {
+                    Noch offen
+                  }
+                </dd>
+              </div>
+              <div>
+                <dt>Bereitschaft</dt>
+                <dd>{{ daten.meilenstein.bereitschaft }}</dd>
+              </div>
+            </dl>
+          </section>
+
+          @if (meldung()) {
+            <p class="meldung meldung--erfolg" role="status">{{ meldung() }}</p>
+          }
+          @if (fehler()) {
+            <p class="meldung meldung--fehler" role="alert">{{ fehler() }}</p>
+          }
+
+          @if (ansicht().rolle === 'PRAXISBILDNER') {
+            @if (ansicht().kannBestaetigen) {
+              @if (!daten.meilenstein.erreicht) {
+                @if (modus() === 'bestaetigen') {
+                  <form class="seitenleiste__formular" (submit)="meilensteinBestaetigen($event)">
+                    <label class="feld">
+                      <span class="feld__label">Kommentar (optional)</span>
+                      <textarea
+                        #kommentarFeld
+                        class="eingabe"
+                        [value]="kommentar()"
+                        (input)="kommentarAendern($event)"
+                        maxlength="500"
+                      ></textarea>
+                    </label>
+                    <div class="seitenleiste__aktionen">
+                      <button
+                        type="submit"
+                        class="knopf knopf--primaer knopf--klein"
+                        [disabled]="laeuft()"
+                      >
+                        Als erreicht bestätigen
+                      </button>
+                      <button
+                        type="button"
+                        class="knopf knopf--leise knopf--klein"
+                        (click)="abbrechen()"
+                      >
+                        Abbrechen
+                      </button>
+                    </div>
+                  </form>
+                } @else {
+                  <button
+                    type="button"
+                    class="knopf knopf--primaer"
+                    (click)="formularOeffnen('bestaetigen')"
+                  >
+                    Als erreicht bestätigen
+                  </button>
+                }
+              } @else if (daten.meilenstein.aktivesEreignis; as ereignis) {
+                @if (modus() === 'zuruecknehmen') {
+                  <form
+                    class="seitenleiste__formular"
+                    (submit)="meilensteinZuruecknehmen($event, ereignis.id)"
+                  >
+                    <label class="feld">
+                      <span class="feld__label">Begründung der Rücknahme</span>
+                      <textarea
+                        #begruendungFeld
+                        class="eingabe"
+                        [value]="begruendung()"
+                        (input)="begruendungAendern($event)"
+                        minlength="10"
+                        required
+                      ></textarea>
+                      <span class="feld__hinweis"
+                        >{{ begruendung().length }} Zeichen (min. 10)</span
+                      >
+                    </label>
+                    <div class="seitenleiste__aktionen">
+                      <button
+                        type="submit"
+                        class="knopf knopf--gefahr knopf--klein"
+                        [disabled]="laeuft()"
+                      >
+                        Rücknahme speichern
+                      </button>
+                      <button
+                        type="button"
+                        class="knopf knopf--leise knopf--klein"
+                        (click)="abbrechen()"
+                      >
+                        Abbrechen
+                      </button>
+                    </div>
+                  </form>
+                } @else {
+                  <button
+                    type="button"
+                    class="knopf knopf--gefahr"
+                    (click)="formularOeffnen('zuruecknehmen')"
+                  >
+                    Zurücknehmen
+                  </button>
+                }
+              }
+            } @else {
+              <p class="untertitel">Bestätigen ist nur mit gültiger Zuordnung möglich.</p>
+            }
+          } @else {
+            <p class="untertitel">
+              Den Status bestätigt die Praxisbildnerin oder der Praxisbildner.
+            </p>
+          }
+
+          <section class="seitenleiste__verlauf">
+            <h3>Verlauf</h3>
+            <st-verlauf-liste [eintraege]="daten.meilenstein.verlauf" />
+          </section>
+        }
+      }
+    </div>
+  </aside>
+}

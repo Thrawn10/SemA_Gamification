@@ -1,0 +1,2205 @@
+{
+  "lehrberuf": {
+    "code": "MED",
+    "name": "Mediamatiker/in EFZ",
+    "fachrichtung": null,
+    "lehrdauerJahre": 4
+  },
+  "bildungsplanJahr": 2018,
+  "version": 1,
+  "quelle": "MED_BiPla_LZK_2019_1.pdf",
+  "bereiche": [
+    {
+      "code": "A",
+      "titel": "Produzieren von digitalen Medieninhalten",
+      "kompetenzen": [
+        {
+          "code": "a1",
+          "titel": "Produktion konzeptionell und organisatorisch vorbereiten",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker bereiten die Produktion von digitalen Medieninhalten konzeptionell und organisatorisch vor (Planungsphase). Von der Kundin oder dem Kunden oder Vorgesetzten erhalten sie einen Auftrag für eine einfache Produktion (z.B. Film, Fotografie, Audioaufnahme). Zunächst prüfen sie, ob sie über alle nötigen Informationen verfügen, um den Auftrag korrekt ausführen zu können. Bei fehlenden Informationen oder Unklarheiten fragen sie nach. Je nach Auftrag erhalten sie ein Konzept (z.B. Storyboard, Drehbuch) oder entwickeln eines selbstständig. Sie wenden einfache Kreativitätstechniken (z.B. Mindmap, Brainstorming) an und bringen eigene Ideen ein. Aufgrund der Vorgaben erstellen sie einen Zeitplan und organisieren die benötigte Infrastruktur und Materialien (z.B. Aufnahmegeräte organisieren, Reservationen, Genehmigungen und Einverständniserklärungen einholen etc.).",
+          "module": {
+            "basislehrjahr": ["Fotografie, Multimedia", "Multimedia"],
+            "berufsfachschule": [
+              "264 Digitale Medienproduktionen vorbereiten",
+              "265 Digitale Fotografien produzieren",
+              "266 Digitale Animationen produzieren",
+              "267 Digitale Audioaufnahmen produzieren",
+              "268 Digitale Filme produzieren",
+              "283 Offerten rechtskonform erstellen und überprüfen"
+            ],
+            "uek": [
+              "269 Fotografieprojekt realisieren",
+              "276 Medien für eine Marketingaktion erstellen"
+            ]
+          },
+          "leistungsziele": [
+            {
+              "code": "a1.1",
+              "text": "prüfen, ob die auftragsrelevanten Informationen vollständig und klar verständlich sind und fragen bei Unklarheiten nach.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Fotografie, Multimedia"],
+                "berufsfachschule": ["264 Digitale Medienproduktionen vorbereiten"],
+                "uek": ["269 Fotografieprojekt realisieren"]
+              }
+            },
+            {
+              "code": "a1.2",
+              "text": "erstellen ein Konzept (Moodboard/Drehbuch/Storyboard/Shootingboard) für eine einfache digitale Produktion.",
+              "taxonomie": "K5",
+              "lernorte": {
+                "basislehrjahr": ["Fotografie, Multimedia"],
+                "berufsfachschule": [
+                  "264 Digitale Medienproduktionen vorbereiten",
+                  "265 Digitale Fotografien produzieren",
+                  "266 Digitale Animationen produzieren",
+                  "267 Digitale Audioaufnahmen produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": [
+                  "269 Fotografieprojekt realisieren",
+                  "276 Medien für eine Marketingaktion erstellen"
+                ]
+              }
+            },
+            {
+              "code": "a1.3",
+              "text": "wenden einfache Kreativitätstechniken an.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Fotografie, Multimedia"],
+                "berufsfachschule": [
+                  "264 Digitale Medienproduktionen vorbereiten",
+                  "265 Digitale Fotografien produzieren",
+                  "266 Digitale Animationen produzieren",
+                  "267 Digitale Audioaufnahmen produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": ["269 Fotografieprojekt realisieren"]
+              }
+            },
+            {
+              "code": "a1.4",
+              "text": "erstellen einen Zeitplan für eine einfache Produktion.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Fotografie, Multimedia"],
+                "berufsfachschule": [
+                  "264 Digitale Medienproduktionen vorbereiten",
+                  "265 Digitale Fotografien produzieren",
+                  "266 Digitale Animationen produzieren",
+                  "267 Digitale Audioaufnahmen produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "a1.5",
+              "text": "organisieren die benötige Infrastruktur und Materialien für eine Aufnahme.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Fotografie, Multimedia"],
+                "berufsfachschule": [
+                  "264 Digitale Medienproduktionen vorbereiten",
+                  "265 Digitale Fotografien produzieren",
+                  "267 Digitale Audioaufnahmen produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": []
+              }
+            },
+            {
+              "code": "a1.6",
+              "text": "treffen Abklärungen für die rechtliche Absicherung und holen die entsprechenden Genehmigungen ein (z.B. Drehgenehmigung, Einverständniserklärung).",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Multimedia"],
+                "berufsfachschule": [
+                  "265 Digitale Fotografien produzieren",
+                  "283 Offerten rechtskonform erstellen und überprüfen"
+                ],
+                "uek": []
+              }
+            }
+          ]
+        },
+        {
+          "code": "a2",
+          "titel": "Digitale Rohdaten erstellen",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker erstellen nach Konzept digitale Rohdaten mit verschiedenen Aufnahmegeräten (Produktionsphase). Gemäss Konzept richten sie den Aufnahmeort mit allen notwendigen Geräten und Materialien ein. Sie produzieren die nötigen Rohdaten für Medieninhalte für die betriebsinterne Verwendung oder für Kundenaufträge. Dazu filmen oder fotografieren sie je nach Bedarf mit einer Kamera und/oder zeichnen einfache Audioaufnahmen auf. Sie halten sich dabei klar an den Arbeitsauftrag und an das erarbeitete Konzept (Moodboard/Drehbuch/Storyboard/Shootingboard). Sie überprüfen die Rohdaten fortlaufend (z.B. Bildschärfe, Störgeräusche, Lautstärke, Belichtung). Beim Arbeiten im Team geben sie klare und verständliche Anweisungen. Nach Abschluss der Aufnahmearbeiten räumen sie den Arbeitsort auf, warten und versorgen die Geräte und Materialien fachgerecht (z.B. Materialkontrolle, Reinigung, Mängel melden, Akkus laden).",
+          "module": {
+            "basislehrjahr": ["Fotografie, Multimedia", "Multimedia"],
+            "berufsfachschule": [
+              "265 Digitale Fotografien produzieren",
+              "267 Digitale Audioaufnahmen produzieren",
+              "268 Digitale Filme produzieren",
+              "264 Digitale Medienproduktionen vorbereiten",
+              "266 Digitale Animationen produzieren"
+            ],
+            "uek": ["269 Fotografieprojekt realisieren"]
+          },
+          "leistungsziele": [
+            {
+              "code": "a2.1",
+              "text": "richten einen Aufnahmeort gemäss Konzept mit allen notwendigen Geräten und Materialien ein.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Fotografie, Multimedia"],
+                "berufsfachschule": [
+                  "265 Digitale Fotografien produzieren",
+                  "267 Digitale Audioaufnahmen produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": ["269 Fotografieprojekt realisieren"]
+              }
+            },
+            {
+              "code": "a2.2",
+              "text": "erstellen Rohdaten mit einer Kamera gemäss Konzept.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Fotografie, Multimedia"],
+                "berufsfachschule": [
+                  "265 Digitale Fotografien produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": ["269 Fotografieprojekt realisieren"]
+              }
+            },
+            {
+              "code": "a2.3",
+              "text": "erstellen Rohdaten mit einem Audioaufnahmegerät gemäss Konzept.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Multimedia"],
+                "berufsfachschule": [
+                  "265 Digitale Fotografien produzieren",
+                  "267 Digitale Audioaufnahmen produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": ["269 Fotografieprojekt realisieren"]
+              }
+            },
+            {
+              "code": "a2.4",
+              "text": "überprüfen die Aufnahmen vor Ort..",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Fotografie, Multimedia"],
+                "berufsfachschule": [
+                  "265 Digitale Fotografien produzieren",
+                  "267 Digitale Audioaufnahmen produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": ["269 Fotografieprojekt realisieren"]
+              }
+            },
+            {
+              "code": "a2.5",
+              "text": "gehen mit Geräten und Materialien sorgfältig um.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Fotografie, Multimedia"],
+                "berufsfachschule": [
+                  "264 Digitale Medienproduktionen vorbereiten",
+                  "265 Digitale Fotografien produzieren",
+                  "266 Digitale Animationen produzieren",
+                  "267 Digitale Audioaufnahmen produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": ["269 Fotografieprojekt realisieren"]
+              }
+            },
+            {
+              "code": "a2.6",
+              "text": "bringen den Aufnahmeort wieder in den ursprünglichen Zustand.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Fotografie, Multimedia"],
+                "berufsfachschule": [
+                  "264 Digitale Medienproduktionen vorbereiten",
+                  "265 Digitale Fotografien produzieren",
+                  "266 Digitale Animationen produzieren",
+                  "267 Digitale Audioaufnahmen produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": ["269 Fotografieprojekt realisieren"]
+              }
+            },
+            {
+              "code": "a2.7",
+              "text": "warten Geräte und Materialien bei der Rückgabe fachgerecht (z.B. Materialkontrolle, Reinigung, Mängel melden, Akkus laden).",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Fotografie, Multimedia"],
+                "berufsfachschule": [
+                  "265 Digitale Fotografien produzieren",
+                  "267 Digitale Audioaufnahmen produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": ["269 Fotografieprojekt realisieren"]
+              }
+            }
+          ]
+        },
+        {
+          "code": "a3",
+          "titel": "Digitale Rohdaten verarbeiten",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker importieren digitale Rohdaten und bearbeiten sie (Nachbearbeitungsphase). Mediamatikerinnen und Mediamatiker übertragen Film-, Foto- und/oder Audioaufnahmen von einem Speichermedium auf die vorgegebene Dateiablage und legen sie korrekt strukturiert ab. Danach bearbeiten sie die Rohdaten mit geeigneten Programmen. Sie erstellen zunächst eine Rohfassung und besprechen sie mit der Kundin oder dem Kunden. Darauf beginnen sie mit der weiteren Bearbeitung (z.B. Filmmaterial schneiden, Farbkorrekturen und gebung vornehmen, Audio optimieren, Musik und Geräusche unterlegen, verschiedene Elemente wie einfache Animationen, etc. einfügen). Dabei halten sie den Arbeitsauftrag bzw. das Konzept und den vorgegebenen Arbeitsablauf ein. Zum Schluss führen sie eine Endkontrolle durch und präsentieren das finale Produkt der Kundin oder dem Kunden.",
+          "module": {
+            "basislehrjahr": ["Fotografie, Multimedia", "Multimedia"],
+            "berufsfachschule": [
+              "264 Digitale Medienproduktionen vorbereiten",
+              "265 Digitale Fotografien produzieren",
+              "267 Digitale Audioaufnahmen produzieren",
+              "268 Digitale Filme produzieren",
+              "266 Digitale Animationen produzieren"
+            ],
+            "uek": ["269 Fotografieprojekt realisieren"]
+          },
+          "leistungsziele": [
+            {
+              "code": "a3.1",
+              "text": "übertragen Rohdaten von einem Speichermedium auf die vorgegebene Dateiablage und legen sie korrekt strukturiert ab.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Fotografie, Multimedia"],
+                "berufsfachschule": [
+                  "264 Digitale Medienproduktionen vorbereiten",
+                  "265 Digitale Fotografien produzieren",
+                  "267 Digitale Audioaufnahmen produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": ["269 Fotografieprojekt realisieren"]
+              }
+            },
+            {
+              "code": "a3.2",
+              "text": "schneiden Rohdaten (Film, Audio) mit unterschiedlichen Schnitttechniken.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Multimedia"],
+                "berufsfachschule": [
+                  "267 Digitale Audioaufnahmen produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": []
+              }
+            },
+            {
+              "code": "a3.3",
+              "text": "vertonen den erstellten Filmschnitt (z.B. Musik, Geräusche, Voice-over).",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Multimedia"],
+                "berufsfachschule": [
+                  "267 Digitale Audioaufnahmen produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": []
+              }
+            },
+            {
+              "code": "a3.4",
+              "text": "optimieren Audiodaten (z.B. Störgeräusche entfernen, normalisieren).",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Multimedia"],
+                "berufsfachschule": [
+                  "267 Digitale Audioaufnahmen produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": []
+              }
+            },
+            {
+              "code": "a3.5",
+              "text": "binden verschiedene Elemente korrekt ein (z.B. einfache Animationen).",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Multimedia"],
+                "berufsfachschule": ["268 Digitale Filme produzieren"],
+                "uek": []
+              }
+            },
+            {
+              "code": "a3.6",
+              "text": "nehmen Farbkorrekturen und Farbgebungen vor.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": [
+                  "265 Digitale Fotografien produzieren",
+                  "266 Digitale Animationen produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": ["269 Fotografieprojekt realisieren"]
+              }
+            },
+            {
+              "code": "a3.7",
+              "text": "überprüfen, ob das finale Produkt dem Auftrag entspricht.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": [
+                  "265 Digitale Fotografien produzieren",
+                  "266 Digitale Animationen produzieren",
+                  "267 Digitale Audioaufnahmen produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": ["269 Fotografieprojekt realisieren"]
+              }
+            },
+            {
+              "code": "a3.8",
+              "text": "präsentieren das finale Produkt der Kundin oder dem Kunden.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Fotografie, Multimedia"],
+                "berufsfachschule": [],
+                "uek": ["269 Fotografieprojekt realisieren"]
+              }
+            }
+          ]
+        },
+        {
+          "code": "a4",
+          "titel": "Daten archivieren und finales Produkt veröffentlichen",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker archivieren Daten nach betrieblichen Vorgaben und exportieren das finale Produkt in die erforderlichen Zielformate. Sie prüfen die spezifischen Anforderungen der definierten Plattform(en) (z.B. Youtube, Vimeo) und wählen das geeignete Zielformat aus. Je nach Auftrag veröffentlichen sie das finale Produkt mit den plattformspezifischen Einstellungen oder übergeben es der Kundin oder dem Kunden. Abschliessend beschriften und archivieren sie ihre Daten nach betriebsspezifischen Vorgaben und legen diese vollständig und strukturiert ab (Nachvollziehbarkeit).",
+          "module": {
+            "basislehrjahr": ["Fotografie, Multimedia"],
+            "berufsfachschule": [
+              "264 Digitale Medienproduktionen vorbereiten",
+              "265 Digitale Fotografien produzieren",
+              "266 Digitale Animationen produzieren",
+              "267 Digitale Audioaufnahmen produzieren",
+              "268 Digitale Filme produzieren"
+            ],
+            "uek": ["269 Fotografieprojekt realisieren"]
+          },
+          "leistungsziele": [
+            {
+              "code": "a4.1",
+              "text": "wählen aufgrund der spezifischen Anforderungen von verschiedenen Plattformen das geeignete Zielformat aus.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": [
+                  "264 Digitale Medienproduktionen vorbereiten",
+                  "265 Digitale Fotografien produzieren",
+                  "266 Digitale Animationen produzieren",
+                  "267 Digitale Audioaufnahmen produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": ["269 Fotografieprojekt realisieren"]
+              }
+            },
+            {
+              "code": "a4.2",
+              "text": "setzen ausgewählte Dateiformate (Container) und Kompressionsverfahren (Codecs) zielorientiert ein.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Fotografie, Multimedia"],
+                "berufsfachschule": [
+                  "265 Digitale Fotografien produzieren",
+                  "266 Digitale Animationen produzieren",
+                  "267 Digitale Audioaufnahmen produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": ["269 Fotografieprojekt realisieren"]
+              }
+            },
+            {
+              "code": "a4.3",
+              "text": "exportieren die Daten in das erforderliche Zielformat.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Fotografie, Multimedia"],
+                "berufsfachschule": [
+                  "265 Digitale Fotografien produzieren",
+                  "266 Digitale Animationen produzieren",
+                  "267 Digitale Audioaufnahmen produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": ["269 Fotografieprojekt realisieren"]
+              }
+            },
+            {
+              "code": "a4.4",
+              "text": "veröffentlichen das finale Produkt gemäss Kundenwunsch und mit plattformspezifischen Einstellungen.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Fotografie, Multimedia"],
+                "berufsfachschule": [],
+                "uek": ["269 Fotografieprojekt realisieren"]
+              }
+            },
+            {
+              "code": "a4.5",
+              "text": "beschriften und archivieren Daten nach betriebsspezifischen Vorgaben vollständig und strukturiert.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Fotografie, Multimedia"],
+                "berufsfachschule": [
+                  "264 Digitale Medienproduktionen vorbereiten",
+                  "265 Digitale Fotografien produzieren",
+                  "266 Digitale Animationen produzieren",
+                  "267 Digitale Audioaufnahmen produzieren",
+                  "268 Digitale Filme produzieren"
+                ],
+                "uek": ["269 Fotografieprojekt realisieren"]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "B",
+      "titel": "Gestalten von Medieninhalten",
+      "kompetenzen": [
+        {
+          "code": "b1",
+          "titel": "Gestaltungsentwürfe entwickeln",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker entwickeln nach Kundenwunsch Gestaltungsvarianten. Auf der Basis eines Kundengesprächs entwickeln sie verschiedene Gestaltungsvorschläge für Web- und/oder Printprodukte (z.B. Flyer, kleine Broschüren, Banner). Dabei verfolgen sie die geltenden Gestaltungsgesetze (z.B. Typografie, Farbenlehre, Bildsprache, Gestaltungsraster), die betrieblichen Rahmenbestimmungen (CI/CD) sowie weitere Vorgaben (z.B. Zielgruppe, Standard-, Web- und Printformate). Danach präsentieren sie diese der Kundin oder dem Kunden und erläutern die Vor- und Nachteile der verschiedenen Varianten. Die Kundin /der Kunde wählt einen Gestaltungsentwurf für die Ausarbeitung aus.",
+          "module": {
+            "basislehrjahr": ["Gestaltung, Webdesign"],
+            "berufsfachschule": [
+              "270 Farbe und Typografie bestimmen und einsetzen",
+              "273 Layouts anlegen",
+              "274 Druckdaten aufbereiten und ausgeben",
+              "275 Gestaltungsentwürfe erstellen und präsentieren"
+            ],
+            "uek": [
+              "276 Medien für eine Marketingaktion erstellen",
+              "272 Printprodukte entwerfen und umsetzen"
+            ]
+          },
+          "leistungsziele": [
+            {
+              "code": "b1.1",
+              "text": "führen ein Kundengespräch und holen alle für die Entwicklung der Gestaltungsvorschläge relevanten Informationen ab.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": [
+                  "270 Farbe und Typografie bestimmen und einsetzen",
+                  "273 Layouts anlegen"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "b1.2",
+              "text": "entwickeln Gestaltungsvarianten für Web- und/oder Printprodukte unter Berücksichtigung aller relevanten Aspekte (z.B. Zielgruppe, CI/CD, Typografie, Farbenlehre, Bildsprache, Gestaltungsraster).",
+              "taxonomie": "K5",
+              "lernorte": {
+                "basislehrjahr": ["Gestaltung, Webdesign"],
+                "berufsfachschule": [
+                  "270 Farbe und Typografie bestimmen und einsetzen",
+                  "273 Layouts anlegen"
+                ],
+                "uek": [
+                  "272 Printprodukte entwerfen und umsetzen",
+                  "276 Medien für eine Marketingaktion erstellen"
+                ]
+              }
+            },
+            {
+              "code": "b1.3",
+              "text": "präsentieren der Kundin oder dem Kunden Gestaltungsvarianten und erläutern die Vor- und Nachteile.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Gestaltung, Webdesign"],
+                "berufsfachschule": [
+                  "270 Farbe und Typografie bestimmen und einsetzen",
+                  "273 Layouts anlegen",
+                  "274 Druckdaten aufbereiten und ausgeben",
+                  "275 Gestaltungsentwürfe erstellen und präsentieren"
+                ],
+                "uek": []
+              }
+            },
+            {
+              "code": "b1.4",
+              "text": "passen den Gestaltungsentwurf an Kundenwünsche an.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Gestaltung, Webdesign"],
+                "berufsfachschule": [
+                  "273 Layouts anlegen",
+                  "274 Druckdaten aufbereiten und ausgeben"
+                ],
+                "uek": []
+              }
+            }
+          ]
+        },
+        {
+          "code": "b2",
+          "titel": "Grafische Elemente gestalten",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker gestalten grafische Elemente für verschiedene Medien. Anhand des Gestaltungsentwurfs gestalten sie verschiedene grafische Elemente (z.B. Diagramme, Tabellen, Icons, Hintergründe, Texte etc.) in statischer und animierter Form. Dabei verfolgen sie die vorgegebene resp. definierte visuelle Sprache (Look & Feel), z.B. für Schriften, Farben und Bilder. Sie finalisieren den von der Kundin oder dem Kunden gewählten Vorschlag. Aus den medienneutralen Projektdaten exportieren sie dem Zielmedium (Web/Print/Film) entsprechende Auslieferungsdaten (Auflösung und Farbraum/Farbprofil) ab.",
+          "module": {
+            "basislehrjahr": ["Gestaltung, Webdesign", "Webdesign"],
+            "berufsfachschule": [
+              "270 Farbe und Typografie bestimmen und einsetzen",
+              "266 Digitale Animationen produzieren",
+              "274 Druckdaten aufbereiten und ausgeben",
+              "271 Vektordaten erstellen und Bilder bearbeiten"
+            ],
+            "uek": [
+              "272 Printprodukte entwerfen und umsetzen",
+              "276 Medien für eine Marketingaktion erstellen"
+            ]
+          },
+          "leistungsziele": [
+            {
+              "code": "b2.1",
+              "text": "wählen aufgrund der vorgegebenen visuellen Sprache und geltender Gestaltungsgesetze passende Schriften und Farben für verschiedene grafische Elemente aus.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Gestaltung, Webdesign"],
+                "berufsfachschule": ["270 Farbe und Typografie bestimmen und einsetzen"],
+                "uek": ["272 Printprodukte entwerfen und umsetzen"]
+              }
+            },
+            {
+              "code": "b2.2",
+              "text": "animieren grafische Elemente (z.B. Icons, Piktogramme, Diagramme, Banner etc.).",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Webdesign"],
+                "berufsfachschule": [
+                  "266 Digitale Animationen produzieren",
+                  "274 Druckdaten aufbereiten und ausgeben"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "b2.3",
+              "text": "wenden Farbräume und Farbprofile (RGB, CMYK) dem Zielmedium entsprechend an.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Gestaltung, Webdesign"],
+                "berufsfachschule": ["270 Farbe und Typografie bestimmen und einsetzen"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "b2.4",
+              "text": "wählen gemäss Auftrag das geeignete Format und Auflösung für verschiedene Elemente.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Gestaltung, Webdesign"],
+                "berufsfachschule": [
+                  "270 Farbe und Typografie bestimmen und einsetzen",
+                  "271 Vektordaten erstellen und Bilder bearbeiten"
+                ],
+                "uek": ["272 Printprodukte entwerfen und umsetzen"]
+              }
+            },
+            {
+              "code": "b2.5",
+              "text": "erstellen in einem vektorbasierten Illustrationsprogramm grafische Elemente.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Gestaltung, Webdesign"],
+                "berufsfachschule": ["271 Vektordaten erstellen und Bilder bearbeiten"],
+                "uek": ["272 Printprodukte entwerfen und umsetzen"]
+              }
+            },
+            {
+              "code": "b2.6",
+              "text": "nehmen in einem pixelbasierten Bildbearbeitungsprogramm einfache Montagen vor.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Gestaltung, Webdesign"],
+                "berufsfachschule": ["271 Vektordaten erstellen und Bilder bearbeiten"],
+                "uek": ["272 Printprodukte entwerfen und umsetzen"]
+              }
+            }
+          ]
+        },
+        {
+          "code": "b3",
+          "titel": "Layout gestalten",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker erstellen ein Layout und integrieren Textbausteine sowie bestehende grafische Elemente und Bilder. Dazu entwickeln sie gemäss ausgewähltem Gestaltungsentwurf ein einfaches Gestaltungsraster für ein Layout oder übernehmen eine betriebliche Vorlage. Sie erstellen Musterseiten, Absatz- und Zeichenformate sowie automatisierte Inhaltsverzeichnisse. Sie fügen verschiedene Elemente (z.B. Bilder, Texte, Hintergründe, Logos, Icons, Tabellen etc.) auf eine optisch ansprechende Weise in das Layout ein. Dabei beachten sie die Kundenwünsche resp. CI/CD-Vorgaben. Das fertige Layout besprechen sie mit der Kundin oder dem Kunden und nehmen gegebenenfalls Anpassungen vor. Sie erstellen statische und interaktive Produkte (z.B. PDF) und berücksichtigen dabei die wesentlichen Aspekte der Typografie (z.B. Schriftmischung, Satzspiegel, Schriftgrössen, Schriftschnitte, Zeilenabstände).",
+          "module": {
+            "basislehrjahr": ["Gestaltung, Webdesign", "Gestaltung"],
+            "berufsfachschule": [
+              "273 Layouts anlegen",
+              "270 Farbe und Typografie bestimmen und einsetzen",
+              "274 Druckdaten aufbereiten und ausgeben",
+              "275 Gestaltungsentwürfe erstellen und präsentieren"
+            ],
+            "uek": ["272 Printprodukte entwerfen und umsetzen"]
+          },
+          "leistungsziele": [
+            {
+              "code": "b3.1",
+              "text": "entwickeln gemäss ausgewähltem Gestaltungsentwurf ein einfaches Gestaltungsraster.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Gestaltung, Webdesign"],
+                "berufsfachschule": ["273 Layouts anlegen"],
+                "uek": ["272 Printprodukte entwerfen und umsetzen"]
+              }
+            },
+            {
+              "code": "b3.2",
+              "text": "erstellen Musterseiten, Absatz- und Zeichenformate unter Berücksichtigung der typografischen Grundlagen.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Gestaltung"],
+                "berufsfachschule": [
+                  "270 Farbe und Typografie bestimmen und einsetzen",
+                  "273 Layouts anlegen"
+                ],
+                "uek": ["272 Printprodukte entwerfen und umsetzen"]
+              }
+            },
+            {
+              "code": "b3.3",
+              "text": "setzen ein Layout gemäss Kundenwünschen und/oder CI/CD-Vorgaben um.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Gestaltung, Webdesign"],
+                "berufsfachschule": [
+                  "274 Druckdaten aufbereiten und ausgeben",
+                  "275 Gestaltungsentwürfe erstellen und präsentieren"
+                ],
+                "uek": ["272 Printprodukte entwerfen und umsetzen"]
+              }
+            },
+            {
+              "code": "b3.4",
+              "text": "definieren Farben und Kontraste für ein Layout.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Gestaltung, Webdesign"],
+                "berufsfachschule": [
+                  "270 Farbe und Typografie bestimmen und einsetzen",
+                  "273 Layouts anlegen"
+                ],
+                "uek": []
+              }
+            },
+            {
+              "code": "b3.5",
+              "text": "fügen verschiedene Elemente (z.B. Bilder, Texte, Hintergründe, Logos, Icons, Tabellen etc.) fachgerecht und auf optisch ansprechende Weise in das Layout ein und nehmen allfällige Anpassungen vor.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Gestaltung, Webdesign"],
+                "berufsfachschule": ["273 Layouts anlegen"],
+                "uek": ["272 Printprodukte entwerfen und umsetzen"]
+              }
+            },
+            {
+              "code": "b3.6",
+              "text": "erstellen in einem Layoutprogramm ein interaktives Produkt.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Gestaltung, Webdesign"],
+                "berufsfachschule": ["275 Gestaltungsentwürfe erstellen und präsentieren"],
+                "uek": []
+              }
+            }
+          ]
+        },
+        {
+          "code": "b4",
+          "titel": "Gestaltung für Zielmedium aufbereiten",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker bereiten die finale Gestaltung für das gewünschte Zielmedium auf. Dazu müssen je nach Medium verschiedene Vorgaben und Standards beachtet werden (z.B. Papierformate, Grössen- und Kontrastverhältnisse von PCs und mobilen Geräten, Proportionen, Platzverhältnisse wie auf Bannern, Blogs und Social-Media-Posts etc.). Sie überprüfen vor dem Export das Dateiformat, die Auflösung der Bilder und den Farbraum gemäss Auftrag. Falls der Auftrag besondere Anforderungen an die Druckproduktion verlangt (z.B. Sonderfarben, Prägungen), nehmen sie Kontakt mit dem Weiterverarbeiter (z.B. Druckerei) auf und organisieren die Datenübergabe. Sie übergeben der Kundin oder dem Kunden die finale Version in den verschiedenen Dateiformaten und Abmessungen, korrekt beschriftet und übersichtlich strukturiert.",
+          "module": {
+            "basislehrjahr": ["Gestaltung, Webdesign", "Gestaltung"],
+            "berufsfachschule": [
+              "271 Vektordaten erstellen und Bilder bearbeiten",
+              "274 Druckdaten aufbereiten und ausgeben"
+            ],
+            "uek": ["272 Printprodukte entwerfen und umsetzen"]
+          },
+          "leistungsziele": [
+            {
+              "code": "b4.1",
+              "text": "überprüfen vor dem Export das Dateiformat, die Auflösung der Bilder und den Farbraum gemäss Auftrag.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Gestaltung, Webdesign"],
+                "berufsfachschule": [
+                  "271 Vektordaten erstellen und Bilder bearbeiten",
+                  "274 Druckdaten aufbereiten und ausgeben"
+                ],
+                "uek": []
+              }
+            },
+            {
+              "code": "b4.2",
+              "text": "holen Informationen beim Weiterverarbeiter ein und bereiten die Daten entsprechend auf.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["274 Druckdaten aufbereiten und ausgeben"],
+                "uek": []
+              }
+            },
+            {
+              "code": "b4.3",
+              "text": "exportieren eine Gestaltung in das dem Auftrag entsprechende Format und organisieren die Datenübergabe.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Gestaltung, Webdesign"],
+                "berufsfachschule": ["274 Druckdaten aufbereiten und ausgeben"],
+                "uek": ["272 Printprodukte entwerfen und umsetzen"]
+              }
+            },
+            {
+              "code": "b4.4",
+              "text": "bereiten ein Layout für einen Druck vor (z.B. Schnitt- und Passermarken).",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Gestaltung"],
+                "berufsfachschule": ["274 Druckdaten aufbereiten und ausgeben"],
+                "uek": ["272 Printprodukte entwerfen und umsetzen"]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "C",
+      "titel": "Entwickeln und Umsetzen von Marketing- und Kommunikationsmassnahmen",
+      "kompetenzen": [
+        {
+          "code": "c1",
+          "titel": "Marketingkonzept erarbeiten",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker erarbeiten für interne Zwecke oder im Rahmen eines Kundenprojekts ein Marketingkonzept. Um ein Marketingkonzept zu erstellen – z.B. für ein neues oder weiterentwickeltes Produkt – analysieren Mediamatikerinnen und Mediamatiker zunächst den vorgesehenen Markt. Sie definieren gemeinsam mit der Kundin oder dem Kunden die Zielgruppe, z.B. Erstellen von Personas. Sie recherchieren, welche Konkurrenten bereits mit ähnlichen Produkten auf dem Markt sind. Um die zukünftige Marktposition abschätzen zu können, führen sie eine SWOT-Analyse durch. In einem weiteren Schritt präzisieren sie die wichtigsten Marketingaspekte wie den Preis, das Produkt, die Distribution/Verkaufskanäle und die Kommunikation. Dabei wenden sie z.B. die Methode der 4 P’s an. Alle Erkenntnisse halten sie in einer Dokumentation schriftlich fest. Auf dieser Grundlage leiten sie schliesslich die integrierten Kommunikationsmassnahmen (Auswahl der Medien, Botschaft, Werbewirkung usw.) ab. Zum Abschluss erstellen sie das Marketingbudget und eine detaillierte Planung des Kommunikations-Mix (wann wird was wie und wo kommuniziert). Das komplette Marketingkonzept besprechen sie dann mit der Kundin oder dem Kunden und leiten die weiteren Schritte ein.",
+          "module": {
+            "basislehrjahr": ["Marketing"],
+            "berufsfachschule": [
+              "278 Markt analysieren und strategische Ziele ableiten",
+              "279 Marketingkonzept entwickeln und präsentieren"
+            ],
+            "uek": ["276 Medien für eine Marketingaktion erstellen"]
+          },
+          "leistungsziele": [
+            {
+              "code": "c1.1",
+              "text": "analysieren nach Absprache mit der Kundin oder dem Kunden Zielgruppen mittels geeigneter Methoden.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": ["278 Markt analysieren und strategische Ziele ableiten"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "c1.2",
+              "text": "führen eine Konkurrenz-Recherche durch.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": ["278 Markt analysieren und strategische Ziele ableiten"],
+                "uek": []
+              }
+            },
+            {
+              "code": "c1.3",
+              "text": "führen eine einfache SWOT-Analyse durch.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": ["278 Markt analysieren und strategische Ziele ableiten"],
+                "uek": []
+              }
+            },
+            {
+              "code": "c1.4",
+              "text": "definieren relevante Marketing-Aspekte wie Preis, Produkt, Distribution und Kommunikation.",
+              "taxonomie": "K5",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["279 Marketingkonzept entwickeln und präsentieren"],
+                "uek": []
+              }
+            },
+            {
+              "code": "c1.5",
+              "text": "leiten aus der (Markt)analyse konkrete Kommunikationsmassnahmen ab und halten diese im Marketingkonzept fest.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": ["279 Marketingkonzept entwickeln und präsentieren"],
+                "uek": []
+              }
+            },
+            {
+              "code": "c1.6",
+              "text": "erstellen eine realistische Zeit- und Kostenplanung der umzusetzenden Marketingaktivitäten.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": ["279 Marketingkonzept entwickeln und präsentieren"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "c1.7",
+              "text": "halten die Ergebnisse der Marketing-Analyse in einem Marketingkonzept übersichtlich und nachvollziehbar fest.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": ["279 Marketingkonzept entwickeln und präsentieren"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "c1.8",
+              "text": "erläutern der Kundin oder dem Kunden die Inhalte eines Marketingkonzepts nachvollziehbar.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": ["279 Marketingkonzept entwickeln und präsentieren"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            }
+          ]
+        },
+        {
+          "code": "c2",
+          "titel": "Analoge Marketingprodukte konzipieren und Marketingaktivitäten umsetzen",
+          "beschreibung": "Auf der Grundlage eines Marketingkonzepts konzipieren Mediamatikerinnen und Mediamatiker analoge Marketingprodukte (z.B. Plakat, Flyer oder eine Hauswurfsendung) und begleiten die Umsetzung. Bei der Konzipierung eines analogen Marketingprodukts beantworten sie folgende Fragen: Welches sind geeignete Botschaften und Slogans? Wie können diese am besten zur Zielgruppe transportiert werden? Weiter konkretisieren sie die verschiedenen Marketingprodukte, indem sie etwa Farben, Formen und Materialien definieren und die Qualität festlegen. Sie berücksichtigen dabei die Aussagekraft der jeweiligen Produkte. Die Ergebnisse der Analyse und die Vorschläge halten sie schriftlich fest und besprechen diese mit der Kundin oder dem Kunden. In einem nächsten Schritt erstellen sie Textentwürfe und wählen geeignete Bilder aus. Allenfalls entwickeln sie die Bildwelten selber. Sind die Produkte fertig erstellt, erteilen sie den Auftrag für die Produktion, z.B. an eine Druckerei. Sie überprüfen die Qualität und stellen schliesslich sicher, dass die Verteilung der Produkte wie vorgesehen umgesetzt werden kann (z.B. Aufhängen von Plakaten).",
+          "module": {
+            "basislehrjahr": ["Marketing"],
+            "berufsfachschule": [
+              "EGK Marketing-Fachsprache",
+              "280 Analoge und digitale Marketingprodukte konzipieren"
+            ],
+            "uek": ["276 Medien für eine Marketingaktion erstellen"]
+          },
+          "leistungsziele": [
+            {
+              "code": "c2.1",
+              "text": "definieren Botschaften und Slogans für analoge Marketingprodukte.",
+              "taxonomie": "K5",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": [
+                  "EGK Marketing-Fachsprache",
+                  "280 Analoge und digitale Marketingprodukte konzipieren"
+                ],
+                "uek": []
+              }
+            },
+            {
+              "code": "c2.2",
+              "text": "konkretisieren analoge Marketingprodukte in Bezug auf relevante Aspekte (z.B. Farbe, Form, Material, Qualität) und halten diese schriftlich fest.",
+              "taxonomie": "K5",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": ["280 Analoge und digitale Marketingprodukte konzipieren"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "c2.3",
+              "text": "präsentieren der Kundin oder dem Kunden die Analyse und Vorschläge für analoge Marketingprodukte.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": [],
+                "uek": []
+              }
+            },
+            {
+              "code": "c2.4",
+              "text": "erstellen Textentwürfe für analoge Marketingprodukte.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["EGK Marketing-Fachsprache"],
+                "uek": []
+              }
+            },
+            {
+              "code": "c2.5",
+              "text": "wählen geeignete Bilder für analoge Marketingprodukte aus.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": ["280 Analoge und digitale Marketingprodukte konzipieren"],
+                "uek": []
+              }
+            },
+            {
+              "code": "c2.6",
+              "text": "erteilen den Auftrag für die Produktion von analogen Marketingprodukten.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c2.7",
+              "text": "koordinieren die Verteilung von analogen Marketingprodukten.",
+              "taxonomie": "K5"
+            }
+          ]
+        },
+        {
+          "code": "c3",
+          "titel": "Digitale Marketingprodukte konzipieren und bewirtschaften",
+          "beschreibung": "Auf der Grundlage eines Marketingkonzepts konzipieren Mediamatikerinnen und Mediamatiker digitale Marketingprodukte (z.B. Filme, Animationen oder Online-Werbebanner), und halten diese in den entsprechenden Medien (z.B. Website) aktuell. Bei der Konzipierung eines digitalen Marketingprodukts beantworten sie folgende Fragen: Welches sind geeignete Botschaften und Slogans? Wie können diese am besten zur Zielgruppe transportiert werden? Wie können die Reichweite und die Akzeptanz der Botschaften gemessen werden? Weiter konkretisieren sie die Marketingprodukte, indem sie etwa Farben, Formen und die geeigneten technischen Plattformen definieren und die Qualität/Ausgabeformate festlegen. Sie berücksichtigen dabei die Aussagekraft der jeweiligen Produkte. Die Ergebnisse der Analyse und die Vorschläge halten sie schriftlich fest und besprechen diese mit der Kundin oder dem Kunden. In einem nächsten Schritt erstellen sie Grafiken, Textentwürfe, Storyboards usw. und definieren allenfalls die Bildwelt. Sind die Produkte fertig erstellt, platzieren sie diese in den entsprechenden digitalen Kanälen. Nach der erfolgreichen Produktivsetzung messen, überwachen und optimieren (Suchmaschinenoptimierung) sie die Onlineaktivitäten mit Hilfe entsprechender technischer Unterstützung, z.B. Google Analytics. Zu Handen der Kundin oder des Kunden erstellen sie produktspezifische Auswertungen und Dashboards und eruieren mögliche Optimierungspotenziale.",
+          "module": {
+            "basislehrjahr": ["Marketing"],
+            "berufsfachschule": [
+              "EGK Marketing-Fachsprache",
+              "280 Analoge und digitale Marketingprodukte konzipieren",
+              "282 Marketingkennzahlen auswerten und Inhalte für die betriebliche Kommunikation aufbereiten"
+            ],
+            "uek": ["276 Medien für eine Marketingaktion erstellen"]
+          },
+          "leistungsziele": [
+            {
+              "code": "c3.1",
+              "text": "definieren Botschaften und Slogans für digitale Marketingprodukte.",
+              "taxonomie": "K5",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": [
+                  "EGK Marketing-Fachsprache",
+                  "280 Analoge und digitale Marketingprodukte konzipieren"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "c3.2",
+              "text": "legen fest, wie Reichweite und Akzeptanz von Botschaften gemessen werden können.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": ["280 Analoge und digitale Marketingprodukte konzipieren"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "c3.3",
+              "text": "konkretisieren digitale Marketingprodukte in Bezug auf relevante Aspekte (z.B. Farbe, Form, geeignete technische Plattformen) und halten diese schriftlich fest.",
+              "taxonomie": "K5",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": ["EGK Marketing-Fachsprache"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "c3.4",
+              "text": "stellen der Kundin oder dem Kunden digitale Marketingprodukte überzeugend vor.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": [],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "c3.5",
+              "text": "wählen geeignete Bilder für digitale Marketingprodukte aus.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": ["280 Analoge und digitale Marketingprodukte konzipieren"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "c3.6",
+              "text": "platzieren digitale Marketingprodukte in den vorgesehenen Kanälen.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": [],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "c3.7",
+              "text": "messen Onlineaktivitäten mittels geeigneter technischer Hilfsmittel.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": [
+                  "282 Marketingkennzahlen auswerten und Inhalte für die betriebliche Kommunikation aufbereiten"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "c3.8",
+              "text": "optimieren die Online-Präsenz mittels geeigneter technischer Hilfsmittel.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": [],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "c3.9",
+              "text": "erstellen produktspezifische Auswertungen und Dashboards.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": [
+                  "282 Marketingkennzahlen auswerten und Inhalte für die betriebliche Kommunikation aufbereiten"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "c3.10",
+              "text": "leiten aus Auswertungen Optimierungspotenziale ab.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": [
+                  "282 Marketingkennzahlen auswerten und Inhalte für die betriebliche Kommunikation aufbereiten"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            }
+          ]
+        },
+        {
+          "code": "c4",
+          "titel": "Texte für die betriebliche Kommunikation verfassen und publizieren",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker unterstützen die Kommunikation ihres Betriebs, indem sie für verschiedenste Kommunikationsmittel Texte verfassen und publizieren. Erhalten Mediamatikerinnen und Mediamatiker einen Auftrag im Bereich der Kommunikation, wählen sie zunächst ein geeignetes Kommunikationsmittel aus. Dazu klären sie die Zielsetzungen und die Zielgruppen mit dem Kommunikationsverantwortlichen ab und erstellen einen Vorschlag, welches Mittel sie einsetzen, z.B. einen Flyer, ein Inserat, Beiträge in einer Publikation oder eine Pressemittelung. Sie entwerfen den Text oder den Inhalt unter Einhaltung der firmenspezifischen Vorgaben (Corporate Communications). Sie achten darauf, dass der Text zielgruppenspezifisch formuliert ist und zu den weiteren Medieninhalten (z.B. Film, Flyer) passt. Ausserdem achten sie darauf, dass die wesentlichen Aussagen klar zum Ausdruck kommen und ein sinnvoller und für die Zielgruppe nachvollziehbarer Textaufbau gewählt wird. Bei Bedarf sprechen sie sich mit anderen internen und externen Stellen ab und/oder übernehmen die Koordination. Schliesslich finalisieren sie den Text und publizieren oder veröffentlichen diesen im vorgesehenen Medium (z.B. Aufschalten auf der Website, Aufschaltung einer Mitteilung im Intranet).",
+          "module": {
+            "basislehrjahr": ["Marketing"],
+            "berufsfachschule": [
+              "282 Marketingkennzahlen auswerten und Inhalte für die betriebliche Kommunikation aufbereiten EGK Marketing-Fachsprache",
+              "EGK Marketing-Fachsprache",
+              "EGK 2. Landessprache",
+              "EGK Englisch"
+            ],
+            "uek": ["276 Medien für eine Marketingaktion erstellen"]
+          },
+          "leistungsziele": [
+            {
+              "code": "c4.1",
+              "text": "wählen in Absprache mit Kommunikationsverantwortlichen ein geeignetes Kommunikationsmittel aus (z.B. Flyer, Inserat, Pressemitteilung).",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": [],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "c4.2",
+              "text": "verfassen einen Text zielgruppenorientiert, aussagekräftig, klar strukturiert und unter Einhaltung der firmenspezifischen Vorgaben.",
+              "taxonomie": "K5",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": [
+                  "282 Marketingkennzahlen auswerten und Inhalte für die betriebliche Kommunikation aufbereiten EGK Marketing-Fachsprache"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "c4.3",
+              "text": "finalisieren einen Text nach Absprache mit internen Stellen formal und inhaltlich korrekt.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["EGK Marketing-Fachsprache"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "c4.4",
+              "text": "publizieren einen Text im vorgesehenen Medium.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": [
+                  "282 Marketingkennzahlen auswerten und Inhalte für die betriebliche Kommunikation aufbereiten EGK Marketing-Fachsprache"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "c4.5",
+              "text": "verfassen einen einfachen, kurzen Text für die betriebliche Kommunikation in einer zweiten Landessprache.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["EGK 2. Landessprache"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "c4.6",
+              "text": "verfassen einen einfachen, kurzen Text für die betriebliche Kommunikation auf Englisch.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["EGK Englisch"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            }
+          ]
+        },
+        {
+          "code": "c5",
+          "titel": "Social-Media-Kanäle aufbauen und bewirtschaften",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker bauen im Rahmen von internen oder externen Aufträgen Social-Media-Kanäle auf und bewirtschaften diese. Zu Beginn eines solchen Auftrags und auf Basis einer Zielgruppenanalyse klären sie zunächst ab, welche Kanäle geeignet sind, um die Zielsetzungen zu erreichen. Sie definieren Anzahl und Art der Kanäle. Danach erstellen sie ein entsprechendes Social-Media-Konzept, in welchem sie definieren, welche Zielgruppe wie, wann und in welcher Regelmässigkeit informiert, resp. bewirtschaftet werden muss. Ebenso definieren sie die Verantwortlichkeiten und stellen eine Bewirtschaftungs-Kostenschätzung auf. Sie bauen den Kanal auf, erstellen die Inhalte – Text, Bild oder Animationen – und publizieren diese gemäss Onlineplanung. Sie kümmern sich anschliessend um eine laufende Bewirtschaftung. Das heisst sie aktualisieren Inhalte, koordinieren die Verantwortlichkeiten und posten oder beantworten Beiträge. Sie kommunizieren aktiv und unter Einhaltung der firmenspezifischen Vorgaben in den Social-Media-Plattformen und unterstützen dabei die Kundin oder den Kunden in der Online-Welt. Je nach Situation erstellen sie ihre Beiträge auch in einer zweiten Landessprache oder auf Englisch. Nach einem vordefinierten Zeitfenster werten sie die Nutzung der einzelnen Kanäle aus (z.B. Anzahl Followers, Likes). Sie erstellen ein Reporting mit Hilfe der gängigsten Analysetools und bereiten die Daten für den Auftraggeber auf.",
+          "module": {
+            "basislehrjahr": ["Marketing"],
+            "berufsfachschule": [
+              "281 Social-Media-Kanäle aufbauen und bewirtschaften",
+              "266 Digitale Animationen produzieren EGK Marketing-Fachsprache",
+              "EGK Marketing-Fachsprache",
+              "282 Marketingkennzahlen auswerten und Inhalte für die betriebliche Kommunikation aufbereiten EGK Marketing-Fachsprache",
+              "EGK 2. Landessprache",
+              "EGK Englisch"
+            ],
+            "uek": ["276 Medien für eine Marketingaktion erstellen"]
+          },
+          "leistungsziele": [
+            {
+              "code": "c5.1",
+              "text": "definieren entsprechend einem Auftrag geeignete Social-Media-Kanäle.",
+              "taxonomie": "K5",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": ["281 Social-Media-Kanäle aufbauen und bewirtschaften"],
+                "uek": []
+              }
+            },
+            {
+              "code": "c5.2",
+              "text": "erstellen ein Social-Media-Konzept in Bezug auf die Zielsetzungen und Zielgruppen.",
+              "taxonomie": "K5",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["281 Social-Media-Kanäle aufbauen und bewirtschaften"],
+                "uek": []
+              }
+            },
+            {
+              "code": "c5.3",
+              "text": "bauen einen Social-Media-Kanal auf.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["281 Social-Media-Kanäle aufbauen und bewirtschaften"],
+                "uek": []
+              }
+            },
+            {
+              "code": "c5.4",
+              "text": "publizieren verschiedene Inhalte auf einem Social-Media-Kanal (z.B. Text, Bild, Animation, Film).",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": [
+                  "266 Digitale Animationen produzieren EGK Marketing-Fachsprache"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "c5.5",
+              "text": "bewirtschaften einen Social-Media-Kanal in Bezug auf Inhalte, Verantwortlichkeiten und Beiträge..",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": ["EGK Marketing-Fachsprache"],
+                "uek": []
+              }
+            },
+            {
+              "code": "c5.6",
+              "text": "erstellen ein nachvollziehbares Reporting zur Nutzung des Social-Media-Kanals.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Marketing"],
+                "berufsfachschule": [
+                  "282 Marketingkennzahlen auswerten und Inhalte für die betriebliche Kommunikation aufbereiten EGK Marketing-Fachsprache"
+                ],
+                "uek": []
+              }
+            },
+            {
+              "code": "c5.7",
+              "text": "posten und beantworten Beiträge in einer zweiten Landessprache.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["EGK 2. Landessprache"],
+                "uek": []
+              }
+            },
+            {
+              "code": "c5.8",
+              "text": "posten und beantworten Beiträge auf Englisch.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["EGK Englisch"],
+                "uek": []
+              }
+            },
+            {
+              "code": "c5.9",
+              "text": "prüfen die rechtlichen Rahmenbedingungen im Umgang mit Social Media und beraten die Kundin oder den Kunden bezüglich Privatsphäre.",
+              "taxonomie": "K5",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["281 Social-Media-Kanäle aufbauen und bewirtschaften"],
+                "uek": []
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "D",
+      "titel": "Mitwirken in der Betriebsadministration",
+      "kompetenzen": [
+        {
+          "code": "d1",
+          "titel": "Externe Anfragen im Geschäftsalltag bearbeiten",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker beantworten verschiedenste Anfragen von Kundinnen und Kunden sowie Partnerinnen und Partnern zielorientiert, effizient und freundlich. Auf verschiedenen Kommunikationswegen – schriftlich, telefonisch, persönlich oder über soziale Medien - nehmen sie Anfragen von Kundinnen und Kunden oder Partnerinnen und Partnern entgegen. Die Anfragen stehen häufig im Zusammenhang mit ihren laufenden Projekten, können sich aber auch generell auf Produkte und Dienstleistungen des Betriebs beziehen. Mediamatikerinnen und Mediamatiker eruieren zunächst die konkreten Anliegen der Kundinnen und Kunden resp. Partnerinnen und Partner. Anschliessend leiten sie die Anfragen an die entsprechende Stelle im Betrieb weiter oder beantworten sie gleich selber. Dazu setzen sie die jeweils geeigneten Kommunikationsmittel ein und achten auf eine freundliche und wertschätzende Formulierung. Relevante Informationen aus Kundengesprächen halten sie anschliessend schriftlich fest, leiten sie bei Bedarf an die entsprechenden Stellen weiter oder schliessen den Prozess nach betrieblichen Vorgaben ab. Sie sind in der Lage, in einer zweiten Landessprache und auf Englisch schriftlich und mündlich Auskunft zu geben.",
+          "module": {
+            "basislehrjahr": ["Kommunikation"],
+            "berufsfachschule": [
+              "EGK Betriebskommunikation",
+              "EGK 2. Landessprache EGK Betriebskommunikation",
+              "EGK Englisch EGK Betriebskommunikation"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "d1.1",
+              "text": "eruieren die Anliegen von Kundinnen und Kunden oder Partnerinnen und Partnern rasch und freundlich.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Kommunikation"],
+                "berufsfachschule": ["EGK Betriebskommunikation"],
+                "uek": []
+              }
+            },
+            {
+              "code": "d1.2",
+              "text": "beantworten Anfragen von Kundinnen und Kunden oder Partnerinnen und Partnern fachlich korrekt und dienstleistungsorientiert (schriftlich und mündlich).",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Kommunikation"],
+                "berufsfachschule": ["EGK Betriebskommunikation"],
+                "uek": []
+              }
+            },
+            {
+              "code": "d1.3",
+              "text": "halten relevante Informationen aus Kundengesprächen schriftlich fest.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Kommunikation"],
+                "berufsfachschule": ["EGK Betriebskommunikation"],
+                "uek": []
+              }
+            },
+            {
+              "code": "d1.4",
+              "text": "leiten Anfragen von Kundinnen und Kunden oder Partnerinnen und Partnern an die korrekte Stelle im Betrieb weiter.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["EGK Betriebskommunikation"],
+                "uek": []
+              }
+            },
+            {
+              "code": "d1.5",
+              "text": "schliessen einen Anfrage-Prozess nach betrieblichen Vorgaben ab.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d1.6",
+              "text": "beantworten Anfragen von Kundinnen und Kunden oder Partnerinnen und Partnern in einer zweiten Landessprache mündlich und schriftlich.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["EGK 2. Landessprache EGK Betriebskommunikation"],
+                "uek": []
+              }
+            },
+            {
+              "code": "d1.7",
+              "text": "beantworten Anfragen von Kundinnen und Kunden oder Partnerinnen und Partnern auf Englisch mündlich und schriftlich.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["EGK Englisch EGK Betriebskommunikation"],
+                "uek": []
+              }
+            }
+          ]
+        },
+        {
+          "code": "d2",
+          "titel": "Sitzungen und Anlässe organisieren und moderieren",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker organisieren interne und externe Sitzungen oder Anlässe und moderieren diese. Zunächst definieren sie den Teilnehmerkreis und koordinieren die Terminfindung. Sie verfassen die Einladung mit dem Programm und allen weiteren benötigten Angaben und verschicken diese anschliessend. Weiter klären sie die benötigte Infrastruktur, Technik sowie Verpflegungsmöglichkeiten ab und buchen die entsprechenden Dienstleistungen. Sie bereiten sich persönlich auf die Sitzung oder den Anlass vor, indem sie eine detaillierte Zeit- und Ablaufplanung erstellen. Sie moderieren die Sitzung oder den Anlass kompetent und setzen geeignete Hilfsmittel ein wie Beamer, Flipchart oder Whiteboard. Sie achten darauf, das Zeitmanagement einzuhalten und die Ziele zu erreichen. Nach der Sitzung oder dem Anlass halten sie die Ergebnisse in geeigneter Form fest, z.B. in einem klassischen Protokoll, in einem Fotoprotokoll oder mittels Audio- oder Videoaufnahmen. Schliesslich informieren sie die Teilnehmenden und stellen ihnen die Ergebnisse zu.",
+          "module": {
+            "basislehrjahr": ["Kommunikation"],
+            "berufsfachschule": [
+              "EGK Betriebskommunikation",
+              "EGK Englisch EGK Betriebskommunikation"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "d2.1",
+              "text": "legen Teilnehmerkreis und Termin für eine Sitzung oder einen Anlass fest.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Kommunikation"],
+                "berufsfachschule": ["EGK Betriebskommunikation"],
+                "uek": []
+              }
+            },
+            {
+              "code": "d2.2",
+              "text": "verfassen eine Einladung mit dem Programm und weiteren relevanten Angaben (z.B. Zeit, Ort, Grundlagen).",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Kommunikation"],
+                "berufsfachschule": ["EGK Betriebskommunikation"],
+                "uek": []
+              }
+            },
+            {
+              "code": "d2.3",
+              "text": "organisieren die benötigte Infrastruktur, Technik und Verpflegung frühzeitig und zuverlässig.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["EGK Betriebskommunikation"],
+                "uek": []
+              }
+            },
+            {
+              "code": "d2.4",
+              "text": "erstellen eine detaillierte Zeit- und Ablaufplanung einer Sitzung oder eines Anlasses.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["EGK Betriebskommunikation"],
+                "uek": []
+              }
+            },
+            {
+              "code": "d2.5",
+              "text": "moderieren eine Sitzung oder einen kleineren Anlass zielorientiert und effizient.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["EGK Betriebskommunikation"],
+                "uek": []
+              }
+            },
+            {
+              "code": "d2.6",
+              "text": "halten die Ergebnisse einer Sitzung oder eines Anlasses in geeigneter Form klar strukturiert fest (z.B. Protokoll, Fotoprotokoll, Audio- oder Videoaufnahmen).",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Kommunikation"],
+                "berufsfachschule": ["EGK Betriebskommunikation"],
+                "uek": []
+              }
+            },
+            {
+              "code": "d2.7",
+              "text": "informieren Sitzungsteilnehmende zeitnah über die Ergebnisse.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Kommunikation"],
+                "berufsfachschule": ["EGK Betriebskommunikation"],
+                "uek": []
+              }
+            },
+            {
+              "code": "d2.8",
+              "text": "moderieren eine einfache Sitzung auf Englisch.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["EGK Englisch EGK Betriebskommunikation"],
+                "uek": []
+              }
+            }
+          ]
+        },
+        {
+          "code": "d3",
+          "titel": "Offerten und Rechnungen für Kundenaufträge erstellen",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker erstellen für ihre Kundenaufträge selbständig oder nach Anleitung von Vorgesetzten Offerten und Rechnungen. In einem ersten Schritt tragen sie die für eine Offerte benötigten Angaben und Informationen zusammen. Bei Bedarf, z.B. wenn Unklarheit bezüglich gewünschten Leistungen besteht, halten sie Rücksprache mit der Kundin oder dem Kunden. Sie verfassen die Offerte mit den betrieblichen Vorlagen und berücksichtigen die aktuellen, betrieblichen Preislisten und Ansätze. Sie halten Inhalte und Umfang der Leistungen fest und berechnen die Kosten. Bei Bedarf besprechen sie sich mit Kolleginnen und Kollegen oder Vorgesetzten. Sie finalisieren die Offerte und überprüfen Inhalt und Form nochmals gründlich. Ist ein Auftrag beendet, bereiten sie die Rechnung zuhanden der Kundin oder des Kunden vor. Als Grundlage dienen ihnen die Offerte sowie die Erfassung der aufgewendeten Stunden. Sie erstellen die Rechnung mit den betrieblichen Vorlagen oder leiten die Rechnungsinformationen an die Buchhaltung weiter.",
+          "module": {
+            "basislehrjahr": ["Kommunikation"],
+            "berufsfachschule": [
+              "283 Offerten rechtskonform erstellen und überprüfen",
+              "284 Leistungserbringung kalkulieren und Zahlungsprozess abwickeln EGK Betriebskommunikation",
+              "284 Leistungserbringung kalkulieren und Zahlungsprozess abwickeln",
+              "285 Jahresabschluss analysieren und Wirtschaftlichkeitsrechnung durchführen"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "d3.1",
+              "text": "tragen die für eine Offerte benötigten Angaben und Informationen vollständig zusammen.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Kommunikation"],
+                "berufsfachschule": ["283 Offerten rechtskonform erstellen und überprüfen"],
+                "uek": []
+              }
+            },
+            {
+              "code": "d3.2",
+              "text": "halten Inhalte und Umfang von Leistungen anhand der betrieblichen Vorlagen und Hilfsmitteln fest.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d3.3",
+              "text": "finalisieren eine Offerte inhaltlich und formal korrekt.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Kommunikation"],
+                "berufsfachschule": [
+                  "283 Offerten rechtskonform erstellen und überprüfen",
+                  "284 Leistungserbringung kalkulieren und Zahlungsprozess abwickeln EGK Betriebskommunikation"
+                ],
+                "uek": []
+              }
+            },
+            {
+              "code": "d3.4",
+              "text": "berechnen effektive Aufwände anhand der Stundenerfassung.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": [
+                  "284 Leistungserbringung kalkulieren und Zahlungsprozess abwickeln",
+                  "285 Jahresabschluss analysieren und Wirtschaftlichkeitsrechnung durchführen"
+                ],
+                "uek": []
+              }
+            },
+            {
+              "code": "d3.5",
+              "text": "erstellen eine Rechnung inhaltlich und formal korrekt.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Kommunikation"],
+                "berufsfachschule": [
+                  "284 Leistungserbringung kalkulieren und Zahlungsprozess abwickeln EGK Betriebskommunikation"
+                ],
+                "uek": []
+              }
+            },
+            {
+              "code": "d3.6",
+              "text": "leiten die Rechnungsinformationen an die Buchhaltung weiter.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": [
+                  "284 Leistungserbringung kalkulieren und Zahlungsprozess abwickeln",
+                  "285 Jahresabschluss analysieren und Wirtschaftlichkeitsrechnung durchführen"
+                ],
+                "uek": []
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "E",
+      "titel": "Einsetzen von Informations- und Kommunikationstechnologien (ICT)",
+      "kompetenzen": [
+        {
+          "code": "e1",
+          "titel": "Die eigenen ICT-Arbeitsinstrumente einrichten und bedienen",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker richten die eigenen Arbeitsinstrumente selbstständig ein und bedienen sie korrekt. Mediamatikerinnen und Mediamatiker verfügen über ein solides technisches Grundverständnis. Je nach Auftrag arbeiten sie mit unterschiedlichen Geräten (z.B. PC, Mac, NAS, Kamera, Mikrofon). Sie stellen Verbindungen (mit Kabel oder kabellos) zwischen den ICT-, Aufnahme- oder mobilen Geräten her und nehmen sie in Betrieb. Danach prüfen sie die Funktionsfähigkeit der Geräte und ob die Software auf dem aktuellsten Stand ist. Bei Bedarf führen sie Updates (Geräte-Software, Treiber, Firmware) durch. Sie sind beim Einsatz von ICT-Arbeitsinstrumenten auf Sicherheitsaspekte sensibilisiert (z.B. Virenschutz, Passwortregelung, Datenschutz, Verschlüsselung) und treffen nach betrieblichen Vorgaben die nötigen Massnahmen. Anwendungs-Software installieren und konfigurieren sie nach individuellen Bedürfnissen. Für kollaborative Arbeiten richten sie eine gemeinsame Plattform (z.B. einfache Cloud-Dienste) projektbezogen ein. Sie gewährleisten die Datensicherheit ihrer Projekte und führen einfache Datensicherungen (Backup) selbstständig durch.",
+          "module": {
+            "basislehrjahr": ["PC-Grundlagen, Fotografie, Multimedia", "PC-Grundlagen"],
+            "berufsfachschule": ["286 Eigene ICT-Arbeitsinstrumente einrichten und bedienen"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "e1.1",
+              "text": "stellen mithilfe von geeigneten Kabeln, Adaptern oder kabellos Verbindungen zwischen verschiedenen Geräten her (z.B. PC-Kamera).",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["PC-Grundlagen, Fotografie, Multimedia"],
+                "berufsfachschule": ["286 Eigene ICT-Arbeitsinstrumente einrichten und bedienen"],
+                "uek": []
+              }
+            },
+            {
+              "code": "e1.2",
+              "text": "nehmen ICT-, Aufnahme- und mobile Geräte in Betrieb.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["PC-Grundlagen, Fotografie, Multimedia"],
+                "berufsfachschule": ["286 Eigene ICT-Arbeitsinstrumente einrichten und bedienen"],
+                "uek": []
+              }
+            },
+            {
+              "code": "e1.3",
+              "text": "prüfen, ob die Geräte auf dem aktuellsten Stand sind und führen bei Bedarf Updates durch.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["PC-Grundlagen"],
+                "berufsfachschule": ["286 Eigene ICT-Arbeitsinstrumente einrichten und bedienen"],
+                "uek": []
+              }
+            },
+            {
+              "code": "e1.4",
+              "text": "schätzen die Geschäftsdaten und ICT-Umgebungen in Sicherheitsaspekten richtig ein und setzen nach betrieblichen Vorgaben die nötigen Massnahmen um.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["286 Eigene ICT-Arbeitsinstrumente einrichten und bedienen"],
+                "uek": []
+              }
+            },
+            {
+              "code": "e1.5",
+              "text": "installieren Anwendungssoftware technisch korrekt und konfigurieren sie nach individuellen Bedürfnissen.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["PC-Grundlagen"],
+                "berufsfachschule": ["286 Eigene ICT-Arbeitsinstrumente einrichten und bedienen"],
+                "uek": []
+              }
+            },
+            {
+              "code": "e1.6",
+              "text": "richten kollaborative Plattformen und einfache Cloud-Dienste projektbezogen ein.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["PC-Grundlagen"],
+                "berufsfachschule": ["286 Eigene ICT-Arbeitsinstrumente einrichten und bedienen"],
+                "uek": []
+              }
+            },
+            {
+              "code": "e1.7",
+              "text": "führen einfache Datensicherungen (Backup) ihrer Projekte selbständig durch.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["PC-Grundlagen"],
+                "berufsfachschule": ["286 Eigene ICT-Arbeitsinstrumente einrichten und bedienen"],
+                "uek": []
+              }
+            },
+            {
+              "code": "e1.8",
+              "text": "setzen die eigenen Geräte energie- und ressourceneffizient ein.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["PC-Grundlagen"],
+                "berufsfachschule": [],
+                "uek": []
+              }
+            }
+          ]
+        },
+        {
+          "code": "e2",
+          "titel": "Website erstellen",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker realisieren statische Websites oder kleine Webapplikationen nach Kundenwunsch. Sie setzen Seitenraster mit HTML und CSS syntaktisch und semantisch korrekt gemäss Kundenbedürfnissen um. Dabei achten sie auf Browserkompatibilität, geräteunabhängige Darstellung (Responsive Design) und Barrierefreiheit. Sie binden Bibliotheken, Frameworks sowie grafische Elemente optimal ein. Mithilfe von Validatoren (z.B. W3C) überprüfen sie die technische Qualität der Website. Je nach Kundenwunsch installieren sie ein Content Management System (CMS). Vor der Übergabe testen sie, ob die Website einwandfrei funktioniert (Browser-Tests, Links etc.). Sie überprüfen ihre Arbeit in Bezug auf Benutzerfreundlichkeit und Übereinstimmung mit den Kundenbedürfnissen. Zum Schluss veröffentlichen sie die Website bzw. übergeben sie der Kundin oder dem Kunden.",
+          "module": {
+            "basislehrjahr": ["Webentwicklung"],
+            "berufsfachschule": ["287 Websites mit CSS gestalten"],
+            "uek": ["101 Webauftritt erstellen und veröffentlichen"]
+          },
+          "leistungsziele": [
+            {
+              "code": "e2.1",
+              "text": "setzen Seitenraster mit HTML und CSS syntaktisch, semantisch und barrierefrei korrekt um.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Webentwicklung"],
+                "berufsfachschule": ["287 Websites mit CSS gestalten"],
+                "uek": ["101 Webauftritt erstellen und veröffentlichen"]
+              }
+            },
+            {
+              "code": "e2.2",
+              "text": "binden Bibliotheken und Frameworks ein.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Webentwicklung"],
+                "berufsfachschule": ["287 Websites mit CSS gestalten"],
+                "uek": []
+              }
+            },
+            {
+              "code": "e2.3",
+              "text": "binden grafische Elemente fachlich korrekt ein.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Webentwicklung"],
+                "berufsfachschule": [],
+                "uek": ["101 Webauftritt erstellen und veröffentlichen"]
+              }
+            },
+            {
+              "code": "e2.4",
+              "text": "installieren und konfigurieren geläufige Content-Management-Systeme nach Kundenwunsch.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Webentwicklung"],
+                "berufsfachschule": [],
+                "uek": []
+              }
+            },
+            {
+              "code": "e2.5",
+              "text": "überprüfen die Qualität von HTML- und CSS-Dokumenten mithilfe von Validatoren (z.B. W3C).",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Webentwicklung"],
+                "berufsfachschule": [],
+                "uek": ["101 Webauftritt erstellen und veröffentlichen"]
+              }
+            },
+            {
+              "code": "e2.6",
+              "text": "führen Browser-Tests durch.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Webentwicklung"],
+                "berufsfachschule": ["287 Websites mit CSS gestalten"],
+                "uek": ["101 Webauftritt erstellen und veröffentlichen"]
+              }
+            },
+            {
+              "code": "e2.7",
+              "text": "überprüfen das Endprodukt auf Benutzerfreundlichkeit und die Erfüllung der Kundenwünsche.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Webentwicklung"],
+                "berufsfachschule": [],
+                "uek": ["101 Webauftritt erstellen und veröffentlichen"]
+              }
+            }
+          ]
+        },
+        {
+          "code": "e3",
+          "titel": "Website clientseitig mit interaktiven Komponenten erweitern",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker entwickeln und implementieren interaktive Komponenten für bestehende Websites. Mit der Skriptsprache JavaScript setzen sie clientseitige Erweiterungen von Webanwendungen um. Sie schreiben Skripte, um beispielsweise Standorte auszulesen, Benutzereingaben zu überprüfen oder auf Benutzerereignisse wie Formulareingaben und Events (Mausklicks etc.) zu reagieren. Mit native JavaScript oder JavaScript-Bibliotheken durchsuchen sie HTML-Seiten, lesen sie aus oder verändern sie (DOM-Manipulation). Sie nutzen externe Dienste/Sensoren über die bereitgestellten API und tauschen Daten aus. Sie achten auf sicherheitsrelevante Aspekte und setzen Massnahmen um, um mögliche Gefährdungen bei der Ausführung von JavaScript-Programmen einzugrenzen (z.B. Same-Origin-Policy).",
+          "module": {
+            "basislehrjahr": ["Webentwicklung"],
+            "berufsfachschule": [
+              "288 Programmiertechniken im Webfrontend einsetzen",
+              "291 Oberflächen (UIs) mit Webtechnologien entwickeln"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "e3.1",
+              "text": "setzen unterschiedliche Verfahren zur Validierung von Benutzereingaben effektiv um.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Webentwicklung"],
+                "berufsfachschule": ["288 Programmiertechniken im Webfrontend einsetzen"],
+                "uek": []
+              }
+            },
+            {
+              "code": "e3.2",
+              "text": "durchsuchen und verändern HTML-Seiten (DOM) mit native JavaScript oder JavaScript-Bibliotheken.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Webentwicklung"],
+                "berufsfachschule": ["288 Programmiertechniken im Webfrontend einsetzen"],
+                "uek": []
+              }
+            },
+            {
+              "code": "e3.3",
+              "text": "erstellen Skripte, um auf Benutzerereignisse wie Formulareingaben oder Events zu reagieren.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Webentwicklung"],
+                "berufsfachschule": ["288 Programmiertechniken im Webfrontend einsetzen"],
+                "uek": []
+              }
+            },
+            {
+              "code": "e3.4",
+              "text": "verändern ereignisbasiert die HTML-Struktur oder CSS-Definitionen einer Website.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Webentwicklung"],
+                "berufsfachschule": ["288 Programmiertechniken im Webfrontend einsetzen"],
+                "uek": []
+              }
+            },
+            {
+              "code": "e3.5",
+              "text": "binden externe Dienste/Sensoren über die JavaScript API ein und tauschen im Hintergrund Daten aus.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Webentwicklung"],
+                "berufsfachschule": ["291 Oberflächen (UIs) mit Webtechnologien entwickeln"],
+                "uek": []
+              }
+            },
+            {
+              "code": "e3.6",
+              "text": "setzen Sicherheitsmassnahmen bei der Anwendung clientseitiger Skriptsprachen um (z.B. Same-Origin-Policy).",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Webentwicklung"],
+                "berufsfachschule": ["291 Oberflächen (UIs) mit Webtechnologien entwickeln"],
+                "uek": []
+              }
+            }
+          ]
+        },
+        {
+          "code": "e4",
+          "titel": "Serverseitig Daten auslesen und verarbeiten",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker lesen Daten einer Datenbank aus und stellen diese verarbeitet auf einer Website dar. Gestützt auf ein Datenmodell bilden sie einfache Sachverhalte in einer Datenbank ab. Sie lesen Daten aus einer Datenbank aus, bereiten sie bei Bedarf auf (ggf. mittels Berechnungen) und stellen sie auf einer Website dar (z.B. Artikel aus Webshop). Über ein Websiteformular fügen sie Daten in eine Datenbank ein (z.B. Warenkorb) oder aktualisieren diese. Dabei stellen sie die Plausibilität der Daten serverseitig sicher, um zu gewährleisten, dass diese für eine spätere Verarbeitung geeignet sind und um die Gefahr von Angriffen auszuschliessen. Wird ein CMS eingesetzt, so verändern sie Templates und platzieren die gewünschten Daten an entsprechender Position.",
+          "module": {
+            "basislehrjahr": ["Webentwicklung"],
+            "berufsfachschule": [
+              "290 Datenbanken abfragen und verändern",
+              "307 Interaktive Webseite mit Formular erstellen"
+            ],
+            "uek": ["289 CMS einsetzen und bewirtschaften"]
+          },
+          "leistungsziele": [
+            {
+              "code": "e4.1",
+              "text": "setzen mit einer Datenbank ein vorgegebenes Datenmodell um.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Webentwicklung"],
+                "berufsfachschule": ["290 Datenbanken abfragen und verändern"],
+                "uek": ["289 CMS einsetzen und bewirtschaften"]
+              }
+            },
+            {
+              "code": "e4.2",
+              "text": "lesen Daten aus einer Datenbank aus, bereiten sie auf und stellen sie auf einer Website dar.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Webentwicklung"],
+                "berufsfachschule": ["290 Datenbanken abfragen und verändern"],
+                "uek": []
+              }
+            },
+            {
+              "code": "e4.3",
+              "text": "fügen Daten über ein Websiteformular in eine Datenbank ein.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Webentwicklung"],
+                "berufsfachschule": ["307 Interaktive Webseite mit Formular erstellen"],
+                "uek": []
+              }
+            },
+            {
+              "code": "e4.4",
+              "text": "verändern selbstständig ein bestehendes CMS-Template.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Webentwicklung"],
+                "berufsfachschule": [],
+                "uek": ["289 CMS einsetzen und bewirtschaften"]
+              }
+            },
+            {
+              "code": "e4.5",
+              "text": "setzen unterschiedliche Verfahren zur Validierung von Benutzereingaben effektiv um.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Webentwicklung"],
+                "berufsfachschule": ["307 Interaktive Webseite mit Formular erstellen"],
+                "uek": ["289 CMS einsetzen und bewirtschaften"]
+              }
+            },
+            {
+              "code": "e4.6",
+              "text": "setzen sicherheitsrelevante Aspekte bei serverseitigen Programmcodes um.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Webentwicklung"],
+                "berufsfachschule": ["307 Interaktive Webseite mit Formular erstellen"],
+                "uek": ["289 CMS einsetzen und bewirtschaften"]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "F",
+      "titel": "Führen von einfachen Projekten",
+      "kompetenzen": [
+        {
+          "code": "f1",
+          "titel": "Bedürfnisse der Kundinnen und Kunden abklären",
+          "beschreibung": "Zu Beginn eines Auftrags klären Mediamatikerinnen und Mediamatiker die Bedürfnisse der Kundin oder des Kunden gründlich und zuverlässig ab. Wenn sie einen neuen Auftrag erhalten, analysieren sie diesen zunächst, so dass sie möglichst rasch eine konkrete Vorstellung des gewünschten Produkts entwickeln. Bei Bedarf führen sie Recherchen durch. Sie bereiten sich auf eine erste Besprechung mit der Kundin oder dem Kunden vor, indem sie Ziele und offene Fragen festhalten. Während des Gesprächs - meistens anlässlich einer Sitzung - eruieren sie die Bedürfnisse und Anliegen der Kundin oder des Kunden. Sie hören interessiert und aktiv zu. Wenn bezüglich einzelner Aspekte noch Unklarheiten bestehen, fragen sie gezielt nach. Sie achten darauf, dass alle offenen Fragen bezüglich Ziele, Umfang, Terminplanung und Kostendach des Auftrags geklärt sind. Nach der Besprechung halten sie alle wichtigen Punkte in einem Protokoll fest und stellen dieses der Kundin oder dem Kunden zu.",
+          "module": {
+            "basislehrjahr": ["Projektmanagement"],
+            "berufsfachschule": [
+              "306 Kleinprojekte im eigenen Berufsumfeld abwickeln",
+              "431 Aufträge im eigenen Berufsumfeld selbständig durchführen"
+            ],
+            "uek": ["276 Medien für eine Marketingaktion erstellen"]
+          },
+          "leistungsziele": [
+            {
+              "code": "f1.1",
+              "text": "analysieren einen Auftrag anhand von strukturierten Recherchen.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Projektmanagement"],
+                "berufsfachschule": [
+                  "306 Kleinprojekte im eigenen Berufsumfeld abwickeln",
+                  "431 Aufträge im eigenen Berufsumfeld selbständig durchführen"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "f1.2",
+              "text": "halten Ziele und offene Fragen für ein Erstgespräch mit der Kundin oder dem Kunden fest.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Projektmanagement"],
+                "berufsfachschule": [
+                  "306 Kleinprojekte im eigenen Berufsumfeld abwickeln",
+                  "431 Aufträge im eigenen Berufsumfeld selbständig durchführen"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "f1.3",
+              "text": "eruieren die Bedürfnisse und Anliegen der Kundin oder des Kunden mittels geeigneter Gesprächstechniken.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Projektmanagement"],
+                "berufsfachschule": [
+                  "306 Kleinprojekte im eigenen Berufsumfeld abwickeln",
+                  "431 Aufträge im eigenen Berufsumfeld selbständig durchführen"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "f1.4",
+              "text": "klären mit der Kundin oder dem Kunden wesentliche Aspekte eines Auftrags freundlich und zielorientiert (z.B. Ziele, Umfang, Terminplanung, Kostendach).",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Projektmanagement"],
+                "berufsfachschule": [
+                  "306 Kleinprojekte im eigenen Berufsumfeld abwickeln",
+                  "431 Aufträge im eigenen Berufsumfeld selbständig durchführen"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "f1.5",
+              "text": "halten die Ergebnisse eines Erstgesprächs in Form eines Protokolls nachvollziehbar fest.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Projektmanagement"],
+                "berufsfachschule": [
+                  "306 Kleinprojekte im eigenen Berufsumfeld abwickeln",
+                  "431 Aufträge im eigenen Berufsumfeld selbständig durchführen"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            }
+          ]
+        },
+        {
+          "code": "f2",
+          "titel": "Projektplanung erstellen",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker erstellen für ihre Projekte eine übersichtliche und realistische Planung mit allen relevanten Angaben. Auf Grundlage des Erstgesprächs mit der Kundin oder dem Kunden leiten sie die Projektziele ab und erstellen eine Arbeits- und Zeitplanung. Darin halten sie die geplanten Arbeitsschritte mit den jeweiligen Terminen und Meilensteinen fest. Sie setzen dabei die betrieblich vorgegebenen Vorlagen, Projektmanagement-Tools und Checklisten ein. Eine besondere Herausforderung besteht darin, die erforderlichen Zeiten realistisch einzuschätzen. In einem weiteren Schritt legen sie die Details des Projekts fest: Sie klären interne Ressourcen ab, wenn eine punktuelle Mitarbeit einer Kollegin oder eines Kollegen erforderlich ist. Weiter definieren sie materielle Ressourcen, beispielsweise benötigte Hard- und Software oder zusätzliche Arbeitsinstrumente für die Produkterstellung. Sobald eine Auftragsbestätigung vorliegt, buchen sie die benötigten personellen und materiellen Ressourcen definitiv. Bei Bedarf sprechen sie Einzelheiten mit der Kundin oder dem Kunden ab. Bei allen Arbeitsschritten achten sie auf eine genaue Arbeitsweise und eine präzise Kommunikation.",
+          "module": {
+            "basislehrjahr": ["Projektmanagement"],
+            "berufsfachschule": [
+              "306 Kleinprojekte im eigenen Berufsumfeld abwickeln",
+              "431 Aufträge im eigenen Berufsumfeld selbständig durchführen"
+            ],
+            "uek": ["276 Medien für eine Marketingaktion erstellen"]
+          },
+          "leistungsziele": [
+            {
+              "code": "f2.1",
+              "text": "definieren spezifische, messbare, akzeptierte, realisierbare und terminierte Ziele (SMART).",
+              "taxonomie": "K5",
+              "lernorte": {
+                "basislehrjahr": ["Projektmanagement"],
+                "berufsfachschule": [
+                  "306 Kleinprojekte im eigenen Berufsumfeld abwickeln",
+                  "431 Aufträge im eigenen Berufsumfeld selbständig durchführen"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "f2.2",
+              "text": "erstellen mit Hilfe der betrieblichen Instrumente eine realistische und übersichtliche Arbeits- und Zeitplanung.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Projektmanagement"],
+                "berufsfachschule": ["306 Kleinprojekte im eigenen Berufsumfeld abwickeln"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "f2.3",
+              "text": "legen sinnvolle Meilensteine zur Überprüfung des Projektfortschritts fest.",
+              "taxonomie": "K5",
+              "lernorte": {
+                "basislehrjahr": ["Projektmanagement"],
+                "berufsfachschule": ["306 Kleinprojekte im eigenen Berufsumfeld abwickeln"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "f2.4",
+              "text": "definieren personelle und materielle Ressourcen präzise und nachvollziehbar.",
+              "taxonomie": "K5",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["306 Kleinprojekte im eigenen Berufsumfeld abwickeln"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "f2.5",
+              "text": "buchen personelle und materielle Ressourcen gemäss den betrieblichen Abläufen.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["306 Kleinprojekte im eigenen Berufsumfeld abwickeln"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "f2.6",
+              "text": "klären offene Punkte der Projektplanung mit der Kundin oder dem Kunden ab.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": [
+                  "306 Kleinprojekte im eigenen Berufsumfeld abwickeln",
+                  "431 Aufträge im eigenen Berufsumfeld selbständig durchführen"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            }
+          ]
+        },
+        {
+          "code": "f3",
+          "titel": "Den Projektfortschritt laufend überprüfen",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker überprüfen während eines Projekts laufend, ob sie bezüglich Zielen, Zeit, Kosten und Produktqualität auf Kurs sind. In regelmässigen Abständen vergleichen sie ihre Planvorgaben (Soll-Werte) mit dem aktuellen Projektstand und halten diesen fest. Bei Abweichungen treffen sie so rasch als möglich geeignete Massnahmen. Beispielsweise organisieren sie zusätzliche personelle Ressourcen, um den Auftrag termingerecht fertig zu stellen. Die Kundin oder den Kunden informieren sie laufend über den Projektstand und besprechen mit ihr resp. ihm allfällige Probleme oder Korrekturen. Ausserdem nehmen sie veränderte Bedürfnisse oder neue Anliegen der Kundin oder des Kunden konstruktiv auf. Sie schlagen Lösungswege oder Alternativen vor. Gleichzeitig zeigen sie auf, wie sich die Änderungen auf die Projektplanung und Kosten auswirken. Um Missverständnisse zu vermeiden, halten sie alle Änderungen schriftlich fest und informieren die Beteiligten.",
+          "module": {
+            "basislehrjahr": ["Projektmanagement"],
+            "berufsfachschule": [
+              "306 Kleinprojekte im eigenen Berufsumfeld abwickeln",
+              "431 Aufträge im eigenen Berufsumfeld selbständig durchführen"
+            ],
+            "uek": ["276 Medien für eine Marketingaktion erstellen"]
+          },
+          "leistungsziele": [
+            {
+              "code": "f3.1",
+              "text": "vergleichen Soll- und Ist- Werte ihrer Projekte bezüglich Ziele, Zeit, Kosten und Produktqualität regelmässig.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Projektmanagement"],
+                "berufsfachschule": ["306 Kleinprojekte im eigenen Berufsumfeld abwickeln"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "f3.2",
+              "text": "treffen geeignete Massnahmen, um Ziele, Zeit, Kosten und Produktqualität einzuhalten.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["306 Kleinprojekte im eigenen Berufsumfeld abwickeln"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "f3.3",
+              "text": "erläutern der Kundin oder dem Kunden den aktuellen Projektstand und unterbreiten allenfalls nötige Korrekturmassnahmen.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Projektmanagement"],
+                "berufsfachschule": [
+                  "306 Kleinprojekte im eigenen Berufsumfeld abwickeln",
+                  "431 Aufträge im eigenen Berufsumfeld selbständig durchführen"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "f3.4",
+              "text": "schlagen der Kundin oder dem Kunden entsprechend ihrer /seiner Änderungswünsche Lösungswege oder Alternativen vor.",
+              "taxonomie": "K5",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": [
+                  "306 Kleinprojekte im eigenen Berufsumfeld abwickeln",
+                  "431 Aufträge im eigenen Berufsumfeld selbständig durchführen"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "f3.5",
+              "text": "halten Änderungen in der Projektplanung schriftlich fest und informieren alle Beteiligten.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Projektmanagement"],
+                "berufsfachschule": [
+                  "306 Kleinprojekte im eigenen Berufsumfeld abwickeln",
+                  "431 Aufträge im eigenen Berufsumfeld selbständig durchführen"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            }
+          ]
+        },
+        {
+          "code": "f4",
+          "titel": "Produkt der Kundin oder dem Kunden übergeben und Projekt abschliessen",
+          "beschreibung": "Mediamatikerinnen und Mediamatiker übergeben der Kundin oder dem Kunden das Produkt und schliessen das Projekt vollständig dokumentiert ab. Beim Abschluss eines Projekts überprüfen sie nochmals, ob das Produkt den Qualitätsanforderungen gemäss Auftrag entspricht. Sie führen Tests durch und stellen sicher, dass alles einwandfrei funktioniert. Sie halten alle relevanten Angaben in der Projektdokumentation fest und schliessen diese ab. Der Kundin oder dem Kunden übergeben sie die definitiven Versionen des Produkts. Falls erwünscht, führen sie eine kleine Schulung oder Instruktion durch. Sie achten dabei auf einen professionellen Auftritt und nehmen auch kritische Rückmeldungen entgegen. Intern schliessen sie das Projekt im Rahmen eines «Reviews» ab. Die gewonnenen Erkenntnisse (z.B. «Lessons learned») halten sie fest, um diese für zukünftige Projekte sowie für die Weiterentwicklung der Produkte nutzbar zu machen. Im Sinne der Selbstreflexion ziehen sie schliesslich auch Bilanz über ihr eigenes Vorgehen und Verhalten im Projekt.",
+          "module": {
+            "basislehrjahr": ["Projektmanagement"],
+            "berufsfachschule": [
+              "306 Kleinprojekte im eigenen Berufsumfeld abwickeln",
+              "431 Aufträge im eigenen Berufsumfeld selbständig durchführen",
+              "213 Teamarbeit entwickeln"
+            ],
+            "uek": ["276 Medien für eine Marketingaktion erstellen"]
+          },
+          "leistungsziele": [
+            {
+              "code": "f4.1",
+              "text": "überprüfen ein Produkt auf Qualität gemäss den definierten Anforderungen.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Projektmanagement"],
+                "berufsfachschule": ["306 Kleinprojekte im eigenen Berufsumfeld abwickeln"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "f4.2",
+              "text": "führen eine Projektdokumentation übersichtlich und vollständig.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Projektmanagement"],
+                "berufsfachschule": ["306 Kleinprojekte im eigenen Berufsumfeld abwickeln"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "f4.3",
+              "text": "übergeben der Kundin oder dem Kunden in geeigneter Form die definitiven Versionen eines Produkts.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Projektmanagement"],
+                "berufsfachschule": [
+                  "431 Aufträge im eigenen Berufsumfeld selbständig durchführen"
+                ],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "f4.4",
+              "text": "führen kleine Produktschulungen für die Kundin oder den Kunden durch.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": [],
+                "berufsfachschule": ["213 Teamarbeit entwickeln"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "f4.5",
+              "text": "nehmen kritische Rückmeldungen der Kundin oder des Kunden entgegen.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Projektmanagement"],
+                "berufsfachschule": ["213 Teamarbeit entwickeln"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "f4.6",
+              "text": "führen ein Projekt-Review im Team durch.",
+              "taxonomie": "K4",
+              "lernorte": {
+                "basislehrjahr": ["Projektmanagement"],
+                "berufsfachschule": ["213 Teamarbeit entwickeln"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "f4.7",
+              "text": "halten Erkenntnisse aus einem Projekt schriftlich und fundiert fest (z.B. lessons learned).",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Projektmanagement"],
+                "berufsfachschule": ["213 Teamarbeit entwickeln"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            },
+            {
+              "code": "f4.8",
+              "text": "reflektieren ihre eigenen Stärken und Schwächen im Projekt und halten diese in geeigneter Form fest.",
+              "taxonomie": "K3",
+              "lernorte": {
+                "basislehrjahr": ["Projektmanagement"],
+                "berufsfachschule": ["213 Teamarbeit entwickeln"],
+                "uek": ["276 Medien für eine Marketingaktion erstellen"]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

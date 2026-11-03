@@ -11,15 +11,15 @@ wins unless an ADR in `docs/architecture/DECISIONS.md` records a deviation.
 
 Project facts (Angular 22.x): do not write `standalone: true`; do not write
 `changeDetection: ChangeDetectionStrategy.OnPush` (OnPush is the default); Signal Forms are stable;
-`@Service` is available. There is no lint yet; the gate is `ng build`, `npx ng test --no-watch` and
-`npx prettier --check .`.
+`@Service` is available. There is no lint yet; the gate is `ng build`, `npx ng test --no-watch`,
+`npx prettier --check .` and `npm run check:components`.
 
 ## File layout
 
 ```text
 shared/ui/button/
-  button.ts            standalone component (inline template if small)
-  button.html          template (when large)
+  button.ts            standalone component (templateUrl + styleUrl)
+  button.html          template (always a separate file)
   button.scss          styles using tokens
   button.spec.ts       tests
 features/checkout/
@@ -29,6 +29,10 @@ features/checkout/
   data/                api service, store, models
 ```
 
+Every component has exactly these four files. Never put the template or the styles inside the
+TypeScript file, even for small components: use `templateUrl` and `styleUrl` with relative paths.
+`npm run check:components` enforces this (D-018).
+
 Match the file naming the workspace schematics produce (`ng generate`); do not mix styles within one
 project.
 
@@ -37,7 +41,8 @@ project.
 ```ts
 @Component({
   selector: 'app-price-tag',
-  template: `<span [class.sale]="onSale()">{{ formatted() }}</span>`,
+  templateUrl: './price-tag.html',
+  styleUrl: './price-tag.scss',
   host: { class: 'price-tag' },
 })
 export class PriceTag {

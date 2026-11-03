@@ -1,0 +1,10 @@
+@if (ohneAusbildung()) {
+  <section class="karte">
+    <h1>Noch kein Lehrberuf zugeordnet</h1>
+    <p>Dir ist noch kein Lehrberuf zugeordnet. Bitte an die Berufsbildung wenden.</p>
+  </section>
+} @else if (fehler()) {
+  <p class="meldung meldung--fehler" role="alert">{{ fehler() }}</p>
+} @else {
+  <p class="untertitel" role="status">Ansicht wird geöffnet …</p>
+}

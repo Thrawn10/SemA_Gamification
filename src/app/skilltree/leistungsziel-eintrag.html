@@ -1,0 +1,288 @@
+<article class="lz" [class.lz--offen]="offen()">
+  <div class="lz__kopf">
+    <button
+      type="button"
+      class="lz__aufklappen"
+      [attr.aria-expanded]="offen()"
+      (click)="offen.set(!offen())"
+    >
+      <span class="lz__code">{{ lz().leistungsziel.code }}</span>
+      <span class="lz__text">{{ lz().leistungsziel.text }}</span>
+    </button>
+    <div class="lz__stand">
+      <st-stufen [stufe]="lz().stufe" />
+      @if (lz().offeneAnfrage; as anfrage) {
+        <span class="lz__angefragt"> angefragt: {{ stufeText(anfrage.zielstufe) }} </span>
+      }
+    </div>
+  </div>
+
+  @if (offen()) {
+    <div class="lz__details" [id]="'lz-details-' + lz().leistungsziel.id">
+      <dl class="lz__daten">
+        <div>
+          <dt>Taxonomie</dt>
+          <dd>{{ lz().leistungsziel.taxonomie }}</dd>
+        </div>
+        <div>
+          <dt>Lernorte</dt>
+          <dd>
+            @if (lernorte().length === 0) {
+              <span class="untertitel">Keine Angabe</span>
+            } @else {
+              <ul class="lz__lernorte">
+                @for (ort of lernorte(); track ort.titel) {
+                  <li>
+                    <strong>{{ ort.titel }}:</strong> {{ ort.werte.join('; ') }}
+                  </li>
+                }
+              </ul>
+            }
+          </dd>
+        </div>
+      </dl>
+
+      @if (meldung()) {
+        <p class="meldung meldung--erfolg" role="status">{{ meldung() }}</p>
+      }
+      @if (fehler()) {
+        <p class="meldung meldung--fehler" role="alert">{{ fehler() }}</p>
+      }
+
+      @if (rolle() === 'LERNENDE') {
+        @if (lz().offeneAnfrage; as anfrage) {
+          <div class="lz__aktionen">
+            <p class="lz__status">
+              Status: {{ statusText() }} · Zielstufe {{ stufeText(anfrage.zielstufe) }}
+            </p>
+            <button
+              type="button"
+              class="knopf knopf--gefahr knopf--klein"
+              (click)="zurueckziehen(anfrage.id)"
+            >
+              Anfrage zurückziehen
+            </button>
+          </div>
+        } @else if (lz().stufe < 3) {
+          @if (modus() === 'anfrage') {
+            <form class="lz__formular" (submit)="anfrageSenden($event)">
+              <label class="feld">
+                <span class="feld__label">Zielstufe</span>
+                <select class="eingabe" [value]="zielstufe()" (change)="zielstufeAendern($event)">
+                  @for (stufe of stufenOptionen(); track stufe) {
+                    <option [value]="stufe" [selected]="stufe === zielstufe()">
+                      {{ stufeText(stufe) }}
+                    </option>
+                  }
+                </select>
+              </label>
+              <label class="feld">
+                <span class="feld__label">Was hast du gemacht?</span>
+                <textarea
+                  class="eingabe"
+                  [value]="text()"
+                  (input)="textAendern($event)"
+                  minlength="10"
+                  maxlength="1000"
+                  required
+                ></textarea>
+                <span class="feld__hinweis">{{ text().length }} von 1000 Zeichen (min. 10)</span>
+              </label>
+              <div class="lz__aktionen">
+                <button
+                  type="submit"
+                  class="knopf knopf--primaer knopf--klein"
+                  [disabled]="laeuft()"
+                >
+                  Anfrage senden
+                </button>
+                <button type="button" class="knopf knopf--leise knopf--klein" (click)="abbrechen()">
+                  Abbrechen
+                </button>
+              </div>
+            </form>
+          } @else {
+            <button
+              type="button"
+              class="knopf knopf--primaer knopf--klein"
+              (click)="oeffne('anfrage')"
+            >
+              Bestätigung anfragen
+            </button>
+          }
+        } @else {
+          <p class="lz__status">Auf Stufe «selbständig» bestätigt.</p>
+        }
+      }
+
+      @if (rolle() === 'PRAXISBILDNER') {
+        @if (kannBestaetigen()) {
+          @if (lz().offeneAnfrage; as anfrage) {
+            @if (modus() !== 'ablehnung') {
+              <div class="lz__aktionen">
+                <button type="button" class="knopf knopf--klein" (click)="oeffne('ablehnung')">
+                  Anfrage ablehnen
+                </button>
+              </div>
+            }
+            @if (modus() === 'ablehnung') {
+              <form class="lz__formular" (submit)="anfrageAblehnen($event)">
+                <p class="lz__status">
+                  Anfrage: «{{ anfrage.text }}» · Zielstufe {{ stufeText(anfrage.zielstufe) }}
+                </p>
+                <div class="lz__vorschlaege" role="group" aria-label="Vorschlagstexte">
+                  @for (vorschlag of vorschlaege; track vorschlag) {
+                    <button
+                      type="button"
+                      class="knopf knopf--klein"
+                      (click)="antwort.set(vorschlag)"
+                    >
+                      {{ vorschlag }}
+                    </button>
+                  }
+                </div>
+                <label class="feld">
+                  <span class="feld__label">Begründung</span>
+                  <textarea
+                    class="eingabe"
+                    [value]="antwort()"
+                    (input)="antwortAendern($event)"
+                    minlength="10"
+                    maxlength="500"
+                    required
+                  ></textarea>
+                  <span class="feld__hinweis"
+                    >{{ antwort().length }} von 500 Zeichen (min. 10)</span
+                  >
+                </label>
+                <div class="lz__aktionen">
+                  <button
+                    type="submit"
+                    class="knopf knopf--gefahr knopf--klein"
+                    [disabled]="laeuft()"
+                  >
+                    Ablehnen
+                  </button>
+                  <button
+                    type="button"
+                    class="knopf knopf--leise knopf--klein"
+                    (click)="abbrechen()"
+                  >
+                    Abbrechen
+                  </button>
+                </div>
+              </form>
+            }
+          }
+
+          @if (lz().stufe < 3) {
+            @if (modus() === 'bestaetigung') {
+              <form class="lz__formular" (submit)="bestaetigen($event)">
+                <p class="lz__status">
+                  Bestätigung für «{{ lz().leistungsziel.code }}»
+                  @if (lz().offeneAnfrage; as anfrage) {
+                    · angefragt: {{ stufeText(anfrage.zielstufe) }}
+                  }
+                </p>
+                <label class="feld">
+                  <span class="feld__label">Stufe</span>
+                  <select class="eingabe" [value]="zielstufe()" (change)="zielstufeAendern($event)">
+                    @for (stufe of stufenOptionen(); track stufe) {
+                      <option [value]="stufe" [selected]="stufe === zielstufe()">
+                        {{ stufeText(stufe) }}
+                      </option>
+                    }
+                  </select>
+                </label>
+                <label class="feld">
+                  <span class="feld__label">Kommentar (optional)</span>
+                  <textarea
+                    class="eingabe"
+                    [value]="kommentar()"
+                    (input)="kommentarAendern($event)"
+                    maxlength="500"
+                  ></textarea>
+                  <span class="feld__hinweis">{{ kommentar().length }} von 500 Zeichen</span>
+                </label>
+                <div class="lz__aktionen">
+                  <button
+                    type="submit"
+                    class="knopf knopf--primaer knopf--klein"
+                    [disabled]="laeuft()"
+                  >
+                    Bestätigen
+                  </button>
+                  <button
+                    type="button"
+                    class="knopf knopf--leise knopf--klein"
+                    (click)="abbrechen()"
+                  >
+                    Abbrechen
+                  </button>
+                </div>
+              </form>
+            } @else {
+              <button
+                type="button"
+                class="knopf knopf--primaer knopf--klein"
+                (click)="oeffne('bestaetigung')"
+              >
+                Bestätigen
+              </button>
+            }
+          }
+
+          @if (lz().aktiveBestaetigung; as bestaetigung) {
+            @if (modus() === 'ruecknahme') {
+              <form class="lz__formular" (submit)="zuruecknehmen($event)">
+                <label class="feld">
+                  <span class="feld__label">Begründung der Rücknahme</span>
+                  <textarea
+                    class="eingabe"
+                    [value]="begruendung()"
+                    (input)="begruendungAendern($event)"
+                    minlength="10"
+                    required
+                  ></textarea>
+                  <span class="feld__hinweis">{{ begruendung().length }} Zeichen (min. 10)</span>
+                </label>
+                <div class="lz__aktionen">
+                  <button
+                    type="submit"
+                    class="knopf knopf--gefahr knopf--klein"
+                    [disabled]="laeuft()"
+                  >
+                    Rücknahme speichern
+                  </button>
+                  <button
+                    type="button"
+                    class="knopf knopf--leise knopf--klein"
+                    (click)="abbrechen()"
+                  >
+                    Abbrechen
+                  </button>
+                </div>
+              </form>
+            } @else {
+              <button
+                type="button"
+                class="knopf knopf--gefahr knopf--klein"
+                (click)="oeffne('ruecknahme')"
+              >
+                Zurücknehmen
+              </button>
+            }
+            <span class="lz__klein">Aktiv: {{ stufeText(bestaetigung.stufe) }}</span>
+          }
+        } @else {
+          <p class="lz__status">Bestätigen ist nur mit gültiger Zuordnung möglich.</p>
+        }
+      }
+
+      <section class="lz__verlauf">
+        <h4>Verlauf</h4>
+        <st-verlauf-liste [eintraege]="lz().verlauf" />
+      </section>
+    </div>
+  }
+</article>

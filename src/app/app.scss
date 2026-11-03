@@ -1,0 +1,99 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-block-size: 100dvh;
+}
+
+.app-kopf {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--abstand-3);
+  padding: var(--abstand-3) var(--abstand-4);
+  border-block-end: 1px solid var(--farbe-rand);
+  background: color-mix(in srgb, var(--farbe-flaeche) 92%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.app-kopf__marke {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--abstand-2);
+  color: var(--farbe-text);
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+.app-kopf__zeichen {
+  display: grid;
+  place-items: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border-radius: var(--radius-rund);
+  background: var(--farbe-akzent);
+  color: var(--farbe-akzent-text);
+}
+
+.app-kopf__navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--abstand-1);
+}
+
+.app-kopf__navigation a {
+  padding: var(--abstand-1) var(--abstand-3);
+  border-radius: var(--radius-rund);
+  color: var(--farbe-text-leise);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.app-kopf__navigation a:hover {
+  background: var(--farbe-hover);
+  color: var(--farbe-text);
+}
+
+.app-kopf__person {
+  display: flex;
+  align-items: center;
+  gap: var(--abstand-2);
+  margin-inline-start: auto;
+}
+
+.app-kopf__name {
+  font-weight: 600;
+}
+
+.app-kopf__rolle {
+  color: var(--farbe-text-leise);
+  font-size: 0.85rem;
+}
+
+.app-kopf__anmeldung {
+  margin-inline-start: auto;
+  color: var(--farbe-akzent);
+  font-weight: 600;
+}
+
+.app-inhalt {
+  flex: 1;
+  inline-size: 100%;
+  max-inline-size: 1280px;
+  margin-inline: auto;
+  padding: var(--abstand-4);
+}
+
+@media (max-width: 760px) {
+  .app-inhalt {
+    padding: var(--abstand-3);
+  }
+
+  .app-kopf {
+    padding-inline: var(--abstand-3);
+  }
+}

@@ -42,5 +42,7 @@ Run the phases in order, pausing for user confirmation after `intake`, `architec
 ## Rules
 
 - After each delegated step, update `docs/PROGRESS.md` and give the user a 3-5 line summary.
-- Never mark a task done until `ng build`, the tests and `npx prettier --check .` pass (and `ng lint` once it is configured) and reviewers report no blockers.
+- Never mark a task done until `ng build`, the tests, `npm run check:components` and
+  `npx prettier --check .` pass (and `ng lint` once it is configured) and reviewers report no
+  blockers.
 - If a subagent reports an assumption or ambiguity, add it to `open-questions.md`.

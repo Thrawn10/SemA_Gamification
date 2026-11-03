@@ -1,0 +1,63 @@
+.feld--datei {
+  margin-block: var(--abstand-4);
+}
+
+.knopfreihe {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--abstand-2);
+  margin-block-start: var(--abstand-3);
+}
+
+.bericht {
+  margin-block-start: var(--abstand-4);
+  padding: var(--abstand-4);
+  border: 1px solid var(--farbe-rand);
+  border-radius: var(--radius-mittel);
+  background: var(--farbe-flaeche-leise);
+}
+
+.bericht h3 {
+  font-size: 1rem;
+  margin-block-end: var(--abstand-3);
+}
+
+.bericht__zahlen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--abstand-2) var(--abstand-5);
+  margin: 0 0 var(--abstand-3);
+}
+
+.bericht__zahlen > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.bericht__zahlen dt {
+  color: var(--farbe-text-leise);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.bericht__zahlen dd {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.bericht__meldungen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-1);
+  max-block-size: 18rem;
+  overflow: auto;
+  font-size: 0.9rem;
+}
+
+.bericht__meldung--fehler {
+  color: var(--farbe-gefahr);
+}

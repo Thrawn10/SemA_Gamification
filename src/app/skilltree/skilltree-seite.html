@@ -1,0 +1,113 @@
+@if (fehler()) {
+  <p class="meldung meldung--fehler" role="alert">{{ fehler() }}</p>
+} @else if (ansicht(); as ansicht) {
+  @if (ansicht.rolle !== 'LERNENDE') {
+    <a class="seite__zurueck" routerLink="/uebersicht">← Meine Lernenden</a>
+  }
+
+  <header class="skilltree-kopf">
+    <div class="skilltree-kopf__person">
+      <p class="seitenleiste__krume">
+        {{ ansicht.rolle === 'LERNENDE' ? 'Mein Skilltree' : 'Skilltree' }}
+      </p>
+      <h1>
+        {{ ansicht.lernende.name }}
+        <st-anforderung id="S-A01" />
+      </h1>
+      <p class="skilltree-kopf__beruf">
+        {{ ansicht.lehrberuf.name }}
+        @if (ansicht.lehrberuf.fachrichtung) {
+          · {{ ansicht.lehrberuf.fachrichtung }}
+        }
+      </p>
+      <dl class="skilltree-kopf__daten">
+        <div>
+          <dt>Lehrjahr</dt>
+          <dd>{{ ansicht.lehrjahr }} von {{ ansicht.lehrberuf.lehrdauerJahre }}</dd>
+        </div>
+        <div>
+          <dt>Bildungsplan</dt>
+          <dd>{{ ansicht.vorlage.bildungsplanJahr }} · Version {{ ansicht.vorlage.version }}</dd>
+        </div>
+        <div>
+          <dt>Praxisbildner/in</dt>
+          <dd>
+            @if (ansicht.praxisbildner.length === 0) {
+              Keine gültige Zuordnung
+            } @else {
+              {{ praxisbildnerText(ansicht) }}
+            }
+          </dd>
+        </div>
+        <div>
+          <dt>Offene Anfragen</dt>
+          <dd>{{ ansicht.offeneAnfragen }}</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="skilltree-kopf__fortschritt">
+      <span class="skilltree-kopf__prozent">{{ ansicht.fortschritt }} %</span>
+      <st-fortschritt [wert]="ansicht.fortschritt" label="Gesamtfortschritt" [zeigeZahl]="false" />
+      <span class="untertitel">Gesamtfortschritt</span>
+    </div>
+  </header>
+
+  @if (ansicht.rolle === 'LERNENDE') {
+    <div class="reiter" role="group" aria-label="Ansichten">
+      <button
+        type="button"
+        class="reiter__knopf"
+        [class.reiter__knopf--aktiv]="reiter() === 'skilltree'"
+        [attr.aria-pressed]="reiter() === 'skilltree'"
+        (click)="reiter.set('skilltree')"
+      >
+        Skilltree
+      </button>
+      <button
+        type="button"
+        class="reiter__knopf"
+        [class.reiter__knopf--aktiv]="reiter() === 'badges'"
+        [attr.aria-pressed]="reiter() === 'badges'"
+        (click)="reiter.set('badges')"
+      >
+        Badges ({{ ansicht.badges.erhalten.length }})
+      </button>
+    </div>
+  }
+
+  @if (reiter() === 'skilltree' || ansicht.rolle !== 'LERNENDE') {
+    <st-skilltree-graph
+      [ansicht]="ansicht"
+      [aktiv]="aktiveKnotenId()"
+      (knotenGewaehlt)="knotenOeffnen($event)"
+      (astGewaehlt)="astOeffnen($event)"
+      (meilensteinGewaehlt)="meilensteinOeffnen($event)"
+    />
+  } @else {
+    <st-badges-ansicht [badges]="ansicht.badges" [rolle]="ansicht.rolle" (geaendert)="neuLaden()" />
+  }
+
+  @if (ansicht.rolle === 'LERNENDE' && reiter() === 'skilltree' && !ansicht.badges.ausgeblendet) {
+    <p class="untertitel">
+      Badges findest du im Reiter «Badges»; sie sind nur für dich und deine Praxisbildner/innen
+      sichtbar.
+    </p>
+  }
+
+  @if (ansicht.rolle !== 'LERNENDE') {
+    <st-badges-ansicht [badges]="ansicht.badges" [rolle]="ansicht.rolle" />
+  }
+
+  @if (auswahl(); as auswahl) {
+    <st-skilltree-seitenleiste
+      [ansicht]="ansicht"
+      [auswahl]="auswahl"
+      [startLz]="startLz()"
+      (schliessen)="schliessen()"
+      (knotenGewaehlt)="knotenOeffnen($event)"
+    />
+  }
+} @else {
+  <p class="untertitel" role="status">Skilltree wird geladen …</p>
+}

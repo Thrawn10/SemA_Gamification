@@ -1,0 +1,69 @@
+<div class="seite">
+  <header class="seite__kopf">
+    <div>
+      <h1 class="seite__titel">
+        Meine Daten
+        <st-anforderung id="S-Q01" />
+      </h1>
+      <p class="seite__untertitel">
+        Welche Daten der Prototyp speichert und wer sie sieht. Alles bleibt in diesem Browser.
+      </p>
+    </div>
+  </header>
+
+  @if (benutzer(); as person) {
+    <section class="karte" aria-labelledby="konto-titel">
+      <h2 id="konto-titel" class="karte__titel">Konto</h2>
+      <dl class="datenliste">
+        <div>
+          <dt>Name</dt>
+          <dd>{{ person.name }}</dd>
+        </div>
+        <div>
+          <dt>Login</dt>
+          <dd>{{ person.login }}</dd>
+        </div>
+        <div>
+          <dt>Rolle</dt>
+          <dd>{{ rollenText() }}</dd>
+        </div>
+        @if (person.rolle === 'LERNENDE') {
+          <div>
+            <dt>Badges in meiner Ansicht</dt>
+            <dd>{{ badgesSichtbar() ? 'eingeblendet' : 'ausgeblendet' }}</dd>
+          </div>
+        }
+      </dl>
+    </section>
+  }
+
+  <section class="karte" aria-labelledby="sichtbarkeit-titel">
+    <h2 id="sichtbarkeit-titel" class="karte__titel">Datenart – wer sieht sie</h2>
+    <div class="tabelle__rahmen">
+      <table class="tabelle">
+        <caption class="nur-screenreader">
+          Datenarten und ihre Sichtbarkeit für die aktuelle Rolle
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Datenart</th>
+            <th scope="col">Wer sieht sie</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (zeile of zeilen(); track zeile.datenart) {
+            <tr>
+              <th scope="row">{{ zeile.datenart }}</th>
+              <td>{{ zeile.sichtbarkeit }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <p class="meldung">
+    Keine Nutzungsanalyse, kein Tracking (T-D1). Personenbezogene Daten sind pseudonymisiert;
+    Bestätigungen und Rücknahmen bleiben unveränderlich im Verlauf.
+  </p>
+</div>

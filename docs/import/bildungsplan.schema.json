@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://skilltree.local/schema/bildungsplan.schema.json",
+  "title": "Bildungsplan-Vorlage (VorlageImport)",
+  "description": "Normalisiertes JSON für den Import eines Bildungsplans in die Skilltree-App. Entspricht dem Typ VorlageImport aus packages/vertraege/src/stammdaten.ts. Enthält nur Stammdaten; Stufen, Fortschritt, Ampel und Badges werden aus Stufenereignissen berechnet und nicht hier gespeichert.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["lehrberuf", "bildungsplanJahr", "quelle", "bereiche"],
+  "properties": {
+    "lehrberuf": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "name", "fachrichtung", "lehrdauerJahre"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stabiler Kürzel, z. B. INF-APP, INF-PLA, MED oder EDB."
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Offizieller Lehrberuf, z. B. «Informatiker/in EFZ»."
+        },
+        "fachrichtung": {
+          "type": ["string", "null"],
+          "description": "Fachrichtung, falls der Lehrberuf eine hat; sonst null."
+        },
+        "lehrdauerJahre": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 6,
+          "description": "Offizielle Lehrdauer in Jahren."
+        }
+      }
+    },
+    "bildungsplanJahr": {
+      "type": "integer",
+      "minimum": 2000,
+      "maximum": 2100,
+      "description": "Jahr des Bildungsplans (nicht des Imports)."
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Optionale Vorlagenversion; der Loader setzt sie beim Import."
+    },
+    "quelle": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Dateiname der Quelle, z. B. «Vorlage_Bildungsplan APP 2021 (1).xlsx» oder «MED_BiPla_LZK_2019 (1) (1).pdf»."
+    },
+    "bereiche": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/bereich" },
+      "description": "Handlungskompetenzbereiche in der Reihenfolge der Quelle."
+    }
+  },
+  "$defs": {
+    "bereich": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "titel", "kompetenzen"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Bereichskürzel, z. B. «A»."
+        },
+        "titel": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Titel des Handlungskompetenzbereichs."
+        },
+        "kompetenzen": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/kompetenz" }
+        }
+      }
+    },
+    "kompetenz": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "titel", "beschreibung", "module", "leistungsziele"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[a-z][0-9]+$",
+          "description": "Kleingeschriebener Code wie «a1»."
+        },
+        "titel": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Titel der Handlungskompetenz ohne Code-Präfix."
+        },
+        "beschreibung": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Beschreibungstext der Handlungskompetenz."
+        },
+        "module": {
+          "$ref": "#/$defs/modulListe",
+          "description": "Module pro Lernort. Eine leere Liste bedeutet: im jeweiligen Lernort nicht ausgewiesen (nicht: nicht unterrichtet)."
+        },
+        "leistungsziele": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/leistungsziel" }
+        }
+      }
+    },
+    "modulListe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["basislehrjahr", "berufsfachschule", "uek"],
+      "properties": {
+        "basislehrjahr": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true,
+          "description": "Basislehrjahr-Module. In den gelieferten Excel-Vorlagen stehen die Modulnummern in den Spalten C–E; Spalte F ist leer."
+        },
+        "berufsfachschule": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true,
+          "description": "Berufsfachschul-Module (Spalte G der Excel-Vorlage)."
+        },
+        "uek": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true,
+          "description": "Überbetriebliche Kurse (Spalte H der Excel-Vorlage)."
+        }
+      }
+    },
+    "leistungsziel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "text", "taxonomie"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[a-z][0-9]+\\.[0-9]+$",
+          "description": "Code wie «a1.1»."
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Beschreibung des Leistungsziels."
+        },
+        "taxonomie": {
+          "type": "string",
+          "enum": ["K1", "K2", "K3", "K4", "K5", "K6"],
+          "description": "Taxonomiestufe nach der Erklärung-Seite der Quelle."
+        },
+        "lernorte": {
+          "oneOf": [{ "$ref": "#/$defs/modulListe" }, { "type": "null" }],
+          "description": "Optionale Lernort-Zuordnung pro Leistungsziel (v. a. MED). Bei INF/EdB ist sie in der Regel nicht gesetzt, weil die Modullisten pro Kompetenz gelten."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+<section class="anmeldung">
+  <div class="anmeldung__intro">
+    <p class="anmeldung__marke">Skilltree-Prototyp</p>
+    <h1>Ausbildungsstand sichtbar machen</h1>
+    <p>
+      Wähle ein Testkonto. Die Anmeldung ist absichtlich ohne Passwort: Alle Daten sind
+      pseudonymisierte Demo-Daten und bleiben in diesem Browser.
+    </p>
+    <p class="untertitel">
+      Die App zeigt den Bildungsplan als Baum, bestätigt Stufen und vergibt Badges.
+    </p>
+  </div>
+
+  @if (fehler()) {
+    <p class="meldung meldung--fehler" role="alert">{{ fehler() }}</p>
+  }
+
+  @for (gruppe of gruppen(); track gruppe.rolle) {
+    <section class="anmeldung__gruppe" [attr.aria-labelledby]="'gruppe-' + gruppe.rolle">
+      <h2 [id]="'gruppe-' + gruppe.rolle">
+        {{ gruppe.titel }}
+        <st-anforderung id="S-A01" />
+      </h2>
+      <p class="untertitel">{{ gruppe.hinweis }}</p>
+      <ul class="anmeldung__konten">
+        @for (konto of gruppe.konten; track konto.id) {
+          <li>
+            <button
+              type="button"
+              class="anmeldung__konto"
+              [attr.aria-label]="'Als ' + konto.name + ' anmelden'"
+              (click)="anmelden(konto)"
+              [disabled]="laeuft()"
+            >
+              <span class="anmeldung__name">{{ konto.name }}</span>
+              <span class="anmeldung__login">{{ konto.login }}</span>
+              <span class="anmeldung__rolle">{{ rollenText(konto.rolle) }}</span>
+            </button>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+</section>

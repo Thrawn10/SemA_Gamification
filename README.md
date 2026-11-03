@@ -1,7 +1,61 @@
 # SemAPrototyp
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.6;
-the installed Angular packages are currently 22.2.x (CLI 22.2.5).
+Research prototype of a skill tree for Swiss apprenticeships (FFHS semester project). It visualises
+the training plan as a bottom-up graph, lets practice trainers confirm stages, collects confirmation
+requests and awards badges. All values are computed from append-only stage events.
+
+The UI copy is German with Swiss spelling; the specification
+([`docs/spec/SPEC.md`](docs/spec/SPEC.md)) is the source of truth for product behaviour.
+
+## What is implemented
+
+- Learner view: skilltree graph (Bbc → branches → IPA → Lehrabschluss), sidebar with learning
+  objectives, request form, history, badges, “Meine Daten”.
+- Coach view: sortable overview of assigned learners, collected requests with confirm/reject,
+  direct confirmation and withdrawal in the tree, milestone confirmation.
+- Admin view: template JSON import with dry run, data set export/import/reset.
+- Violet prototype bar (`DEMO_MODE`) with role switch, requirement IDs, review and reset.
+- Seeds: three learning plans (APP, PLA, MED), seven accounts, deterministic demo events.
+
+Data lives in IndexedDB in the browser and is seeded on first start. There is no backend yet; the
+ports and adapters are prepared for one (see `docs/architecture/DECISIONS.md`).
+
+## Try it
+
+```bash
+npm install
+npm start        # http://localhost:4200
+```
+
+Choose a test account on the login page (no password, pseudonymised demo data):
+
+| Login    | Person      | Role                       |
+| -------- | ----------- | -------------------------- |
+| `nora`   | Nora Frei   | Learner (APP)              |
+| `luca`   | Luca Meier  | Learner (PLA)              |
+| `sara`   | Sara Huber  | Learner (MED)              |
+| `jan`    | Jan Bühler  | Learner without a training |
+| `daniel` | Daniel Roth | Practice trainer           |
+| `petra`  | Petra Lang  | Practice trainer           |
+| `admin`  | Admin       | Administration             |
+
+Reset the demo data with the violet bar or under “Import und Daten” as admin.
+
+## Checks
+
+```bash
+npx ng build                # production build
+npx ng test --no-watch      # Vitest unit, service, page and component tests
+npm run check:components    # four-file component rule (D-018)
+npx prettier --check .      # formatting
+```
+
+`ng lint` is not available yet (`angular-eslint` is not installed). The in-browser Excel import is
+still deferred (D-010; the source workbooks sit outside the repository), but an offline converter
+produces normalised `VorlageImport` JSON: `npm run import:bildungsplaene`. Template JSON import is
+available in the admin view. See
+[`docs/import/BILDUNGSPLAN-IMPORT.md`](docs/import/BILDUNGSPLAN-IMPORT.md),
+[`docs/PROGRESS.md`](docs/PROGRESS.md) and [`docs/spec/open-questions.md`](docs/spec/open-questions.md).
 
 ## AI agent setup
 

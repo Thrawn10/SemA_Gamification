@@ -1,0 +1,15 @@
+@if (kompakt()) {
+  <span
+    class="ampel ampel--kompakt"
+    [class]="'ampel ampel--kompakt ampel--' + ampel().toLowerCase()"
+    [attr.title]="text()"
+  >
+    <span aria-hidden="true">{{ symbol() }}</span>
+    <span class="nur-screenreader">Ampel {{ text() }}</span>
+  </span>
+} @else {
+  <span class="ampel" [class]="'ampel ampel--' + ampel().toLowerCase()">
+    <span aria-hidden="true">{{ symbol() }}</span>
+    <span>{{ text() }}</span>
+  </span>
+}

@@ -1,0 +1,280 @@
+<div class="seite">
+  <header class="seite__kopf">
+    <div>
+      <h1 class="seite__titel">
+        Meine Lernenden
+        <st-anforderung id="S-L01" />
+      </h1>
+      <p class="seite__untertitel">
+        Gültig zugeordnete Lernende mit Fortschritt, Ampel pro Bereich und offenen Anfragen.
+      </p>
+    </div>
+  </header>
+
+  @if (fehler()) {
+    <p class="meldung meldung--fehler" role="alert">{{ fehler() }}</p>
+  }
+
+  <div class="reiter" role="group" aria-label="Übersichten">
+    <button
+      type="button"
+      class="reiter__knopf"
+      [class.reiter__knopf--aktiv]="reiter() === 'lernende'"
+      [attr.aria-pressed]="reiter() === 'lernende'"
+      (click)="reiter.set('lernende')"
+    >
+      Meine Lernenden ({{ zeilen().length }})
+    </button>
+    <button
+      #anfrageReiter
+      type="button"
+      class="reiter__knopf"
+      [class.reiter__knopf--aktiv]="reiter() === 'anfragen'"
+      [attr.aria-pressed]="reiter() === 'anfragen'"
+      (click)="reiter.set('anfragen')"
+    >
+      Offene Anfragen ({{ anfragen().length }})
+      <st-anforderung id="S-L05" />
+    </button>
+  </div>
+
+  @if (reiter() === 'lernende') {
+    @if (zeilen().length === 0) {
+      <p class="meldung">Keine Lernenden mit gültiger Zuordnung.</p>
+    } @else {
+      <div class="tabelle__rahmen">
+        <table class="tabelle">
+          <caption class="nur-screenreader">
+            Lernende mit Fortschritt und offenen Anfragen
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col" [attr.aria-sort]="ariaSort('name')">
+                <button type="button" class="tabelle__sortierung" (click)="sortiere('name')">
+                  Name <span aria-hidden="true">{{ pfeil('name') }}</span>
+                </button>
+              </th>
+              <th scope="col" [attr.aria-sort]="ariaSort('lehrberuf')">
+                <button type="button" class="tabelle__sortierung" (click)="sortiere('lehrberuf')">
+                  Lehrberuf <span aria-hidden="true">{{ pfeil('lehrberuf') }}</span>
+                </button>
+              </th>
+              <th scope="col" [attr.aria-sort]="ariaSort('lehrjahr')">
+                <button type="button" class="tabelle__sortierung" (click)="sortiere('lehrjahr')">
+                  Lehrjahr <span aria-hidden="true">{{ pfeil('lehrjahr') }}</span>
+                </button>
+              </th>
+              <th scope="col" [attr.aria-sort]="ariaSort('fortschritt')">
+                <button type="button" class="tabelle__sortierung" (click)="sortiere('fortschritt')">
+                  Fortschritt <span aria-hidden="true">{{ pfeil('fortschritt') }}</span>
+                </button>
+              </th>
+              <th scope="col">Bereiche</th>
+              <th scope="col" [attr.aria-sort]="ariaSort('roteKompetenzen')">
+                <button
+                  type="button"
+                  class="tabelle__sortierung"
+                  (click)="sortiere('roteKompetenzen')"
+                >
+                  Rote Knoten <span aria-hidden="true">{{ pfeil('roteKompetenzen') }}</span>
+                </button>
+              </th>
+              <th scope="col" [attr.aria-sort]="ariaSort('offeneAnfragen')">
+                <button
+                  type="button"
+                  class="tabelle__sortierung"
+                  (click)="sortiere('offeneAnfragen')"
+                >
+                  Offene Anfragen <span aria-hidden="true">{{ pfeil('offeneAnfragen') }}</span>
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (zeile of zeilenSortiert(); track zeile.ausbildung.id) {
+              <tr>
+                <th scope="row">
+                  <a [routerLink]="['/skilltree', zeile.ausbildung.id]">{{
+                    zeile.lernende.name
+                  }}</a>
+                </th>
+                <td>
+                  {{ zeile.lehrberuf.name }}
+                  @if (zeile.lehrberuf.fachrichtung) {
+                    <span class="untertitel">{{ zeile.lehrberuf.fachrichtung }}</span>
+                  }
+                </td>
+                <td>{{ zeile.lehrjahr }}</td>
+                <td class="tabellen-zelle--fortschritt">
+                  <st-fortschritt [wert]="zeile.fortschritt" />
+                </td>
+                <td>
+                  <span class="bereiche-reihe">
+                    @for (bereich of zeile.bereiche; track bereich.code) {
+                      <span
+                        class="bereich-chip"
+                        [attr.title]="bereich.code + ': ' + bereich.fortschritt + ' %'"
+                      >
+                        <strong>{{ bereich.code }}</strong>
+                        <st-ampel [ampel]="bereich.ampel" [kompakt]="true" />
+                        <span class="nur-screenreader">{{ bereich.fortschritt }} Prozent</span>
+                      </span>
+                    }
+                  </span>
+                </td>
+                <td>{{ zeile.roteKompetenzen }}</td>
+                <td>{{ zeile.offeneAnfragen }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+        <p class="nur-screenreader" role="status">{{ sortierMeldung() }}</p>
+      </div>
+    }
+  } @else {
+    @if (anfragen().length === 0) {
+      <p class="meldung">Keine offenen Anfragen.</p>
+    } @else {
+      @if (meldung()) {
+        <p class="meldung meldung--erfolg" role="status">{{ meldung() }}</p>
+      }
+      <div class="anfragen-liste">
+        @for (eintrag of anfragen(); track eintrag.anfrage.id) {
+          <article class="karte anfrage-karte">
+            <header class="anfrage-karte__kopf">
+              <div>
+                <h2>
+                  <a [routerLink]="['/skilltree', eintrag.ausbildung.id]">{{
+                    eintrag.lernende.name
+                  }}</a>
+                </h2>
+                <p class="untertitel">
+                  {{ eintrag.lehrberuf.name }}
+                  @if (eintrag.lehrberuf.fachrichtung) {
+                    · {{ eintrag.lehrberuf.fachrichtung }}
+                  }
+                </p>
+              </div>
+              <p class="anfrage-karte__alter">{{ alterText(eintrag) }}</p>
+            </header>
+
+            <p class="anfrage-karte__ziel">
+              <strong>{{ eintrag.leistungsziel.code }}</strong>
+              {{ eintrag.leistungsziel.text }}
+            </p>
+            <p class="anfrage-karte__stufe">
+              Aktuell: {{ stufeText(eintrag.aktuelleStufe) }} → Ziel:
+              {{ stufeText(eintrag.anfrage.zielstufe) }} · {{ eintrag.bereich.code }}
+            </p>
+            <blockquote class="anfrage-karte__text">{{ eintrag.anfrage.text }}</blockquote>
+
+            @if (anfrageFehler() && offenerModus()?.id === eintrag.anfrage.id) {
+              <p class="meldung meldung--fehler" role="alert">{{ anfrageFehler() }}</p>
+            }
+
+            @if (offenerModus(); as modus) {
+              @if (modus.id === eintrag.anfrage.id && modus.art === 'bestaetigen') {
+                <form class="anfrage-karte__formular" (submit)="bestaetigen($event, eintrag)">
+                  <label class="feld">
+                    <span class="feld__label">Kommentar (optional)</span>
+                    <textarea
+                      class="eingabe"
+                      [value]="kommentar()"
+                      (input)="kommentarAendern($event)"
+                      maxlength="500"
+                    ></textarea>
+                  </label>
+                  <div class="anfrage-karte__aktionen">
+                    <button
+                      type="submit"
+                      class="knopf knopf--primaer knopf--klein"
+                      [disabled]="laeuft()"
+                    >
+                      Bestätigen
+                    </button>
+                    <button
+                      type="button"
+                      class="knopf knopf--leise knopf--klein"
+                      (click)="abbrechen()"
+                    >
+                      Abbrechen
+                    </button>
+                  </div>
+                </form>
+              }
+              @if (modus.id === eintrag.anfrage.id && modus.art === 'ablehnen') {
+                <form class="anfrage-karte__formular" (submit)="ablehnen($event, eintrag)">
+                  <div class="anfrage-karte__vorschlaege" role="group" aria-label="Vorschlagstexte">
+                    @for (vorschlag of vorschlaege; track vorschlag) {
+                      <button
+                        type="button"
+                        class="knopf knopf--klein"
+                        (click)="antwort.set(vorschlag)"
+                      >
+                        {{ vorschlag }}
+                      </button>
+                    }
+                  </div>
+                  <label class="feld">
+                    <span class="feld__label">Begründung</span>
+                    <textarea
+                      class="eingabe"
+                      [value]="antwort()"
+                      (input)="antwortAendern($event)"
+                      minlength="10"
+                      maxlength="500"
+                      required
+                    ></textarea>
+                    <span class="feld__hinweis"
+                      >{{ antwort().length }} von 500 Zeichen (min. 10)</span
+                    >
+                  </label>
+                  <div class="anfrage-karte__aktionen">
+                    <button
+                      type="submit"
+                      class="knopf knopf--gefahr knopf--klein"
+                      [disabled]="laeuft()"
+                    >
+                      Ablehnen
+                    </button>
+                    <button
+                      type="button"
+                      class="knopf knopf--leise knopf--klein"
+                      (click)="abbrechen()"
+                    >
+                      Abbrechen
+                    </button>
+                  </div>
+                </form>
+              }
+            } @else {
+              <div class="anfrage-karte__aktionen">
+                <a
+                  class="knopf knopf--klein"
+                  [routerLink]="['/skilltree', eintrag.ausbildung.id]"
+                  [queryParams]="{ knoten: eintrag.kompetenz.id, lz: eintrag.leistungsziel.id }"
+                >
+                  Im Baum zeigen
+                </a>
+                <button
+                  type="button"
+                  class="knopf knopf--primaer knopf--klein"
+                  (click)="oeffne(eintrag, 'bestaetigen')"
+                >
+                  Bestätigen
+                </button>
+                <button
+                  type="button"
+                  class="knopf knopf--gefahr knopf--klein"
+                  (click)="oeffne(eintrag, 'ablehnen')"
+                >
+                  Ablehnen
+                </button>
+              </div>
+            }
+          </article>
+        }
+      </div>
+    }
+  }
+</div>

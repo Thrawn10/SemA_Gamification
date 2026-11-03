@@ -1,0 +1,1180 @@
+{
+  "lehrberuf": {
+    "code": "INF-APP",
+    "name": "Informatiker/in EFZ",
+    "fachrichtung": "Applikationsentwicklung",
+    "lehrdauerJahre": 4
+  },
+  "bildungsplanJahr": 2021,
+  "version": 1,
+  "quelle": "Vorlage_Bildungsplan_APP_2021.xlsx",
+  "bereiche": [
+    {
+      "code": "A",
+      "titel": "Begleiten von ICT-Projekten",
+      "kompetenzen": [
+        {
+          "code": "a1",
+          "titel": "Bedürfnisse von Stakeholdern im Rahmen eines ICT-Projekts abklären und dokumentieren",
+          "beschreibung": "Informatikerinnen und Informatiker nehmen die Projektziele und Bedürfnisse der Stakeholder auf und dokumentieren diese: Als Erstes erfragen sie die Projektziele und klären übergeordnete Parameter wie Kosten, Zeit, Qualität, Umfang, Verantwortlichkeiten und Methodik (Initiale Road Mapping Session). Sie wenden dabei verschiedene Befragungstechniken und Beobachtungstechniken an (z.B. offene, geschlossene Fragen, Meeting, Workshop, Shadowing, Simulation der anzustrebenden Lösung in Form eines Zeitsprungs). Dank ihres Einfühlungsvermögens sind sie in der Lage, die Bedürfnisse der Stakeholder/der Kundschaft passgenau zu erfassen und das Gespräch zielgerichtet zu führen. Als Nächstes analysieren sie den Systemkontext: Welchen Anforderungen muss das zu entwickelnde System gerecht werden? Sie klären die System und Kontextabgrenzung und identifizieren Schnittstellen. Sie erarbeiten Lösungen zur Beseitigung möglicher Zielkonflikte. (Requirements Elicitation) Danach überführen sie die natürlichsprachige Definition (der Stakeholder) in eine modellbasierte Dokumentation und klassifizieren die Projektziele und -anforderungen (z.B. Kano Modell). Sie achten darauf, allfälligen Interpretationsspielraum zu minimieren. Das Ziel ist es, eindeutige, referenzierbare Projektziele und -anforderungen als Basis für das weitere Vorgehen des Engineering Prozesses zu haben. (Requirements Documentation /Communication) In einem weiteren Schritt überprüfen sie die aufgenommenen Projektziele und -anforderungen bezüglich Messbarkeit, Konsistenz, Vollständigkeit, Notwendigkeit, Korrektheit und Referenzierbarkeit. Dabei setzen sie unterstützende Techniken (z.B. Inspektion, Walkthrough, Perspektivenbasiertes Lesen, Prüfung durch Prototyp) ein. (Requirements Validation) Zuletzt definieren sie die Eigenschaften für die Verwaltung der einzelnen Projektziele und -anforderungen (z.B. Versionierung, Identifikator zur Referenzierbarkeit, Beschreibung, Autor, Quelle, Kritikalität, Priorität). (Requirements Management).",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "431: Aufträge im eigenen Umfeld selbstständig durchführen",
+              "306: Kleinprojekt im eigenen Berufsumfeld abwickeln"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "a1.1",
+              "text": "Sie klären Projektziele und übergeordnete Parameter wie Kosten, Zeit, Qualität, Umfang, Verantwortlichkeiten und Methodik eines ICT-Projektes ab.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a1.2",
+              "text": "Sie wenden verschiedene Befragungstechniken und Beobachtungstechniken an (z.B. offene, geschlossene Fragen, Meeting, Workshop, Shadowing, Simulation der anzustrebenden Lösung in Form eines Zeitsprungs).",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "a1.3",
+              "text": "Sie analysieren den Systemkontext, nehmen eine System- und Kontextabgrenzung vor und identifizieren Schnittstellen.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a1.4",
+              "text": "Sie erarbeiten Lösungen zur Beseitigung möglicher Zielkonflikte.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "a1.5",
+              "text": "Sie überführen die natürlich sprachige Definition (der Stakeholder) in eine modellbasierte Dokumentation mit eindeutigen, referenzierbaren Projektziele und -anforderungen.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "a1.6",
+              "text": "Sie überprüfen die Projektziele und -anforderungen bezüglich Messbarkeit, Konsistenz, Vollständigkeit, Notwendigkeit, Korrektheit und Referenzierbarkeit.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a1.7",
+              "text": "Sie definieren die Eigenschaften für die Verwaltung der einzelnen Projektziele und -anforderungen (z.B. Versionierung, Identifikator zur Referenzierbarkeit, Beschreibung, Autor, Quelle, Kritikalität, Priorität).",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "a2",
+          "titel": "Vorgehensmodell für ein ICT-Projekt bestimmen",
+          "beschreibung": "Informatikerinnen und Informatiker wählen ein den Projektzielen und -anforderungen entsprechendes Vorgehensmodell: Zunächst analysieren sie die in der Handlungskompetenz a1 ermittelten Parameter und die vom Auftraggeber gegebenen Konditionen (z.B. Teamstruktur, Dynamik der Anforderungen, Entwicklungskultur, Teamgrösse). Danach wägen sie die Vor- und Nachteile von verschiedenen plangetriebenen resp. agilen (iterativen, inkrementellen) Vorgehensmodellen in Bezug auf das ICT-Projekt ab, bewerten diese und wählen ein passendes Modell. Bei Bedarf passen sie das Vorgehensmodell projektspezifisch an (Process-Tailoring).",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["431: Aufträge im eigenen Umfeld selbstständig durchführen"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "a2.1",
+              "text": "Sie analysieren die vom Auftraggeber gegebenen Konditionen und Parameter.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a2.2",
+              "text": "Sie wägen die Vor- und Nachteile von verschiedenen plangetriebenen resp. agilen (iterativen, inkrementellen) Vorgehensmodellen in Bezug auf ein ICT-Projekt ab und wählen ein passendes Modell.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a2.3",
+              "text": "Sie passen ein Vorgehensmodell projektspezifisch an (Process-Tailoring).",
+              "taxonomie": "K5"
+            }
+          ]
+        },
+        {
+          "code": "a3",
+          "titel": "Informationen zu ICT-Lösungen und zu Innovationen recherchieren",
+          "beschreibung": "Informatikerinnen und Informatiker suchen gezielt Informationen zu ICT-Lösungen, um Wissenslücken zu schliessen oder den aktuellen Stand der Technik zu erfassen: Sie suchen nach Innovationen, z.B. um eine Übersicht über die Marktsituation zu erstellen oder den aktuellen Stand der Technik zu erfassen. Dazu suchen sie gezielt und systematisch nach Informationen aus digitalen und analogen Quellen. Sie durchleuchten die Ergebnisse kritisch und identifizieren verlässliche und unzuverlässige oder unseriöse Quellen. Sie achten dabei auf Informationen zu Produkten und Lösungen, welche einen sparsamen Umgang mit Energie und einen bedachten Umgang mit verwendeten Ressourcen ermöglichen. Sie tragen mehrere Varianten aus den Ergebnissen zusammen, vergleichen und bewerten sie. Dabei zeigen sie deren technische Potenziale und Risiken auf. Für die favorisierte Variante erstellen sie ein technisches Proof of Concept (PoC), um die prinzipielle Durchführbarkeit eines Vorhabens zu belegen (z.B. zur Risikominimierung).",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "241: Innovative ICT-Lösungen initialisieren",
+              "245: Innovative ICT-Lösungen umsetzen"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "a3.1",
+              "text": "Sie suchen gezielt und systematisch nach Informationen aus digitalen und analogen Quellen.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a3.2",
+              "text": "Sie identifizieren verlässliche Quellen.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a3.3",
+              "text": "Sie vergleichen mehrere Varianten aus den Ergebnissen und bewerten sie.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a3.4",
+              "text": "Sie zeigen technische Potenziale und Risiken von Varianten auf.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a3.5",
+              "text": "Sie erstellen ein technisches Proof of Concept (PoC).",
+              "taxonomie": "K5"
+            }
+          ]
+        },
+        {
+          "code": "a4",
+          "titel": "ICT-Projekte und daraus entstehende Aufgaben gemäss Vorgehensmodell planen",
+          "beschreibung": "Informatikerinnen und Informatiker planen ihre Aufgaben gemäss dem gewählten Vorgehensmodell: Unabhängig vom Vorgehensmodell brechen sie eine Gesamtaufgabe in kleinere, besser einschätzbare und einer Ressource zuteilbare Aktivitäten herunter (vom Groben zum Detail). Sie unterscheiden Aktivitäten nach Aufwand und Dauer, erstellen eine ungefähre zeitliche Einschätzung und schätzen den Komplexitätsgrad der Aufgabe ab. Weiter klären sie die sequenziellen Abhängigkeiten, definieren die zeitliche Reihenfolge und hinterlegen sie allenfalls mit Ressourcen. Zum Schluss gruppieren und priorisieren sie Aktivitäten zur Erreichung eines Zwischenziels anhand von zeitlichen oder funktionellen Vorgaben und halten dies schriftlich fest. Nachfolgend anhand des Beispiels Scrum «rollenübergreifend» und vereinfacht erklärt: • Sie definieren und priorisieren (z.B. BV, ROI) User Stories im Product Backlog zusammen mit den Stakeholdern. • Sie legen Velocity und Goals (Condition of Satisfaction) für die geplante Iteration (Sprint) fest. • Sie schätzen (Story Points) die User Stories (Story Poker) ab. • Sie bestimmen den Sprint Backlog.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "431: Aufträge im eigenen Umfeld selbstständig durchführen",
+              "306: Kleinprojekt im eigenen Berufsumfeld abwickeln"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "a4.1",
+              "text": "Sie teilen eine Gesamtaufgabe in kleinere, besser einschätzbare und einer Ressource zuteilbare Aktivitäten auf.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a4.2",
+              "text": "Sie identifizieren Aktivitäten nach Typ Aufwand oder Dauer.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a4.3",
+              "text": "Sie schätzen Aufwand, Dauer und Komplexitätsgrad von Aktivitäten ab.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a4.4",
+              "text": "Sie klären die sequenziellen Abhängigkeiten von Aktivitäten und definieren die zeitliche Reihenfolge.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a4.5",
+              "text": "Sie gruppieren und priorisieren Aktivitäten zur Erreichung eines Zwischenziels anhand von zeitlichen oder funktionellen Vorgaben.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "a5",
+          "titel": "Varianten für ICT-Lösungen visualisieren und präsentieren",
+          "beschreibung": "Informatikerinnen und Informatiker bereiten verschiedene Varianten von ICT-Lösungen visuell auf und präsentieren sie: Zunächst identifizieren sie die Zielgruppe und deren Informationsbedürfnisse zu den ICT-Lösungen gemäss Anforderungskatalog. Darauf identifizieren sie die zielgruppenrelevanten Merkmale der ICT-Lösungen. Im Anschluss bereiten sie die aus den Merkmalen gewonnenen Erkenntnisse zielgruppen- und problemgerecht visuell auf (z.B. Flipchart, Whiteboard, Präsentationsprogramm, Videoconferencing). Sie nutzen dabei ihre Kreativität und ihr Vorstellungsvermögen. Zum Schluss präsentieren sie ihre Lösungsvorschläge schlüssig und überzeugend, um den Entscheidungsträgern bei ihrer Entscheidungsfindung zu helfen (z.B. durch Storytelling).",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "431: Aufträge im eigenen Umfeld selbstständig durchführen",
+              "306: Kleinprojekt im eigenen Berufsumfeld abwickeln"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "a5.1",
+              "text": "Sie identifizieren die Zielgruppe und deren Informationsbedürfnisse zu einer ICT-Lösung gemäss Anforderungskatalog.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a5.2",
+              "text": "Sie identifizieren die zielgruppenrelevanten Merkmale einer ICT-Lösung.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a5.3",
+              "text": "Sie bereiten die aus den Merkmalen gewonnenen Erkenntnisse zielgruppen- und problemgerecht visuell auf (z.B. Flipchart, Whiteboard, Präsentationsprogramm, Videoconferencing).",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "a5.4",
+              "text": "Sie präsentieren ihre Lösungsvorschläge schlüssig und überzeugend (z.B. durch Storytelling).",
+              "taxonomie": "K5"
+            }
+          ]
+        },
+        {
+          "code": "a6",
+          "titel": "Fortschritt von ICT-Projekten und daraus entstehenden Aufgaben gemäss Vorgehensmodell überprüfen und rapportieren",
+          "beschreibung": "Informatikerinnen und Informatiker überprüfen laufend den Fortschritt eines Projekts oder ihrer Aufgaben darin und rapportieren diesen gemäss projektspezifischem Vorgehensmodell: Entsprechend ihrer Rolle holen oder bringen sie zuerst Bewertungen zum Stand der zugewiesenen Aufträge ein (persönlich oder über ein Tool). Falls sie eine koordinierende oder leitende Rolle im Projekt innehaben, ergeben sich weitere Schritte: Sie sammeln die Bewertungen, kategorisieren und priorisieren sie. Danach konsolidieren sie die Bewertungen und erarbeiten ggf. Vorschläge für Korrekturmassnahmen. In einem weiteren Schritt halten sie den Fortschritt schriftlich fest, visualisieren und kommunizieren ihn. Schliesslich legen sie zusammen mit den Entscheidungsträgern das weitere Vorgehen fest, z.B. Entscheid für Korrekturmassnahmen.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "431: Aufträge im eigenen Umfeld selbstständig durchführen",
+              "306: Kleinprojekt im eigenen Berufsumfeld abwickeln"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "a6.1",
+              "text": "Sie bringen Bewertungen zum Stand der ihnen zugewiesenen Aufträge ein (persönlich",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a6.2",
+              "text": "Sie kategorisieren und priorisieren gesammelte Bewertungen.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a6.3",
+              "text": "Sie konsolidieren die Bewertungen und erarbeiten ggf. Vorschläge für Korrekturmass nahmen.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "a6.4",
+              "text": "Sie halten den Fortschritt schriftlich fest und stellen ihn visuell dar.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a6.5",
+              "text": "Sie rapportieren die zusammengefassten Ergebnisse zum Projektfortschritt gemäss pro jektspezifischem Vorgehensmodell.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "a7",
+          "titel": "ICT-Lösungen der Kundin oder dem Kunden übergeben und Projekt abschliessen",
+          "beschreibung": "Informatikerinnen und Informatiker übergeben eine ICT-Lösung der Kundin oder dem Kunden und schliessen das Projekt gemäss Vereinbarung im Projektauftrag ab: Dazu eruieren sie zuerst die einzubeziehenden Personen bei der Kundin bzw. Kunden. Falls noch nicht vorhanden, legen sie zusammen mit der Kundin /dem Kunden die Abnahmekriterien und -verfahren sowie den zeitlichen Ablauf der Übergabe fest. Als Nächstes stellen sie die gemäss Projektauftrag vereinbarte Dokumentation bereit. Bei Bedarf planen sie eine Schulung/Instruktion und bereiten die Schulungsunterlagen vor. Danach führen sie die Abnahme nach den festgelegten Kriterien durch und protokollieren sie. Zum Schluss archivieren und sichern sie ihre Arbeiten nach betriebsspezifischen Vorgaben.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "431: Aufträge im eigenen Umfeld selbstständig durchführen",
+              "306: Kleinprojekt im eigenen Berufsumfeld abwickeln"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "a7.1",
+              "text": "Sie eruieren die einzubeziehenden Personen beim Kunden.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a7.2",
+              "text": "Sie legen zusammen mit dem Kunden die Abnahmekriterien und -verfahren sowie den zeitlichen Ablauf der Übergabe fest.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a7.3",
+              "text": "Sie stellen die gemäss Projektauftrag vereinbarte Dokumentation bereit.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a7.4",
+              "text": "Sie planen eine Schulung/Instruktion.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a7.5",
+              "text": "Sie bereiten die Schulungsunterlagen vor.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "a7.6",
+              "text": "Sie führen eine Abnahme nach festgelegten Kriterien durch und protokollieren sie.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a7.7",
+              "text": "Sie archivieren und sichern ihre Arbeiten nach betriebsspezifischen Vorgaben.",
+              "taxonomie": "K3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "B",
+      "titel": "Unterstützen und Beraten im ICT-Umfeld",
+      "kompetenzen": [
+        {
+          "code": "b1",
+          "titel": "den eigenen ICT-Arbeitsplatz einrichten",
+          "beschreibung": "Informatikerinnen und Informatiker richten den eigenen digitalen Arbeitsplatz mit allen benötigten Komponenten ein: In einem ersten Schritt setzen sie den Computer mit einem Betriebssystem auf, verbinden ihn mit einem Netzwerk und testen die Verbindung. Sie konfigurieren die nötigen Sicherheitsmassnahmen (Firewall, Antivirensysteme etc.) gemäss Firmenrichtlinien. Bei Bedarf installieren sie Software, testen, ob sie einwandfrei funktioniert und führen gegebenenfalls Updates aus. Darauf verbinden sie den Computer mit weiteren zu verwendenden Peripheriegeräten und testen deren Funktionalitäten. Des Weiteren richten sie ihren Bürotisch und -stuhl so ein, dass die ergonomischen Grundsätze eingehalten werden. Mit Büromaterialien und Energie gehen sie sparsam um.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "114: Codierungs-, Kompressions- und Verschlüsselungsverfahren einsetzen",
+              "117: Informatik- und Netzinfrastruktur für ein kleines Unternehmen realisieren"
+            ],
+            "uek": ["187: ICT-Arbeitsplatz mit Betriebssystem in Betrieb nehmen"]
+          },
+          "leistungsziele": [
+            {
+              "code": "b1.1",
+              "text": "Sie setzen einen Computer mit einem Betriebssystem auf.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b1.2",
+              "text": "Sie verbinden den Computer mit einem Netzwerk und testen die Verbindung.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b1.3",
+              "text": "Sie konfigurieren die nötigen Sicherheitsmassnahmen (Firewall, Antivirensysteme etc.) gemäss Firmenrichtlinien.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b1.4",
+              "text": "Sie installieren Software, testen sie und führen bei Bedarf Updates aus.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b1.5",
+              "text": "Sie verbinden den Computer mit den zu verwendenden Peripheriegeräten und testen deren Funktionalitäten.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b1.6",
+              "text": "Sie richten ihren Bürotisch und -stuhl nach ergonomischen Grundsätzen ein.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "b2",
+          "titel": "komplexe ICT-Supportanfragen entgegennehmen und bearbeiten",
+          "beschreibung": "Informatikerinnen und Informatiker nehmen komplexe Supportanfragen entgegen und erarbeiten Lösungen: Sie erhalten im Rahmen des 3rd Level Supports eine Supportanfrage für ein komplexes ICT-Problem. Sie nehmen diese entgegen und beginnen sogleich, den Inhalt der Anfrage systematisch zu analysieren (z.B. mit Hilfe eines Fragenkatalogs oder einer Checkliste). Mittels geeigneter Methoden oder Kollaborationen führen sie eine Lösung herbei und dokumentieren diese nach betriebsspezifischen Vorgaben. Ihre Lösung für die Anfrage bereiten sie zielgruppengerecht (z.B. für den 2nd Level Support) auf und kommunizieren sie dem Anfragesteller.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "b2.1",
+              "text": "Sie analysieren komplexe Anfragen systematisch (z.B. mit Hilfe eines Fragenkatalogs oder einer Checkliste).",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "b2.2",
+              "text": "Sie führen mit geeigneten Methoden oder Kollaborationen Lösungen herbei.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "b2.3",
+              "text": "Sie dokumentieren Lösungen nach betriebsspezifischen Vorgaben.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b2.4",
+              "text": "Sie bereiten Lösungen für eine Anfrage zielgruppengerecht (z.B. für den 2nd Level Support) auf und kommunizieren sie.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "b3",
+          "titel": "Kundinnen und Kunden in Bezug auf Datenschutz und Datensicherheit beraten",
+          "beschreibung": "Informatikerinnen und Informatiker beraten Kundinnen und Kunden im Umgang mit schützenswerten Daten und zeigen Lösungen für Schutzmassnahmen auf: Dazu klären sie zunächst mit gezielten Fragen die Sicherheitssituation bei Kundinnen und Kunden in Bezug auf System, Netzwerk, Software und Daten. Anhand dieser Informationen schlagen sie den Kundinnen und Kunden nötige und empfohlene Schutzmassnahmen in den evaluierten Bereichen vor. Sie schaffen ein Bewusstsein für Gefahren im Netz und im Umgang mit schützenswerten Daten. Zur Erfüllung dieser Aufgaben informieren sie sich laufend über Veränderungen der rechtlichen Rahmenbedingungen/Vorgaben. Bei Bedarf schulen sie Mitarbeitende in der Anwendung der firmeneigenen IT-Richtlinien.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["231: Datenschutz und Datensicherheit anwenden"],
+            "uek": [
+              "216: Internet of Everything-Endgeräte in bestehende Plattform integrieren (Wahlmodul)"
+            ]
+          },
+          "leistungsziele": [
+            {
+              "code": "b3.1",
+              "text": "Sie klären anhand von gezielten Fragen die Sicherheitssituation beim Kunden in Bezug auf System, Netzwerk, Software und Daten.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b3.2",
+              "text": "Sie informieren Kunden über Gefahren im Netz und den Umgang mit schützenswerten Daten.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b3.3",
+              "text": "Sie schlagen dem Kunden nötige und empfohlene Schutzmassnahmen in den evaluierten Bereichen vor.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "b3.4",
+              "text": "Sie schulen Mitarbeitende in der Anwendung der firmeneigenen IT-Richtlinien.",
+              "taxonomie": "K5"
+            }
+          ]
+        },
+        {
+          "code": "b4",
+          "titel": "Geschäftsprozesse von Kundinnen und Kunden analysieren, visualisieren und dokumentieren",
+          "beschreibung": "Informatikerinnen und Informatiker analysieren Geschäftsprozesse, stellen sie grafisch dar und dokumentieren sie: In einem ersten Schritt identifizieren sie relevante Prozessinformationen (Bezeichnung, auslösendes Ereignis, Ergebnis, Auslöser, Empfänger). Darauf zerlegen sie die Geschäftsprozesse in einer Aufgabenanalyse in einzelne Prozessschritte. Nun dokumentieren sie den Prozessablauf und stellen ihn auf der Basis von anerkannten und üblichen Beschreibungsstandards grafisch dar. In einem weiteren Schritt präzisieren sie den Prozessablauf mit Zusatzinformationen wie benötigten Hilfsmitteln, ausführenden Stellen sowie der Beschreibung des zu erzeugenden Outputs (Ergebnis). Zum Schluss übergeben sie die Dokumentation dem Kunden.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["254: Geschäftsprozesse im eigenen Berufsumfeld beschreiben"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "b4.1",
+              "text": "Sie identifizieren relevante Prozessinformationen (Bezeichnung, auslösendes Ereignis, Ergebnis, Auslöser, Empfänger).",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "b4.2",
+              "text": "Sie zerlegen einen Geschäftsprozess in einer Aufgabenanalyse in einzelne Prozessschritte.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "b4.3",
+              "text": "Sie dokumentieren einen Prozessablauf und stellen ihn auf der Basis von anerkannten und üblichen Beschreibungsstandards grafisch dar.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b4.4",
+              "text": "Sie präzisieren den Prozessablauf mit Zusatzinformationen wie benötigten Hilfsmitteln, ausführenden Stellen sowie der Beschreibung des zu erzeugenden Outputs (Ergebnis).",
+              "taxonomie": "K3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "C",
+      "titel": "Aufbauen und Pflegen von digitalen Daten",
+      "kompetenzen": [
+        {
+          "code": "c1",
+          "titel": "Daten identifizieren, analysieren und Datenmodelle entwickeln",
+          "beschreibung": "Informatikerinnen und Informatiker analysieren Daten aus verschiedenen Datenquellen und fassen sie in einem geeigneten Datenmodell zusammen: Je nach Auftrag erhalten sie Daten aus verschiedenen strukturierten und unstrukturierten Datenquellen. Als Erstes sichten sie die Daten und ordnen sie hinsichtlich des 4V-Modells ein (volume, variety, velocity, veracity). Als Nächstes untersuchen sie die Daten auf Eindeutigkeit und Widersprüchlichkeit und bereinigen sie falls nötig. In einem weiteren Schritt gewinnen sie Indikatoren/Anhaltspunkte für die Modellbildung aus bestehenden Auswertungsformen (Reports). Sie bestimmen je nach Datentyp geeignete Testfälle für die Datenkorrektheit sowie eine geeignete Struktur für die bereinigten Daten. Schliesslich normalisieren sie das Datenmodell und bilden es in geeigneter Darstellung ab.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "162: Daten analysieren und modellieren",
+              "164: Datenbanken erstellen und Daten einfügen"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "c1.1",
+              "text": "Sie sichten Daten aus verschiedenen strukturierten und unstrukturierten Datenquellen und ordnen sie hinsichtlich des 4V-Modells ein.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "c1.2",
+              "text": "Sie untersuchen Daten auf Eindeutigkeit und Widersprüchlichkeit und bereinigen sie falls nötig.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "c1.3",
+              "text": "Sie gewinnen Indikatoren/Anhaltspunkte für die Modellbildung aus bestehenden Auswertungsformen (Reports).",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "c1.4",
+              "text": "Sie bestimmen je nach Datentyp geeignete Testfälle für die Datenkorrektheit.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c1.5",
+              "text": "Sie bestimmen eine geeignete Struktur für die bereinigten Daten.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "c1.6",
+              "text": "Sie normalisieren ein Datenmodell.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c1.7",
+              "text": "Sie bilden ein Datenmodell in geeigneter Darstellung ab.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "c2",
+          "titel": "Datenmodelle in einem digitalen Datenspeicher umsetzen",
+          "beschreibung": "Informatikerinnen und Informatiker realisieren ein Datenmodell in einem geeigneten digitalen Datenspeicher: Dazu wählen sie zuerst einen geeigneten Datenspeicher (z.B. objektrelational, relational, verteilt/zentral). Nun implementieren sie ein normalisiertes Datenmodell für die Speicherung und berücksichtigen dabei die referentielle Integrität. Als Nächstes planen sie Funktions- und Performancetests und bereiten die dazu notwendigen Testdaten vor. Sie führen die Funktions- und Performancetests durch und werten sie aus. Weiter planen sie Datenmigrationen aus unterschiedlichen Quellsystemen in ein Zielsystem und führen sie durch. Sie prüfen die migrierten Daten im Zielsystem auf Vollständigkeit, Integrität und Korrektheit.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["164: Datenbanken erstellen und Daten einfügen"],
+            "uek": ["106: Datenbanken abfragen, bearbeiten und warten"]
+          },
+          "leistungsziele": [
+            {
+              "code": "c2.1",
+              "text": "Sie wählen einen geeigneten Datenspeicher (z.B. objektrelational, relational, verteilt/zentral).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c2.2",
+              "text": "Sie implementieren ein normalisiertes Datenmodell für die Speicherung unter Berücksichtigung der referentiellen Integrität.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c2.3",
+              "text": "Sie planen Funktions- und Performancetests und bereiten die dazu notwendigen Testdaten vor.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "c2.4",
+              "text": "Sie führen Funktions- und Performancetests durch.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c2.5",
+              "text": "Sie werten Funktions- und Performancetests aus.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "c2.6",
+              "text": "Sie planen Datenmigrationen aus unterschiedlichen Quellsystemen in ein Zielsystem und führen sie durch.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "c2.7",
+              "text": "Sie prüfen die migrierten Daten im Zielsystem auf Vollständigkeit, Integrität und Korrektheit.",
+              "taxonomie": "K4"
+            }
+          ]
+        },
+        {
+          "code": "c3",
+          "titel": "Datensicherheit und Datenschutz für ICT-Lösungen planen, implementieren und dokumentieren",
+          "beschreibung": "Informatikerinnen und Informatiker planen Massnahmen zur Datensicherheit und zum Datenschutz, implementieren sie und dokumentieren sie: In einem ersten Schritt identifizieren sie schutzwürdige Daten und kategorisieren sie. Als Nächstes modellieren sie die schützenswerten Daten gemäss Privacy by design. Sie klären die erforderlichen Schutzmechanismen gemäss Schutzwürdigkeit ab und qualifizieren sie. Dabei berücksichtigen sie die gesetzlichen Rahmenbedingungen (u.a. DSGVO) und interpretieren sie situationsgerecht. Darauf erarbeiten sie ein Datensicherheits- und Rollenkonzept gemäss Auftrag, dokumentieren es und setzen es um (z.B. Backup erstellen, Zugriffsberechtigung setzen, Daten verschlüsseln). Zuletzt überprüfen sie die eingerichteten Datensicherheits- und Schutzmechanismen in Bezug auf ihre Wirksamkeit.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["231: Datenschutz und Datensicherheit anwenden"],
+            "uek": ["106: Datenbanken abfragen, bearbeiten und warten"]
+          },
+          "leistungsziele": [
+            {
+              "code": "c3.1",
+              "text": "Sie identifizieren schutzwürdige Daten und kategorisieren sie.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "c3.2",
+              "text": "Sie modellieren schützenswerte Daten gemäss Privacy by design.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c3.3",
+              "text": "Sie klären die erforderlichen Schutzmechanismen gemäss Schutzwürdigkeit ab und qualifizieren sie.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "c3.4",
+              "text": "Sie erarbeiten ein Datensicherheits- und Rollenkonzept gemäss Auftrag.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c3.5",
+              "text": "Sie erstellen ein Backup und prüfen die erfolgreiche Wiederherstellung.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c3.6",
+              "text": "Sie setzen Zugriffsberechtigungen gemäss Konzept.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c3.7",
+              "text": "Sie verschlüsseln Daten gemäss Konzept.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c3.8",
+              "text": "Sie überprüfen die eingerichteten Datensicherheits- und Schutzmechanismen in Bezug auf ihre Wirksamkeit.",
+              "taxonomie": "K4"
+            }
+          ]
+        },
+        {
+          "code": "c4",
+          "titel": "Daten aus digitalen Datenspeichern aufbereiten",
+          "beschreibung": "Informatikerinnen und Informatiker analysieren Daten aus digitalen Datenspeichern und bereiten sie auf: Zu Beginn lesen sie die Daten in eine geeignete Analysesoftware ein. Darauf führen sie eine explorative Datenanalyse durch und identifizieren mögliche Datenfehler. Sie prüfen die Validität der aufbereiteten Daten durch Stichproben. Als Nächstes vergleichen sie etablierte Aufbereitungsmethoden und Darstellungsformen miteinander und bewerten sie. Auf dieser Grundlage wählen sie geeignete Darstellungsformen aus und setzen sie ein (z.B. logarithmieren und nicht lineare Zusammenhänge linear darstellen). Schliesslich stellen sie die Daten anonymisiert bereit (z.B. für Testfälle).",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["162: Daten analysieren und modellieren"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "c4.1",
+              "text": "Sie lesen Daten in eine geeignete Analysesoftware ein.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c4.2",
+              "text": "Sie führen eine explorative Datenanalyse durch und identifizieren mögliche Datenfehler.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "c4.3",
+              "text": "Sie vergleichen etablierte Aufbereitungsmethoden und Darstellungsformen und bewerten sie.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "c4.4",
+              "text": "Sie wählen geeignete Darstellungsformen aus und setzen sie ein.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c4.5",
+              "text": "Sie prüfen die Validität der aufbereiteten Daten durch Stichproben.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c4.6",
+              "text": "Sie stellen Daten anonymisiert bereit.",
+              "taxonomie": "K3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "G",
+      "titel": "Entwickeln von Applikationen",
+      "kompetenzen": [
+        {
+          "code": "g1",
+          "titel": "Anforderungen an Applikationen und Schnittstellen analysieren und dokumentieren",
+          "beschreibung": "Informatikerinnen und Informatiker analysieren die im Kundengespräch eruierten Anforderungen (a1) und dokumentieren diese (requirement engineering): In einem ersten Schritt halten sie die Kundenbedürfnisse in Form von fachlichen und technischen Anforderungen fest. Um die Perspektive der Nutzer zu vertiefen, beschreiben sie im Team sowie mit relevanten Stakeholdern die Zielgruppen sowie deren Bedürfnisse (z.B. mittels «Personas»). Dies kann in Form eines Workshops geschehen. Auf dieser Grundlage überprüfen sie die technischen Anforderungen an eine Applikation und deren Schnittstellen (z.B. UI, REST, Sensorik, Peripherie) auf Konsistenz, Vollständigkeit und Messbarkeit (Akzeptanzkriterien). Sie halten Informationen zu Rahmenbedingungen, Kontext, Abgrenzung, sowie Begriffsdefinitionen fest. Bei Bedarf ergänzen sie die Anforderungen. In einem weiteren Schritt katalogisieren sie die Anforderungen, d.h. sie sortieren und gruppieren diese nach branchen- oder projektspezifischen Kriterien (z.B. funktional, nicht-funkti-onal, Qualität). Die Ergebnisse halten sie im System (z.B. backlog, issues, use cases, user stories) oder auf Papier fest und versehen sie mit einer eindeutigen Bezeichnung (Identifizierung). Schliesslich schätzen sie im Team Zeitaufwand, Komplexität, Umfang und Priorisierung ab. Je nach Situation koordinieren sie das Vorgehen mit dem Projektmanager oder Productowner. In Absprache mit den Stakeholdern vergewissern sie sich, dass die definitiven Anforderungen valide sind und keine Missverständnisse vorliegen. Bei Änderungen im Laufe der Applikationsentwicklung führen sie die Anforderungen nach (iteratives Vorgehen).",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "322: Benutzerschnittstellen entwerfen und implementieren",
+              "254: Geschäftsprozesse im eigenen Berufsumfeld beschreiben",
+              "426: Software mit agilen Methoden entwickeln",
+              "162: Daten analysieren und modellieren",
+              "164: Datenbanken erstellen und Daten einfügen",
+              "321: Verteilte Systeme programmieren",
+              "346: Cloud Lösungen konzipieren und realisieren",
+              "324: DevOps-Prozesse mit Tools unterstützen"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "g1.1",
+              "text": "Sie halten Kundenbedürfnisse in Form von fachlichen und technischen Anforderungen nachvollziehbar und lösungsneutral fest. (K3)",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "g1.2",
+              "text": "Sie entwickeln im Team Nutzermodelle anhand von Personas. (K5)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g1.3",
+              "text": "Sie überprüfen fachliche und technische Anforderungen auf Konsistenz, Vollständigkeit und Messbarkeit. (K4)",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "g1.4",
+              "text": "Sie katalogisieren Anforderungen nach branchen- oder projektspezifischen Kriterien und halten diese schriftlich fest. (K4)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g1.5",
+              "text": "Sie versehen Anforderungen mit einer eindeutigen Bezeichnung. (K3)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g1.6",
+              "text": "Sie schätzen Zeitaufwand, Komplexität, Umfang und Priorisierung von Arbeitspaketen im Team ab. (K4)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g1.7",
+              "text": "Sie überprüfen die Anforderungen mit relevanten Stakeholdern auf Validität. (K3)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g1.8",
+              "text": "Sie dokumentieren fachliche und technische Anforderungen laufend nach. (K3)",
+              "taxonomie": "K4"
+            }
+          ]
+        },
+        {
+          "code": "g2",
+          "titel": "Gestaltungsentwürfe für Benutzerschnittstellen auf technische Machbarkeit überprüfen und weiterentwickeln",
+          "beschreibung": "Informatikerinnen und Informatiker überprüfen Gestaltungsentwürfe für Benutzerschnittstellen auf technische Machbarkeit und entwickeln diese im Sinne der Benutzerfreundlichkeit weiter: Sie erhalten Gestaltungsrichtlinien und Vorgaben in Bezug auf Benutzerschnittstellen vom Auftraggeber oder von anderen Partnern. Auf dieser Grundlage erstellen sie funktionale Gestaltungsentwürfe (z.B. MockUps, Grids, Wireframes). Sie setzen dabei geeignete grafische Tools ein. Je nach Situation passen sie bereits erstellte Entwürfe an. In einem nächsten Schritt Identifizieren sie problematische Teile der Benutzerschnittstelle, z.B. voneinander abhängige Informationen oder nicht Standard-Komponenten. Die Machbarkeit der problematischen Teile überprüfen sie anhand von Prototypen, welche sie auf Papier oder anhand von Tools entwerfen. Sie berücksichtigen dabei verschiedenste Aspekte, wie z.B. den Umfang der Informationen, Abhängigkeiten von Feldern, Interaktionselemente, Navigation, Responsiveness, Gestaltungsgesetze oder Barrierefreiheit. Anschliessend besprechen sie die technisch nicht umsetzbaren Teile mit den Stakeholdern. Sie schlagen diesen Lösungen vor und überarbeiten den Gestaltungsentwurf entsprechend. Anhand des Prototyps oder mehrerer Prototypen entwickeln sie schliesslich funktionale Benutzerschnittstellen. Sie wenden dabei aktuelle Methoden und Werkzeuge an.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "322: Benutzerschnittstellen entwerfen und implementieren",
+              "319: Applikationen entwerfen und implementieren",
+              "320: Objektorientiert programmieren",
+              "293: Webauftritt erstellen und veröffentlichen"
+            ],
+            "uek": [
+              "294: Frontend einer interaktiven Webapplikation realisieren",
+              "223: Multi-User-Applikationen (objekt-orientiert) realisieren (Wahlmodul)",
+              "335: Mobile-Applikation realisieren (Wahlmodul)"
+            ]
+          },
+          "leistungsziele": [
+            {
+              "code": "g2.1",
+              "text": "Sie entwickeln Gestaltungsentwürfe für Benutzerschnittstellen anhand von geeigneten grafischen Tools und unter Berücksichtigung von Gestaltungsrichtlinien und Vorgaben. (K5)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g2.2",
+              "text": "Sie identifizieren problematische Teile von Benutzerschnittstellen. (K4)",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "g2.3",
+              "text": "Sie entwerfen Prototypen von Benutzerschnittstellen. (K4)",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "g2.4",
+              "text": "Sie überprüfen die technische Machbarkeit von Benutzerschnittstellen unter Berücksichtigung relevanter Aspekte. (K4)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g2.5",
+              "text": "Sie besprechen mit Stakeholdern Gestaltungsentwürfe und schlagen alternative Lösungen für technisch nicht umsetzbare Teile vor. (K3)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g2.6",
+              "text": "Sie entwickeln anhand von Prototypen funktionale Benutzerschnittstellen. (K5)",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "g3",
+          "titel": "Sicherheit von Applikationen und Schnittstellen beurteilen und dokumentieren",
+          "beschreibung": "Informatikerinnen und Informatiker beurteilen die Sicherheit von Applikationen und Schnittstellen und dokumentieren die Ergebnisse: Zunächst klären sie relevante sicherheitsbezogene Fragen in Bezug auf das Systemumfeld, z.B. Welche Schnittstellen bestehen? Wer sind die Benutzer der Applikation? Welche anderen Systeme greifen auf die Applikation zu? Welchen Schutzbedarf haben die Daten resp. die Applikation (Verfügbarkeit, Vertraulichkeit, Verbindlichkeit, Integrität)? Welche internen und gesetzlichen Vorgaben sind einzuhalten? Sie leiten daraus die Risiken ab, welche auf die Applikation und deren Schnittstellen einwirken. Sie nehmen dabei eine vorausschauende Haltung ein und zeigen Gefährdungsmethoden und mögliche Manipulationen von aussen auf. Die Ergebnisse besprechen sie im Team. Sie leiten Massnahmen ab und halten diese fest (z.B. Verschlüsselung der Daten, Zugriffssicherheit, Identity-Management, Escaping). Schliesslich passen sie den Anforderungskatalog entsprechend an und besprechen diesen mit dem Stakeholder.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "183: Applikationssicherheit implementieren",
+              "114: Codierungs-, Kompressions- und Verschlüsselungsverfahren einsetzen",
+              "450: Applikationen testen",
+              "346: Cloud Lösungen konzipieren und realisieren"
+            ],
+            "uek": [
+              "295: Backend für Applikationen realisieren",
+              "216: Internet of Everything-Endgeräte in bestehende Plattform integrieren (Wahlmodul)"
+            ]
+          },
+          "leistungsziele": [
+            {
+              "code": "g3.1",
+              "text": "Sie klären sicherheitsrelevante Fragen in Bezug auf ein Systemumfeld vorausschauend und leiten daraus mögliche Risiken ab. (K4)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g3.2",
+              "text": "Sie beschaffen sich sicherheitsrelevante Informationen im Team oder in der Community (z.B. OWASP). (K3)",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "g3.3",
+              "text": "Sie halten sicherheitsrelevante Risiken und daraus abgeleitete Massnahmen nachvollziehbar fest. (K3)",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "g3.4",
+              "text": "Sie erläutern Massnahmen zur Sicherung der Applikationen und Schnittstellen im Team. (K3)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g3.5",
+              "text": "Sie passen einen Anforderungskatalog entsprechend den Ergebnissen an und Besprechen diesen mit dem Stakeholder. (K3)",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "g4",
+          "titel": "Umsetzungsvarianten für Applikationen entwerfen und Lösung konzeptionell ausarbeiten",
+          "beschreibung": "Informatikerinnen und Informatiker entwerfen Umsetzungsvarianten für Applikationen und arbeiten für die ausgewählte Variante ein Realisierungskonzept aus. Sie arbeiten dabei eng mit den Stakeholdern und dem Team zusammen: In einem ersten Schritt zeigen sie anhand von Skizzen und Beschreibungen grundlegende Varianten in Bezug auf die Implementierung auf (z.B. Technologien, Komponenten, Frameworks, Libraries, Systeme). Gemeinsam mit jeweiligen Stakeholdern erstellen sie eine nachvollziehbare Nutzwertanalyse der verschiedenen Varianten mit sinnvollen, bewertbaren Entscheidungskriterien. Anhand der Nutzwertanalyse beraten sie den Stakeholder bei der Entscheidungsfindung für eine optimale Lösung. Dabei achten sie darauf, dass diese auch ethisch, moralisch und rechtlich vertretbar ist. Schliesslich überprüfen sie die gewählte Variante gegebenenfalls in Form einer Machbarkeitsanalyse (→ a3). Daraus erarbeiten sie schrittweise ein fachliches und technisches Realisierungskonzept (z.B. UseCases, Komponenten, Schichten, Ablauf, Schnittstellen, Klassen, Datenmodell). Dazu analysieren sie die relevanten Daten, Abläufe, Systeme und Schnittstellen und dokumentieren die Ergebnisse. Dabei setzen sie geeignete Hilfsmittel ein, wie z.B. UML oder weitere Diagramme. Je nach Situation ist es auch möglich, dass sie für bestehende Applikationen Anpassungen entwerfen.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "319: Applikationen entwerfen und implementieren",
+              "320: Objektorientiert programmieren",
+              "323: Funktional programmieren",
+              "164: Datenbanken erstellen und Daten einfügen",
+              "321: Verteilte Systeme programmieren",
+              "346: Cloud Lösungen konzipieren und realisieren",
+              "306: Kleinprojekt im eigenen Berufsumfeld abwickeln"
+            ],
+            "uek": [
+              "106: Datenbanken abfragen, bearbeiten und warten",
+              "223: Multi-User-Applikationen (objektorientiert) realisieren (Wahlmodul)",
+              "335: Mobile-Applikation realisieren (Wahlmodul)",
+              "216: Internet of Everything-Endgeräte in bestehende Plattform integrieren (Wahlmodul)"
+            ]
+          },
+          "leistungsziele": [
+            {
+              "code": "g4.1",
+              "text": "Sie zeigen grundlegende Umsetzungsvarianten in Bezug auf die Implementierung anhand von Skizzen und Beschreibungen auf. (K5)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g4.2",
+              "text": "Sie erstellen in Zusammenarbeit mit dem Stakeholder eine nachvollziehbare Nutzwertanalyse mit sinnvollen, bewertbaren Entscheidungskriterien. (K4)",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "g4.3",
+              "text": "Sie beraten den Stakeholder bei der Entscheidungsfindung für eine optimale, ethisch und rechtlich vertretbare Lösung. (K5)",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "g4.4",
+              "text": "Sie erarbeiten ein fachliches und technisches Realisierungskonzept anhand von geeigneten Hilfsmitteln. (K5)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g4.5",
+              "text": "Sie führen eine Machbarkeitsanalyse für die gewählte Umsetzungsvariante durch. (K4)",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "g5",
+          "titel": "Applikationen und Schnittstellen gemäss Entwurf implementieren und dabei die Sicherheitsanforderungen erfüllen",
+          "beschreibung": "Auf Basis der definierten Anforderungen und ausgearbeiteten Entwürfe implementieren Informatikerinnen und Informatiker Applikationen und Schnittstellen. Es kann sich dabei sowohl um neue als auch um die Erweiterung von bestehenden Applikationen handeln: In einem ersten Schritt richten sie eine geeignete Entwicklungs- und Laufzeitumgebung ein. Das erstellte Realisierungskonzept sowie Firmenvorgaben dienen ihnen als Grundlage. Danach beginnen sie mit der Programmierung von Back-End und Front-End gemäss den definierten Anforderungen. Sie setzen dazu vorgegebene Programmiersprachen sowie Entwicklungstools ein. Die Implementierung testen sie regelmässig auf Fehler und beheben diese (debuggen). Sie achten laufend darauf, dass sie regulatorische und technische Richtlinien (z.B. von Frameworks, Designvorgaben) einhalten. Ausserdem berücksichtigen sie Sicherheitsanforderungen. Bei der Implementation achten sie darauf, die allgemein bekannten Coderichtlinien einzuhalten, um die Nachvollziehbarkeit und Verständlichkeit zu sichern (z.B. Clean Code, Coding Conventions). Die programmierten Elemente legen sie laufend in einem Softwareverwaltungssystem (z.B. Git) ab. Sie sind in der Lage, jederzeit auf gespeicherte Zwischenstände zuzugreifen. Sie halten dabei die firmeninternen Richtlinien (z.B. Branches) ein. Abschliessend nehmen sie allfällige Anpassungen im Realisierungskonzept vor, um es aktuell zu halten. IT-Technologien entwickeln sich rasch. Informatikerinnen und Informatiker informieren sich laufend über Neuerungen und deren Auswirkungen (z.B. welche neuen Frameworks gibt es?) und setzen die Erkenntnisse in ihrer täglichen Arbeit um.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "319: Applikationen entwerfen und implementieren",
+              "320: Objektorientiert programmieren",
+              "323: Funktional programmieren",
+              "293: Webauftritt erstellen und veröffentlichen",
+              "165: NoSQL-Datenbanken einsetzen",
+              "321: Verteilte Systeme programmieren",
+              "322: Benutzerschnittstellenentwerfen und implementieren",
+              "183: Applikationssicherheit implementieren",
+              "426: Software mit agilen Methoden entwickeln",
+              "324: DevOps-Prozesse mit Tools unterstützen"
+            ],
+            "uek": [
+              "106: Datenbanken abfragen, bearbeiten und warten",
+              "294: Frontend einer interaktiven Webapplikation realisieren",
+              "295: Backend für Applikationen realisieren",
+              "223: Multi-User-Applikationen objekt-orientiert realisieren (Wahlmodul)",
+              "335: Mobile-Applikation realisieren (Wahlmodul)",
+              "216: Internet of Everything-Endgeräte in bestehende Plattform integrieren (Wahlmodul)"
+            ]
+          },
+          "leistungsziele": [
+            {
+              "code": "g5.1",
+              "text": "Sie richten eine geeignete Entwicklungs- und Laufzeitumgebung anhand des Realisierungskonzepts sowie Firmenvorgaben ein. (K3)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g5.2",
+              "text": "Sie programmieren ein Back-End mittels vorgegebener Programmiersprachen effizient, strukturiert und gemäss den relevanten Vorgaben. (K3)",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "g5.3",
+              "text": "Sie programmieren ein Front-End mittels vorgegebener Programmiersprachen effizient, strukturiert und gemäss den relevanten Vorgaben. (K3)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g5.4",
+              "text": "Sie überprüfen Zwischenergebnisse mit den Anforderungen (funktional, nicht-funktional, Sicherheit) und nehmen laufend Korrekturen vor. (K4)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g5.5",
+              "text": "Sie überprüfen die Einhaltung von Coderichtlinien. (K3)",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "g5.6",
+              "text": "Sie legen die Änderungen und Erweiterungen der Implementierung übersichtlich und zuverlässig in einem Softwareverwaltungssystem ab. (K3)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g5.7",
+              "text": "Sie passen ein Realisierungskonzept nachvollziehbar an. (K3)",
+              "taxonomie": "K4"
+            }
+          ]
+        },
+        {
+          "code": "g6",
+          "titel": "Qualität und Sicherheit von Applikationen und Schnittstellen überprüfen",
+          "beschreibung": "Informatikerinnen und Informatiker überprüfen die Qualität und Sicherheit von Applikationen und Schnittstellen anhand von Testkonzepten. Damit stellen sie sicher, dass Applikationen gemäss den Anforderungen implementiert, Fehler behoben und die Applikation für die Produktion freigegeben werden kann: Sie erstellen in einem ersten Schritt ein Testkonzept. Darin beschreiben sie das Testumfeld der Applikation mit den relevanten Angaben (z.B. System, Akteure, Daten, Benutzer, Berechtigungen). Weiter bestimmen sie, welche Testarten gebraucht werden (z.B. Unit Tests, Benutzerakzeptanztests, Integrationstests, Last-/Performancetests oder Security-Tests.) Auf diesen Grundlagen definieren sie geeignete Testmittel. Danach beschreiben sie die Testfälle (Testcases) mit Bezug auf die Anwendungsfälle (Usecases) und Anforderungen. Sie berücksichtigen dabei unterschiedliche Perspektiven (z.B. Grenzwerte, Fehlersituationen). Sie stellen sicher, dass die definierten Testfälle wiederholbar sind (automatisiert oder manuell). Sie definieren die erwarteten Resultate und dokumentieren diese ebenfalls nachvollziehbar. Falls nötig bauen sie in einem weiteren Schritt eine geeignete Testumgebung auf. Das vorgängig erstellte Testkonzept dient ihnen dabei als Grundlage. Sie implementieren, wenn möglich automatisierbare Testfälle. Danach führen sie alle Testfälle durch, werten den Testlauf aus und protokollieren die Ergebnisse. Sie gehen dabei sorgfältig vor und formulieren das Protokoll nachvollziehbar. Bei nicht erfolgreichen Testfällen nehmen sie Korrekturmassnahmen entweder am Test oder der Implementierung vor. Nach erfolgten Korrekturen führen sie ein Retesting durch. Sie überprüfen die Implementierung gemäss dem definierten Sicherheitskonzept und treffen bei Abweichungen geeignete Massnahmen zu dessen Einhaltung.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "183: Applikationssicherheit implementieren",
+              "426: Software mit agilen Methoden entwickeln",
+              "450: Applikationen testen",
+              "324: DevOps-Prozesse mit Tools unterstützen",
+              "321: Verteilte Systeme programmieren"
+            ],
+            "uek": [
+              "295: Backend für Applikationen realisieren",
+              "223: Multi-User-Applikationen objekt-orientiert realisieren (Wahlmodul)"
+            ]
+          },
+          "leistungsziele": [
+            {
+              "code": "g6.1",
+              "text": "Sie beschreiben das Testumfeld einer Applikation mit allen relevanten Angaben. (K3)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g6.2",
+              "text": "Sie definieren Testmittel anhand der ausgewählten Testarten. (K4)",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "g6.3",
+              "text": "Sie beschreiben wiederholbare Testfälle in Bezug auf Anwendungsfälle und Anforderungen nachvollziehbar und definieren die erwarteten Resultate. (K4)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g6.4",
+              "text": "Sie bauen gemäss Testkonzept eine geeignete Testumgebung auf. (K3)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g6.5",
+              "text": "Sie implementieren die automatisierbaren Testfälle gemäss den definierten Testmitteln. (K4)",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "g6.6",
+              "text": "Sie führen Testfälle umfassend und sorgfältig durch. (K3)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g6.7",
+              "text": "Sie werten den Testlauf aus und protokollieren die Ergebnisse nachvollziehbar. (K4)",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "g6.8",
+              "text": "Sie definieren Korrekturmassnahmen und führen diese durch. (K4)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g6.9",
+              "text": "Sie überprüfen die Implementierung gemäss dem definierten Sicherheitskonzept und treffen geeignete Korrekturmassnahmen (K4).",
+              "taxonomie": "K4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "H",
+      "titel": "Ausliefern und Betreiben von Applikationen",
+      "kompetenzen": [
+        {
+          "code": "h1",
+          "titel": "geeignete Plattform für die Auslieferung von Applikationen bestimmen",
+          "beschreibung": "Informatikerinnen und Informatiker analysieren die unterschiedlichen Anforderungen an den Betrieb von Applikationen und bestimmen eine geeignete Plattform: In einem ersten Schritt analysieren sie die vorgegebenen Anforderungen und identifizieren die Abhängigkeiten zwischen den Komponenten (Mikroservices, bestehende SW, APIs/Schnittstellen). Darauf definieren sie eine geeignete Plattform für den Betrieb der Applikation (Cloud, On-Premise, Client, Hybrid, Multicloud). In einem weiteren Schritt definieren sie das Schichtenmodell (SaaS, PaaS, IaaS) innerhalb der Rahmenbedingungen des Stakeholders (z.B. Kosten, Verantwortlichkeit, Umsetzbarkeit). Sie identifizieren die Sicherheitsanforderungen (inkl. Datenschutz) an die Plattform und wählen geeignete Services aus. Sie schätzen die benötigten Ressourcen ab und wählen diese anhand der Empfehlung des Plattformbetreibers aus (Performance, Speicherbedarf, Verfügbarkeit, Kosten, Zugriff; kein Rocketscience). Sie achten dabei auf ökonomische und ökologische Lösungen. Abschliessend prüfen sie ihre Auswahl in Zusammenarbeit mit dem Team und/oder dem Stakeholder auf Konsistenz, nehmen allfällig nötige Anpassungen vor und halten die Ergebnisse fest.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "346: Cloud Lösungen konzipieren und realisieren",
+              "347: Dienst mit Container anwenden"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "h1.1",
+              "text": "Sie identifizieren die Abhängigkeiten zwischen verschiedenen Komponenten. (K4)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "h1.2",
+              "text": "Sie definieren eine geeignete Plattform für den Betrieb einer Applikation. (K4)",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "h1.3",
+              "text": "Sie definieren ein Schichtenmodell innerhalb der Rahmenbedingungen des Stakeholders. (K4)",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "h1.4",
+              "text": "Sie identifizieren die Sicherheitsanforderungen an die Plattform und wählen geeignete Services aus. (K4)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "h1.5",
+              "text": "Sie wählen die benötigten Ressourcen anhand der Empfehlung des Plattformbetreibers aus. (K3)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "h1.6",
+              "text": "Sie prüfen im Team ihre Auswahl auf Konsistenz, nehmen Anpassungen vor und halten die Ergebnisse fest. (K4)",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "h2",
+          "titel": "Auslieferungsprozess von Applikationen definieren",
+          "beschreibung": "Informatikerinnen und Informatiker definieren Auslieferungsprozesse von Applikationen sowie einzusetzende Techniken und Werkzeuge: Sie orientieren sich bei der Definition der Auslieferungsprozesse am vorliegenden Vorgehensmodell (z.B. Scrum). Zunächst analysieren sie die Abhängigkeiten zwischen den verschiedenen Komponenten in Bezug auf den Auslieferungsprozess. Sie beachten dabei auch planbare Migrationen (Code First, Datenbankschema) von Daten unter Berücksichtigung der Architektur. Sie bestimmen geeignete Integrationspraktiken (z.B. Git-Flow, Trunk, Continuous Integration) anhand des Applikationstyps sowie des gewählten Vorgehensmodells und halten diese fest. Weiter bestimmen sie geeignete Deployment-Praktiken (z.B. Continuous Deployment, Continuous Delivery). Schliesslich bestimmen sie eine geeignete Artefakt-Verwaltung (z.B. Container Registry.)",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "426: Software mit agilen Methoden entwickeln",
+              "346: Cloud Lösungen konzipieren und realisieren",
+              "324: DevOps-Prozesse mit Tools unterstützen"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "h2.1",
+              "text": "Sie analysieren die Abhängigkeit der Komponenten in Bezug auf den Auslieferungsprozess. (K4)",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "h2.2",
+              "text": "Sie bestimmen geeignete Integrationspraktiken und halten diese fest. (K4)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "h2.3",
+              "text": "Sie bestimmen geeignete Deployment-Praktiken und halten diese fest. (K4)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "h2.4",
+              "text": "Sie bestimmen eine geeignete Artefakt-Verwaltung und halten diese fest. (K4)",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "h3",
+          "titel": "Auslieferungsprozess von Applikationen durchführen",
+          "beschreibung": "Informatikerinnen und Informatiker führen Auslieferungsprozesse von Applikationen nach Vorgabe durch: Falls noch nicht vorhanden, erstellen sie zuerst ein Proof of Concept für die gewählte Lösung (→ a3.5). Nun beginnen sie, den definierten Auslieferungsprozess zu implementieren. Sie richten die Services ein, schreiben Automatisierungsskripte und definieren Umgebungsvariablen mit geeigneten Methoden und Tools (z.B. CI/CD Pipeline, CLI, YAML). Sie stellen Komponenten bereit (Laufzeitumgebung /Services) und paketieren die Applikation (z.B. Docker, Container). Weiter verwalten und versionieren sie die Artefakte. Dabei gehen sie strukturiert vor, überprüfen ihre Arbeit regelmässig auf Fehler und beheben diese. Zum Schluss überprüfen sie den gesamten Auslieferungsprozess der Applikation gemäss Vorgaben (z.B. Checkliste) und testen die Funktionsfähigkeit /das Zusammenspiel der Applikationen anhand eines Testkonzepts (z.B. Integrationstest). Dabei zeigen Sie den Willen und akribisches Vorgehen zur Verbesserung und Optimierung des Auslieferungsprozesses.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "122: Abläufe mit einer Scriptsprache automatisieren",
+              "324: DevOps-Prozesse mit Tools unterstützen",
+              "347: Dienst mit Container anwenden",
+              "346: Cloud Lösungen konzipieren und realisieren"
+            ],
+            "uek": ["335: Mobile-Applikation realisieren (Wahlmodul)"]
+          },
+          "leistungsziele": [
+            {
+              "code": "h3.1",
+              "text": "Sie richten Services für die Auslieferung ein. (K3)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "h3.2",
+              "text": "Sie schreiben Automatisierungsskripte und definieren Umgebungsvariablen mit geeigneten Methoden und Tools. (K3)",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "h3.3",
+              "text": "Sie stellen Komponenten für die Auslieferung bereit. (K3)",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "h3.4",
+              "text": "Sie paketieren eine Applikation. (K3)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "h3.5",
+              "text": "Sie verwalten und versionieren Artefakte. (K3)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "h3.6",
+              "text": "Sie überprüfen den Auslieferungsprozess der Applikation gemäss Vorgaben. (K4)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "h3.7",
+              "text": "Sie prüfen die Funktionsfähigkeit/das Zusammenspiel der Applikationen anhand eines Testkonzepts. (K4)",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "h4",
+          "titel": "Applikationen und Schnittstellen überwachen und Probleme im laufenden Betrieb beheben",
+          "beschreibung": "Informatikerinnen und Informatiker überwachen Applikationen und Schnittstellen, treffen Massnahmen zur Erhaltung der Stabilität und beheben falls nötig Probleme im laufenden Betrieb: Für die Überwachung resp. das Monitoring einer Applikation definieren sie zunächst, was alles aufgezeichnet werden soll (Metriken) und konfigurieren die Systeme entsprechend (Log-Tiefe, Messpunkte). Sie treffen in der Applikation Massnahmen zum frühzeitigen Erkennen von Missbrauch oder Gefahren. Das Monitoring führen sie in regelmässigen Abständen durch und überprüfen dabei den Zustand der Applikation anhand der aufgezeichneten Informationen. Bei Bedarf führen sie eine Analyse durch, z.B. wenn eine Fehlermeldung durch die Kundin oder den Kunden oder das System vorliegt. Um das Problem einzugrenzen, reproduzieren sie den Fehler. Sie gehen analytisch und hartnäckig vor, bis der Fehler eruiert werden kann. Weiter überprüfen sie die Aktualität und Sicherheitseinstellungen der Applikationen und Schnittstellen. Dazu lesen sie regelmässig die Mitteilungen der Hersteller der verwendeten Frameworks und Dienste. Aufgrund der Fehleranalyse legen sie ein Vorgehen zur Problembehebung fest und besprechen dieses je nach Auswirkung im Team oder mit dem Stakeholder. Dabei agieren sie vorausschauend und setzen die definierten Massnahmen rechtzeitig um (z.B. Software Life Cycle: Updates/Patches planen und einspielen, Erneuerung von Sicherheitszertifikaten, Konfigurationsanpassungen). Sie halten Probleme und Massnahmen nachvollziehbar fest und ergänzen gegebenenfalls auch die Testfälle.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "183: Applikationssicherheit implementieren",
+              "431: Aufträge im eigenen Umfeld selbstständig durchführen",
+              "321: Verteilte Systeme programmieren",
+              "346: Cloud Lösungen konzipieren und realisieren"
+            ],
+            "uek": [
+              "187: ICT-Arbeitsplatz mit Betriebssystem in Betrieb nehmen",
+              "109: Dienste in der Public Cloud betreiben und überwachen (Wahlmodul)"
+            ]
+          },
+          "leistungsziele": [
+            {
+              "code": "h4.1",
+              "text": "Sie definieren und konfigurieren Tools für das Monitoring einer Applikation. (K3)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "h4.2",
+              "text": "Sie führen das Monitoring in regelmässigen Abständen zuverlässig und sorgfältig durch. (K3)",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "h4.3",
+              "text": "Sie analysieren ein auftretendes Problem durch eine strukturierte Vorgehensweise. (K4)",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "h4.4",
+              "text": "Sie überprüfen Aktualität und Sicherheitseinstellungen der Applikationen und Schnittstellen anhand der Herstellerinformationen. (K4)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "h4.5",
+              "text": "Sie legen ein zielführendes Vorgehen zur Problembehebung fest und besprechen dieses im Team und/oder mit dem Stakeholder. (K5)",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "h4.6",
+              "text": "Sie setzen die vereinbarten Massnahmen um und halten sie verständlich und nachvollziehbar fest. (K3)",
+              "taxonomie": "K3"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+<span class="stufen" [attr.aria-label]="'Stufe: ' + text()">
+  @for (feld of felder; track feld.stufe) {
+    <span
+      class="stufen__feld"
+      [class.stufen__feld--aktiv]="stufe() >= feld.stufe"
+      aria-hidden="true"
+      >{{ feld.kuerzel }}</span
+    >
+  }
+  <span class="stufen__text">{{ text() }}</span>
+</span>

@@ -1,0 +1,168 @@
+<div class="graph">
+  <p class="graph__hinweis">
+    Knoten antippen, um deine Leistungsziele zu sehen und eine Bestätigung anzufragen.
+    <st-anforderung id="S-A03" />
+  </p>
+
+  <div class="graph__karte" #baumkarte>
+    <div
+      class="graph__buehne"
+      [style.inline-size.px]="layout().breite"
+      [style.block-size.px]="layout().hoehe"
+    >
+      <svg
+        class="graph__kanten"
+        [attr.viewBox]="'0 0 ' + layout().breite + ' ' + layout().hoehe"
+        [attr.width]="layout().breite"
+        [attr.height]="layout().hoehe"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <defs>
+          <marker
+            id="pfeil-erreicht"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="7"
+            markerHeight="7"
+            orient="auto-start-reverse"
+          >
+            <path d="M 0 0 L 10 5 L 0 10 z" class="graph__pfeil graph__pfeil--erreicht" />
+          </marker>
+          <marker
+            id="pfeil-offen"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="7"
+            markerHeight="7"
+            orient="auto-start-reverse"
+          >
+            <path d="M 0 0 L 10 5 L 0 10 z" class="graph__pfeil graph__pfeil--offen" />
+          </marker>
+        </defs>
+        @for (pfad of sichtbarePfade(); track pfad.id) {
+          <path
+            [attr.d]="pfad.d"
+            class="graph__kante"
+            [class.graph__kante--erreicht]="pfad.zustand === 'ERREICHT'"
+            [class.graph__kante--offen]="pfad.zustand === 'OFFEN'"
+            [class.graph__kante--verweis]="pfad.typ === 'VERWEIS'"
+            [class.graph__kante--beteiligt]="pfad.beteiligt"
+            [attr.marker-end]="'url(#pfeil-' + pfad.marker + ')'"
+          />
+        }
+      </svg>
+
+      @for (basis of layout().astBasen; track basis.id) {
+        <button
+          type="button"
+          class="graph__ast"
+          [class.graph__ast--beteiligt]="istBeteiligt(basis.id)"
+          [style.inset-inline-start.px]="basis.punkt.x - 15"
+          [style.inset-block-start.px]="basis.punkt.y - 24"
+          [attr.aria-label]="basis.tooltip"
+          [attr.data-tip]="basis.tooltip"
+          [attr.data-ast]="basis.code"
+          (click)="astGewaehlt.emit(basis.code)"
+          (mouseenter)="aktiviere(basis.id)"
+          (mouseleave)="deaktiviere(basis.id)"
+          (focus)="aktiviere(basis.id)"
+          (blur)="deaktiviere(basis.id)"
+        >
+          <span class="graph__ast-code" aria-hidden="true">{{ basis.code }}</span>
+          <span class="graph__ast-titel">{{ basis.titel }}</span>
+        </button>
+      }
+
+      @for (knoten of layout().kompetenzen; track knoten.id) {
+        <button
+          type="button"
+          class="graph__knoten"
+          [class.graph__knoten--naechster]="knoten.istNaechster"
+          [class.graph__knoten--beteiligt]="istBeteiligt(knoten.id)"
+          [style.inset-inline-start.px]="knoten.punkt.x - 42"
+          [style.inset-block-start.px]="knoten.punkt.y - 33"
+          [attr.aria-label]="knoten.tooltip"
+          [attr.data-tip]="knoten.tooltip"
+          [attr.data-knoten]="knoten.id"
+          (click)="knotenGewaehlt.emit(knoten.id)"
+          (mouseenter)="aktiviere(knoten.id)"
+          (mouseleave)="deaktiviere(knoten.id)"
+          (focus)="aktiviere(knoten.id)"
+          (blur)="deaktiviere(knoten.id)"
+        >
+          <span
+            class="graph__ring"
+            [class]="'graph__ring graph__ring--' + knoten.ampel.toLowerCase()"
+            [style.--fortschritt]="knoten.fortschritt + '%'"
+            aria-hidden="true"
+          >
+            <span class="graph__code">{{ knoten.code }}</span>
+          </span>
+          <span class="graph__titel" lang="de">{{ knoten.titel }}</span>
+          @if (knoten.offeneAnfragen > 0) {
+            <span class="graph__anfragen" aria-hidden="true">{{ knoten.offeneAnfragen }}</span>
+          }
+        </button>
+      }
+
+      @for (meilenstein of layout().meilensteine; track meilenstein.code) {
+        <button
+          type="button"
+          class="graph__meilenstein"
+          [class.graph__meilenstein--erreicht]="meilenstein.erreicht"
+          [style.inset-inline-start.px]="meilenstein.punkt.x - 30"
+          [style.inset-block-start.px]="meilenstein.punkt.y - 26"
+          [attr.aria-label]="meilenstein.tooltip"
+          [attr.data-tip]="meilenstein.tooltip"
+          [attr.data-meilenstein]="meilenstein.code"
+          (click)="meilensteinGewaehlt.emit(meilenstein.code)"
+          (mouseenter)="aktiviere(meilenstein.code)"
+          (mouseleave)="deaktiviere(meilenstein.code)"
+          (focus)="aktiviere(meilenstein.code)"
+          (blur)="deaktiviere(meilenstein.code)"
+        >
+          <span class="graph__sechseck" aria-hidden="true">{{ meilenstein.kuerzel }}</span>
+          <span class="graph__meilenstein-text">
+            <span class="graph__meilenstein-name">{{ meilenstein.name }}</span>
+            <span class="graph__meilenstein-untertitel">{{ meilenstein.untertitel }}</span>
+          </span>
+        </button>
+      }
+    </div>
+  </div>
+
+  <p class="graph__wischhinweis">Den Baum seitlich wischen.</p>
+
+  <div class="graph__fuss">
+    <div class="graph__bereiche" role="group" aria-label="Bereichsschlüssel">
+      @for (basis of layout().astBasen; track basis.id) {
+        <span class="graph__bereich">
+          <strong>{{ basis.code }}</strong> {{ basis.titel }}
+        </span>
+      }
+    </div>
+    <ul class="graph__legende" aria-label="Legende">
+      <li>
+        <span class="legende-ring" aria-hidden="true"></span> Fortschrittsring (Farbe = Ampel)
+      </li>
+      @for (stufe of ampelStufen; track stufe.ampel) {
+        <li>
+          <span
+            class="legende-ampel"
+            [class]="'legende-ampel legende-ampel--' + stufe.ampel.toLowerCase()"
+            aria-hidden="true"
+            >{{ stufe.symbol }}</span
+          >
+          {{ stufe.text }}
+        </li>
+      }
+      <li><span class="legende-naechster" aria-hidden="true"></span> Als Nächstes</li>
+      <li><span class="legende-kante" aria-hidden="true"></span> erreicht</li>
+      <li><span class="legende-kante legende-kante--offen" aria-hidden="true"></span> offen</li>
+      <li><span class="legende-kante legende-kante--verweis" aria-hidden="true"></span> Verweis</li>
+    </ul>
+  </div>
+</div>

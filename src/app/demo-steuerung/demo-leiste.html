@@ -1,0 +1,77 @@
+<div class="demo-leiste" role="region" aria-label="Prototyp-Steuerung">
+  <p class="demo-leiste__titel">Prototyp-Steuerung · violett = nicht Teil der App</p>
+
+  <label class="demo-leiste__feld">
+    <span>Angemeldet als</span>
+    <select [value]="sitzung.benutzer()?.login ?? ''" (change)="wechsle($event)">
+      @for (konto of demo.konten(); track konto.id) {
+        <option
+          [value]="konto.login"
+          [selected]="konto.login === (sitzung.benutzer()?.login ?? '')"
+        >
+          {{ konto.name }} · {{ rollenText(konto.rolle) }}
+        </option>
+      }
+    </select>
+  </label>
+
+  <label class="demo-leiste__feld demo-leiste__feld--inline">
+    <input type="checkbox" [checked]="demo.idsSichtbar()" (change)="idsUmschalten($event)" />
+    <span>Anforderungs-IDs</span>
+  </label>
+
+  <button
+    type="button"
+    class="demo-leiste__knopf"
+    (click)="demo.reviewOffen.set(!demo.reviewOffen())"
+  >
+    Review
+  </button>
+
+  @if (loeschBestaetigung()) {
+    <span class="demo-leiste__feld">
+      <span>Demo-Daten zurücksetzen?</span>
+      <button
+        type="button"
+        class="demo-leiste__knopf"
+        data-fokus="demo-reset-ja"
+        (click)="zuruecksetzen()"
+      >
+        Ja
+      </button>
+      <button type="button" class="demo-leiste__knopf" (click)="resetAbbrechen()">Abbrechen</button>
+    </span>
+  } @else {
+    <button
+      type="button"
+      class="demo-leiste__knopf"
+      data-fokus="demo-reset"
+      (click)="resetAnfragen()"
+    >
+      Demo-Daten zurücksetzen
+    </button>
+  }
+
+  @if (meldung()) {
+    <p class="demo-leiste__meldung" role="status">{{ meldung() }}</p>
+  }
+</div>
+
+@if (demo.reviewOffen()) {
+  <aside class="demo-review" aria-label="Review der Anforderungen">
+    <h2>Review</h2>
+    <p>
+      Dieser Prototyp setzt die Must-Stories S-A01–S-A08, S-L01–S-L06 und S-Q01 sowie die Regeln
+      R-S1–R-S6, R-F1–R-F6, R-E1, R-T1–R-T4, R-M1–R-M3 und R-B1–R-B8 um. Offene fachliche Fragen
+      stehen in <code>docs/spec/open-questions.md</code>.
+    </p>
+    <ul>
+      <li>Daten bleiben lokal im Browser (IndexedDB).</li>
+      <li>Ereignisse sind nur anfügend; Rücknahmen erzeugen neue Einträge.</li>
+      <li>Keine Vergleiche zwischen Lernenden, keine Ranglisten.</li>
+    </ul>
+    <button type="button" class="demo-leiste__knopf" (click)="demo.reviewOffen.set(false)">
+      Schliessen
+    </button>
+  </aside>
+}

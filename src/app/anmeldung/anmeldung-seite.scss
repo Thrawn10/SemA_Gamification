@@ -1,0 +1,90 @@
+.anmeldung {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-5);
+  max-inline-size: 62rem;
+  margin-inline: auto;
+}
+
+.anmeldung__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-2);
+  padding: var(--abstand-5);
+  border: 1px solid var(--farbe-rand);
+  border-radius: var(--radius-gross);
+  background: var(--farbe-flaeche);
+  box-shadow: var(--schatten-karte);
+}
+
+.anmeldung__intro h1 {
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+}
+
+.anmeldung__marke {
+  color: var(--farbe-akzent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.anmeldung__gruppe {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-2);
+}
+
+.anmeldung__gruppe h2 {
+  font-size: 1.15rem;
+}
+
+.anmeldung__konten {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: var(--abstand-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.anmeldung__konto {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  inline-size: 100%;
+  block-size: 100%;
+  padding: var(--abstand-3) var(--abstand-4);
+  border: 1px solid var(--farbe-rand-stark);
+  border-radius: var(--radius-mittel);
+  background: var(--farbe-flaeche);
+  text-align: start;
+  cursor: pointer;
+}
+
+.anmeldung__konto:hover {
+  border-color: var(--farbe-akzent);
+  background: var(--farbe-hover);
+}
+
+.anmeldung__konto:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.anmeldung__name {
+  font-weight: 700;
+}
+
+.anmeldung__login {
+  color: var(--farbe-text-leise);
+  font-family: var(--schrift-mono);
+  font-size: 0.82rem;
+}
+
+.anmeldung__rolle {
+  margin-block-start: var(--abstand-1);
+  color: var(--farbe-akzent);
+  font-size: 0.8rem;
+  font-weight: 600;
+}

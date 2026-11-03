@@ -1,0 +1,58 @@
+<section class="badges">
+  <header class="badges__kopf">
+    <h2>
+      Badges
+      <st-anforderung id="S-A07" />
+    </h2>
+    @if (rolle() === 'LERNENDE') {
+      <button
+        type="button"
+        class="knopf knopf--leise knopf--klein"
+        (click)="umschalten(!badges().ausgeblendet)"
+      >
+        {{ badges().ausgeblendet ? 'Badges einblenden' : 'Badges ausblenden' }}
+      </button>
+    }
+  </header>
+
+  @if (badges().ausgeblendet) {
+    <p class="meldung" role="status">
+      Badges sind für deine Ansicht ausgeblendet. Die Einstellung wird gespeichert; deine
+      Praxisbildner/innen sehen die Badges weiterhin.
+    </p>
+  } @else {
+    <p class="untertitel">
+      Badges würdigen Fortschritt, ohne Lernende zu vergleichen. Ausblenden ändert nur deine
+      Ansicht.
+    </p>
+
+    @if (badges().erhalten.length > 0) {
+      <h3>Erhalten ({{ badges().erhalten.length }})</h3>
+      <div class="badge-raster">
+        @for (badge of badges().erhalten; track badge.definition.id) {
+          <st-badge-karte [ansicht]="badge" />
+        }
+      </div>
+    }
+
+    @if (badges().inaktiv.length > 0) {
+      <h3>Derzeit nicht erfüllt ({{ badges().inaktiv.length }})</h3>
+      <div class="badge-raster">
+        @for (badge of badges().inaktiv; track badge.definition.id) {
+          <st-badge-karte [ansicht]="badge" />
+        }
+      </div>
+    }
+
+    <h3>Noch offen ({{ badges().offen.length }})</h3>
+    @if (badges().offen.length === 0) {
+      <p class="untertitel">Alle Badges sind erreicht.</p>
+    } @else {
+      <div class="badge-raster">
+        @for (badge of badges().offen; track badge.definition.id) {
+          <st-badge-karte [ansicht]="badge" />
+        }
+      </div>
+    }
+  }
+</section>

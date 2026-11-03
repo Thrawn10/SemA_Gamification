@@ -1,0 +1,51 @@
+.verlauf {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.verlauf__eintrag {
+  padding: var(--abstand-2) var(--abstand-3);
+  border-inline-start: 3px solid var(--farbe-rand);
+  background: var(--farbe-flaeche-leise);
+  border-radius: 0 var(--radius-klein) var(--radius-klein) 0;
+}
+
+.verlauf__eintrag--inaktiv .verlauf__aktion,
+.verlauf__eintrag--inaktiv .verlauf__text {
+  /* Keep full contrast: the audit trail must stay readable, the strikethrough marks the state. */
+  text-decoration: line-through;
+}
+
+.verlauf__aktion {
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+.verlauf__status {
+  color: var(--farbe-text-leise);
+  font-weight: 500;
+}
+
+.verlauf__meta {
+  color: var(--farbe-text-leise);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.verlauf__text {
+  margin-block-start: var(--abstand-1);
+  font-size: 0.86rem;
+}
+
+.verlauf__hinweis {
+  margin-block-start: var(--abstand-1);
+  color: var(--farbe-gefahr);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}

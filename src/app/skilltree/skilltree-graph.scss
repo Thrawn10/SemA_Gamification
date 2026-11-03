@@ -1,0 +1,373 @@
+.graph {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-3);
+}
+
+.graph__hinweis {
+  padding: var(--abstand-3) var(--abstand-4);
+  border-radius: var(--radius-mittel);
+  background: var(--farbe-akzent-leise);
+  color: var(--farbe-text);
+  font-weight: 600;
+}
+
+.graph__karte {
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  border: 1px solid var(--farbe-rand);
+  border-radius: var(--radius-gross);
+  background: var(--farbe-flaeche);
+  box-shadow: var(--schatten-karte);
+  scroll-behavior: smooth;
+}
+
+.graph__buehne {
+  position: relative;
+  margin-inline: auto;
+  padding-block: var(--abstand-4);
+}
+
+.graph__kanten {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.graph__kante {
+  fill: none;
+  stroke-width: 2;
+}
+
+.graph__kante--erreicht {
+  stroke: var(--ampel-gruen);
+}
+
+.graph__kante--offen {
+  stroke: var(--farbe-rand-stark);
+  stroke-dasharray: 6 5;
+}
+
+.graph__kante--verweis {
+  stroke-dasharray: 2 5;
+  stroke-width: 1.6;
+}
+
+.graph__kante--beteiligt {
+  stroke-width: 3;
+}
+
+.graph__pfeil--erreicht {
+  fill: var(--ampel-gruen);
+}
+
+.graph__pfeil--offen {
+  fill: var(--farbe-rand-stark);
+}
+
+.graph__knoten,
+.graph__ast,
+.graph__meilenstein {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: var(--abstand-2);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--farbe-text);
+  text-align: start;
+  cursor: pointer;
+}
+
+.graph__knoten {
+  inline-size: 172px;
+  block-size: 66px;
+}
+
+.graph__ring {
+  --ringfarbe: var(--ampel-rot);
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 44px;
+  block-size: 44px;
+  border-radius: var(--radius-rund);
+  background: conic-gradient(
+    var(--ringfarbe) var(--fortschritt, 0%),
+    var(--farbe-flaeche-leise) var(--fortschritt, 0%)
+  );
+}
+
+.graph__ring::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: inherit;
+  background: var(--farbe-flaeche);
+}
+
+.graph__ring--rot {
+  --ringfarbe: var(--ampel-rot);
+}
+
+.graph__ring--orange {
+  --ringfarbe: var(--ampel-orange);
+}
+
+.graph__ring--gruen {
+  --ringfarbe: var(--ampel-gruen);
+}
+
+.graph__code {
+  position: relative;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.graph__titel {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  font-size: 0.76rem;
+  line-height: 1.2;
+  hyphens: auto;
+}
+
+.graph__anfragen {
+  position: absolute;
+  inset-block-start: 2px;
+  inset-inline-start: 34px;
+  display: grid;
+  place-items: center;
+  inline-size: 1.15rem;
+  block-size: 1.15rem;
+  border-radius: var(--radius-rund);
+  background: var(--farbe-akzent);
+  color: var(--farbe-akzent-text);
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.graph__knoten--naechster .graph__ring {
+  outline: 2px dashed var(--farbe-text-leise);
+  outline-offset: 3px;
+}
+
+.graph__knoten--beteiligt .graph__ring,
+.graph__ast--beteiligt .graph__ast-code {
+  box-shadow: 0 0 0 4px var(--farbe-akzent-leise);
+}
+
+.graph__ast {
+  inline-size: 172px;
+  block-size: 48px;
+  align-items: flex-start;
+}
+
+.graph__ast-code {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 30px;
+  block-size: 30px;
+  border: 1px solid var(--farbe-rand-stark);
+  border-radius: var(--radius-rund);
+  background: var(--farbe-flaeche-leise);
+  font-weight: 700;
+}
+
+.graph__ast-titel {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.2;
+  hyphens: auto;
+}
+
+.graph__meilenstein {
+  align-items: center;
+}
+
+.graph__sechseck {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 60px;
+  block-size: 52px;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  background: var(--farbe-flaeche-leise);
+  color: var(--farbe-text);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.graph__meilenstein--erreicht .graph__sechseck {
+  background: var(--farbe-akzent);
+  color: var(--farbe-akzent-text);
+}
+
+.graph__meilenstein-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  inline-size: 120px;
+  text-align: start;
+}
+
+.graph__meilenstein-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.graph__meilenstein-untertitel {
+  color: var(--farbe-text-leise);
+  font-size: 0.68rem;
+  line-height: 1.15;
+}
+
+.graph__knoten::after,
+.graph__ast::after,
+.graph__meilenstein::after {
+  content: attr(data-tip);
+  position: absolute;
+  z-index: 30;
+  inset-block-end: calc(100% + 6px);
+  inset-inline-start: 0;
+  inline-size: max-content;
+  max-inline-size: 18rem;
+  padding: var(--abstand-2) var(--abstand-3);
+  border: 1px solid var(--farbe-rand);
+  border-radius: var(--radius-klein);
+  background: var(--farbe-flaeche);
+  color: var(--farbe-text);
+  box-shadow: var(--schatten-karte);
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.35;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.graph__meilenstein::after {
+  inset-block-end: auto;
+  inset-block-start: calc(100% + 6px);
+}
+
+.graph__knoten:hover::after,
+.graph__knoten:focus-visible::after,
+.graph__ast:hover::after,
+.graph__ast:focus-visible::after,
+.graph__meilenstein:hover::after,
+.graph__meilenstein:focus-visible::after {
+  opacity: 1;
+}
+
+.graph__wischhinweis {
+  display: none;
+  color: var(--farbe-text-leise);
+  font-size: 0.85rem;
+}
+
+.graph__fuss {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--abstand-3);
+}
+
+.graph__bereiche {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--abstand-1) var(--abstand-3);
+  font-size: 0.8rem;
+}
+
+.graph__bereich strong {
+  color: var(--farbe-akzent);
+}
+
+.graph__legende {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--abstand-1) var(--abstand-3);
+  padding: 0;
+  list-style: none;
+  font-size: 0.78rem;
+  color: var(--farbe-text-leise);
+}
+
+.graph__legende li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--abstand-1);
+}
+
+.legende-ring,
+.legende-naechster {
+  inline-size: 0.9rem;
+  block-size: 0.9rem;
+  border-radius: var(--radius-rund);
+  border: 3px solid var(--ampel-gruen);
+  background: linear-gradient(90deg, var(--ampel-gruen) 50%, transparent 50%);
+}
+
+.legende-naechster {
+  border: 2px dashed var(--farbe-text-leise);
+  background: transparent;
+}
+
+.legende-ampel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 0.9rem;
+  block-size: 0.9rem;
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+.legende-ampel--rot {
+  color: var(--ampel-rot);
+}
+
+.legende-ampel--orange {
+  color: var(--ampel-orange);
+}
+
+.legende-ampel--gruen {
+  color: var(--ampel-gruen);
+}
+
+.legende-kante {
+  inline-size: 1.3rem;
+  border-block-start: 2px solid var(--ampel-gruen);
+}
+
+.legende-kante--offen {
+  border-block-start: 2px dashed var(--farbe-rand-stark);
+}
+
+.legende-kante--verweis {
+  border-block-start: 2px dotted var(--farbe-rand-stark);
+}
+
+@media (max-width: 760px) {
+  .graph__karte {
+    margin-inline: calc(var(--abstand-3) * -1);
+    border-radius: 0;
+    border-inline: 0;
+  }
+
+  .graph__wischhinweis {
+    display: block;
+  }
+}

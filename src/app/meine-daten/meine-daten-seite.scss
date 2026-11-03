@@ -1,0 +1,57 @@
+.datenliste {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: var(--abstand-3) var(--abstand-5);
+  margin: var(--abstand-3) 0 0;
+}
+
+.datenliste dt {
+  color: var(--farbe-text-leise);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.datenliste dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.tabelle__rahmen {
+  overflow-x: auto;
+  border: 1px solid var(--farbe-rand);
+  border-radius: var(--radius-mittel);
+}
+
+.tabelle {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.tabelle th,
+.tabelle td {
+  padding: var(--abstand-2) var(--abstand-3);
+  border-block-end: 1px solid var(--farbe-rand);
+  text-align: start;
+  vertical-align: top;
+}
+
+.tabelle thead th {
+  background: var(--farbe-flaeche-leise);
+  color: var(--farbe-text-leise);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.tabelle tbody th {
+  font-weight: 600;
+}
+
+.tabelle tbody td {
+  color: var(--farbe-text-leise);
+  max-inline-size: 46ch;
+}

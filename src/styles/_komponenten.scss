@@ -1,0 +1,444 @@
+.seite {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-5);
+}
+
+.seite__kopf {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--abstand-4);
+}
+
+.seite__titel {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+}
+
+.seite__untertitel {
+  color: var(--farbe-text-leise);
+  max-inline-size: 65ch;
+}
+
+.seite__zurueck {
+  align-self: flex-start;
+  color: var(--farbe-text-leise);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.seite__zurueck:hover {
+  color: var(--farbe-text);
+}
+
+.karte {
+  padding: var(--abstand-5);
+  border: 1px solid var(--farbe-rand);
+  border-radius: var(--radius-gross);
+  background: var(--farbe-flaeche);
+  box-shadow: var(--schatten-karte);
+}
+
+.karte--leise {
+  box-shadow: none;
+  background: var(--farbe-flaeche-leise);
+}
+
+.karte__kopf {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--abstand-3);
+  margin-block-end: var(--abstand-4);
+}
+
+.karte__titel {
+  font-size: 1.1rem;
+}
+
+.untertitel {
+  color: var(--farbe-text-leise);
+}
+
+.knopf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--abstand-2);
+  min-block-size: 2.75rem;
+  padding: var(--abstand-2) var(--abstand-4);
+  border: 1px solid var(--farbe-rand-stark);
+  border-radius: var(--radius-rund);
+  background: var(--farbe-flaeche);
+  color: var(--farbe-text);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.knopf:hover {
+  background: var(--farbe-hover);
+}
+
+.knopf:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.knopf--primaer {
+  border-color: var(--farbe-akzent);
+  background: var(--farbe-akzent);
+  color: var(--farbe-akzent-text);
+}
+
+.knopf--primaer:hover {
+  background: color-mix(in srgb, var(--farbe-akzent) 86%, black);
+}
+
+.knopf--gefahr {
+  border-color: var(--farbe-gefahr);
+  color: var(--farbe-gefahr);
+}
+
+.knopf--gefahr:hover {
+  background: var(--farbe-gefahr-flaeche);
+}
+
+.knopf--leise {
+  border-color: transparent;
+  background: transparent;
+  color: var(--farbe-text-leise);
+}
+
+.knopf--klein {
+  min-block-size: 2.25rem;
+  padding: var(--abstand-1) var(--abstand-3);
+  font-size: 0.9rem;
+}
+
+.feld {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-1);
+}
+
+.feld__label {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.feld__hinweis {
+  color: var(--farbe-text-leise);
+  font-size: 0.82rem;
+}
+
+.feld__fehler {
+  color: var(--farbe-gefahr);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.eingabe {
+  inline-size: 100%;
+  min-block-size: 2.6rem;
+  padding: var(--abstand-2) var(--abstand-3);
+  border: 1px solid var(--farbe-rand-stark);
+  border-radius: var(--radius-klein);
+  background: var(--farbe-flaeche);
+  color: var(--farbe-text);
+}
+
+textarea.eingabe {
+  min-block-size: 5.5rem;
+  resize: vertical;
+}
+
+.meldung {
+  padding: var(--abstand-3) var(--abstand-4);
+  border: 1px solid var(--farbe-rand);
+  border-inline-start-width: 4px;
+  border-radius: var(--radius-klein);
+  background: var(--farbe-flaeche-leise);
+}
+
+.meldung--fehler {
+  border-color: var(--farbe-gefahr);
+  background: var(--farbe-gefahr-flaeche);
+}
+
+.meldung--erfolg {
+  border-color: var(--ampel-gruen);
+  background: var(--ampel-gruen-flaeche);
+}
+
+.reiter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--abstand-1);
+  border-block-end: 1px solid var(--farbe-rand);
+}
+
+.reiter__knopf {
+  padding: var(--abstand-2) var(--abstand-4);
+  border: 0;
+  border-block-end: 3px solid transparent;
+  background: transparent;
+  color: var(--farbe-text-leise);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.reiter__knopf:hover {
+  color: var(--farbe-text);
+}
+
+.reiter__knopf--aktiv {
+  border-block-end-color: var(--farbe-akzent);
+  color: var(--farbe-text);
+}
+
+.ampel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--abstand-1);
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ampel--rot {
+  color: var(--ampel-rot);
+}
+
+.ampel--orange {
+  color: var(--ampel-orange);
+}
+
+.ampel--gruen {
+  color: var(--ampel-gruen);
+}
+
+.ampel--kompakt {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  border-radius: var(--radius-rund);
+  font-size: 1rem;
+}
+
+.ampel--kompakt.ampel--rot {
+  background: var(--ampel-rot-flaeche);
+}
+
+.ampel--kompakt.ampel--orange {
+  background: var(--ampel-orange-flaeche);
+}
+
+.ampel--kompakt.ampel--gruen {
+  background: var(--ampel-gruen-flaeche);
+}
+
+.fortschritt {
+  display: flex;
+  align-items: center;
+  gap: var(--abstand-2);
+}
+
+.fortschritt__balken {
+  flex: 1;
+  block-size: 0.6rem;
+  min-inline-size: 3rem;
+  overflow: hidden;
+  border-radius: var(--radius-rund);
+  background: var(--farbe-flaeche-leise);
+}
+
+.fortschritt__fuellung {
+  display: block;
+  block-size: 100%;
+  border-radius: inherit;
+  background: var(--farbe-akzent);
+}
+
+.fortschritt__zahl {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.stufen {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.8rem;
+}
+
+.stufen__feld {
+  display: grid;
+  place-items: center;
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  border: 1px solid var(--farbe-rand-stark);
+  border-radius: 3px;
+  color: var(--farbe-text-leise);
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.stufen__feld--aktiv {
+  border-color: var(--farbe-akzent);
+  background: var(--farbe-akzent);
+  color: var(--farbe-akzent-text);
+}
+
+.stufen__text {
+  margin-inline-start: var(--abstand-1);
+  color: var(--farbe-text-leise);
+}
+
+.badge-raster {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: var(--abstand-3);
+}
+
+.badge-karte {
+  display: flex;
+  gap: var(--abstand-3);
+  padding: var(--abstand-4);
+  border: 1px solid var(--farbe-rand);
+  border-radius: var(--radius-mittel);
+  background: var(--farbe-flaeche);
+}
+
+.badge-karte--offen {
+  border-style: dashed;
+  background: var(--farbe-flaeche-leise);
+}
+
+.badge-karte--inaktiv {
+  opacity: 0.75;
+}
+
+.badge-karte__medaille {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border-radius: var(--radius-rund);
+  background: var(--farbe-akzent-leise);
+  color: var(--farbe-akzent);
+  font-size: 1.2rem;
+}
+
+.badge-karte__medaille--eckig {
+  border-radius: var(--radius-klein);
+}
+
+.badge-karte__inhalt {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-1);
+}
+
+.badge-karte__inhalt h4 {
+  font-size: 1rem;
+}
+
+.badge-karte__inhalt p {
+  font-size: 0.88rem;
+  color: var(--farbe-text-leise);
+}
+
+.badge-karte__meta {
+  font-variant-numeric: tabular-nums;
+}
+
+.anforderung-id {
+  display: inline-block;
+  margin-inline-start: var(--abstand-2);
+  padding: 0 var(--abstand-1);
+  border: 1px solid var(--ctl-rand);
+  border-radius: var(--radius-klein);
+  background: var(--ctl-flaeche);
+  color: var(--ctl-text);
+  font-family: var(--schrift-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.demo-leiste {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--abstand-3);
+  padding: var(--abstand-2) var(--abstand-4);
+  border-block-end: 1px solid var(--ctl-rand);
+  background: var(--ctl-flaeche);
+  color: var(--ctl-text);
+  font-size: 0.85rem;
+}
+
+.demo-leiste__titel {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.demo-leiste__feld {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--abstand-2);
+}
+
+.demo-leiste__feld select,
+.demo-leiste__knopf {
+  min-block-size: 2rem;
+  padding: var(--abstand-1) var(--abstand-2);
+  border: 1px solid var(--ctl-rand);
+  border-radius: var(--radius-klein);
+  background: var(--farbe-flaeche);
+  color: var(--ctl-text);
+  font: inherit;
+}
+
+.demo-leiste__knopf {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.demo-leiste__meldung {
+  flex-basis: 100%;
+  font-weight: 600;
+}
+
+.demo-review {
+  position: fixed;
+  inset-inline-end: var(--abstand-4);
+  inset-block-start: 6rem;
+  z-index: 40;
+  inline-size: min(24rem, calc(100vw - 2rem));
+  max-block-size: calc(100dvh - 8rem);
+  overflow: auto;
+  padding: var(--abstand-4);
+  border: 1px solid var(--ctl-rand);
+  border-radius: var(--radius-mittel);
+  background: var(--ctl-flaeche);
+  color: var(--ctl-text);
+  box-shadow: var(--schatten-karte);
+}
+
+.demo-review h2 {
+  font-size: 1.1rem;
+  margin-block-end: var(--abstand-2);
+}
+
+.demo-review p,
+.demo-review ul {
+  margin-block-end: var(--abstand-3);
+  font-size: 0.9rem;
+}

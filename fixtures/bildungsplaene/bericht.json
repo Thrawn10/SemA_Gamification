@@ -1,0 +1,352 @@
+{
+  "vorlagen": [
+    {
+      "code": "INF-APP",
+      "quelle": "Vorlage_Bildungsplan APP 2021 (1).xlsx",
+      "ausgabe": "vorlage-inf-app-2021.json",
+      "bereiche": 5,
+      "kompetenzen": 25,
+      "leistungsziele": 145,
+      "eintraege": 146,
+      "warnungen": 35,
+      "bfsOhneModul": 25,
+      "bfsOhneModulKompetenzen": [
+        "a1",
+        "a2",
+        "a3",
+        "a4",
+        "a5",
+        "a6",
+        "a7",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "g1",
+        "g2",
+        "g3",
+        "g4",
+        "g5",
+        "g6",
+        "h1",
+        "h2",
+        "h3",
+        "h4"
+      ],
+      "annahmen": []
+    },
+    {
+      "code": "INF-PLA",
+      "quelle": "Vorlage_Bildungsplan PLA 2021 (1).xlsx",
+      "ausgabe": "vorlage-inf-pla-2021.json",
+      "bereiche": 6,
+      "kompetenzen": 33,
+      "leistungsziele": 177,
+      "eintraege": 178,
+      "warnungen": 2,
+      "bfsOhneModul": 33,
+      "bfsOhneModulKompetenzen": [
+        "a1",
+        "a2",
+        "a3",
+        "a4",
+        "a5",
+        "a6",
+        "a7",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "e1",
+        "e2",
+        "e3",
+        "e4",
+        "e5",
+        "e6",
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5",
+        "f6",
+        "f7",
+        "f8"
+      ],
+      "annahmen": []
+    },
+    {
+      "code": "EDB",
+      "quelle": "Vorlage_Bildungsplan EdB 2024.xlsx",
+      "ausgabe": "vorlage-edb-2024.json",
+      "bereiche": 5,
+      "kompetenzen": 28,
+      "leistungsziele": 136,
+      "eintraege": 136,
+      "warnungen": 2,
+      "bfsOhneModul": 28,
+      "bfsOhneModulKompetenzen": [
+        "a1",
+        "a2",
+        "a3",
+        "a4",
+        "a5",
+        "a6",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6",
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "e1",
+        "e2",
+        "e3",
+        "e4"
+      ],
+      "annahmen": [
+        "lehrdauerJahre steht nicht in der Quelle; 4 Jahre angenommen (EFZ-Standard).",
+        "bildungsplanJahr aus dem Dateinamen übernommen."
+      ]
+    },
+    {
+      "code": "MED",
+      "quelle": "MED_BiPla_LZK_2019 (1) (1).pdf",
+      "ausgabe": "vorlage-med-2019.json",
+      "bereiche": 6,
+      "kompetenzen": 24,
+      "leistungsziele": 158,
+      "eintraege": 158,
+      "warnungen": 0,
+      "bfsOhneModul": 0,
+      "bfsOhneModulKompetenzen": [],
+      "annahmen": [
+        "PDF-Parsing ist nicht automatisiert; die Transkription aus Anhang C wird verwendet."
+      ]
+    }
+  ],
+  "meldungen": [
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt A5, Zeile 10",
+      "meldung": "Doppelter Eintrag a5.2 zusammengeführt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt A6, Zeile 10",
+      "meldung": "Code 6.3 ohne Buchstabenpräfix; als a6.3 übernommen."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt G1, Zeile 8",
+      "meldung": "Taxonomie Spalte B (K4) weicht von (K3) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt G1, Zeile 9",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K5) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt G1, Zeile 11",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K4) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt G1, Zeile 13",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K4) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt G1, Zeile 15",
+      "meldung": "Taxonomie Spalte B (K4) weicht von (K3) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt G2, Zeile 8",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K5) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt G2, Zeile 11",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K4) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt G2, Zeile 13",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K5) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt G3, Zeile 8",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K4) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt G3, Zeile 9",
+      "meldung": "Taxonomie Spalte B (K4) weicht von (K3) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt G3, Zeile 10",
+      "meldung": "Taxonomie Spalte B (K5) weicht von (K3) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt G4, Zeile 8",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K5) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt G4, Zeile 11",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K5) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt G4, Zeile 12",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K4) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt G5, Zeile 9",
+      "meldung": "Taxonomie Spalte B (K4) weicht von (K3) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt G5, Zeile 11",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K4) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt G5, Zeile 12",
+      "meldung": "Taxonomie Spalte B (K4) weicht von (K3) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt G5, Zeile 14",
+      "meldung": "Taxonomie Spalte B (K4) weicht von (K3) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt G6, Zeile 10",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K4) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt G6, Zeile 15",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K4) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt H1, Zeile 8",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K4) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt H1, Zeile 11",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K4) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt H1, Zeile 13",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K4) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt H2, Zeile 9",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K4) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt H2, Zeile 10",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K4) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt H2, Zeile 11",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K4) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt H3, Zeile 9",
+      "meldung": "Taxonomie Spalte B (K4) weicht von (K3) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt H3, Zeile 10",
+      "meldung": "Taxonomie Spalte B (K4) weicht von (K3) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt H3, Zeile 13",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K4) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt H3, Zeile 14",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K4) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt H4, Zeile 9",
+      "meldung": "Taxonomie Spalte B (K4) weicht von (K3) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt H4, Zeile 11",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K4) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-APP",
+      "ort": "Blatt H4, Zeile 12",
+      "meldung": "Taxonomie Spalte B (K3) weicht von (K5) im Text ab; Spalte B gilt."
+    },
+    {
+      "vorlage": "INF-PLA",
+      "ort": "Blatt A5, Zeile 10",
+      "meldung": "Doppelter Eintrag a5.2 zusammengeführt."
+    },
+    {
+      "vorlage": "INF-PLA",
+      "ort": "Blatt A6, Zeile 10",
+      "meldung": "Code 6.3 ohne Buchstabenpräfix; als a6.3 übernommen."
+    },
+    {
+      "vorlage": "EDB",
+      "ort": "Blatt A5",
+      "meldung": "Titel in A2 «Varianten für ICT-Lösungen visualisieren und präsentieren» weicht von «Start» «Fortschritt von Projekten im Bereich digitales Business überprüfen und festhalten» ab; «Start» wird verwendet."
+    },
+    {
+      "vorlage": "EDB",
+      "ort": "Blatt A6, Zeile 10",
+      "meldung": "Code 6.3 ohne Buchstabenpräfix; als a6.3 übernommen."
+    },
+    {
+      "vorlage": "MED",
+      "ort": "MED_BiPla_LZK_2019 (1) (1).pdf",
+      "meldung": "PDF-Quelle: JSON ist die bereinigte Transkription aus SPEC Anhang C (158 Leistungsziele) und wurde gegen den PDF-Text geprüft."
+    }
+  ]
+}

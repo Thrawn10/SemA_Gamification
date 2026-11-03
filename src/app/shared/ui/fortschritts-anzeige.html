@@ -1,0 +1,16 @@
+<div class="fortschritt">
+  <div
+    class="fortschritt__balken"
+    role="progressbar"
+    [attr.aria-label]="label()"
+    [attr.aria-valuenow]="wert()"
+    [attr.aria-valuetext]="wert() + ' Prozent'"
+    aria-valuemin="0"
+    aria-valuemax="100"
+  >
+    <span class="fortschritt__fuellung" [style.inline-size.%]="wert()"></span>
+  </div>
+  @if (zeigeZahl()) {
+    <span class="fortschritt__zahl">{{ wert() }} %</span>
+  }
+</div>
