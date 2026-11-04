@@ -38,19 +38,27 @@
 }
 
 .seitenleiste__schliessen {
+  display: grid;
+  place-items: center;
   flex: none;
-  inline-size: 2.5rem;
-  block-size: 2.5rem;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
   border: 1px solid var(--farbe-rand);
   border-radius: var(--radius-rund);
   background: var(--farbe-flaeche);
   color: var(--farbe-text);
   font-size: 1.3rem;
+  line-height: 1;
   cursor: pointer;
 }
 
 .seitenleiste__schliessen:hover {
   background: var(--farbe-hover);
+}
+
+.seitenleiste__schliessen:focus-visible {
+  outline: 2px solid var(--farbe-fokus);
+  outline-offset: 2px;
 }
 
 .seitenleiste__inhalt {
@@ -64,16 +72,28 @@
 .seitenleiste__kennzahlen {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--abstand-4);
+  align-items: stretch;
+  gap: var(--abstand-3) var(--abstand-4);
   padding: var(--abstand-3);
+  border: 1px solid var(--farbe-rand);
   border-radius: var(--radius-mittel);
   background: var(--farbe-flaeche-leise);
 }
 
+// Content-sized flex items: the long traffic-light label must never be squeezed
+// into a fixed grid column and overlap the competence value.
 .seitenleiste__kennzahlen > div {
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
   gap: 2px;
+  padding-inline-start: var(--abstand-3);
+  border-inline-start: 2px solid var(--farbe-rand);
+}
+
+.seitenleiste__kennzahlen > div:first-child {
+  padding-inline-start: 0;
+  border-inline-start: 0;
 }
 
 .seitenleiste__zahl {

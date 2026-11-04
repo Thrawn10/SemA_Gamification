@@ -94,6 +94,14 @@ interface BaumLayout {
   punkte: Map<string, Punkt>;
 }
 
+/** Viewport coordinates of the floating node tooltip (D-029). */
+interface Tipp {
+  text: string;
+  links: number;
+  oben: number;
+  unten: boolean;
+}
+
 /**
  * HTML buttons above an SVG edge layer (SPEC 8.2). The column width follows the available card
  * width between 150 and 284 px (D-024); all node geometry scales with it, so large screens show a
@@ -122,6 +130,9 @@ export class SkilltreeGraph {
   private zug: { x: number; scrollLeft: number; griff: boolean; pointerId: number } | null = null;
   private klickUnterdruecken = false;
   private zentriert = false;
+
+  /** Tooltip text plus viewport position; `null` while no node is hovered or focused. */
+  protected readonly tipp = signal<Tipp | null>(null);
 
   /** S-A02: visible legend of the three traffic-light levels with symbol and text. */
   protected readonly ampelStufen = (['ROT', 'ORANGE', 'GRUEN'] as const).map((ampel) => ({
@@ -311,6 +322,36 @@ export class SkilltreeGraph {
     }
   }
 
+  /**
+   * D-029: the tooltip lives outside the scroll container and is positioned from the node's
+   * viewport rectangle, so `overflow-y: hidden` can no longer clip it or widen `scrollWidth`.
+   * The text is repeated by the button's `aria-label`, so the bubble itself stays decorative.
+   */
+  protected tippZeigen(text: string, event: Event): void {
+    const ziel = event.currentTarget;
+    if (!(ziel instanceof HTMLElement)) {
+      return;
+    }
+    const rechteck = ziel.getBoundingClientRect();
+    const halbeBreite = Math.max(72, Math.min(176, (window.innerWidth - 24) / 2));
+    const unten = rechteck.top < 140;
+    this.tipp.set({
+      text,
+      links: Math.min(
+        Math.max(rechteck.left + rechteck.width / 2, halbeBreite + 8),
+        Math.max(halbeBreite + 8, window.innerWidth - halbeBreite - 8),
+      ),
+      oben: unten ? rechteck.bottom : rechteck.top,
+      unten,
+    });
+  }
+
+  protected tippVerbergen(): void {
+    if (this.tipp() !== null) {
+      this.tipp.set(null);
+    }
+  }
+
   private pfad(von: Punkt, nach: Punkt, kante: KantenAnsicht, layout: BaumLayout): string {
     const { radius, skala, lanes, spaltenbreite: spalte } = layout;
     const ecken = ECKEN_RADIUS * skala;
@@ -360,6 +401,7 @@ export class SkilltreeGraph {
     if (!element) {
       return;
     }
+    this.tippVerbergen();
     this.zug = {
       x: event.clientX,
       scrollLeft: element.scrollLeft,
@@ -467,8 +509,8 @@ export class SkilltreeGraph {
     if (!element || element.clientWidth === 0) {
       return;
     }
-    // Centre the stage itself, not `scrollWidth`: the invisible tooltips extend the scrollable
-    // area, so `scrollWidth` would start narrow screens at the right edge of the tree (D-026).
+    // Centre the stage itself, not `scrollWidth`: the stage is exactly the layout width, so the
+    // Bbc root starts in the middle of the card on narrow screens (D-024).
     element.scrollLeft = Math.max(0, (this.layout().breite - element.clientWidth) / 2);
     this.zentriert = true;
   }

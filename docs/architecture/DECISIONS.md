@@ -437,3 +437,43 @@ reading that the human still has to confirm; it is also mirrored in
   `astBelohnungen`/`belohnungFuerAst` for the sidebar. Q-020's reward-board part is resolved
   (removed); the 284 px column cap is unaffected.
 - Status: BESTÄTIGT
+
+## D-029 Skill tree visual language: SVG ring, overlay tooltip and a curved crown
+
+- Bezug: SPEC 8.2, S-A02, S-A03, S-A04, R-E1, R-F6, R-T2, human request 2026-11-04, extends D-024,
+  D-026 and D-027
+- Entscheid: the tree's presentation is rebuilt around four parts. (1) _Ring_: every competence ring
+  is an SVG (`viewBox 0 0 44 44`) with a track circle (`r=19`, `--farbe-ring-spur`) and a value
+  circle that uses `pathLength="100"`, `stroke-dasharray: 100` and
+  `stroke-dashoffset: 100 − fortschritt`, rotated −90° and drawn with round caps; the disc behind it
+  is a plain `background`, filled `--ampel-gruen` for `ABGESCHLOSSEN` and `--farbe-flaeche-leise` for
+  `SPAETER`. (2) _Tooltip_: `.graph__tipp` is rendered once, outside the scrolling stage, with
+  `position: fixed`, sized from the node's `getBoundingClientRect()` and flipped below the node when
+  the node starts under 140 px; it is `aria-hidden` because the button's `aria-label` carries the
+  same text, and it hides while panning. (3) _Crown_: `pfadAstIpa` chains two `Q` segments with
+  their control points on the IPA lane and their join at the horizontal midpoint, instead of routing
+  the five milestone edges through `rundeKanten` on one shared orthogonal lane. (4) _Footer_: the
+  symbol legend is one bordered panel on one line without group captions, with the area key row
+  above it; the request badge moves to the start edge of the ring with `tabular-nums` and a 2 px
+  `--farbe-flaeche` halo. Hover and focus draw a 4 px `--farbe-akzent-leise` halo on the glyph and a
+  2 px `--farbe-fokus` outline with a 3 px offset, so the focus ring follows the circle instead of
+  the node's rectangle. The sidebar KPI strip uses content-sized flex items that wrap, so the long
+  traffic-light label can no longer overlap the competence value.
+  `anyComponentStyle.maximumWarning` rises from 8 kB to 12 kB and `maximumError` from 9 kB to 14 kB.
+- Grund: a rendered review of the page as learner «Nora Frei» (the previous tooling produced the
+  stylesheet without ever seeing it) showed five defects that made the tree look unfinished rather
+  than deliberate: the ring had no visible track on a light surface, so a node at 0 % read like a
+  completed one (it also undercut R-F6's requirement that a red node stays recognisable); the
+  tooltips were clipped at the top row and widened the card's `scrollWidth` (already noted in
+  D-026); the five milestone edges shared one lane and formed a large dashed rectangle over the
+  whole crown; the request count sat against the first glyph of the title and read as an ordered
+  list number; and the legend was a loose row of captions plus symbols instead of the one-line
+  legend SPEC 8.2 asks for.
+- Hinweis: presentation only. No stage, progress, traffic light, recommendation, badge or
+  authorisation rule changes; every node stays clickable and requestable (R-E1) and `VERWEIS` edges
+  stay hidden until a node is involved (R-T2). The `pfadAstIpa` anchors still include the lane point,
+  so the existing `baum-geometrie.spec.ts` contract holds. The spec fixes the legend's order, not
+  that it must stay on one line at every width: below about 700 px the panel wraps to two rows,
+  which is accepted. The compiled graph sheet is the largest component style in the app and drove
+  the budget raise; splitting it is in `docs/backlog.md`, and the budget stays a cap, not a target.
+- Status: BESTÄTIGT

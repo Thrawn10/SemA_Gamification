@@ -5,11 +5,13 @@
 }
 
 .graph__hinweis {
-  padding: var(--abstand-3) var(--abstand-4);
-  border-radius: var(--radius-mittel);
+  padding: var(--abstand-2) var(--abstand-3);
+  border-inline-start: 3px solid var(--farbe-akzent);
+  border-radius: var(--radius-klein);
   background: var(--farbe-akzent-leise);
   color: var(--farbe-text);
-  font-weight: 600;
+  font-size: 0.86rem;
+  font-weight: 500;
 }
 
 .graph__karte {
@@ -57,25 +59,30 @@
 
 .graph__kante {
   fill: none;
-  stroke-width: 2;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .graph__kante--erreicht {
   stroke: var(--ampel-gruen);
 }
 
+/* D-029: open edges recede instead of competing with the achieved path. */
 .graph__kante--offen {
-  stroke: var(--farbe-rand-stark);
-  stroke-dasharray: 6 5;
+  stroke: var(--farbe-kante-offen);
+  stroke-dasharray: 5 6;
+  opacity: 0.7;
 }
 
 .graph__kante--verweis {
-  stroke-dasharray: 2 5;
-  stroke-width: 1.6;
+  stroke-dasharray: 1.5 4.5;
+  stroke-width: 1.5;
 }
 
 .graph__kante--beteiligt {
-  stroke-width: 3;
+  stroke-width: 2.75;
+  opacity: 1;
 }
 
 .graph__pfeil--erreicht {
@@ -83,7 +90,7 @@
 }
 
 .graph__pfeil--offen {
-  fill: var(--farbe-rand-stark);
+  fill: var(--farbe-kante-offen);
 }
 
 .graph__knoten,
@@ -101,11 +108,34 @@
   cursor: pointer;
 }
 
+/* D-029: the focus ring sits on the glyph, not on the invisible 245 px hit box. */
+:is(.graph__knoten, .graph__ast):focus-visible {
+  outline: none;
+}
+
+.graph__meilenstein:focus-visible {
+  outline: 2px solid var(--farbe-fokus);
+  outline-offset: 4px;
+  border-radius: var(--radius-mittel);
+}
+
+:is(.graph__knoten, .graph__ast):is(:hover, :focus-visible) :is(.graph__ring, .graph__ast-code) {
+  box-shadow: 0 0 0 4px var(--farbe-akzent-leise);
+}
+
+:is(.graph__knoten, .graph__ast):focus-visible :is(.graph__ring, .graph__ast-code) {
+  outline: 2px solid var(--farbe-fokus);
+  outline-offset: 3px;
+}
+
 .graph__knoten {
   inline-size: calc(var(--spalte) - 8px * var(--skala));
   block-size: var(--zeile, calc(84px * var(--skala)));
 }
 
+/* D-029: the ring is an SVG arc on an explicit track. Round caps and a real track replace the
+ * conic gradient, whose hard edge left a dangling sliver at low percentages and could not be
+ * padded. `pathLength="100"` keeps the dash maths in percent. */
 .graph__ring {
   --ringfarbe: var(--ampel-rot);
   position: relative;
@@ -115,18 +145,31 @@
   inline-size: calc(44px * var(--skala));
   block-size: calc(44px * var(--skala));
   border-radius: var(--radius-rund);
-  background: conic-gradient(
-    var(--ringfarbe) var(--fortschritt, 0%),
-    var(--farbe-flaeche-leise) var(--fortschritt, 0%)
-  );
+  background: var(--farbe-flaeche);
 }
 
-.graph__ring::before {
-  content: '';
+.graph__ring-bild {
   position: absolute;
-  inset: calc(5px * var(--skala));
-  border-radius: inherit;
-  background: var(--farbe-flaeche);
+  inset: 0;
+  overflow: visible;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.graph__ring-spur {
+  fill: none;
+  stroke: var(--farbe-ring-spur);
+  stroke-width: 4;
+}
+
+.graph__ring-wert {
+  fill: none;
+  stroke: var(--ringfarbe);
+  stroke-width: 4;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  transition: stroke-dashoffset 240ms ease;
 }
 
 .graph__ring--rot {
@@ -172,11 +215,18 @@
   line-height: 1;
 }
 
+/*
+ * The request count sits top-left: top-right would put the digit directly in front of the title and
+ * read as its list number. The surface-coloured halo keeps the badge separated from the ring and
+ * legible on the filled "abgeschlossen" disc.
+ */
 .graph__anfragen {
-  inset-block-start: calc(-6px * var(--skala));
-  inset-inline-end: calc(-6px * var(--skala));
+  inset-block-start: calc(-7px * var(--skala));
+  inset-inline-start: calc(-7px * var(--skala));
   background: var(--farbe-akzent);
   color: var(--farbe-akzent-text);
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 0 0 2px var(--farbe-flaeche);
 }
 
 /*
@@ -186,7 +236,7 @@
  * with a grey disc and a muted code. The corner badge and the code colour repeat the state, so the
  * difference does not rely on colour alone.
  */
-.graph__knoten--abgeschlossen .graph__ring::before {
+.graph__knoten--abgeschlossen .graph__ring {
   background: var(--ampel-gruen);
 }
 
@@ -199,7 +249,7 @@
 }
 
 .graph__knoten--naechster .graph__ring {
-  outline: calc(3px * var(--skala)) dashed var(--farbe-akzent);
+  outline: calc(2px * var(--skala)) dashed var(--farbe-akzent);
   outline-offset: calc(4px * var(--skala));
 }
 
@@ -207,7 +257,7 @@
   color: var(--farbe-akzent);
 }
 
-.graph__knoten--spaeter .graph__ring::before {
+.graph__knoten--spaeter .graph__ring {
   background: var(--farbe-flaeche-leise);
 }
 
@@ -234,20 +284,22 @@
 }
 
 .graph__zustand--spaeter {
-  border-color: var(--farbe-rand-stark);
-  background: var(--farbe-flaeche-leise);
+  border: 1px dashed var(--farbe-rand-stark);
+  background: var(--farbe-flaeche);
   color: var(--farbe-text-leise);
 }
 
-.graph__knoten--beteiligt .graph__ring,
-.graph__ast--beteiligt .graph__ast-code {
-  box-shadow: 0 0 0 4px var(--farbe-akzent-leise);
+/* The externally selected node gets its own halo so the dashed "nächster" frame stays intact. */
+.graph__knoten.graph__knoten--beteiligt .graph__ring,
+.graph__ast.graph__ast--beteiligt .graph__ast-code {
+  box-shadow:
+    0 0 0 2px var(--farbe-akzent),
+    0 0 0 6px var(--farbe-akzent-leise);
 }
 
 .graph__ast {
   inline-size: calc(var(--spalte) - 8px * var(--skala));
   block-size: calc(48px * var(--skala));
-  align-items: flex-start;
 }
 
 .graph__ast-code {
@@ -259,8 +311,10 @@
   border: 1px solid var(--farbe-rand-stark);
   border-radius: var(--radius-rund);
   background: var(--farbe-flaeche-leise);
+  color: var(--farbe-text);
   font-size: calc(0.9rem * var(--skala));
   font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 .graph__ast-titel {
@@ -270,9 +324,9 @@
   min-inline-size: 0;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-  font-size: calc(0.78rem * var(--skala));
+  font-size: calc(0.76rem * var(--skala));
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.15;
   hyphens: auto;
 }
 
@@ -284,13 +338,14 @@
   display: grid;
   place-items: center;
   flex: none;
-  inline-size: calc(60px * var(--skala));
-  block-size: calc(52px * var(--skala));
+  inline-size: calc(56px * var(--skala));
+  block-size: calc(48px * var(--skala));
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
   background: var(--farbe-flaeche-leise);
   color: var(--farbe-text);
-  font-size: calc(0.8rem * var(--skala));
+  font-size: calc(0.78rem * var(--skala));
   font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 .graph__meilenstein--erreicht .graph__sechseck {
@@ -317,41 +372,30 @@
   line-height: 1.15;
 }
 
-.graph__knoten::after,
-.graph__ast::after,
-.graph__meilenstein::after {
-  content: attr(data-tip);
-  position: absolute;
-  z-index: 30;
-  inset-block-end: calc(100% + 6px * var(--skala));
-  inset-inline-start: 0;
+/*
+ * D-029: instead of the clipped `::after` bubble inside the scroll container, one fixed bubble is
+ * positioned from the hovered node. It is decorative: the button's aria-label carries the text.
+ */
+.graph__tipp {
+  position: fixed;
+  z-index: 45;
   inline-size: max-content;
-  max-inline-size: min(24rem, calc(18rem * var(--skala)));
+  max-inline-size: min(22rem, calc(100vw - 1.5rem));
   padding: var(--abstand-2) var(--abstand-3);
   border: 1px solid var(--farbe-rand);
   border-radius: var(--radius-klein);
-  background: var(--farbe-flaeche);
+  background: var(--farbe-flaeche-erhoben);
   color: var(--farbe-text);
-  box-shadow: var(--schatten-karte);
-  font-size: calc(0.78rem * var(--skala));
+  box-shadow: var(--schatten-schwebend);
+  font-size: 0.78rem;
   font-weight: 500;
   line-height: 1.35;
-  opacity: 0;
   pointer-events: none;
+  transform: translate(-50%, calc(-100% - 10px));
 }
 
-.graph__meilenstein::after {
-  inset-block-end: auto;
-  inset-block-start: calc(100% + 6px * var(--skala));
-}
-
-.graph__knoten:hover::after,
-.graph__knoten:focus-visible::after,
-.graph__ast:hover::after,
-.graph__ast:focus-visible::after,
-.graph__meilenstein:hover::after,
-.graph__meilenstein:focus-visible::after {
-  opacity: 1;
+.graph__tipp--unten {
+  transform: translate(-50%, 10px);
 }
 
 .graph__wischhinweis {
@@ -361,17 +405,16 @@
 
 .graph__fuss {
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--abstand-3);
+  flex-direction: column;
+  gap: var(--abstand-2);
 }
 
 .graph__bereiche {
   display: flex;
   flex-wrap: wrap;
   gap: var(--abstand-1) var(--abstand-3);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
+  color: var(--farbe-text-leise);
 }
 
 .graph__bereich strong {
@@ -381,10 +424,14 @@
 .graph__legende {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: var(--abstand-1) var(--abstand-3);
-  padding: 0;
+  padding: var(--abstand-2) var(--abstand-3);
+  border: 1px solid var(--farbe-rand);
+  border-radius: var(--radius-mittel);
+  background: var(--farbe-flaeche-leise);
   list-style: none;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   color: var(--farbe-text-leise);
 }
 
@@ -394,12 +441,15 @@
   gap: var(--abstand-1);
 }
 
+/* Same visual language as the node ring: grey track, coloured arc, no pie fill (D-029). */
 .legende-ring {
-  inline-size: 0.9rem;
-  block-size: 0.9rem;
+  inline-size: 0.8rem;
+  block-size: 0.8rem;
+  border: 3px solid var(--farbe-ring-spur);
+  border-block-start-color: var(--ampel-gruen);
+  border-inline-end-color: var(--ampel-gruen);
   border-radius: var(--radius-rund);
-  border: 3px solid var(--ampel-gruen);
-  background: linear-gradient(90deg, var(--ampel-gruen) 50%, transparent 50%);
+  transform: rotate(-45deg);
 }
 
 /* The legend reuses the node badge so symbol and colours cannot drift apart (D-026). */
@@ -433,16 +483,17 @@
 }
 
 .legende-kante {
-  inline-size: 1.3rem;
+  inline-size: 1.4rem;
   border-block-start: 2px solid var(--ampel-gruen);
+  border-radius: var(--radius-rund);
 }
 
 .legende-kante--offen {
-  border-block-start: 2px dashed var(--farbe-rand-stark);
+  border-block-start: 2px dashed var(--farbe-kante-offen);
 }
 
 .legende-kante--verweis {
-  border-block-start: 2px dotted var(--farbe-rand-stark);
+  border-block-start: 2px dotted var(--farbe-kante-offen);
 }
 
 @media (max-width: 760px) {

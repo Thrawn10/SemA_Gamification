@@ -22,8 +22,14 @@ decision. The specification wins for product behaviour; anything not in it belon
   objectives, re-point apprenticeships and derive `TEXTVERWEIS` edges on import (D-014, Q-011).
 - **Publication-grade sidebar.** `@angular/cdk` dialog (or `<dialog showModal()>`) for `inert`
   background, scroll lock and a proper focus trap (D-015).
-- **Tooltip polish.** The top milestone tooltip is clipped by the graph card, and Escape does not
-  dismiss a tooltip (WCAG 1.4.13). A small anchored tooltip component would fix both.
+- **Tooltip polish.** The clipping is fixed by D-029's fixed overlay, but Escape still does not
+  dismiss a tooltip (WCAG 1.4.13). A small anchored tooltip component would also solve keyboard
+  dismissal.
+- **Split the graph stylesheet.** `skilltree-graph.scss` is the largest component style in the app
+  and drove the `anyComponentStyle` raise in D-029. Extracting the footer, the legend and the
+  tooltip into their own components would cut it and keep the node styles readable.
+- **Shared edge corridors.** Every long `VERWEIS` jump picks its own lane offset, so two distant
+  nodes can draw parallel lines a few pixels apart. A corridor allocator could share one lane.
 - **Graph keyboard model.** Roving tabindex per area and DOM order from crown to root would cut the
   ~33 Tab stops per skilltree visit.
 - **Read the materialised badge grants.** Either use `Badge-Vergabe` for display (with replay as a

@@ -111,9 +111,18 @@ export function pfadBbcAst(start: Punkt, ziel: Punkt, lane: number, ecken: numbe
   return rundeKanten([start, { x: start.x, y: lane }, { x: ziel.x, y: lane }, ziel], ecken);
 }
 
-/** Milestone edge top competence → IPA: up to the top lane, across, up into the IPA hexagon. */
-export function pfadAstIpa(start: Punkt, ziel: Punkt, lane: number, ecken: number): string {
-  return rundeKanten([start, { x: start.x, y: lane }, { x: ziel.x, y: lane }, ziel], ecken);
+/**
+ * Milestone edge top competence → IPA: straight out of the ring, then a smooth swoosh along the top
+ * lane into the hexagon (D-029). Two chained quadrant curves keep the tangents continuous, so the
+ * branches of all areas read as a crown instead of a dashed frame with right-angled corners.
+ */
+export function pfadAstIpa(start: Punkt, ziel: Punkt, lane: number, _ecken: number): string {
+  const mitte = (start.x + ziel.x) / 2;
+  return (
+    `M ${zahl(start.x)} ${zahl(start.y)}` +
+    ` Q ${zahl(start.x)} ${zahl(lane)} ${zahl(mitte)} ${zahl(lane)}` +
+    ` Q ${zahl(ziel.x)} ${zahl(lane)} ${zahl(ziel.x)} ${zahl(ziel.y)}`
+  );
 }
 
 /** Input of the cross-edge router; positions are stage coordinates. */

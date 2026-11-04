@@ -15,6 +15,7 @@
     (pointermove)="ziehe($event)"
     (pointerup)="beendeZiehen($event)"
     (pointercancel)="beendeZiehen($event)"
+    (scroll)="tippVerbergen()"
   >
     <div
       class="graph__buehne"
@@ -38,8 +39,8 @@
             viewBox="0 0 10 10"
             refX="9"
             refY="5"
-            markerWidth="7"
-            markerHeight="7"
+            markerWidth="6"
+            markerHeight="6"
             orient="auto-start-reverse"
           >
             <path d="M 0 0 L 10 5 L 0 10 z" class="graph__pfeil graph__pfeil--erreicht" />
@@ -49,8 +50,8 @@
             viewBox="0 0 10 10"
             refX="9"
             refY="5"
-            markerWidth="7"
-            markerHeight="7"
+            markerWidth="6"
+            markerHeight="6"
             orient="auto-start-reverse"
           >
             <path d="M 0 0 L 10 5 L 0 10 z" class="graph__pfeil graph__pfeil--offen" />
@@ -78,13 +79,12 @@
           [style.inset-inline-start.px]="basis.punkt.x - 15 * layout().skala"
           [style.inset-block-start.px]="basis.punkt.y - 24 * layout().skala"
           [attr.aria-label]="basis.tooltip"
-          [attr.data-tip]="basis.tooltip"
           [attr.data-ast]="basis.code"
           (click)="astWaehlen(basis.code)"
-          (mouseenter)="aktiviere(basis.id)"
-          (mouseleave)="deaktiviere(basis.id)"
-          (focus)="aktiviere(basis.id)"
-          (blur)="deaktiviere(basis.id)"
+          (mouseenter)="aktiviere(basis.id); tippZeigen(basis.tooltip, $event)"
+          (mouseleave)="deaktiviere(basis.id); tippVerbergen()"
+          (focus)="aktiviere(basis.id); tippZeigen(basis.tooltip, $event)"
+          (blur)="deaktiviere(basis.id); tippVerbergen()"
         >
           <span class="graph__ast-code" aria-hidden="true">{{ basis.code }}</span>
           <span class="graph__ast-titel">{{ basis.titel }}</span>
@@ -102,20 +102,29 @@
           [style.inset-inline-start.px]="knoten.punkt.x - layout().radius"
           [style.inset-block-start.px]="knoten.punkt.y - layout().zeilenabstand / 2"
           [attr.aria-label]="knoten.tooltip"
-          [attr.data-tip]="knoten.tooltip"
           [attr.data-knoten]="knoten.id"
           (click)="knotenWaehlen(knoten.id)"
-          (mouseenter)="aktiviere(knoten.id)"
-          (mouseleave)="deaktiviere(knoten.id)"
-          (focus)="aktiviere(knoten.id)"
-          (blur)="deaktiviere(knoten.id)"
+          (mouseenter)="aktiviere(knoten.id); tippZeigen(knoten.tooltip, $event)"
+          (mouseleave)="deaktiviere(knoten.id); tippVerbergen()"
+          (focus)="aktiviere(knoten.id); tippZeigen(knoten.tooltip, $event)"
+          (blur)="deaktiviere(knoten.id); tippVerbergen()"
         >
           <span
-            class="graph__ring"
             [class]="'graph__ring graph__ring--' + knoten.ampel.toLowerCase()"
-            [style.--fortschritt]="knoten.fortschritt + '%'"
             aria-hidden="true"
           >
+            <svg class="graph__ring-bild" viewBox="0 0 44 44" focusable="false">
+              <circle class="graph__ring-spur" cx="22" cy="22" r="19" />
+              <circle
+                class="graph__ring-wert"
+                cx="22"
+                cy="22"
+                r="19"
+                pathLength="100"
+                stroke-dasharray="100"
+                [attr.stroke-dashoffset]="100 - knoten.fortschritt"
+              />
+            </svg>
             <span class="graph__code">{{ knoten.code }}</span>
             @if (knoten.offeneAnfragen > 0) {
               <span class="graph__anfragen">{{ knoten.offeneAnfragen }}</span>
@@ -138,13 +147,12 @@
           [style.inset-inline-start.px]="meilenstein.punkt.x - 30 * layout().skala"
           [style.inset-block-start.px]="meilenstein.punkt.y - 26 * layout().skala"
           [attr.aria-label]="meilenstein.tooltip"
-          [attr.data-tip]="meilenstein.tooltip"
           [attr.data-meilenstein]="meilenstein.code"
           (click)="meilensteinWaehlen(meilenstein.code)"
-          (mouseenter)="aktiviere(meilenstein.code)"
-          (mouseleave)="deaktiviere(meilenstein.code)"
-          (focus)="aktiviere(meilenstein.code)"
-          (blur)="deaktiviere(meilenstein.code)"
+          (mouseenter)="aktiviere(meilenstein.code); tippZeigen(meilenstein.tooltip, $event)"
+          (mouseleave)="deaktiviere(meilenstein.code); tippVerbergen()"
+          (focus)="aktiviere(meilenstein.code); tippZeigen(meilenstein.tooltip, $event)"
+          (blur)="deaktiviere(meilenstein.code); tippVerbergen()"
         >
           <span class="graph__sechseck" aria-hidden="true">{{ meilenstein.kuerzel }}</span>
           <span class="graph__meilenstein-text">
@@ -168,7 +176,8 @@
     </div>
     <ul class="graph__legende" aria-label="Legende">
       <li>
-        <span class="legende-ring" aria-hidden="true"></span> Fortschrittsring (Farbe = Ampel)
+        <span class="legende-ring" aria-hidden="true"></span>
+        Fortschritt (Farbe = Ampel)
       </li>
       @for (stufe of ampelStufen; track stufe.ampel) {
         <li>
@@ -198,4 +207,17 @@
       <li><span class="legende-kante legende-kante--verweis" aria-hidden="true"></span> Verweis</li>
     </ul>
   </div>
+
+  <!-- D-029: the tooltip floats above the card instead of being clipped by `overflow-y: hidden`. -->
+  @if (tipp(); as tipp) {
+    <div
+      class="graph__tipp"
+      [class.graph__tipp--unten]="tipp.unten"
+      [style.inset-inline-start.px]="tipp.links"
+      [style.inset-block-start.px]="tipp.oben"
+      aria-hidden="true"
+    >
+      {{ tipp.text }}
+    </div>
+  }
 </div>

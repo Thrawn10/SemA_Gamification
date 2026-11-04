@@ -47,7 +47,9 @@
     </div>
 
     <div class="skilltree-kopf__fortschritt">
-      <span class="skilltree-kopf__prozent">{{ ansicht.fortschritt }} %</span>
+      <span class="skilltree-kopf__prozent"
+        >{{ ansicht.fortschritt }}<span class="skilltree-kopf__einheit"> %</span></span
+      >
       <st-fortschritt [wert]="ansicht.fortschritt" label="Gesamtfortschritt" [zeigeZahl]="false" />
       <span class="untertitel">Gesamtfortschritt</span>
     </div>

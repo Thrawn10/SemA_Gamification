@@ -13,6 +13,9 @@
   --farbe-akzent-leise: #e3f1ec;
   --farbe-hover: #e9edf1;
   --farbe-fokus: #0b5fbe;
+  --farbe-flaeche-erhoben: #ffffff;
+  --farbe-ring-spur: #c6cfd9;
+  --farbe-kante-offen: #7f8a99;
 
   --ampel-rot: #b3261e;
   --ampel-rot-flaeche: #fbe9e7;
@@ -44,6 +47,7 @@
   --radius-rund: 999px;
 
   --schatten-karte: 0 1px 2px rgb(16 24 40 / 6%), 0 8px 24px rgb(16 24 40 / 5%);
+  --schatten-schwebend: 0 2px 6px rgb(16 24 40 / 8%), 0 14px 36px rgb(16 24 40 / 14%);
   --schrift: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
   --schrift-mono: 'Cascadia Mono', 'SFMono-Regular', Consolas, monospace;
   --max-breite: 1280px;
@@ -64,6 +68,9 @@
     --farbe-akzent-leise: #163a32;
     --farbe-hover: #222d38;
     --farbe-fokus: #7ab7ff;
+    --farbe-flaeche-erhoben: #212b35;
+    --farbe-ring-spur: #3a4653;
+    --farbe-kante-offen: #6b7b8f;
 
     --ampel-rot: #ff8a80;
     --ampel-rot-flaeche: #3a1b19;
@@ -81,5 +88,6 @@
     --ctl-text: #ede9fe;
 
     --schatten-karte: 0 1px 2px rgb(0 0 0 / 40%), 0 8px 24px rgb(0 0 0 / 25%);
+    --schatten-schwebend: 0 2px 6px rgb(0 0 0 / 45%), 0 14px 36px rgb(0 0 0 / 45%);
   }
 }

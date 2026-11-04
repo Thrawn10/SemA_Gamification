@@ -1,7 +1,7 @@
 .skilltree-kopf {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: stretch;
   justify-content: space-between;
   gap: var(--abstand-4);
   padding: var(--abstand-4);
@@ -11,8 +11,17 @@
   box-shadow: var(--schatten-karte);
 }
 
+.skilltree-kopf__person {
+  display: flex;
+  flex: 1 1 22rem;
+  flex-direction: column;
+  gap: var(--abstand-1);
+  min-inline-size: 0;
+}
+
 .skilltree-kopf__person h1 {
   font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  line-height: 1.15;
 }
 
 .skilltree-kopf__beruf {
@@ -23,18 +32,23 @@
 .skilltree-kopf__daten {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--abstand-2) var(--abstand-5);
+  gap: var(--abstand-2);
   margin: var(--abstand-3) 0 0;
 }
 
 .skilltree-kopf__daten > div {
   display: flex;
   flex-direction: column;
+  gap: 1px;
+  padding: var(--abstand-1) var(--abstand-3);
+  border: 1px solid var(--farbe-rand);
+  border-radius: var(--radius-mittel);
+  background: var(--farbe-flaeche-leise);
 }
 
 .skilltree-kopf__daten dt {
   color: var(--farbe-text-leise);
-  font-size: 0.72rem;
+  font-size: 0.66rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -42,16 +56,19 @@
 
 .skilltree-kopf__daten dd {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.86rem;
   font-weight: 600;
 }
 
 .skilltree-kopf__fortschritt {
   display: flex;
+  flex: 0 0 auto;
   flex-direction: column;
   align-items: flex-end;
   gap: var(--abstand-1);
   min-inline-size: 12rem;
+  padding-inline-start: var(--abstand-4);
+  border-inline-start: 1px solid var(--farbe-rand);
 }
 
 .skilltree-kopf__prozent {
@@ -59,6 +76,15 @@
   font-weight: 800;
   line-height: 1;
   font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* The unit recedes so the number reads as the headline figure. */
+.skilltree-kopf__einheit {
+  color: var(--farbe-text-leise);
+  font-size: 0.42em;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 .skilltree-kopf__fortschritt st-fortschritt {
@@ -69,5 +95,7 @@
   .skilltree-kopf__fortschritt {
     align-items: flex-start;
     inline-size: 100%;
+    padding-inline-start: 0;
+    border-inline-start: 0;
   }
 }
