@@ -9,11 +9,11 @@ import {
   signal,
 } from '@angular/core';
 import type { DatenbestandJson } from '@skilltree/vertraege';
-import { fehlerText } from '../core/fehler';
-import { DatenverwaltungDienst, pruefeDatenbestand } from '../dienste/datenverwaltung-dienst';
-import type { ImportBericht } from '../dienste/import-dienst';
-import { ImportDienst } from '../dienste/import-dienst';
-import { AnforderungId } from '../shared/ui/anforderung-id';
+import { fehlerText } from '../../core/fehler';
+import { DatenverwaltungDienst, pruefeDatenbestand } from '../../dienste/datenverwaltung-dienst';
+import type { ImportBericht } from '../../dienste/import-dienst';
+import { ImportDienst } from '../../dienste/import-dienst';
+import { AnforderungId } from '../../shared/ui/anforderung-id/anforderung-id';
 
 /**
  * Admin route: template import with dry run plus backup, restore and reset of the

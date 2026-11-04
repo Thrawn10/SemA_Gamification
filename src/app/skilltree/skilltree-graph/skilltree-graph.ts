@@ -17,7 +17,7 @@ import type {
   SkilltreeAnsicht,
 } from '@skilltree/vertraege';
 import { AMPEL_SYMBOLE, AMPEL_TEXTE, MEILENSTEIN_TEXTE } from '@skilltree/vertraege';
-import { AnforderungId } from '../shared/ui/anforderung-id';
+import { AnforderungId } from '../../shared/ui/anforderung-id/anforderung-id';
 
 interface Punkt {
   x: number;

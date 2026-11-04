@@ -23,7 +23,7 @@ A large spec cannot be held in one context. Work in a way that is resumable and 
 ### R-014 · Login form validation
 
 - Area: Auth
-- Feature folder: features/auth
+- Feature folder: anmeldung
 - Type: functional
 - Priority: must
 - Source: SPEC.md §3.2 (lines 412-430)

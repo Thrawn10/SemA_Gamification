@@ -17,11 +17,11 @@ import type {
   Rolle,
 } from '@skilltree/vertraege';
 import { ANFRAGE_STATUS_TEXTE, STUFEN_TEXTE } from '@skilltree/vertraege';
-import { fehlerText } from '../core/fehler';
-import { AnfrageDienst } from '../dienste/anfrage-dienst';
-import { BestaetigungDienst } from '../dienste/bestaetigung-dienst';
-import { StufenAnzeige } from '../shared/ui/stufen-anzeige';
-import { VerlaufListe } from './verlauf-liste';
+import { fehlerText } from '../../core/fehler';
+import { AnfrageDienst } from '../../dienste/anfrage-dienst';
+import { BestaetigungDienst } from '../../dienste/bestaetigung-dienst';
+import { StufenAnzeige } from '../../shared/ui/stufen-anzeige/stufen-anzeige';
+import { VerlaufListe } from '../verlauf-liste/verlauf-liste';
 
 type Modus = 'anfrage' | 'bestaetigung' | 'ruecknahme' | 'ablehnung' | null;
 

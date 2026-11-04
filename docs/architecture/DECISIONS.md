@@ -201,3 +201,21 @@ reading that the human still has to confirm; it is also mirrored in
 - Grund: this keeps the runtime import deferred (D-010) and avoids an unreviewed dependency, while
   still producing reproducible, reviewable data and a schema another tool or AI can target.
 - Status: BESTÄTIGT
+
+## D-020 One folder per component, folders by subject not by type
+
+- Bezug: SPEC 0.8 ("Ordner nach Fachthema, nicht nach Typ"), AGENTS.md conventions, D-018,
+  `tools/pruefe-komponenten.mjs`
+- Entscheid: every Angular component lives in its own folder named after the component
+  (`<feature>/<name>/<name>.ts`, `.html`, `.scss`, `.spec.ts`; shared components under
+  `shared/ui/<name>/`). Several components never share a feature folder. Folders follow the subject
+  (feature or component), not the file type, so there are no `components/`, `pages/` or `services/`
+  directories. The bootstrap root component stays at `src/app/app.ts` with its four files, because
+  `src/app` is already its named folder and Angular's schematic generates it there.
+  `npm run check:components` fails the gate when a component's parent folder name differs from the
+  component name.
+- Grund: the feature folders had accumulated several components in one directory, which made the
+  four-file rule hard to see and imports ambiguous. A folder per component keeps the local context
+  (template, styles, test) together, matches the schematic naming, and stays consistent with the
+  spec's subject-based folder rule.
+- Status: BESTÄTIGT

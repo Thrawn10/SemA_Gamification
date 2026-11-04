@@ -1,7 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import type { SkilltreeAnsicht } from '@skilltree/vertraege';
 import { SkilltreeGraph } from './skilltree-graph';
-import { ausbildungVon, erstelleUmgebung, type TestUmgebung } from '../../testing/dienst-umgebung';
+import {
+  ausbildungVon,
+  erstelleUmgebung,
+  type TestUmgebung,
+} from '../../../testing/dienst-umgebung';
 
 describe('SkilltreeGraph', () => {
   let umgebung: TestUmgebung;

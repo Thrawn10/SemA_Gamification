@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-11-03
+Last updated: 2026-11-04
 
 ## Current phase
 
@@ -49,15 +49,21 @@ Status values: `todo`, `in-progress`, `blocked`, `done`.
 - `npm run check:components` — green (four-file rule, no inline templates, D-018).
 - `ng lint` — not available (no `angular-eslint`).
 
-## Component structure (D-018)
+## Component structure (D-018, D-020)
 
-Every Angular component now ships as four files (`.ts`, `.html`, `.scss`, `.spec.ts`). The 17
-components that still carried an inline template were split; components without styles received an
-empty component stylesheet so the structure is uniform. The test-only router stub was replaced by a
-wildcard route with `children: []`, so no test component lives outside the rule. New per-component
-tests were added for the remaining components, and the former shared `seiten.spec.ts` was split into
-one spec per page. `npm run check:components` fails the gate if a component misses a file or embeds a
-`template:`/`styles:` block.
+Every Angular component ships as four files (`.ts`, `.html`, `.scss`, `.spec.ts`) inside its own
+folder named after the component. The 17 components that previously shared a feature folder were
+moved to `skilltree/<name>/`, `uebersicht/<name>/`, `anmeldung/<name>/`, `admin/<name>/`,
+`meine-daten/<name>/`, `demo-steuerung/<name>/` and `shared/ui/<name>/`; all relative imports,
+route imports and test imports were updated. The bootstrap root component stays at
+`src/app/app.ts` with its four files, because `src/app` is already its named folder and the Angular
+schematic generates it there. The 17 components that still carried an inline template were split
+earlier; components without styles received an empty component stylesheet so the structure is
+uniform. The test-only router stub was replaced by a wildcard route with `children: []`, so no test
+component lives outside the rule. New per-component tests were added for the remaining components,
+and the former shared `seiten.spec.ts` was split into one spec per page. `npm run check:components`
+fails the gate if a component misses a file, embeds a `template:`/`styles:` block, or is not in a
+folder named after it.
 
 ## Fix: blank page after bootstrap (NG0203)
 

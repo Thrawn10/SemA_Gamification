@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AnforderungId } from './anforderung-id';
-import { DemoDienst } from '../../demo-steuerung/demo-dienst';
-import { erstelleUmgebung } from '../../../testing/dienst-umgebung';
+import { DemoDienst } from '../../../demo-steuerung/demo-dienst';
+import { erstelleUmgebung } from '../../../../testing/dienst-umgebung';
 
 describe('AnforderungId', () => {
   beforeEach(async () => {

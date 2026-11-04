@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { StartSeite } from './start-seite';
-import { erstelleUmgebung, type TestUmgebung } from '../../testing/dienst-umgebung';
+import { erstelleUmgebung, type TestUmgebung } from '../../../testing/dienst-umgebung';
 
 describe('StartSeite', () => {
   let umgebung: TestUmgebung;

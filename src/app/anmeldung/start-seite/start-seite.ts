@@ -1,8 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { fehlerText } from '../core/fehler';
-import { SitzungDienst } from '../dienste/sitzung-dienst';
-import { UebersichtDienst } from '../dienste/uebersicht-dienst';
+import { fehlerText } from '../../core/fehler';
+import { SitzungDienst } from '../../dienste/sitzung-dienst';
+import { UebersichtDienst } from '../../dienste/uebersicht-dienst';
 
 /** Role-based entry point after login or when clicking the product name. */
 @Component({

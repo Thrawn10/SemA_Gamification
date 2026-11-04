@@ -12,15 +12,15 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import type { AktiveAnfrageAnsicht, UebersichtZeile } from '@skilltree/vertraege';
 import { STUFEN_TEXTE } from '@skilltree/vertraege';
-import { DomaenenEreignisse } from '../core/domaenen-ereignisse';
-import { fehlerText } from '../core/fehler';
-import { UHR } from '../core/uhr';
-import { AnfrageDienst } from '../dienste/anfrage-dienst';
-import { BestaetigungDienst } from '../dienste/bestaetigung-dienst';
-import { UebersichtDienst } from '../dienste/uebersicht-dienst';
-import { AmpelAnzeige } from '../shared/ui/ampel-anzeige';
-import { AnforderungId } from '../shared/ui/anforderung-id';
-import { FortschrittsAnzeige } from '../shared/ui/fortschritts-anzeige';
+import { DomaenenEreignisse } from '../../core/domaenen-ereignisse';
+import { fehlerText } from '../../core/fehler';
+import { UHR } from '../../core/uhr';
+import { AnfrageDienst } from '../../dienste/anfrage-dienst';
+import { BestaetigungDienst } from '../../dienste/bestaetigung-dienst';
+import { UebersichtDienst } from '../../dienste/uebersicht-dienst';
+import { AmpelAnzeige } from '../../shared/ui/ampel-anzeige/ampel-anzeige';
+import { AnforderungId } from '../../shared/ui/anforderung-id/anforderung-id';
+import { FortschrittsAnzeige } from '../../shared/ui/fortschritts-anzeige/fortschritts-anzeige';
 
 type Sortierschluessel =
   'name' | 'lehrberuf' | 'lehrjahr' | 'fortschritt' | 'roteKompetenzen' | 'offeneAnfragen';

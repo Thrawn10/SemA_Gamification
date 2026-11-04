@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /**
- * Enforces the four-file rule for Angular components: every `@Component` lives in a
- * `.ts` file with `templateUrl` and `styleUrl` and has a sibling `.html`, `.scss`
- * and `.spec.ts`. Inline `template:`/`styles:` are rejected everywhere under `src/`.
+ * Enforces the component structure rules: every `@Component` lives in its own folder named
+ * after it, uses `templateUrl` and `styleUrl`, and has a sibling `.html`, `.scss` and
+ * `.spec.ts`. Inline `template:`/`styles:` are rejected everywhere under `src/`.
  */
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { basename, dirname, join, relative } from 'node:path';
 
 const wurzel = process.cwd();
 const fehler = [];
@@ -31,6 +31,14 @@ for (const pfad of tsDateien) {
   }
   if (!/@Component\s*\(/.test(quelle) || relativ.endsWith('.spec.ts')) {
     continue;
+  }
+
+  const komponente = basename(pfad, '.ts');
+  if (basename(dirname(pfad)) !== komponente) {
+    fehler.push(
+      `${relativ}: component must live in its own folder \`${komponente}/\`; ` +
+        `move it to \`${relative(wurzel, join(dirname(pfad), komponente, komponente)).replaceAll('\\', '/')}.ts\`.`,
+    );
   }
 
   const basis = pfad.replace(/\.ts$/, '');

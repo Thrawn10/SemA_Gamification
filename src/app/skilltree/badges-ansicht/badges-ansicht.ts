@@ -1,8 +1,8 @@
 import { Component, inject, input, output } from '@angular/core';
 import type { BadgesAnsicht, Rolle } from '@skilltree/vertraege';
-import { SitzungDienst } from '../dienste/sitzung-dienst';
-import { BadgeKarte } from '../shared/ui/badge-karte';
-import { AnforderungId } from '../shared/ui/anforderung-id';
+import { SitzungDienst } from '../../dienste/sitzung-dienst';
+import { BadgeKarte } from '../../shared/ui/badge-karte/badge-karte';
+import { AnforderungId } from '../../shared/ui/anforderung-id/anforderung-id';
 
 /** Badge tab: awarded, inactive and open badges (S-A07, R-B7). */
 @Component({

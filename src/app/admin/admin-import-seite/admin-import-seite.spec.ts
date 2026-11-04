@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AdminImportSeite } from './admin-import-seite';
-import { erstelleUmgebung, type TestUmgebung } from '../../testing/dienst-umgebung';
-import { element } from '../../testing/seiten-helfer';
+import { erstelleUmgebung, type TestUmgebung } from '../../../testing/dienst-umgebung';
+import { element } from '../../../testing/seiten-helfer';
 
 describe('AdminImportSeite', () => {
   let umgebung: TestUmgebung;

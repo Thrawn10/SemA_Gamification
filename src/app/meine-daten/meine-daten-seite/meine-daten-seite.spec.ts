@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { MeineDatenSeite } from './meine-daten-seite';
-import { erstelleUmgebung, type TestUmgebung } from '../../testing/dienst-umgebung';
-import { element } from '../../testing/seiten-helfer';
+import { erstelleUmgebung, type TestUmgebung } from '../../../testing/dienst-umgebung';
+import { element } from '../../../testing/seiten-helfer';
 
 describe('MeineDatenSeite', () => {
   let umgebung: TestUmgebung;

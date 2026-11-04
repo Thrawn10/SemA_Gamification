@@ -94,23 +94,25 @@ With the MCP server available, `run_target`, `devserver_start`, `devserver_wait_
 
 ```
 src/app/
+  app.ts                 bootstrap root component (app.html, app.scss, app.spec.ts)
   app.config.ts          providers (router, http, interceptors, error handling)
   app.routes.ts          top-level lazy routes
   core/                  singletons: interceptors, guards, auth, config, error handling
+  daten/                 storage ports and adapters
+  dienste/               application services (role and assignment checks)
   shared/
-    ui/                  design-system components (presentational, reusable)
+    ui/<name>/           one folder per design-system component (presentational, reusable)
     util/                pure helpers, pipes, directives
-  features/
-    <feature>/
-      <feature>.routes.ts
-      pages/             routed (smart) components
-      components/        feature-only presentational components
-      data/              services, API clients, stores, models
-      <feature>.spec.ts or colocated *.spec.ts
+  <feature>/             e.g. skilltree, uebersicht, anmeldung, admin, meine-daten
+    <name>/              one folder per component: <name>.ts/.html/.scss/.spec.ts
+    data/                feature services, models (when a feature grows)
 src/styles/              tokens, theme, global styles
 e2e/                     end-to-end tests
 docs/                    spec, architecture, progress, angular guidance
 ```
+
+Folders follow the subject (feature or component), not the file type: no `components/`, `pages/` or
+`services/` directories (SPEC 0.8).
 
 Import rules: `features` may import `shared` and `core`; `shared` imports nothing from `features`;
 features do not import each other (use a shared abstraction or the router).
@@ -135,10 +137,13 @@ features do not import each other (use a shared abstraction or the router).
 - No hard-coded colors, spacing, or font sizes: use design tokens.
 - Do not add a dependency without recording why in `docs/architecture/DECISIONS.md`.
 - Prefer the Angular CLI (`ng generate`) for scaffolding so files follow the workspace schematics.
-- Every Angular component is four files: `<name>.ts`, `<name>.html`, `<name>.scss`, `<name>.spec.ts`.
-  Never put the template or the styles in the TypeScript file (no inline `template:`/`styles:`), even
-  for small components; use `templateUrl` and `styleUrl` with relative paths. The script
-  `npm run check:components` enforces this (D-018).
+- Every Angular component lives in its own folder named after it:
+  `<feature>/<name>/<name>.ts`, `.html`, `.scss` and `.spec.ts`. Never put several components in one
+  folder. Never put the template or the styles in the TypeScript file (no inline
+  `template:`/`styles:`), even for small components; use `templateUrl` and `styleUrl` with relative
+  paths. The bootstrap root component is the only exception (`src/app/app.ts` next to the app
+  config). The script `npm run check:components` enforces the folder and four-file rules
+  (D-018, D-020).
 
 ## Definition of done (per task)
 

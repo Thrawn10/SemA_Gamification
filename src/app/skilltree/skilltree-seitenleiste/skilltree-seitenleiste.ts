@@ -19,13 +19,13 @@ import type {
   SkilltreeAnsicht,
 } from '@skilltree/vertraege';
 import { MEILENSTEIN_TEXTE } from '@skilltree/vertraege';
-import { fehlerText } from '../core/fehler';
-import { MeilensteinDienst } from '../dienste/meilenstein-dienst';
-import { AmpelAnzeige } from '../shared/ui/ampel-anzeige';
-import { AnforderungId } from '../shared/ui/anforderung-id';
-import type { BaumAuswahl } from './auswahl';
-import { LeistungszielEintrag } from './leistungsziel-eintrag';
-import { VerlaufListe } from './verlauf-liste';
+import { fehlerText } from '../../core/fehler';
+import { MeilensteinDienst } from '../../dienste/meilenstein-dienst';
+import { AmpelAnzeige } from '../../shared/ui/ampel-anzeige/ampel-anzeige';
+import { AnforderungId } from '../../shared/ui/anforderung-id/anforderung-id';
+import type { BaumAuswahl } from '../auswahl';
+import { LeistungszielEintrag } from '../leistungsziel-eintrag/leistungsziel-eintrag';
+import { VerlaufListe } from '../verlauf-liste/verlauf-liste';
 
 interface KompetenzInhalt {
   art: 'kompetenz';

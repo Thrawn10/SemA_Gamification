@@ -2,9 +2,9 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import type { Benutzer, Rolle } from '@skilltree/vertraege';
 import { ROLLEN_TEXTE } from '@skilltree/vertraege';
-import { fehlerText } from '../core/fehler';
-import { SitzungDienst } from '../dienste/sitzung-dienst';
-import { AnforderungId } from '../shared/ui/anforderung-id';
+import { fehlerText } from '../../core/fehler';
+import { SitzungDienst } from '../../dienste/sitzung-dienst';
+import { AnforderungId } from '../../shared/ui/anforderung-id/anforderung-id';
 
 interface Kontogruppe {
   rolle: Rolle;

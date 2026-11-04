@@ -11,15 +11,15 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import type { SkilltreeAnsicht } from '@skilltree/vertraege';
-import { DomaenenEreignisse } from '../core/domaenen-ereignisse';
-import { fehlerText } from '../core/fehler';
-import { SkilltreeDienst } from '../dienste/skilltree-dienst';
-import { BadgesAnsichtKomponente } from './badges-ansicht';
-import type { BaumAuswahl } from './auswahl';
-import { SkilltreeGraph } from './skilltree-graph';
-import { SkilltreeSeitenleiste } from './skilltree-seitenleiste';
-import { AnforderungId } from '../shared/ui/anforderung-id';
-import { FortschrittsAnzeige } from '../shared/ui/fortschritts-anzeige';
+import { DomaenenEreignisse } from '../../core/domaenen-ereignisse';
+import { fehlerText } from '../../core/fehler';
+import { SkilltreeDienst } from '../../dienste/skilltree-dienst';
+import { BadgesAnsichtKomponente } from '../badges-ansicht/badges-ansicht';
+import type { BaumAuswahl } from '../auswahl';
+import { SkilltreeGraph } from '../skilltree-graph/skilltree-graph';
+import { SkilltreeSeitenleiste } from '../skilltree-seitenleiste/skilltree-seitenleiste';
+import { AnforderungId } from '../../shared/ui/anforderung-id/anforderung-id';
+import { FortschrittsAnzeige } from '../../shared/ui/fortschritts-anzeige/fortschritts-anzeige';
 
 /** Learner and coach skilltree page (S-A01–S-A08, S-L02). */
 @Component({

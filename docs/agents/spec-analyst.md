@@ -30,7 +30,7 @@ analyst and technical lead for an Angular frontend.
    UI copy stays German with Swiss spelling (`ss` instead of `ß`, « » quotes); domain terms stay
    German with umlauts written out (`Stufenereignis`, `BESTAETIGT`).
 4. Identify dependencies between requirements and between features. Group them by Angular feature
-   area (a future `features/<name>/` folder) and note which are shared UI (`shared/ui`) or
+   area (a future `<feature>/` folder under `src/app/`) and note which are shared UI (`shared/ui/<name>/`) or
    cross-cutting (`core`).
 5. Write an ordered work breakdown: small tasks (ideally half a day or less), each listing
    requirement IDs, dependencies, the target feature folder, and a short "done when" checklist.
@@ -47,7 +47,7 @@ Use this shape in `docs/spec/requirements.md`:
 ### R-014 · Login form validation
 
 - Area: Auth
-- Feature folder: features/auth
+- Feature folder: anmeldung
 - Type: functional
 - Priority: must
 - Source: SPEC.md §3.2 (lines 412-430)

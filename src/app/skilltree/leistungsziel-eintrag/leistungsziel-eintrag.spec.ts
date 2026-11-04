@@ -1,7 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import type { Bestaetigungsanfrage, LeistungszielAnsicht } from '@skilltree/vertraege';
 import { LeistungszielEintrag } from './leistungsziel-eintrag';
-import { ausbildungVon, erstelleUmgebung, type TestUmgebung } from '../../testing/dienst-umgebung';
+import {
+  ausbildungVon,
+  erstelleUmgebung,
+  type TestUmgebung,
+} from '../../../testing/dienst-umgebung';
 
 describe('LeistungszielEintrag', () => {
   let umgebung: TestUmgebung;

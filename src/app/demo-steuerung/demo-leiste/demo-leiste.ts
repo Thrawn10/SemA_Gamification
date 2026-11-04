@@ -2,10 +2,10 @@ import { Component, ElementRef, Injector, afterNextRender, inject, signal } from
 import { Router } from '@angular/router';
 import type { Rolle } from '@skilltree/vertraege';
 import { ROLLEN_TEXTE } from '@skilltree/vertraege';
-import { DatenverwaltungDienst } from '../dienste/datenverwaltung-dienst';
-import { SitzungDienst } from '../dienste/sitzung-dienst';
-import { fehlerText } from '../core/fehler';
-import { DemoDienst } from './demo-dienst';
+import { DatenverwaltungDienst } from '../../dienste/datenverwaltung-dienst';
+import { SitzungDienst } from '../../dienste/sitzung-dienst';
+import { fehlerText } from '../../core/fehler';
+import { DemoDienst } from '../demo-dienst';
 
 /** Violet prototype control bar; not part of the application (N-11). */
 @Component({

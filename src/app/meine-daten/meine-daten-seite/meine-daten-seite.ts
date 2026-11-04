@@ -1,8 +1,8 @@
 import { Component, computed, inject } from '@angular/core';
 import { ROLLEN_TEXTE } from '@skilltree/vertraege';
-import { SitzungDienst } from '../dienste/sitzung-dienst';
-import { UebersichtDienst } from '../dienste/uebersicht-dienst';
-import { AnforderungId } from '../shared/ui/anforderung-id';
+import { SitzungDienst } from '../../dienste/sitzung-dienst';
+import { UebersichtDienst } from '../../dienste/uebersicht-dienst';
+import { AnforderungId } from '../../shared/ui/anforderung-id/anforderung-id';
 
 /** «Meine Daten»: role-dependent transparency table (S-Q01, T-D1). */
 @Component({

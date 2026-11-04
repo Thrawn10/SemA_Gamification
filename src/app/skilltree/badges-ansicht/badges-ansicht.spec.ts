@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import type { BadgeAnsicht, BadgesAnsicht } from '@skilltree/vertraege';
 import { BadgesAnsichtKomponente } from './badges-ansicht';
-import { erstelleUmgebung, type TestUmgebung } from '../../testing/dienst-umgebung';
+import { erstelleUmgebung, type TestUmgebung } from '../../../testing/dienst-umgebung';
 
 function badge(id: string, status: BadgeAnsicht['status']): BadgeAnsicht {
   return {

@@ -1,5 +1,5 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { DemoDienst } from '../../demo-steuerung/demo-dienst';
+import { DemoDienst } from '../../../demo-steuerung/demo-dienst';
 
 /** Small violet requirement marker, visible only in prototype mode (N-11). */
 @Component({

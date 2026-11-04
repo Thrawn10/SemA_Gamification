@@ -22,16 +22,25 @@ shared/ui/button/
   button.html          template (always a separate file)
   button.scss          styles using tokens
   button.spec.ts       tests
-features/checkout/
-  checkout.routes.ts   lazy routes
-  pages/               routed components
-  components/          feature-only presentational components
-  data/                api service, store, models
+skilltree/
+  skilltree-seite/     one folder per component, named after the component
+    skilltree-seite.ts
+    skilltree-seite.html
+    skilltree-seite.scss
+    skilltree-seite.spec.ts
+  skilltree-graph/
+    skilltree-graph.ts
+    skilltree-graph.html
+    skilltree-graph.scss
+    skilltree-graph.spec.ts
+  data/                feature services, models (when the feature grows)
 ```
 
-Every component has exactly these four files. Never put the template or the styles inside the
-TypeScript file, even for small components: use `templateUrl` and `styleUrl` with relative paths.
-`npm run check:components` enforces this (D-018).
+Every component has its own folder named after it and contains exactly these four files. Folders
+follow the subject (feature or component), not the file type: do not create `components/`, `pages/`
+or `services/` directories. Never put the template or the styles inside the TypeScript file, even for
+small components: use `templateUrl` and `styleUrl` with relative paths. `npm run check:components`
+enforces the folder and four-file rules (D-018, D-020).
 
 Match the file naming the workspace schematics produce (`ng generate`); do not mix styles within one
 project.

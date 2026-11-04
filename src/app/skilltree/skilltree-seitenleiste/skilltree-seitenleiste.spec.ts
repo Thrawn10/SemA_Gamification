@@ -1,8 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import type { SkilltreeAnsicht } from '@skilltree/vertraege';
 import { SkilltreeSeitenleiste } from './skilltree-seitenleiste';
-import type { BaumAuswahl } from './auswahl';
-import { ausbildungVon, erstelleUmgebung, type TestUmgebung } from '../../testing/dienst-umgebung';
+import type { BaumAuswahl } from '../auswahl';
+import {
+  ausbildungVon,
+  erstelleUmgebung,
+  type TestUmgebung,
+} from '../../../testing/dienst-umgebung';
 
 describe('SkilltreeSeitenleiste', () => {
   let umgebung: TestUmgebung;

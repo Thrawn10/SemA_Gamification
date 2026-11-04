@@ -1,7 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { SkilltreeSeite } from './skilltree-seite';
-import { ausbildungVon, erstelleUmgebung, type TestUmgebung } from '../../testing/dienst-umgebung';
-import { element, warteBis } from '../../testing/seiten-helfer';
+import {
+  ausbildungVon,
+  erstelleUmgebung,
+  type TestUmgebung,
+} from '../../../testing/dienst-umgebung';
+import { element, warteBis } from '../../../testing/seiten-helfer';
 
 describe('SkilltreeSeite', () => {
   let umgebung: TestUmgebung;

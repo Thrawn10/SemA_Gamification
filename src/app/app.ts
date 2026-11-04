@@ -12,7 +12,7 @@ import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router
 import { filter } from 'rxjs/operators';
 import { ROLLEN_TEXTE } from '@skilltree/vertraege';
 import { DEMO_MODE } from './core/konfiguration';
-import { DemoLeiste } from './demo-steuerung/demo-leiste';
+import { DemoLeiste } from './demo-steuerung/demo-leiste/demo-leiste';
 import { SitzungDienst } from './dienste/sitzung-dienst';
 
 @Component({

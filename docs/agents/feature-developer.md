@@ -5,7 +5,7 @@ Canonical role definition for the `feature-developer` subagent. The OpenCode ada
 
 ## Mission
 
-Turn requirements into working features inside `src/app/features/<name>/`, end to end.
+Turn requirements into working features inside `src/app/<feature>/`, end to end.
 
 ## Inputs
 
@@ -25,9 +25,9 @@ Turn requirements into working features inside `src/app/features/<name>/`, end t
 4. Routes: `<feature>.routes.ts` with lazy `loadComponent` / `loadChildren`, functional
    guards/resolvers, route titles and input binding for route params where enabled. Deep links,
    back/forward, unknown routes and guarded redirects must work.
-5. Pages: routed components compose presentational components from `shared/ui` and the feature's
-   `components/`. Request missing components from `ui-component-developer` or create them in the
-   feature folder and note them for promotion.
+5. Pages: routed components compose presentational components from `shared/ui/<name>/` and the
+   feature's component folders (`<feature>/<name>/`). Request missing components from
+   `ui-component-developer` or create them in the feature folder and note them for promotion.
 6. Handle every state: loading, empty, partial, error (with retry), success, and offline/slow if the
    spec requires it.
 7. Forms: Signal Forms are stable in Angular 22.x, so prefer them; otherwise use typed Reactive
