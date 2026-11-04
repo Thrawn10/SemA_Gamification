@@ -1,4 +1,9 @@
-import type { MeilensteinCode, MeilensteinEreignis, Stufe } from '@skilltree/vertraege';
+import type {
+  MeilensteinCode,
+  MeilensteinEreignis,
+  Stufe,
+  Stufenmodell,
+} from '@skilltree/vertraege';
 import { MEILENSTEINE } from '@skilltree/vertraege';
 import { ampel, fortschritt, kompetenzwert } from './fortschritt';
 import type { PlanIndex } from './plan';
@@ -63,6 +68,7 @@ export function meilensteinBereitschaft(
   stufen: ReadonlyMap<string, Stufe>,
   stati: MeilensteinStati,
   gesamtfortschritt: number,
+  modell: Stufenmodell = 'DREI_STUFEN',
 ): string {
   switch (code) {
     case 'BBC': {
@@ -82,10 +88,12 @@ export function meilensteinBereitschaft(
       if (ziele.length === 0) {
         return 'Die Praxisbildnerin / der Praxisbildner bestätigt den Basismeilenstein.';
       }
-      const erklaert = ziele.filter((ziel) =>
+      const erreicht = ziele.filter((ziel) =>
         ziel ? (stufen.get(ziel.id) ?? 0) >= 1 : false,
       ).length;
-      return `${erklaert} von ${ziele.length} Leistungszielen mit Lernort Basislehrjahr mindestens erklärt.`;
+      return modell === 'BINAER'
+        ? `${erreicht} von ${ziele.length} Leistungszielen mit Lernort Basislehrjahr abgeschlossen.`
+        : `${erreicht} von ${ziele.length} Leistungszielen mit Lernort Basislehrjahr mindestens erklärt.`;
     }
     case 'IPA': {
       const nichtRot = index.bereiche
@@ -107,10 +115,11 @@ export function alleMeilensteinErgebnisse(
   index: PlanIndex,
   stufen: ReadonlyMap<string, Stufe>,
   stati: MeilensteinStati,
+  modell: Stufenmodell = 'DREI_STUFEN',
 ): { code: MeilensteinCode; bereitschaft: string }[] {
   const gesamt = fortschritt(index.aktiveLeistungszielIds, stufen);
   return MEILENSTEINE.map((code) => ({
     code,
-    bereitschaft: meilensteinBereitschaft(code, index, stufen, stati, gesamt),
+    bereitschaft: meilensteinBereitschaft(code, index, stufen, stati, gesamt, modell),
   }));
 }

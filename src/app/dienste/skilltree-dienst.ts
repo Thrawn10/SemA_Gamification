@@ -15,6 +15,7 @@ import type {
   SkilltreeAnsicht,
   Stufe,
   Stufenereignis,
+  Stufenmodell,
   VerlaufEintrag,
   Vorlage,
   Zuordnung,
@@ -22,8 +23,9 @@ import type {
 import {
   ANFRAGE_STATUS_TEXTE,
   FachlicherFehler,
-  MEILENSTEIN_TEXTE,
-  STUFEN_TEXTE,
+  meilensteinTexteFuer,
+  stufenmodellFuer,
+  stufenText,
 } from '@skilltree/vertraege';
 import {
   aktiveBestaetigungen,
@@ -37,6 +39,7 @@ import {
   erstelleBadgeDefinitionen,
   fortschritt,
   indexierePlan,
+  istAktuellesBadgeSet,
   istZuordnungGueltig,
   kanten,
   kantenzustand,
@@ -46,7 +49,8 @@ import {
   meilensteinStati,
   meilensteinStatusMap,
   naechsteKnoten,
-  stufenMap,
+  stufenMapFuerModell,
+  type MeilensteinStatusMap,
   type PlanIndex,
 } from '@skilltree/regeln';
 import {
@@ -90,7 +94,8 @@ export class SkilltreeDienst {
   async laden(ausbildungId: string): Promise<SkilltreeAnsicht> {
     const kontext = await this.ladeKontext(ausbildungId);
     const jetzt = this.uhr();
-    const stufen = stufenMap(kontext.stufenereignisse);
+    const modell = stufenmodellFuer(kontext.vorlage.stufenmodell, kontext.lehrberuf.stufenmodell);
+    const stufen = stufenMapFuerModell(kontext.stufenereignisse, modell);
     const stati = meilensteinStati(kontext.meilensteinereignisse);
     const ampeln = kompetenzAmpeln(kontext.index, stufen);
     const naechste = naechsteKnoten(kontext.index, stufen);
@@ -115,7 +120,7 @@ export class SkilltreeDienst {
             throw new FachlicherFehler('NICHT_GEFUNDEN', 'Leistungsziel fehlt im Plan.');
           }
           const offene = offeneProZiel.get(zielId) ?? [];
-          const verlauf = this.verlaufFuer(zielId, kontext, aktiveIds);
+          const verlauf = this.verlaufFuer(zielId, kontext, aktiveIds, modell);
           return {
             leistungsziel,
             stufe: stufen.get(zielId) ?? 0,
@@ -139,6 +144,8 @@ export class SkilltreeDienst {
             (summe, ziel) => summe + ziel.offeneAnfrageAnzahl,
             0,
           ),
+          abgeschlosseneLeistungsziele: leistungsziele.filter((ziel) => ziel.stufe >= 3).length,
+          anzahlLeistungsziele: leistungsziele.length,
         };
       });
       return {
@@ -158,6 +165,9 @@ export class SkilltreeDienst {
           (summe, kompetenz) => summe + kompetenz.offeneAnfragen,
           0,
         ),
+        abgeschlosseneLeistungsziele: ziele.filter((zielId) => (stufen.get(zielId) ?? 0) >= 3)
+          .length,
+        anzahlLeistungsziele: ziele.length,
       };
     });
 
@@ -180,8 +190,9 @@ export class SkilltreeDienst {
           stufen,
           stati,
           fortschritt(kontext.index.aktiveLeistungszielIds, stufen),
+          modell,
         ),
-        verlauf: this.meilensteinVerlauf(code, kontext),
+        verlauf: this.meilensteinVerlauf(code, kontext, modell),
       };
     });
 
@@ -194,13 +205,14 @@ export class SkilltreeDienst {
           liste.findIndex((anderer) => anderer.id === eintrag.id) === index,
       );
 
-    const badges = await this.badgesFuer(kontext, stufen);
+    const badges = await this.badgesFuer(kontext, stufen, modell, statusMap);
 
     return {
       ausbildung: kontext.ausbildung,
       lernende: kontext.benutzerNachId.get(kontext.ausbildung.lernendeId) ?? kontext.benutzer,
       lehrberuf: kontext.lehrberuf,
       vorlage: kontext.vorlage,
+      stufenmodell: modell,
       rolle: kontext.benutzer.rolle,
       lehrjahr: berechneLehrjahr(
         kontext.ausbildung.lehrbeginn,
@@ -270,6 +282,7 @@ export class SkilltreeDienst {
     leistungszielId: string,
     kontext: TreeKontext,
     aktiveIds: ReadonlySet<string>,
+    modell: Stufenmodell,
   ): VerlaufEintrag[] {
     const eintraege: VerlaufEintrag[] = [];
 
@@ -280,7 +293,7 @@ export class SkilltreeDienst {
       eintraege.push({
         id: ereignis.id,
         art: 'EREIGNIS',
-        aktion: aktionsText(ereignis),
+        aktion: aktionsText(ereignis, modell),
         zeitpunkt: ereignis.zeitpunkt,
         akteurId: ereignis.akteurId,
         akteurName: kontext.benutzerNachId.get(ereignis.akteurId)?.name ?? 'Unbekannt',
@@ -320,6 +333,7 @@ export class SkilltreeDienst {
   private meilensteinVerlauf(
     code: MeilensteinEreignis['meilenstein'],
     kontext: TreeKontext,
+    modell: Stufenmodell,
   ): VerlaufEintrag[] {
     const eintraege: VerlaufEintrag[] = [];
     const aktive = new Set(aktiveMeilensteinIds(kontext.meilensteinereignisse));
@@ -327,13 +341,14 @@ export class SkilltreeDienst {
       if (ereignis.meilenstein !== code) {
         continue;
       }
+      const texte = meilensteinTexteFuer(code, modell);
       eintraege.push({
         id: ereignis.id,
         art: 'EREIGNIS',
         aktion:
           ereignis.aktion === 'ERREICHT'
-            ? `${MEILENSTEIN_TEXTE[code].name} als erreicht bestätigt`
-            : `Rücknahme ${MEILENSTEIN_TEXTE[code].name}`,
+            ? `${texte.name} als erreicht bestätigt`
+            : `Rücknahme ${texte.name}`,
         zeitpunkt: ereignis.zeitpunkt,
         akteurId: ereignis.akteurId,
         akteurName: kontext.benutzerNachId.get(ereignis.akteurId)?.name ?? 'Unbekannt',
@@ -349,17 +364,21 @@ export class SkilltreeDienst {
   private async badgesFuer(
     kontext: TreeKontext,
     stufen: ReadonlyMap<string, Stufe>,
+    modell: Stufenmodell,
+    meilensteine: MeilensteinStatusMap,
   ): Promise<BadgesAnsicht> {
     const gespeicherte = await this.badgeRepository.definitionen(kontext.vorlage.id);
     const definitionen =
-      gespeicherte.length > 0
+      gespeicherte.length > 0 && istAktuellesBadgeSet(gespeicherte)
         ? gespeicherte
-        : erstelleBadgeDefinitionen(kontext.index.struktur, kontext.vorlage.id);
+        : erstelleBadgeDefinitionen(kontext.index.struktur, kontext.vorlage.id, modell);
     const vergaben = berechneBadgeVergaben(
       definitionen,
       kontext.index,
       kontext.stufenereignisse,
       kontext.ausbildung.id,
+      modell,
+      kontext.meilensteinereignisse,
     );
     const nachBadge = new Map(vergaben.map((vergabe) => [vergabe.badgeId, vergabe]));
     const istEigeneAnsicht = kontext.benutzer.id === kontext.ausbildung.lernendeId;
@@ -371,12 +390,12 @@ export class SkilltreeDienst {
 
     for (const definition of [...definitionen].sort((a, b) => a.reihenfolge - b.reihenfolge)) {
       const vergabe = nachBadge.get(definition.id) ?? null;
-      const bedingung = badgeBedingung(definition, kontext.index, stufen);
+      const bedingung = badgeBedingung(definition, kontext.index, stufen, meilensteine);
       const ansicht: BadgeAnsicht = {
         definition,
         vergabe,
         status: vergabe?.aktiv ? 'ERHALTEN' : vergabe ? 'INAKTIV' : 'OFFEN',
-        fortschrittText: badgeFortschrittText(definition, bedingung),
+        fortschrittText: badgeFortschrittText(definition, bedingung, modell),
         aktuell: bedingung.aktuell,
         gesamt: bedingung.gesamt,
       };
@@ -410,14 +429,15 @@ export class SkilltreeDienst {
   }
 }
 
-function aktionsText(ereignis: Stufenereignis): string {
+function aktionsText(ereignis: Stufenereignis, modell: Stufenmodell): string {
+  const text = stufenText(modell, ereignis.stufe);
   switch (ereignis.aktion) {
     case 'BESTAETIGT':
-      return `${STUFEN_TEXTE[ereignis.stufe]} bestätigt`;
+      return `${text} bestätigt`;
     case 'UEBERNOMMEN':
-      return `${STUFEN_TEXTE[ereignis.stufe]} aus Bildungsplan übernommen`;
+      return `${text} aus Bildungsplan übernommen`;
     case 'ZURUECKGENOMMEN':
-      return `Rücknahme ${STUFEN_TEXTE[ereignis.stufe]}`;
+      return `Rücknahme ${text}`;
   }
 }
 

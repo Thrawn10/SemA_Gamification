@@ -1,0 +1,1134 @@
+{
+  "lehrberuf": {
+    "code": "INF-PIBS",
+    "name": "Praxisintegriertes Bachelor-Studium Informatik (PiBS)",
+    "fachrichtung": "Informatik (Bachelor of Science SUPSI in Informatik, FFHS)",
+    "lehrdauerJahre": 4,
+    "abschluss": "Bachelor of Science SUPSI in Informatik",
+    "hochschule": "FFHS Fernfachhochschule Schweiz",
+    "ects": 180,
+    "dauerSemester": 8,
+    "studienmodell": "Praxisintegriert (Blended Learning: ca. 40% Unternehmen, 20% Präsenz, 40% begleitetes Selbststudium)",
+    "studienorte": ["Bern", "Zürich"],
+    "studienbeginn": "August (Herbstsemester)"
+  },
+  "bildungsplanJahr": 2021,
+  "version": 1,
+  "stufenmodell": "BINAER",
+  "quelle": "https://www.ffhs.ch/de/bachelor/praxisintegriertes-bachelor-studium-informatik-pibs",
+  "quellen": [
+    "https://www.ffhs.ch/de/bachelor/praxisintegriertes-bachelor-studium-informatik-pibs",
+    "https://www.ffhs.ch/fileadmin/dam/upload/studium/reglemente/bsc-informatik-pibs-studienordnung.pdf (Studien- und Rahmenordnung PiBS Informatik vom 01.02.2021, ab Studienjahrgang 2020)",
+    "https://www.ffhs.ch/de/bachelor/bsc-informatik/wahlmodule-informatik"
+  ],
+  "inhaltsStatus": "ENTWURF: Struktur, Module, Semesterzuordnung, Vertiefungen, Wahlmodule und ECTS-Regeln stammen von der FFHS-Website und der Studienordnung. Die Kompetenzen, Beschreibungen und Leistungsziele sind aus Modultiteln und dem Studienziel (Studienordnung Art. 2) abgeleitet, da die offiziellen Modulbeschreibungen (SharePoint-PDFs) nicht zugänglich waren. Vor produktivem Einsatz gegen die Modulbeschreibungen der FFHS prüfen.",
+  "hinweise": [
+    "Schlüssel unter 'module' folgen dem Beispiel INF-APP: 'berufsfachschule' = Module an der FFHS (Hochschule), 'basislehrjahr' = optionales Informatik-Basislehrjahr im 1. Studienjahr (ICT Berufsbildungscenter AG), 'uek' = nicht vorhanden.",
+    "Modulreferenzen: 'S1' bis 'S8' = Semester laut Modulübersicht; 'S5-S8' = Vertiefungs- bzw. Wahlmodul in den Semestern 5 bis 8 (genaue Semesterzuordnung je Modul nicht publiziert).",
+    "Pro Regelsemester: 4 Module zu je 5 ECTS plus Transferarbeit zu 3 ECTS ab dem 3. Semester (Studienordnung Art. 7 Abs. 4). Für Semester 1, 2 und 8 sind die ECTS je Modul nicht publiziert.",
+    "Taxonomiestufen (K1 bis K6) sind Vorschläge und nicht offiziell vorgegeben."
+  ],
+  "bereiche": [
+    {
+      "code": "A",
+      "titel": "Grundlagen der Informatik und Mathematik",
+      "kompetenzen": [
+        {
+          "code": "a1",
+          "titel": "Mathematische Grundlagen für die Informatik anwenden",
+          "beschreibung": "Informatikerinnen und Informatiker wenden mathematische Methoden auf informatische Fragestellungen an: Sie nutzen Konzepte der diskreten Mathematik, der linearen Algebra sowie der Wahrscheinlichkeitsrechnung und Statistik, um Probleme zu modellieren, zu berechnen und Ergebnisse zu beurteilen.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "S1: Diskrete Mathematik",
+              "S2: Lineare Algebra",
+              "S2: Wahrscheinlichkeitsrechnung und Statistik"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "a1.1",
+              "text": "Sie wenden Methoden der diskreten Mathematik (z.B. Logik, Mengen, Relationen, Graphen, Kombinatorik) auf informatische Fragestellungen an.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a1.2",
+              "text": "Sie lösen Problemstellungen der linearen Algebra (z.B. Vektoren, Matrizen, lineare Gleichungssysteme).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a1.3",
+              "text": "Sie berechnen Wahrscheinlichkeiten und werten Daten mit Methoden der deskriptiven und schliessenden Statistik aus.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a1.4",
+              "text": "Sie beurteilen, welche mathematischen Modelle sich für eine informatische Problemstellung eignen.",
+              "taxonomie": "K4"
+            }
+          ]
+        },
+        {
+          "code": "a2",
+          "titel": "Aufbau und Funktionsweise von Rechnersystemen verstehen",
+          "beschreibung": "Informatikerinnen und Informatiker verstehen, wie Rechner auf technischer Ebene aufgebaut sind und funktionieren: Sie kennen Zahlensysteme und Codierungen, digitale Schaltungen sowie die Grundkomponenten eines Rechnersystems und ordnen das Zusammenspiel von Hardware und Software ein.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["S1: Grundlagen der technischen Informatik"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "a2.1",
+              "text": "Sie rechnen mit Zahlensystemen und erläutern gängige Codierungen von Zahlen und Zeichen.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a2.2",
+              "text": "Sie entwerfen einfache digitale Schaltungen mit Hilfe der Booleschen Algebra.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a2.3",
+              "text": "Sie erklären den Aufbau eines Rechnersystems (Prozessor, Speicher, Ein-/Ausgabe).",
+              "taxonomie": "K2"
+            },
+            {
+              "code": "a2.4",
+              "text": "Sie ordnen das Zusammenspiel von Hardware, Betriebssystem und Anwendungssoftware ein.",
+              "taxonomie": "K4"
+            }
+          ]
+        },
+        {
+          "code": "a3",
+          "titel": "Datenstrukturen und Algorithmen auswählen, implementieren und analysieren",
+          "beschreibung": "Informatikerinnen und Informatiker wählen für ein Problem passende Datenstrukturen und Algorithmen aus, implementieren sie und beurteilen deren Laufzeit- und Speicherverhalten.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["S3: Datenstrukturen & Algorithmen"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "a3.1",
+              "text": "Sie wählen für eine Problemstellung geeignete Datenstrukturen (z.B. Listen, Bäume, Hashtabellen, Graphen) aus.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a3.2",
+              "text": "Sie implementieren Standardalgorithmen (z.B. Suchen, Sortieren, Graphalgorithmen).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "a3.3",
+              "text": "Sie analysieren Laufzeit- und Speicherkomplexität von Algorithmen.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "a3.4",
+              "text": "Sie vergleichen alternative Algorithmen und bewerten sie hinsichtlich ihrer Eignung.",
+              "taxonomie": "K4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "B",
+      "titel": "Entwickeln von Software und Applikationen",
+      "kompetenzen": [
+        {
+          "code": "b1",
+          "titel": "Objektorientiert programmieren",
+          "beschreibung": "Informatikerinnen und Informatiker programmieren in einer objektorientierten Sprache (Java): Sie setzen die Grundkonzepte der Sprache ein, entwickeln strukturierte und nachvollziehbare Programme und realisieren auf Projektstufe grössere Anwendungen im Team.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["S1: Java Fundamentals", "S2: Java Project Level"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "b1.1",
+              "text": "Sie wenden die Grundkonzepte von Java an (Datentypen, Kontrollstrukturen, Klassen, Vererbung, Schnittstellen).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b1.2",
+              "text": "Sie entwickeln strukturierte, nachvollziehbare und testbare Programme gemäss gängigen Coderichtlinien.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b1.3",
+              "text": "Sie setzen Entwicklungswerkzeuge (IDE, Build-Tools, Versionsverwaltung) zielgerichtet ein.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b1.4",
+              "text": "Sie realisieren im Team eine Java-Anwendung auf Projektstufe.",
+              "taxonomie": "K5"
+            }
+          ]
+        },
+        {
+          "code": "b2",
+          "titel": "Software modellieren",
+          "beschreibung": "Informatikerinnen und Informatiker erfassen Anforderungen und stellen sie in Modellen dar: Sie erstellen UML-Modelle für Struktur und Verhalten eines Systems, prüfen sie auf Konsistenz und Vollständigkeit und leiten daraus die Implementierung ab.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["S3: Software Engineering Modellierung"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "b2.1",
+              "text": "Sie erheben und dokumentieren fachliche Anforderungen an ein Softwaresystem.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b2.2",
+              "text": "Sie erstellen UML-Modelle (z.B. Use Cases, Klassen-, Sequenz- und Aktivitätsdiagramme).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b2.3",
+              "text": "Sie überprüfen Modelle auf Konsistenz und Vollständigkeit.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "b2.4",
+              "text": "Sie leiten aus Modellen eine Implementierung ab.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "b3",
+          "titel": "Software-Architekturen entwerfen",
+          "beschreibung": "Informatikerinnen und Informatiker entwerfen Software-Architekturen anhand von Qualitätsanforderungen: Sie kennen Architektur- und Entwurfsmuster, bewerten Architekturvarianten und dokumentieren die gewählte Lösung.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["S4: Software Engineering Architektur"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "b3.1",
+              "text": "Sie erläutern gängige Architekturmuster (z.B. Schichten, Client-Server, Microservices).",
+              "taxonomie": "K2"
+            },
+            {
+              "code": "b3.2",
+              "text": "Sie wenden Entwurfsmuster in Softwareentwürfen an.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b3.3",
+              "text": "Sie bewerten Architekturvarianten anhand funktionaler und nicht-funktionaler Qualitätsanforderungen.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "b3.4",
+              "text": "Sie dokumentieren eine Architektur nachvollziehbar.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "b4",
+          "titel": "Enterprise-Applikationen entwickeln",
+          "beschreibung": "Informatikerinnen und Informatiker entwickeln mehrschichtige Unternehmensanwendungen mit Java-Technologien, setzen Persistenz und Schnittstellen um und sichern die Qualität durch automatisierte Tests.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["S4: Java Enterprise Application"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "b4.1",
+              "text": "Sie realisieren mehrschichtige Enterprise-Applikationen mit Java-Frameworks.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b4.2",
+              "text": "Sie setzen Datenpersistenz, Transaktionen und Schnittstellen (z.B. REST) um.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b4.3",
+              "text": "Sie sichern die Qualität der Anwendung mit automatisierten Tests.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "b5",
+          "titel": "Webanwendungen entwickeln",
+          "beschreibung": "Informatikerinnen und Informatiker entwickeln Webanwendungen vom Frontend bis zur Server-Kommunikation: Sie setzen Web-Technologien und moderne Frameworks ein und berücksichtigen dabei Sicherheit, Performance und Barrierefreiheit.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["S1: Web-Grundlagen", "S6: Web Engineering"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "b5.1",
+              "text": "Sie erstellen Webseiten mit HTML, CSS und JavaScript.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b5.2",
+              "text": "Sie erklären die Client-Server-Kommunikation im Web (z.B. HTTP).",
+              "taxonomie": "K2"
+            },
+            {
+              "code": "b5.3",
+              "text": "Sie entwickeln Webanwendungen mit modernen Web-Frameworks.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "b5.4",
+              "text": "Sie berücksichtigen Sicherheit, Performance und Barrierefreiheit beim Entwurf von Webanwendungen.",
+              "taxonomie": "K4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "C",
+      "titel": "Aufbauen und Auswerten von Daten",
+      "kompetenzen": [
+        {
+          "code": "c1",
+          "titel": "Relationale Datenbanken entwerfen und nutzen",
+          "beschreibung": "Informatikerinnen und Informatiker entwerfen relationale Datenbanken und arbeiten damit: Sie modellieren Daten, normalisieren das Modell, setzen es in einem Datenbanksystem um und fragen und verändern Daten mit SQL.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["S2: Datenbanksysteme"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "c1.1",
+              "text": "Sie erstellen Datenmodelle (z.B. ER-Modelle), überführen sie ins relationale Modell und normalisieren sie.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c1.2",
+              "text": "Sie erstellen Datenbankstrukturen und fragen und verändern Daten mit SQL.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c1.3",
+              "text": "Sie erklären Transaktionen, Integritätsbedingungen und Indizes.",
+              "taxonomie": "K2"
+            },
+            {
+              "code": "c1.4",
+              "text": "Sie beurteilen Datenbankentwürfe hinsichtlich Qualität und Performance.",
+              "taxonomie": "K4"
+            }
+          ]
+        },
+        {
+          "code": "c2",
+          "titel": "Big-Data- und NoSQL-Technologien einsetzen",
+          "beschreibung": "Informatikerinnen und Informatiker ordnen Datenszenarien ein und wählen geeignete Datenspeicher: Sie unterscheiden NoSQL-Datenbanktypen und setzen diese sowie verteilte Verarbeitungskonzepte für grosse Datenmengen prototypisch ein.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["S4: Big Data & NoSQL"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "c2.1",
+              "text": "Sie charakterisieren Big-Data-Szenarien (z.B. anhand des 4V-Modells).",
+              "taxonomie": "K2"
+            },
+            {
+              "code": "c2.2",
+              "text": "Sie unterscheiden NoSQL-Datenbanktypen und ihre Einsatzgebiete.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "c2.3",
+              "text": "Sie wählen für eine Anwendung einen geeigneten Datenspeicher aus und begründen die Wahl.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "c2.4",
+              "text": "Sie setzen NoSQL-Datenbanken prototypisch ein.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "c3",
+          "titel": "Methoden des Machine Learning anwenden",
+          "beschreibung": "Informatikerinnen und Informatiker wenden grundlegende Methoden des maschinellen Lernens an: Sie bereiten Daten auf, trainieren und evaluieren Modelle und reflektieren deren Grenzen.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["S5: Machine Learning"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "c3.1",
+              "text": "Sie erklären die Grundprinzipien des überwachten und unüberwachten Lernens.",
+              "taxonomie": "K2"
+            },
+            {
+              "code": "c3.2",
+              "text": "Sie bereiten Daten auf und trainieren Modelle mit geeigneten Werkzeugen.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "c3.3",
+              "text": "Sie beurteilen die Güte von Modellen anhand geeigneter Metriken (z.B. Overfitting, Generalisierung).",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "c3.4",
+              "text": "Sie reflektieren Grenzen, Verzerrungen und ethische Aspekte von Machine-Learning-Systemen.",
+              "taxonomie": "K4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "D",
+      "titel": "Systeme und Netzwerke betreiben",
+      "kompetenzen": [
+        {
+          "code": "d1",
+          "titel": "Server installieren und konfigurieren",
+          "beschreibung": "Informatikerinnen und Informatiker installieren und konfigurieren Server und Serverdienste: Sie verwalten Benutzer und Rechte, automatisieren Administrationsaufgaben und dokumentieren die Konfiguration.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["S2: Installation & Konfiguration von Servern"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "d1.1",
+              "text": "Sie installieren und konfigurieren Serverbetriebssysteme und Serverdienste.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d1.2",
+              "text": "Sie richten Benutzer- und Rechteverwaltung ein.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d1.3",
+              "text": "Sie automatisieren Administrationsaufgaben mit Skripten.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d1.4",
+              "text": "Sie dokumentieren Installation und Konfiguration nachvollziehbar.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "d2",
+          "titel": "Rechnernetze verstehen und analysieren",
+          "beschreibung": "Informatikerinnen und Informatiker verstehen den Aufbau und die Protokolle von Rechnernetzen: Sie planen Adressierung und Netzstrukturen und analysieren Netzwerkprobleme.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["S3: Rechnernetze"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "d2.1",
+              "text": "Sie erklären Schichtenmodelle und Protokolle (z.B. ISO/OSI, TCP/IP).",
+              "taxonomie": "K2"
+            },
+            {
+              "code": "d2.2",
+              "text": "Sie planen IP-Adressierung und Subnetze.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "d2.3",
+              "text": "Sie erläutern Routing, Switching und zentrale Netzwerkdienste.",
+              "taxonomie": "K2"
+            },
+            {
+              "code": "d2.4",
+              "text": "Sie analysieren Netzwerkverkehr und grenzen Netzwerkprobleme ein.",
+              "taxonomie": "K4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "E",
+      "titel": "Sicherheit und Datenschutz",
+      "kompetenzen": [
+        {
+          "code": "e1",
+          "titel": "Informationssicherheit gewährleisten",
+          "beschreibung": "Informatikerinnen und Informatiker beurteilen Bedrohungen und Risiken für Informationen und Systeme, leiten Schutzmassnahmen ab und setzen grundlegende Sicherheitsmechanismen ein. Sie berücksichtigen dabei gesetzliche Rahmenbedingungen.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["S4: Informationssicherheit"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "e1.1",
+              "text": "Sie erläutern Schutzziele (Vertraulichkeit, Integrität, Verfügbarkeit) und typische Bedrohungen.",
+              "taxonomie": "K2"
+            },
+            {
+              "code": "e1.2",
+              "text": "Sie analysieren Risiken und leiten geeignete Schutzmassnahmen ab.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "e1.3",
+              "text": "Sie wenden grundlegende Sicherheitsmechanismen an (z.B. Verschlüsselung, Authentifizierung, Zugriffskontrolle).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "e1.4",
+              "text": "Sie berücksichtigen gesetzliche Vorgaben und Datenschutzanforderungen.",
+              "taxonomie": "K3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "F",
+      "titel": "Projekte, Wirtschaft und Kommunikation",
+      "kompetenzen": [
+        {
+          "code": "f1",
+          "titel": "Benutzerschnittstellen nutzerzentriert gestalten",
+          "beschreibung": "Informatikerinnen und Informatiker gestalten Benutzerschnittstellen anhand der Bedürfnisse der Nutzenden: Sie analysieren Nutzer und Aufgaben, entwerfen Prototypen und überprüfen die Gebrauchstauglichkeit.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["S7: Mensch-Computer Interaktion"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "f1.1",
+              "text": "Sie erläutern Prinzipien und Gestaltungsgesetze der Mensch-Computer-Interaktion.",
+              "taxonomie": "K2"
+            },
+            {
+              "code": "f1.2",
+              "text": "Sie analysieren Nutzergruppen und deren Aufgaben und Bedürfnisse.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "f1.3",
+              "text": "Sie entwerfen Prototypen von Benutzerschnittstellen.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "f1.4",
+              "text": "Sie überprüfen die Gebrauchstauglichkeit mit geeigneten Methoden (z.B. Usability-Tests).",
+              "taxonomie": "K4"
+            }
+          ]
+        },
+        {
+          "code": "f2",
+          "titel": "Informatikprojekte planen, wirtschaftlich beurteilen und führen",
+          "beschreibung": "Informatikerinnen und Informatiker planen und steuern Projekte: Sie wählen passende Vorgehensmodelle, planen Aufgaben, Termine, Ressourcen und Risiken, beurteilen die Wirtschaftlichkeit und wenden Grundsätze der Führung und Teamarbeit an.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "S1: Projektmanagement Grundlagen",
+              "S6: Projektmanagement, Wirtschaftlichkeit & Führung"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "f2.1",
+              "text": "Sie planen ein Projekt (Ziele, Aufgaben, Termine, Ressourcen, Risiken).",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "f2.2",
+              "text": "Sie vergleichen klassische und agile Vorgehensmodelle und wählen ein passendes aus.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "f2.3",
+              "text": "Sie beurteilen die Wirtschaftlichkeit von Projekten und Lösungen (Kosten und Nutzen).",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "f2.4",
+              "text": "Sie wenden Grundsätze der Führung und Zusammenarbeit in Teams an.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "f3",
+          "titel": "Informatik in Gesellschafts- und Wirtschaftsordnung einordnen",
+          "beschreibung": "Informatikerinnen und Informatiker ordnen ihre Tätigkeit in gesellschaftliche, wirtschaftliche und rechtliche Zusammenhänge ein und beurteilen die Auswirkungen digitaler Technologien.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["S3: Agieren in einer Gesellschafts- und Wirtschaftsordnung"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "f3.1",
+              "text": "Sie erläutern grundlegende wirtschaftliche und gesellschaftliche Zusammenhänge.",
+              "taxonomie": "K2"
+            },
+            {
+              "code": "f3.2",
+              "text": "Sie ordnen ihre berufliche Tätigkeit in rechtliche und wirtschaftliche Rahmenbedingungen ein.",
+              "taxonomie": "K2"
+            },
+            {
+              "code": "f3.3",
+              "text": "Sie analysieren Auswirkungen digitaler Technologien auf Gesellschaft und Wirtschaft.",
+              "taxonomie": "K4"
+            }
+          ]
+        },
+        {
+          "code": "f4",
+          "titel": "Kommunizieren, präsentieren und interkulturell zusammenarbeiten",
+          "beschreibung": "Informatikerinnen und Informatiker kommunizieren und präsentieren fachliche Inhalte adressatengerecht und arbeiten in kulturell vielfältigen Teams zusammen.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["S5: Kommunikation, Präsentation, Interkulturelle Kompetenzen"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "f4.1",
+              "text": "Sie präsentieren fachliche Inhalte adressatengerecht und überzeugend.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "f4.2",
+              "text": "Sie führen Fachgespräche und Verhandlungen zielgerichtet.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "f4.3",
+              "text": "Sie berücksichtigen kulturelle Unterschiede in der Zusammenarbeit.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "f4.4",
+              "text": "Sie reflektieren ihr eigenes Kommunikationsverhalten.",
+              "taxonomie": "K4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "G",
+      "titel": "Praxistransfer und wissenschaftliches Arbeiten",
+      "kompetenzen": [
+        {
+          "code": "g1",
+          "titel": "Studieninhalte im Praxisunternehmen anwenden und Transfer reflektieren",
+          "beschreibung": "Studierende im PiBS arbeiten parallel zum Studium im Praxisunternehmen (Studienausbildungsvertrag). Sie wenden Studieninhalte auf Aufgaben im Betrieb an, übernehmen wachsende Verantwortung und dokumentieren und reflektieren den Transfer zwischen Theorie und Praxis in den Transferarbeiten I bis V, deren Themen zwischen FFHS und Unternehmen abgestimmt werden.",
+          "module": {
+            "basislehrjahr": [
+              "Informatik-Basislehrjahr im 1. Studienjahr (optional, je nach Unternehmen; ICT Berufsbildungscenter AG)"
+            ],
+            "berufsfachschule": [
+              "S3: Transferarbeit I",
+              "S4: Transferarbeit II",
+              "S5: Transferarbeit III",
+              "S6: Transferarbeit IV",
+              "S7: Transferarbeit V"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "g1.1",
+              "text": "Sie wenden Studieninhalte auf konkrete Aufgaben im Praxisunternehmen an.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g1.2",
+              "text": "Sie dokumentieren die Bearbeitung betrieblicher Aufgaben in einer Transferarbeit nachvollziehbar.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g1.3",
+              "text": "Sie reflektieren den Transfer zwischen Studieninhalten und betrieblicher Praxis.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "g1.4",
+              "text": "Sie übernehmen im Unternehmen schrittweise mehr Verantwortung für Aufgaben und Ergebnisse.",
+              "taxonomie": "K3"
+            }
+          ]
+        },
+        {
+          "code": "g2",
+          "titel": "Wissenschaftlich arbeiten und die Bachelor-Thesis erstellen",
+          "beschreibung": "Informatikerinnen und Informatiker bearbeiten Fragestellungen methodisch und wissenschaftlich: Sie recherchieren und bewerten Quellen, verfassen eine wissenschaftliche Arbeit mit korrekter Quellenangabe und präsentieren und verteidigen ihre Ergebnisse. Die Bachelor-Thesis wird mit dem Unternehmen abgestimmt.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": ["S7: Informatikseminar", "S8: Bachelor-Thesis & Kolloquium"],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "g2.1",
+              "text": "Sie recherchieren wissenschaftliche und fachliche Quellen und bewerten deren Verlässlichkeit.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "g2.2",
+              "text": "Sie bearbeiten eine Fragestellung mit einer geeigneten wissenschaftlichen Methodik.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "g2.3",
+              "text": "Sie verfassen eine wissenschaftliche Arbeit mit korrekter Quellenangabe.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "g2.4",
+              "text": "Sie präsentieren und verteidigen ihre Ergebnisse im Kolloquium.",
+              "taxonomie": "K5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "H",
+      "titel": "Vertiefung und Wahlmodule",
+      "kompetenzen": [
+        {
+          "code": "h1",
+          "titel": "Vertiefung Data Science",
+          "beschreibung": "Studierende der Vertiefung Data Science entwickeln und betreiben datengetriebene Lösungen: Sie verarbeiten natürliche Sprache, setzen Reinforcement Learning und Deep Learning ein und bauen Datenpipelines (Data Engineering). Die Vertiefungsmodule finden online samstags zusammen mit den berufsbegleitend Studierenden statt.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "S5-S8: Natural Language Processing",
+              "S5-S8: Reinforcement Learning",
+              "S5-S8: Data Engineering",
+              "S5-S8: Deep Learning"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "h1.1",
+              "text": "Sie wenden Methoden der Verarbeitung natürlicher Sprache auf Textdaten an.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "h1.2",
+              "text": "Sie setzen Reinforcement-Learning-Verfahren für Entscheidungsprobleme ein.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "h1.3",
+              "text": "Sie entwerfen und implementieren Datenpipelines für die Erfassung und Aufbereitung grosser Datenmengen.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "h1.4",
+              "text": "Sie entwickeln und evaluieren Deep-Learning-Modelle.",
+              "taxonomie": "K5"
+            }
+          ]
+        },
+        {
+          "code": "h2",
+          "titel": "Vertiefung Enterprise Computing",
+          "beschreibung": "Studierende der Vertiefung Enterprise Computing entwerfen und realisieren verteilte Unternehmensanwendungen: Sie setzen Java Enterprise Edition und serviceorientierte Architekturen ein und verwalten Unternehmensdaten.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "S5-S8: Verteilte Systeme und Anwendungen",
+              "S5-S8: Java Enterprise Edition",
+              "S5-S8: Service Oriented Architecture",
+              "S5-S8: Enterprise Data Management"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "h2.1",
+              "text": "Sie entwerfen verteilte Systeme und Anwendungen und beurteilen deren Eigenschaften.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "h2.2",
+              "text": "Sie realisieren Unternehmensanwendungen mit Java Enterprise Edition.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "h2.3",
+              "text": "Sie entwerfen serviceorientierte Architekturen und binden Dienste ein.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "h2.4",
+              "text": "Sie gestalten die Verwaltung von Unternehmensdaten (Enterprise Data Management).",
+              "taxonomie": "K4"
+            }
+          ]
+        },
+        {
+          "code": "h3",
+          "titel": "Vertiefung Informationssicherheit",
+          "beschreibung": "Studierende der Vertiefung Informationssicherheit beurteilen und stärken die Sicherheit von Systemen und Organisationen: Sie kennen Sicherheitsrisiken im Internet, setzen kryptologische Verfahren ein, managen IT-Security und reagieren auf Sicherheitsvorfälle.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "S5-S8: Internetsicherheit",
+              "S5-S8: Kryptologie",
+              "S5-S8: Management von IT-Security",
+              "S5-S8: Reaktive Informationssicherheit"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "h3.1",
+              "text": "Sie analysieren Angriffe und Schwachstellen im Internet und leiten Schutzmassnahmen ab.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "h3.2",
+              "text": "Sie setzen kryptologische Verfahren zielgerichtet ein.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "h3.3",
+              "text": "Sie planen und steuern Massnahmen des IT-Security-Managements.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "h3.4",
+              "text": "Sie erkennen, analysieren und behandeln Sicherheitsvorfälle.",
+              "taxonomie": "K4"
+            }
+          ]
+        },
+        {
+          "code": "h4",
+          "titel": "Vertiefung Systems Engineering",
+          "beschreibung": "Studierende der Vertiefung Systems Engineering konzipieren, betreiben und sichern verteilte Systeme: Sie setzen Cloud-Technologien und DevOps-Praktiken ein und berücksichtigen die Internetsicherheit.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "S5-S8: Verteilte Systeme und Anwendungen",
+              "S5-S8: Cloud Computing",
+              "S5-S8: DevOps",
+              "S5-S8: Internetsicherheit"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "h4.1",
+              "text": "Sie entwerfen verteilte Systeme und Anwendungen und beurteilen deren Eigenschaften.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "h4.2",
+              "text": "Sie konzipieren und realisieren Lösungen auf Cloud-Plattformen.",
+              "taxonomie": "K5"
+            },
+            {
+              "code": "h4.3",
+              "text": "Sie setzen DevOps-Praktiken und -Werkzeuge für Integration, Auslieferung und Betrieb ein.",
+              "taxonomie": "K3"
+            },
+            {
+              "code": "h4.4",
+              "text": "Sie analysieren Angriffe und Schwachstellen im Internet und leiten Schutzmassnahmen ab.",
+              "taxonomie": "K4"
+            }
+          ]
+        },
+        {
+          "code": "h5",
+          "titel": "Individuelle Schwerpunkte mit Wahlmodulen setzen",
+          "beschreibung": "Studierende setzen mit einem Wahlmodul pro Semester im 5. bis 8. Semester individuelle Schwerpunkte. Die konkrete Auswahl wird den Studierenden während des Studiums in einem Wahlkurs auf Moodle freigeschaltet und unterscheidet sich je nach Studiengang. Wahlmodule finden online samstags statt.",
+          "module": {
+            "basislehrjahr": [],
+            "berufsfachschule": [
+              "S5-S8: Software & Architekturen: C++, Cloud Computing, Data Warehousing und Business Intelligence, Fortgeschrittene Web-Technologien, Game Development, Software Qualität, DevOps, Blockchain, Innovation und Technologie, Enterprise Architecture, Quantum Computing, Generative KI in der Softwareentwicklung",
+              "S5-S8: Systemtechnik: Embedded Systems, Mobilkommunikation, Mobile App Development",
+              "S5-S8: Data Science: Data Analytics, Ethik und Regulierung der Künstlichen Intelligenz, Machine Learning Operations",
+              "S5-S8: Cyber Security: Operating Systems and Hardware Security, IT-Forensik, Secure Software Coding, IT-Governance Risk & Datenschutzrecht",
+              "S5-S8: Unternehmertum: Businessplanung und Präsentationstraining, Modelle und Methoden zur Entscheidungsunterstützung"
+            ],
+            "uek": []
+          },
+          "leistungsziele": [
+            {
+              "code": "h5.1",
+              "text": "Sie wählen Wahlmodule passend zu ihrem Berufsumfeld und ihren Interessen aus.",
+              "taxonomie": "K4"
+            },
+            {
+              "code": "h5.2",
+              "text": "Sie erwerben vertieftes Spezialwissen in einem gewählten Fachgebiet und wenden es an.",
+              "taxonomie": "K3"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "studienplan": [
+    {
+      "semester": 1,
+      "module": [
+        {
+          "name": "Projektmanagement Grundlagen",
+          "typ": "Pflicht",
+          "ects": null
+        },
+        {
+          "name": "Java Fundamentals",
+          "typ": "Pflicht",
+          "ects": null
+        },
+        {
+          "name": "Web-Grundlagen",
+          "typ": "Pflicht",
+          "ects": null
+        },
+        {
+          "name": "Grundlagen der technischen Informatik",
+          "typ": "Pflicht",
+          "ects": null
+        },
+        {
+          "name": "Diskrete Mathematik",
+          "typ": "Pflicht",
+          "ects": null
+        }
+      ]
+    },
+    {
+      "semester": 2,
+      "module": [
+        {
+          "name": "Wahrscheinlichkeitsrechnung und Statistik",
+          "typ": "Pflicht",
+          "ects": null
+        },
+        {
+          "name": "Java Project Level",
+          "typ": "Pflicht",
+          "ects": null
+        },
+        {
+          "name": "Installation & Konfiguration von Servern",
+          "typ": "Pflicht",
+          "ects": null
+        },
+        {
+          "name": "Datenbanksysteme",
+          "typ": "Pflicht",
+          "ects": null
+        },
+        {
+          "name": "Lineare Algebra",
+          "typ": "Pflicht",
+          "ects": null
+        }
+      ]
+    },
+    {
+      "semester": 3,
+      "module": [
+        {
+          "name": "Agieren in einer Gesellschafts- und Wirtschaftsordnung",
+          "typ": "Pflicht",
+          "ects": 5
+        },
+        {
+          "name": "Software Engineering Modellierung",
+          "typ": "Pflicht",
+          "ects": 5
+        },
+        {
+          "name": "Rechnernetze",
+          "typ": "Pflicht",
+          "ects": 5
+        },
+        {
+          "name": "Datenstrukturen & Algorithmen",
+          "typ": "Pflicht",
+          "ects": 5
+        },
+        {
+          "name": "Transferarbeit I",
+          "typ": "Transferarbeit",
+          "ects": 3
+        }
+      ]
+    },
+    {
+      "semester": 4,
+      "module": [
+        {
+          "name": "Informationssicherheit",
+          "typ": "Pflicht",
+          "ects": 5
+        },
+        {
+          "name": "Software Engineering Architektur",
+          "typ": "Pflicht",
+          "ects": 5
+        },
+        {
+          "name": "Java Enterprise Application",
+          "typ": "Pflicht",
+          "ects": 5
+        },
+        {
+          "name": "Big Data & NoSQL",
+          "typ": "Pflicht",
+          "ects": 5
+        },
+        {
+          "name": "Transferarbeit II",
+          "typ": "Transferarbeit",
+          "ects": 3
+        }
+      ]
+    },
+    {
+      "semester": 5,
+      "module": [
+        {
+          "name": "Kommunikation, Präsentation, Interkulturelle Kompetenzen",
+          "typ": "Pflicht",
+          "ects": 5
+        },
+        {
+          "name": "Vertiefungsfach",
+          "typ": "Vertiefung",
+          "ects": 5
+        },
+        {
+          "name": "Wahlmodul",
+          "typ": "Wahl",
+          "ects": 5
+        },
+        {
+          "name": "Machine Learning",
+          "typ": "Pflicht",
+          "ects": 5
+        },
+        {
+          "name": "Transferarbeit III",
+          "typ": "Transferarbeit",
+          "ects": 3
+        }
+      ]
+    },
+    {
+      "semester": 6,
+      "module": [
+        {
+          "name": "Web Engineering",
+          "typ": "Pflicht",
+          "ects": 5
+        },
+        {
+          "name": "Vertiefungsfach",
+          "typ": "Vertiefung",
+          "ects": 5
+        },
+        {
+          "name": "Wahlmodul",
+          "typ": "Wahl",
+          "ects": 5
+        },
+        {
+          "name": "Projektmanagement, Wirtschaftlichkeit & Führung",
+          "typ": "Pflicht",
+          "ects": 5
+        },
+        {
+          "name": "Transferarbeit IV",
+          "typ": "Transferarbeit",
+          "ects": 3
+        }
+      ]
+    },
+    {
+      "semester": 7,
+      "module": [
+        {
+          "name": "Wahlmodul",
+          "typ": "Wahl",
+          "ects": 5
+        },
+        {
+          "name": "Vertiefungsfach",
+          "typ": "Vertiefung",
+          "ects": 5
+        },
+        {
+          "name": "Mensch-Computer Interaktion",
+          "typ": "Pflicht",
+          "ects": 5
+        },
+        {
+          "name": "Informatikseminar",
+          "typ": "Pflicht",
+          "ects": 5
+        },
+        {
+          "name": "Transferarbeit V",
+          "typ": "Transferarbeit",
+          "ects": 3
+        }
+      ]
+    },
+    {
+      "semester": 8,
+      "module": [
+        {
+          "name": "Wahlmodul",
+          "typ": "Wahl",
+          "ects": null
+        },
+        {
+          "name": "Vertiefungsfach",
+          "typ": "Vertiefung",
+          "ects": null
+        },
+        {
+          "name": "Bachelor-Thesis & Kolloquium",
+          "typ": "Abschluss",
+          "ects": null
+        }
+      ]
+    }
+  ]
+}

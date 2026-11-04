@@ -8,13 +8,13 @@ import type {
   Stufenereignis,
   VorlageStruktur,
 } from '@skilltree/vertraege';
-import { berechneBadgeVergaben, erstelleBadgeDefinitionen } from './badges';
+import { badgeFortschrittText, berechneBadgeVergaben, erstelleBadgeDefinitionen } from './badges';
 import { ampel, anzahlRoteKompetenzen, fortschritt, kompetenzwert, punktwert } from './fortschritt';
 import { berechneLehrjahr, istZuordnungGueltig } from './lehrjahr';
 import { meilensteinBereitschaft, meilensteinStati, meilensteinStatusMap } from './meilensteine';
 import { indexierePlan } from './plan';
 import { kantenzustand, kanten, kompetenzAmpeln, naechsteKnoten } from './struktur';
-import { aktiveBestaetigungen, stufeFuer, stufenMap } from './stufen';
+import { aktiveBestaetigungen, stufeFuer, stufenMap, stufenMapFuerModell } from './stufen';
 
 function ereignis(
   id: string,
@@ -502,5 +502,70 @@ describe('S-A01 / R-S3 – apprenticeship year and assignment validity', () => {
     };
     expect(istZuordnungGueltig(zuordnung, new Date('2026-03-01T00:00:00Z'))).toBe(true);
     expect(istZuordnungGueltig(zuordnung, new Date('2026-11-03T00:00:00Z'))).toBe(false);
+  });
+});
+
+describe('D-022 – binary stage model', () => {
+  it('treats every confirmation as completed and keeps open objectives at zero', () => {
+    const verlauf = [
+      ereignis('b1', 'a1.1', 1, 'BESTAETIGT', '2026-01-01T08:00:00.000Z'),
+      ereignis('b2', 'a1.2', 2, 'BESTAETIGT', '2026-01-02T08:00:00.000Z'),
+      ereignis('b3', 'a1.3', 3, 'BESTAETIGT', '2026-01-03T08:00:00.000Z'),
+    ];
+
+    const binaer = stufenMapFuerModell(verlauf, 'BINAER');
+    expect(binaer.get('a1.1')).toBe(3);
+    expect(binaer.get('a1.2')).toBe(3);
+    expect(binaer.get('a1.3')).toBe(3);
+    expect(binaer.get('a1.4')).toBeUndefined();
+    expect(stufenMapFuerModell(verlauf, 'DREI_STUFEN').get('a1.1')).toBe(1);
+  });
+
+  it('uses completion wording in badge definitions and progress texts', () => {
+    const struktur = plan('p', [1]);
+    const definitionen = erstelleBadgeDefinitionen(struktur, 'p', 'BINAER');
+    const meilenstein = definitionen.find((definition) => definition.code === 'MS-25');
+    const bereich = definitionen.find((definition) => definition.code === 'BG-A');
+    expect(meilenstein?.kriterium).toContain('abgeschlossen');
+    expect(bereich?.kriterium).toContain('abgeschlossen');
+
+    const bedingung = { erfuellt: false, aktuell: 1, gesamt: 3 };
+    expect(badgeFortschrittText(meilenstein!, bedingung, 'BINAER')).toBe(
+      '1 von 3 Leistungszielen abgeschlossen',
+    );
+    expect(badgeFortschrittText(meilenstein!, bedingung)).toBe(
+      '1 von 3 Leistungszielen selbständig',
+    );
+  });
+
+  it('awards the area badge after the first completion, not the competence badge', () => {
+    const struktur = plan('p', [1]);
+    const index = indexierePlan(struktur);
+    const definitionen = erstelleBadgeDefinitionen(struktur, 'p', 'BINAER');
+    const [erstesZiel] = index.aktiveLeistungszielIds;
+    const verlauf = [ereignis('b1', erstesZiel, 1, 'BESTAETIGT', '2026-01-01T08:00:00.000Z')];
+
+    const vergaben = berechneBadgeVergaben(definitionen, index, verlauf, 'az-1', 'BINAER');
+    expect(vergaben.find((vergabe) => vergabe.badgeId === 'p:BG-A')?.aktiv).toBe(true);
+    expect(vergaben.some((vergabe) => vergabe.badgeId === 'p:KS-a1')).toBe(false);
+  });
+
+  it('reports milestone readiness as completed objectives', () => {
+    const struktur = plan('p', [1]);
+    struktur.kompetenzen[0].moduleBasislehrjahr = ['M1'];
+    const index = indexierePlan(struktur);
+    const [erstesZiel, zweitesZiel] = index.aktiveLeistungszielIds;
+    const stufen = stufenMapFuerModell(
+      [
+        ereignis('b1', erstesZiel, 1, 'BESTAETIGT', '2026-01-01T08:00:00.000Z'),
+        ereignis('b2', zweitesZiel, 3, 'BESTAETIGT', '2026-01-02T08:00:00.000Z'),
+      ],
+      'BINAER',
+    );
+    const stati = meilensteinStati([]);
+
+    expect(meilensteinBereitschaft('BBC', index, stufen, stati, 33, 'BINAER')).toBe(
+      '2 von 3 Leistungszielen mit Lernort Basislehrjahr abgeschlossen.',
+    );
   });
 });

@@ -15,7 +15,10 @@ export class DemoDienst {
   readonly konten = signal<Benutzer[]>([]);
 
   async laden(): Promise<void> {
-    this.konten.set(await this.sitzung.konten());
+    // The admin account has no route in the prototype any more (D-021); keep the switcher to the
+    // four learner accounts (including the PiBS student, D-022) and the hidden practice-trainer mock.
+    const konten = await this.sitzung.konten();
+    this.konten.set(konten.filter((konto) => konto.rolle !== 'ADMIN'));
   }
 
   async wechsle(login: string): Promise<Benutzer> {

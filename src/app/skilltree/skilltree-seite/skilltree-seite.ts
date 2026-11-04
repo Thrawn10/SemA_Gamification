@@ -15,6 +15,7 @@ import { DomaenenEreignisse } from '../../core/domaenen-ereignisse';
 import { fehlerText } from '../../core/fehler';
 import { SkilltreeDienst } from '../../dienste/skilltree-dienst';
 import { BadgesAnsichtKomponente } from '../badges-ansicht/badges-ansicht';
+import { BelohnungenUebersicht } from '../belohnungen-uebersicht/belohnungen-uebersicht';
 import type { BaumAuswahl } from '../auswahl';
 import { SkilltreeGraph } from '../skilltree-graph/skilltree-graph';
 import { SkilltreeSeitenleiste } from '../skilltree-seitenleiste/skilltree-seitenleiste';
@@ -29,6 +30,7 @@ import { FortschrittsAnzeige } from '../../shared/ui/fortschritts-anzeige/fortsc
     SkilltreeGraph,
     SkilltreeSeitenleiste,
     BadgesAnsichtKomponente,
+    BelohnungenUebersicht,
     AnforderungId,
     FortschrittsAnzeige,
   ],

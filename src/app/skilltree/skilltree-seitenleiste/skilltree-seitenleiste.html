@@ -60,10 +60,20 @@
               <st-ampel [ampel]="daten.kompetenz.ampel" />
               <span class="untertitel">Ampel</span>
             </div>
-            <div>
-              <span class="seitenleiste__zahl">{{ daten.kompetenz.wert.toFixed(1) }}</span>
-              <span class="untertitel">Kompetenzwert (0–6)</span>
-            </div>
+            @if (ansicht().stufenmodell === 'BINAER') {
+              <div>
+                <span class="seitenleiste__zahl"
+                  >{{ daten.kompetenz.abgeschlosseneLeistungsziele }} von
+                  {{ daten.kompetenz.anzahlLeistungsziele }}</span
+                >
+                <span class="untertitel">Leistungsziele abgeschlossen</span>
+              </div>
+            } @else {
+              <div>
+                <span class="seitenleiste__zahl">{{ daten.kompetenz.wert.toFixed(1) }}</span>
+                <span class="untertitel">Kompetenzwert (0–6)</span>
+              </div>
+            }
           </section>
 
           <nav class="seitenleiste__chips" aria-label="Nachbarknoten">
@@ -85,13 +95,21 @@
               <ol>
                 <li>Knoten und Leistungsziel lesen.</li>
                 <li>Leistungsziel aufklappen.</li>
-                <li>Bestätigung für die nächste Stufe anfragen.</li>
+                @if (ansicht().stufenmodell === 'BINAER') {
+                  <li>Bestätigung für den Abschluss anfragen.</li>
+                } @else {
+                  <li>Bestätigung für die nächste Stufe anfragen.</li>
+                }
               </ol>
             } @else {
               <ol>
                 <li>Leistungsziel prüfen und aufklappen.</li>
-                <li>Stufe wählen (vorausgewählt ist die nächste).</li>
-                <li>Bestätigen – ohne Seitenwechsel.</li>
+                @if (ansicht().stufenmodell === 'BINAER') {
+                  <li>Abschluss bestätigen oder zurücknehmen.</li>
+                } @else {
+                  <li>Stufe wählen (vorausgewählt ist die nächste).</li>
+                  <li>Bestätigen – ohne Seitenwechsel.</li>
+                }
               </ol>
             }
           </section>
@@ -105,6 +123,7 @@
                   [lz]="lz"
                   [kompetenz]="daten.kompetenz.kompetenz"
                   [rolle]="ansicht().rolle"
+                  [stufenmodell]="ansicht().stufenmodell"
                   [kannBestaetigen]="ansicht().kannBestaetigen"
                   [startOffen]="lz.leistungsziel.id === startLz()"
                   (aktualisiert)="aktualisiert.emit()"
@@ -134,8 +153,22 @@
               <span class="untertitel">rote Kompetenzen</span>
             </div>
           </section>
+          @if (daten.belohnung; as belohnung) {
+            @if (!ansicht().badges.ausgeblendet && belohnung.abschluss; as abschluss) {
+              <section class="seitenleiste__belohnung" aria-label="Belohnung für diesen Ast">
+                <h3>Belohnung für diesen Ast</h3>
+                <p class="untertitel">
+                  Sind alle Kompetenzen {{ hoechsteStufe() }}, erhältst du dieses Badge.
+                </p>
+                <st-badge-karte [ansicht]="abschluss" />
+              </section>
+            }
+          }
           <section>
             <h3>Kompetenzen im Ast</h3>
+            @if (daten.belohnung; as belohnung) {
+              <p class="untertitel">{{ belohnung.skillsText }}</p>
+            }
             <ul class="seitenleiste__liste">
               @for (kompetenz of daten.bereich.kompetenzen; track kompetenz.kompetenz.id) {
                 <li>
@@ -145,7 +178,13 @@
                     (click)="knotenGewaehlt.emit(kompetenz.kompetenz.id)"
                   >
                     <strong>{{ kompetenz.kompetenz.code }}</strong>
-                    <span>{{ kompetenz.kompetenz.titel }}</span>
+                    <span class="chip__text">
+                      <span>{{ kompetenz.kompetenz.titel }}</span>
+                      <span class="chip__meta"
+                        >{{ kompetenz.abgeschlosseneLeistungsziele }} von
+                        {{ kompetenz.anzahlLeistungsziele }} {{ hoechsteStufe() }}</span
+                      >
+                    </span>
                     <st-ampel [ampel]="kompetenz.ampel" [kompakt]="true" />
                   </button>
                 </li>

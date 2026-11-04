@@ -4,9 +4,11 @@ import type {
   Ausbildung,
   Bestaetigungsanfrage,
   MeineDatenZeile,
+  Stufenmodell,
   UebersichtZeile,
   VorlageStruktur,
 } from '@skilltree/vertraege';
+import { stufenmodellFuer } from '@skilltree/vertraege';
 import {
   ampel,
   anzahlRoteKompetenzen,
@@ -14,7 +16,7 @@ import {
   bereichswert,
   fortschritt,
   indexierePlan,
-  stufenMap,
+  stufenMapFuerModell,
   type PlanIndex,
 } from '@skilltree/regeln';
 import { UHR } from '../core/uhr';
@@ -32,6 +34,7 @@ import { fordereRolle } from './zugriff';
 interface PlanCache {
   index: PlanIndex;
   struktur: VorlageStruktur;
+  modell: Stufenmodell;
 }
 
 @Service()
@@ -70,11 +73,12 @@ export class UebersichtDienst {
         this.ereignisRepository.stufenereignisse(ausbildung.id),
         this.anfrageRepository.fuerAusbildung(ausbildung.id),
       ]);
-      const stufen = stufenMap(ereignisse);
+      const stufen = stufenMapFuerModell(ereignisse, cache.modell);
       zeilen.push({
         ausbildung,
         lernende,
         lehrberuf,
+        stufenmodell: cache.modell,
         lehrjahr: berechneLehrjahr(ausbildung.lehrbeginn, jetzt, lehrberuf.lehrdauerJahre),
         fortschritt: fortschritt(cache.index.aktiveLeistungszielIds, stufen),
         bereiche: cache.index.bereiche.map((bereich) => {
@@ -142,7 +146,9 @@ export class UebersichtDienst {
         leistungsziel,
         kompetenz: kompetenz.kompetenz,
         bereich: bereich.bereich,
-        aktuelleStufe: stufenMap(ereignisse).get(anfrage.leistungszielId) ?? 0,
+        aktuelleStufe:
+          stufenMapFuerModell(ereignisse, cache.modell).get(anfrage.leistungszielId) ?? 0,
+        stufenmodell: cache.modell,
       });
     }
 
@@ -230,8 +236,15 @@ export class UebersichtDienst {
     if (vorhanden) {
       return vorhanden;
     }
-    const struktur = await this.vorlageRepository.struktur(ausbildung.vorlageId);
-    const cache = { struktur, index: indexierePlan(struktur) };
+    const [vorlage, struktur] = await Promise.all([
+      this.vorlageRepository.laden(ausbildung.vorlageId),
+      this.vorlageRepository.struktur(ausbildung.vorlageId),
+    ]);
+    const cache = {
+      struktur,
+      index: indexierePlan(struktur),
+      modell: stufenmodellFuer(vorlage.stufenmodell),
+    };
     caches.set(ausbildung.vorlageId, cache);
     return cache;
   }

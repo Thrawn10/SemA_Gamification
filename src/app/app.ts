@@ -5,10 +5,11 @@ import {
   afterNextRender,
   computed,
   inject,
+  signal,
   viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { ROLLEN_TEXTE } from '@skilltree/vertraege';
 import { DEMO_MODE } from './core/konfiguration';
@@ -25,8 +26,12 @@ export class App {
   protected readonly demoAktiv = DEMO_MODE;
   protected readonly sitzung = inject(SitzungDienst);
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
   private readonly injector = inject(Injector);
   private readonly hauptinhalt = viewChild<ElementRef<HTMLElement>>('hauptinhalt');
+
+  /** Routes opt into a wider content column with `data: { breite: 'breit' }` (D-024). */
+  protected readonly breiterInhalt = signal(false);
 
   protected readonly rollenText = computed(() => {
     const rolle = this.sitzung.rolle();
@@ -41,6 +46,8 @@ export class App {
         takeUntilDestroyed(),
       )
       .subscribe(() => {
+        const daten: Record<string, unknown> = this.route.firstChild?.snapshot.data ?? {};
+        this.breiterInhalt.set(daten['breite'] === 'breit');
         afterNextRender(() => this.hauptinhalt()?.nativeElement.focus(), {
           injector: this.injector,
         });

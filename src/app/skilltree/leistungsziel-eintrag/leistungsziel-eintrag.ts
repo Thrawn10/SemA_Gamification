@@ -15,8 +15,9 @@ import type {
   Kompetenz,
   LeistungszielAnsicht,
   Rolle,
+  Stufenmodell,
 } from '@skilltree/vertraege';
-import { ANFRAGE_STATUS_TEXTE, STUFEN_TEXTE } from '@skilltree/vertraege';
+import { ANFRAGE_STATUS_TEXTE, bestaetigungsStufen, stufenText } from '@skilltree/vertraege';
 import { fehlerText } from '../../core/fehler';
 import { AnfrageDienst } from '../../dienste/anfrage-dienst';
 import { BestaetigungDienst } from '../../dienste/bestaetigung-dienst';
@@ -37,6 +38,7 @@ export class LeistungszielEintrag implements OnInit {
   readonly lz = input.required<LeistungszielAnsicht>();
   readonly kompetenz = input.required<Kompetenz>();
   readonly rolle = input.required<Rolle>();
+  readonly stufenmodell = input<Stufenmodell>('DREI_STUFEN');
   readonly kannBestaetigen = input(false);
   readonly startOffen = input(false);
 
@@ -67,7 +69,7 @@ export class LeistungszielEintrag implements OnInit {
   ];
 
   protected readonly stufenOptionen = computed(() =>
-    ([1, 2, 3] as const).filter((stufe) => stufe > this.lz().stufe),
+    bestaetigungsStufen(this.stufenmodell()).filter((stufe) => stufe > this.lz().stufe),
   );
 
   protected readonly lernorte = computed(() => {
@@ -91,7 +93,7 @@ export class LeistungszielEintrag implements OnInit {
   });
 
   protected stufeText(stufe: BestaetigungsStufe | 0): string {
-    return STUFEN_TEXTE[stufe];
+    return stufenText(this.stufenmodell(), stufe);
   }
 
   ngOnInit(): void {
@@ -108,7 +110,7 @@ export class LeistungszielEintrag implements OnInit {
     this.ausloeser =
       aktives instanceof HTMLElement && this.host.nativeElement.contains(aktives) ? aktives : null;
     const offeneZielstufe = this.lz().offeneAnfrage?.zielstufe;
-    const erste = this.stufenOptionen()[0] ?? 1;
+    const erste = this.stufenOptionen()[0] ?? (this.stufenmodell() === 'BINAER' ? 3 : 1);
     this.zielstufe.set(
       offeneZielstufe && offeneZielstufe > this.lz().stufe ? offeneZielstufe : erste,
     );

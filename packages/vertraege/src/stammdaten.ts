@@ -1,4 +1,4 @@
-import type { AbhaengigkeitsQuelle, MeilensteinCode, Taxonomie } from './stufe';
+import type { AbhaengigkeitsQuelle, MeilensteinCode, Stufenmodell, Taxonomie } from './stufe';
 
 export interface Lehrberuf {
   id: string;
@@ -6,6 +6,8 @@ export interface Lehrberuf {
   name: string;
   fachrichtung: string | null;
   lehrdauerJahre: number;
+  /** Optional for data written before D-022; missing means the three-stage model. */
+  stufenmodell?: Stufenmodell;
   aktiv: boolean;
 }
 
@@ -17,6 +19,8 @@ export interface Vorlage {
   quelle: string;
   importiertAm: string;
   pruefsumme: string;
+  /** Optional for data written before D-022; missing means the three-stage model. */
+  stufenmodell?: Stufenmodell;
   aktiv: boolean;
 }
 
@@ -79,10 +83,14 @@ export interface VorlageImport {
     name: string;
     fachrichtung: string | null;
     lehrdauerJahre: number;
+    /** Optional per profession; a top-level value wins. */
+    stufenmodell?: Stufenmodell;
   };
   bildungsplanJahr: number;
   version?: number;
   quelle: string;
+  /** Optional: `BINAER` marks a plan with one completion state (PiBS, D-022). */
+  stufenmodell?: Stufenmodell;
   bereiche: VorlageImportBereich[];
 }
 

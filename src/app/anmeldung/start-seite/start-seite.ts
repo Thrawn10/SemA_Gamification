@@ -34,7 +34,9 @@ export class StartSeite {
         return;
       }
       if (rolle === 'ADMIN') {
-        await this.router.navigate(['/admin/import']);
+        // The admin route was removed from the prototype (D-021); keep the account reachable for
+        // data-management tests only.
+        await this.router.navigate(['/meine-daten']);
         return;
       }
       const ausbildung = await this.uebersicht.eigeneAusbildung();

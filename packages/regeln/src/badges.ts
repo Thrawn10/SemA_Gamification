@@ -1,81 +1,132 @@
 import type {
   BadgeDefinition,
   BadgeVergabe,
+  MeilensteinCode,
+  MeilensteinEreignis,
   Stufe,
   Stufenereignis,
+  Stufenmodell,
   VorlageStruktur,
 } from '@skilltree/vertraege';
+import {
+  ABSCHLUSS_STUFE,
+  MEILENSTEINE,
+  meilensteinTexteFuer,
+  stufenText,
+} from '@skilltree/vertraege';
 import { fortschritt, punktwert } from './fortschritt';
+import { meilensteinStati, meilensteinStatusMap } from './meilensteine';
 import type { PlanIndex } from './plan';
-import { aktiveBestaetigungen, stufenMap } from './stufen';
+import { aktiveBestaetigungen, stufenMapFuerModell } from './stufen';
 
-const ANTEILE = [25, 50, 75, 100] as const;
+/** Competence-count thresholds of the reduced badge set (D-025). */
+const SCHWELLEN = [5, 10, 15] as const;
 
-/** R-B1-R-B4 / R-B8: deterministic badge definitions for a template. */
+type MeilensteinErreicht = Readonly<Record<MeilensteinCode, boolean>>;
+
+const KEINE_MEILENSTEINE: MeilensteinErreicht = { BBC: false, IPA: false, LAP: false };
+
+function stufenFuerModell(modell: Stufenmodell): readonly Stufe[] {
+  return modell === 'BINAER' ? [ABSCHLUSS_STUFE] : [1, 2, 3];
+}
+
+function kompetenzenAufStufe(
+  index: PlanIndex,
+  stufen: ReadonlyMap<string, Stufe>,
+  mindestStufe: Stufe,
+): number {
+  let anzahl = 0;
+  for (const kompetenz of index.kompetenzNachId.values()) {
+    if (
+      kompetenz.leistungszielIds.length > 0 &&
+      kompetenz.leistungszielIds.every((id) => (stufen.get(id) ?? 0) >= mindestStufe)
+    ) {
+      anzahl += 1;
+    }
+  }
+  return anzahl;
+}
+
+/**
+ * R-B1-R-B4 / R-B8: deterministic badge definitions for a template. The reduced set
+ * contains milestone badges, one badge per area, three stage-count badges per stage
+ * (5/10/15 competences) and one badge for all competences.
+ */
 export function erstelleBadgeDefinitionen(
   struktur: VorlageStruktur,
   vorlageId: string,
+  modell: Stufenmodell = 'DREI_STUFEN',
 ): BadgeDefinition[] {
   const definitionen: BadgeDefinition[] = [];
+  const bereiche = [...struktur.bereiche].sort((a, b) => a.reihenfolge - b.reihenfolge);
+  const topLevel = stufenText(modell, ABSCHLUSS_STUFE);
+  const kompetenzAnzahl = struktur.kompetenzen.length;
   let reihenfolge = 0;
 
-  for (const bereich of [...struktur.bereiche].sort((a, b) => a.reihenfolge - b.reihenfolge)) {
+  for (const code of MEILENSTEINE) {
+    const texte = meilensteinTexteFuer(code, modell);
     definitionen.push({
-      id: `${vorlageId}:BG-${bereich.code}`,
+      id: `${vorlageId}:M-${code}`,
       vorlageId,
-      code: `BG-${bereich.code}`,
-      titel: `Bereich ${bereich.code} gestartet`,
-      kriterium: `Mindestens ein Leistungsziel von Bereich ${bereich.code} ist mindestens erklärt.`,
-      regeltyp: 'BEREICH_GESTARTET',
-      parameter: { bereichId: bereich.id },
+      code: `M-${code}`,
+      titel: `${texte.name} erreicht`,
+      kriterium: `Der Meilenstein «${texte.name}» ist erreicht.`,
+      regeltyp: 'MEILENSTEIN_ERREICHT',
+      parameter: { meilenstein: code },
       reihenfolge: reihenfolge++,
     });
   }
 
-  for (const bereich of [...struktur.bereiche].sort((a, b) => a.reihenfolge - b.reihenfolge)) {
-    for (const kompetenz of struktur.kompetenzen
-      .filter((eintrag) => eintrag.bereichId === bereich.id)
-      .sort((a, b) => a.reihenfolge - b.reihenfolge)) {
-      definitionen.push({
-        id: `${vorlageId}:KS-${kompetenz.code}`,
-        vorlageId,
-        code: `KS-${kompetenz.code}`,
-        titel: `${kompetenz.code} selbständig`,
-        kriterium: `Alle Leistungsziele von ${kompetenz.code} sind selbständig.`,
-        regeltyp: 'KOMPETENZ_SELBSTAENDIG',
-        parameter: { kompetenzId: kompetenz.id },
-        reihenfolge: reihenfolge++,
-      });
-    }
-  }
-
-  for (const bereich of [...struktur.bereiche].sort((a, b) => a.reihenfolge - b.reihenfolge)) {
+  for (const bereich of bereiche) {
     definitionen.push({
       id: `${vorlageId}:BA-${bereich.code}`,
       vorlageId,
       code: `BA-${bereich.code}`,
       titel: `Bereich ${bereich.code} abgeschlossen`,
-      kriterium: `Alle Leistungsziele von Bereich ${bereich.code} sind selbständig.`,
+      kriterium: `Alle Leistungsziele von Bereich ${bereich.code} sind ${topLevel}.`,
       regeltyp: 'BEREICH_ABGESCHLOSSEN',
       parameter: { bereichId: bereich.id },
       reihenfolge: reihenfolge++,
     });
   }
 
-  for (const anteil of ANTEILE) {
-    definitionen.push({
-      id: `${vorlageId}:MS-${anteil}`,
-      vorlageId,
-      code: `MS-${anteil}`,
-      titel: `Meilenstein ${anteil} %`,
-      kriterium: `Mindestens ${anteil} % aller Leistungsziele sind selbständig.`,
-      regeltyp: 'MEILENSTEIN',
-      parameter: { anteil },
-      reihenfolge: reihenfolge++,
-    });
+  for (const stufe of stufenFuerModell(modell)) {
+    const wort = stufenText(modell, stufe);
+    for (const anzahl of SCHWELLEN) {
+      // A badge for 10 or 15 competences is unreachable in a plan with fewer competences.
+      if (anzahl > kompetenzAnzahl) {
+        continue;
+      }
+      definitionen.push({
+        id: `${vorlageId}:K${stufe}-${anzahl}`,
+        vorlageId,
+        code: `K${stufe}-${anzahl}`,
+        titel: `${anzahl} Kompetenzen ${wort}`,
+        kriterium: `Mindestens ${anzahl} Kompetenzen haben alle Leistungsziele ${wort}.`,
+        regeltyp: 'KOMPETENZ_ANZAHL',
+        parameter: { stufe, anzahl },
+        reihenfolge: reihenfolge++,
+      });
+    }
   }
 
+  definitionen.push({
+    id: `${vorlageId}:K-ALLE`,
+    vorlageId,
+    code: 'K-ALLE',
+    titel: `Alle Kompetenzen ${topLevel}`,
+    kriterium: `Alle Kompetenzen haben alle Leistungsziele ${topLevel}.`,
+    regeltyp: 'ALLE_KOMPETENZEN',
+    parameter: {},
+    reihenfolge: reihenfolge++,
+  });
+
   return definitionen;
+}
+
+/** True for a stored badge set that already uses the reduced rules (D-025). */
+export function istAktuellesBadgeSet(definitionen: readonly BadgeDefinition[]): boolean {
+  return definitionen.some((definition) => definition.regeltyp === 'MEILENSTEIN_ERREICHT');
 }
 
 export interface BadgeBedingungErgebnis {
@@ -88,43 +139,41 @@ export function badgeBedingung(
   definition: BadgeDefinition,
   index: PlanIndex,
   stufen: ReadonlyMap<string, Stufe>,
+  meilensteine: MeilensteinErreicht = KEINE_MEILENSTEINE,
 ): BadgeBedingungErgebnis {
-  const ziele = zieleFuerDefinition(definition, index);
   switch (definition.regeltyp) {
-    case 'BEREICH_GESTARTET': {
-      const aktuell = ziele.filter((id) => (stufen.get(id) ?? 0) >= 1).length;
-      return { erfuellt: aktuell > 0, aktuell, gesamt: ziele.length };
+    case 'MEILENSTEIN_ERREICHT': {
+      const code = definition.parameter.meilenstein;
+      const erfuellt = code ? meilensteine[code] === true : false;
+      return { erfuellt, aktuell: erfuellt ? 1 : 0, gesamt: 1 };
     }
-    case 'KOMPETENZ_SELBSTAENDIG':
     case 'BEREICH_ABGESCHLOSSEN': {
-      const aktuell = ziele.filter((id) => (stufen.get(id) ?? 0) === 3).length;
+      const ziele = zieleFuerBereich(definition, index);
+      const aktuell = ziele.filter(
+        (id) => (stufen.get(id) ?? 0) === ABSCHLUSS_STUFE,
+      ).length;
       return {
         erfuellt: ziele.length > 0 && aktuell === ziele.length,
         aktuell,
         gesamt: ziele.length,
       };
     }
-    case 'MEILENSTEIN': {
-      const aktuell = ziele.filter((id) => (stufen.get(id) ?? 0) === 3).length;
-      const anteil = definition.parameter.anteil ?? 100;
-      return {
-        erfuellt: ziele.length > 0 && aktuell * 100 >= anteil * ziele.length,
-        aktuell,
-        gesamt: ziele.length,
-      };
+    case 'KOMPETENZ_ANZAHL': {
+      const stufe = definition.parameter.stufe ?? ABSCHLUSS_STUFE;
+      const anzahl = definition.parameter.anzahl ?? 0;
+      const aktuell = kompetenzenAufStufe(index, stufen, stufe);
+      const gesamt = index.kompetenzNachId.size;
+      return { erfuellt: anzahl > 0 && aktuell >= anzahl, aktuell, gesamt };
+    }
+    case 'ALLE_KOMPETENZEN': {
+      const aktuell = kompetenzenAufStufe(index, stufen, ABSCHLUSS_STUFE);
+      const gesamt = index.kompetenzNachId.size;
+      return { erfuellt: gesamt > 0 && aktuell === gesamt, aktuell, gesamt };
     }
   }
 }
 
-function zieleFuerDefinition(definition: BadgeDefinition, index: PlanIndex): string[] {
-  if (definition.regeltyp === 'KOMPETENZ_SELBSTAENDIG') {
-    const kompetenzId = definition.parameter.kompetenzId;
-    return kompetenzId ? (index.kompetenzNachId.get(kompetenzId)?.leistungszielIds ?? []) : [];
-  }
-  if (definition.regeltyp === 'MEILENSTEIN') {
-    // R-B4: milestone badges count all active objectives of the template.
-    return [...index.aktiveLeistungszielIds];
-  }
+function zieleFuerBereich(definition: BadgeDefinition, index: PlanIndex): string[] {
   const bereichId = definition.parameter.bereichId;
   if (!bereichId) {
     return [];
@@ -137,44 +186,74 @@ function zieleFuerDefinition(definition: BadgeDefinition, index: PlanIndex): str
 export function badgeFortschrittText(
   definition: BadgeDefinition,
   bedingung: BadgeBedingungErgebnis,
+  modell: Stufenmodell = 'DREI_STUFEN',
 ): string {
-  const basis = `${bedingung.aktuell} von ${bedingung.gesamt} Leistungszielen`;
   switch (definition.regeltyp) {
-    case 'BEREICH_GESTARTET':
-      return `${basis} mindestens erklärt`;
-    case 'KOMPETENZ_SELBSTAENDIG':
+    case 'MEILENSTEIN_ERREICHT':
+      return bedingung.erfuellt ? 'Meilenstein erreicht' : 'Meilenstein noch nicht erreicht';
     case 'BEREICH_ABGESCHLOSSEN':
-    case 'MEILENSTEIN':
-      return `${basis} selbständig`;
+      return `${bedingung.aktuell} von ${bedingung.gesamt} Leistungszielen ${stufenText(modell, ABSCHLUSS_STUFE)}`;
+    case 'KOMPETENZ_ANZAHL': {
+      const stufe = definition.parameter.stufe ?? ABSCHLUSS_STUFE;
+      return `${bedingung.aktuell} von ${bedingung.gesamt} Kompetenzen ${stufenText(modell, stufe)}`;
+    }
+    case 'ALLE_KOMPETENZEN':
+      return `${bedingung.aktuell} von ${bedingung.gesamt} Kompetenzen ${stufenText(modell, ABSCHLUSS_STUFE)}`;
   }
 }
 
+type ZeitlinieEintrag =
+  | { art: 'STUFE'; zeitpunkt: string; ereignis: Stufenereignis }
+  | { art: 'MEILENSTEIN'; zeitpunkt: string; ereignis: MeilensteinEreignis };
+
 /**
- * R-B5 / R-B8: replay all events in chronological order and derive badge
- * allocations. The result equals the materialised state after the same events.
+ * R-B5 / R-B8: replay all stage and milestone events in chronological order and derive
+ * badge allocations. The result equals the materialised state after the same events.
  */
 export function berechneBadgeVergaben(
   definitionen: readonly BadgeDefinition[],
   index: PlanIndex,
   ereignisse: readonly Stufenereignis[],
   ausbildungId: string,
+  modell: Stufenmodell = 'DREI_STUFEN',
+  meilensteinereignisse: readonly MeilensteinEreignis[] = [],
 ): BadgeVergabe[] {
-  const sortiert = [...ereignisse].sort((a, b) => a.zeitpunkt.localeCompare(b.zeitpunkt));
-  const aktive = new Map<string, Stufenereignis>();
+  const zeitlinie: ZeitlinieEintrag[] = [
+    ...ereignisse.map((ereignis) => ({
+      art: 'STUFE' as const,
+      zeitpunkt: ereignis.zeitpunkt,
+      ereignis,
+    })),
+    ...meilensteinereignisse.map((ereignis) => ({
+      art: 'MEILENSTEIN' as const,
+      zeitpunkt: ereignis.zeitpunkt,
+      ereignis,
+    })),
+  ].sort((a, b) => a.zeitpunkt.localeCompare(b.zeitpunkt));
+
+  const aktiveStufen = new Map<string, Stufenereignis>();
+  const aktiveMeilensteine: MeilensteinEreignis[] = [];
   const vergaben = new Map<string, BadgeVergabe>();
 
-  for (const ereignis of sortiert) {
-    if (ereignis.aktion === 'ZURUECKGENOMMEN') {
-      if (ereignis.refEreignisId) {
-        aktive.delete(ereignis.refEreignisId);
+  for (const eintrag of zeitlinie) {
+    if (eintrag.art === 'STUFE') {
+      const ereignis = eintrag.ereignis;
+      if (ereignis.aktion === 'ZURUECKGENOMMEN') {
+        if (ereignis.refEreignisId) {
+          aktiveStufen.delete(ereignis.refEreignisId);
+        }
+      } else {
+        aktiveStufen.set(ereignis.id, ereignis);
       }
     } else {
-      aktive.set(ereignis.id, ereignis);
+      aktiveMeilensteine.push(eintrag.ereignis);
     }
 
-    const stufen = stufenMap([...aktive.values()]);
+    const stufen = stufenMapFuerModell([...aktiveStufen.values()], modell);
+    const meilensteine = meilensteinStatusMap(meilensteinStati(aktiveMeilensteine));
+
     for (const definition of definitionen) {
-      const bedingung = badgeBedingung(definition, index, stufen);
+      const bedingung = badgeBedingung(definition, index, stufen, meilensteine);
       const vorhanden = vergaben.get(definition.id);
 
       if (bedingung.erfuellt && !vorhanden) {
@@ -182,9 +261,10 @@ export function berechneBadgeVergaben(
           id: `${ausbildungId}:${definition.id}`,
           ausbildungId,
           badgeId: definition.id,
-          vergebenAm: ereignis.zeitpunkt,
+          vergebenAm: eintrag.zeitpunkt,
           aktiv: true,
-          ausStartstand: ereignis.aktion === 'UEBERNOMMEN',
+          ausStartstand:
+            eintrag.art === 'STUFE' && eintrag.ereignis.aktion === 'UEBERNOMMEN',
         });
       } else if (bedingung.erfuellt && vorhanden && !vorhanden.aktiv) {
         // Reactivation keeps the original award date (R-B5, TF3c).
@@ -197,7 +277,7 @@ export function berechneBadgeVergaben(
         vergaben.set(definition.id, {
           ...vorhanden,
           aktiv: false,
-          inaktivSeit: ereignis.zeitpunkt,
+          inaktivSeit: eintrag.zeitpunkt,
         });
       }
     }
@@ -211,8 +291,9 @@ export function offenerBadgeFortschritt(
   definition: BadgeDefinition,
   index: PlanIndex,
   stufen: ReadonlyMap<string, Stufe>,
+  meilensteine: MeilensteinErreicht = KEINE_MEILENSTEINE,
 ): BadgeBedingungErgebnis {
-  return badgeBedingung(definition, index, stufen);
+  return badgeBedingung(definition, index, stufen, meilensteine);
 }
 
 /** Only used by tests and the seed to verify that replay equals a stored state. */

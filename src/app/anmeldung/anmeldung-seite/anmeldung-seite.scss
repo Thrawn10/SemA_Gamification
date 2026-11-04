@@ -88,3 +88,21 @@
   font-size: 0.8rem;
   font-weight: 600;
 }
+
+.anmeldung__prototyp {
+  padding: var(--abstand-3) var(--abstand-4);
+  border: 1px dashed var(--farbe-rand-stark);
+  border-radius: var(--radius-mittel);
+  background: var(--farbe-flaeche-leise);
+}
+
+.anmeldung__prototyp summary {
+  color: var(--farbe-text-leise);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.anmeldung__prototyp[open] summary {
+  margin-block-end: var(--abstand-2);
+}

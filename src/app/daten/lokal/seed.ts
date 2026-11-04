@@ -12,10 +12,12 @@ import type {
   MeilensteinEreignis,
   Stufe,
   Stufenereignis,
+  Stufenmodell,
   Vorlage,
   VorlageImport,
   Zuordnung,
 } from '@skilltree/vertraege';
+import { ABSCHLUSS_STUFE, stufenmodellFuer } from '@skilltree/vertraege';
 import {
   berechneBadgeVergaben,
   erstelleBadgeDefinitionen,
@@ -26,6 +28,13 @@ import {
 import { TEXTVERWEISE } from './verweise';
 
 const TAG = 86_400_000;
+
+/**
+ * Bump when the deterministic demo data changes in a way that existing browsers must pick up.
+ * `DatenbestandSpeicherAdapter` compares it with the value stored in the `meta` store and reseeds
+ * when they differ (D-023). The PiBS learner and the binary stage model are version 1.
+ */
+export const SEED_VERSION = 1;
 
 /** Deterministic PRNG (mulberry32) so the demo data is stable per person. */
 function zufall(seed: number): () => number {
@@ -93,6 +102,7 @@ interface Lernpfad {
   index: PlanIndex;
   vorlageId: string;
   templateCode: string;
+  stufenmodell: Stufenmodell;
   ziel: number;
   von: Date;
   bis: Date;
@@ -120,6 +130,10 @@ export function erstelleSeedDaten(importe: readonly VorlageImport[], jetzt: Date
 
   for (const importiert of importe) {
     const code = importiert.lehrberuf.code;
+    const stufenmodell = stufenmodellFuer(
+      importiert.stufenmodell,
+      importiert.lehrberuf.stufenmodell,
+    );
     const lehrberufId = id('lb', code);
     lehrberufe.push({
       id: lehrberufId,
@@ -127,6 +141,7 @@ export function erstelleSeedDaten(importe: readonly VorlageImport[], jetzt: Date
       name: importiert.lehrberuf.name,
       fachrichtung: importiert.lehrberuf.fachrichtung,
       lehrdauerJahre: importiert.lehrberuf.lehrdauerJahre,
+      stufenmodell,
       aktiv: true,
     });
 
@@ -139,6 +154,7 @@ export function erstelleSeedDaten(importe: readonly VorlageImport[], jetzt: Date
       quelle: importiert.quelle,
       importiertAm: jetztIso,
       pruefsumme: code.toLowerCase(),
+      stufenmodell,
       aktiv: true,
     });
 
@@ -232,14 +248,38 @@ export function erstelleSeedDaten(importe: readonly VorlageImport[], jetzt: Date
 
     const index = indexierePlan(struktur);
     indexes.set(code, index);
-    badgeDefinitionen.push(...erstelleBadgeDefinitionen(struktur, vorlageId));
+    badgeDefinitionen.push(...erstelleBadgeDefinitionen(struktur, vorlageId, stufenmodell));
   }
 
+  // ANNAHME: The validation build shows exactly one learner per MVP profession plus one PiBS
+  // student (D-022). The practice-trainer accounts stay in the seed as a hidden login, and the
+  // admin account stays internal (data management tests only); neither is offered on the login
+  // page (D-021).
   const benutzer: Benutzer[] = [
-    { id: 'u-nora', login: 'nora', name: 'Nora Frei', rolle: 'LERNENDE' },
-    { id: 'u-luca', login: 'luca', name: 'Luca Meier', rolle: 'LERNENDE' },
-    { id: 'u-sara', login: 'sara', name: 'Sara Huber', rolle: 'LERNENDE' },
-    { id: 'u-jan', login: 'jan', name: 'Jan Bühler', rolle: 'LERNENDE' },
+    {
+      id: 'u-nora',
+      login: 'nora',
+      name: 'Nora Frei (Applikationsentwicklerin)',
+      rolle: 'LERNENDE',
+    },
+    {
+      id: 'u-luca',
+      login: 'luca',
+      name: 'Luca Meier (Plattformentwickler)',
+      rolle: 'LERNENDE',
+    },
+    {
+      id: 'u-sara',
+      login: 'sara',
+      name: 'Sara Huber (Mediamatikerin)',
+      rolle: 'LERNENDE',
+    },
+    {
+      id: 'u-mia',
+      login: 'mia',
+      name: 'Mia Keller (PiBS-Studentin)',
+      rolle: 'LERNENDE',
+    },
     { id: 'u-daniel', login: 'daniel', name: 'Daniel Roth', rolle: 'PRAXISBILDNER' },
     { id: 'u-petra', login: 'petra', name: 'Petra Lang', rolle: 'PRAXISBILDNER' },
     { id: 'u-admin', login: 'admin', name: 'Admin', rolle: 'ADMIN' },
@@ -269,7 +309,15 @@ export function erstelleSeedDaten(importe: readonly VorlageImport[], jetzt: Date
     lehrbeginn: `${sj - 3}-08-01`,
     aktiv: true,
   };
-  const ausbildungen = [ausbildungNora, ausbildungLuca, ausbildungSara];
+  const ausbildungMia: Ausbildung = {
+    id: 'az-mia',
+    lernendeId: 'u-mia',
+    lehrberufId: id('lb', 'INF-PIBS'),
+    vorlageId: id('vorlage', 'INF-PIBS', 'v1'),
+    lehrbeginn: `${sj - 1}-08-01`,
+    aktiv: true,
+  };
+  const ausbildungen = [ausbildungNora, ausbildungLuca, ausbildungSara, ausbildungMia];
 
   const zuordnungen: Zuordnung[] = [
     {
@@ -300,6 +348,13 @@ export function erstelleSeedDaten(importe: readonly VorlageImport[], jetzt: Date
       gueltigVon: `${sj - 3}-08-01`,
       gueltigBis: null,
     },
+    {
+      id: 'z-mia-daniel',
+      ausbildungId: 'az-mia',
+      praxisbildnerId: 'u-daniel',
+      gueltigVon: `${sj - 1}-08-01`,
+      gueltigBis: null,
+    },
   ];
 
   const pfade: Lernpfad[] = [
@@ -310,6 +365,7 @@ export function erstelleSeedDaten(importe: readonly VorlageImport[], jetzt: Date
       index: indexes.get('INF-APP')!,
       vorlageId: ausbildungNora.vorlageId,
       templateCode: 'INF-APP',
+      stufenmodell: 'DREI_STUFEN',
       ziel: 45,
       von: new Date(`${ausbildungNora.lehrbeginn}T00:00:00.000Z`),
       bis: inTagen(jetzt, 4),
@@ -323,6 +379,7 @@ export function erstelleSeedDaten(importe: readonly VorlageImport[], jetzt: Date
       index: indexes.get('INF-PLA')!,
       vorlageId: ausbildungLuca.vorlageId,
       templateCode: 'INF-PLA',
+      stufenmodell: 'DREI_STUFEN',
       ziel: 10,
       von: new Date(`${ausbildungLuca.lehrbeginn}T00:00:00.000Z`),
       bis: inTagen(jetzt, 4),
@@ -336,11 +393,27 @@ export function erstelleSeedDaten(importe: readonly VorlageImport[], jetzt: Date
       index: indexes.get('MED')!,
       vorlageId: ausbildungSara.vorlageId,
       templateCode: 'MED',
+      stufenmodell: 'DREI_STUFEN',
       ziel: 80,
       von: new Date(`${ausbildungSara.lehrbeginn}T00:00:00.000Z`),
       bis: inTagen(jetzt, 4),
       zuordnungen: zuordnungen.filter((zuordnung) => zuordnung.ausbildungId === 'az-sara'),
       akteurFallback: 'u-petra',
+    },
+    {
+      login: 'mia',
+      benutzerId: 'u-mia',
+      ausbildung: ausbildungMia,
+      index: indexes.get('INF-PIBS')!,
+      vorlageId: ausbildungMia.vorlageId,
+      templateCode: 'INF-PIBS',
+      // D-022: the PiBS plan only knows open/completed, so `ziel` is the completed share.
+      stufenmodell: 'BINAER',
+      ziel: 35,
+      von: new Date(`${ausbildungMia.lehrbeginn}T00:00:00.000Z`),
+      bis: inTagen(jetzt, 4),
+      zuordnungen: zuordnungen.filter((zuordnung) => zuordnung.ausbildungId === 'az-mia'),
+      akteurFallback: 'u-daniel',
     },
   ];
 
@@ -370,8 +443,13 @@ export function erstelleSeedDaten(importe: readonly VorlageImport[], jetzt: Date
       });
     }
 
-    const zielPunkte = Math.round((pfad.ziel / 100) * 6 * pfad.index.aktiveLeistungszielIds.length);
-    const stufen = verteileStufen(ziele, zielPunkte);
+    const stufen =
+      pfad.stufenmodell === 'BINAER'
+        ? verteileStufenBinaer(ziele, pfad.ziel)
+        : verteileStufen(
+            ziele,
+            Math.round((pfad.ziel / 100) * 6 * pfad.index.aktiveLeistungszielIds.length),
+          );
     stufenProAusbildung.set(pfad.ausbildung.id, stufen);
 
     let laufendeNummer = 0;
@@ -390,6 +468,23 @@ export function erstelleSeedDaten(importe: readonly VorlageImport[], jetzt: Date
 
     for (const [zielId, stufe] of stufen) {
       if (stufe === 0) {
+        continue;
+      }
+      if (pfad.stufenmodell === 'BINAER') {
+        // D-022: one confirmation per objective, no partial levels.
+        const zeitpunkt = zeitpunktFuer(new Date(pfad.von.getTime() + 25 * TAG));
+        const kommentar =
+          random() < 0.3 ? KOMMENTARE[Math.floor(random() * KOMMENTARE.length)] : undefined;
+        stufenereignisse.push({
+          id: id('seed', pfad.login, String(laufendeNummer++)),
+          ausbildungId: pfad.ausbildung.id,
+          leistungszielId: zielId,
+          stufe: ABSCHLUSS_STUFE,
+          aktion: 'BESTAETIGT',
+          akteurId: akteurFuer(zeitpunkt),
+          zeitpunkt: iso(zeitpunkt),
+          ...(kommentar ? { kommentar } : {}),
+        });
         continue;
       }
       const kandidaten: { stufe: 1 | 2 | 3 }[] = [];
@@ -553,6 +648,7 @@ export function erstelleSeedDaten(importe: readonly VorlageImport[], jetzt: Date
   const nora = pfade[0];
   const luca = pfade[1];
   const sara = pfade[2];
+  const mia = pfade[3];
 
   anfrage(
     'nora-1',
@@ -601,6 +697,14 @@ export function erstelleSeedDaten(importe: readonly VorlageImport[], jetzt: Date
     'Für die Social-Media-Kampagne habe ich die Bildsprache festgelegt und die Entwürfe präsentiert.',
     6,
   );
+  anfrage(
+    'mia-1',
+    mia,
+    naechstesZiel(mia, 3, 'offen'),
+    3,
+    'Für die Transferarbeit habe ich die Anforderungen selbstständig erhoben und als User Stories dokumentiert.',
+    3,
+  );
 
   // Badge allocations derive from the events (R-B5).
   const badgeVergaben: BadgeVergabe[] = [];
@@ -612,7 +716,13 @@ export function erstelleSeedDaten(importe: readonly VorlageImport[], jetzt: Date
       (ereignis) => ereignis.ausbildungId === pfad.ausbildung.id,
     );
     badgeVergaben.push(
-      ...berechneBadgeVergaben(definitionen, pfad.index, ereignisse, pfad.ausbildung.id),
+      ...berechneBadgeVergaben(
+        definitionen,
+        pfad.index,
+        ereignisse,
+        pfad.ausbildung.id,
+        pfad.stufenmodell,
+      ),
     );
   }
 
@@ -674,5 +784,25 @@ export function verteileStufen(
     differenz -= punktwert(neu) - punktwert(stufe);
   }
 
+  return stufen;
+}
+
+/**
+ * D-022: binary plans only know open/completed. The top-ranked objectives are
+ * completed until the requested share is reached; there are no partial levels.
+ */
+export function verteileStufenBinaer(
+  ziele: readonly { id: string; score: number }[],
+  anteilProzent: number,
+): Map<string, Stufe> {
+  const sortiert = [...ziele].sort((a, b) => b.score - a.score);
+  const anzahl = Math.max(
+    0,
+    Math.min(sortiert.length, Math.round((anteilProzent / 100) * sortiert.length)),
+  );
+  const stufen = new Map<string, Stufe>();
+  sortiert.forEach((ziel, index) => {
+    stufen.set(ziel.id, index < anzahl ? ABSCHLUSS_STUFE : 0);
+  });
   return stufen;
 }

@@ -30,7 +30,10 @@ describe('StartSeite', () => {
   });
 
   it('meldet eine Lernende ohne Ausbildung statt weiterzuleiten', async () => {
-    await umgebung.sitzung.anmelden('jan');
+    // The prototype seed has one trained learner per profession; remove the training temporarily
+    // to cover the "no apprenticeship" branch that the removed fourth account used to provide.
+    await umgebung.speicher.ersetzeAlle('ausbildungen', []);
+    await umgebung.sitzung.anmelden('nora');
     const fixture = TestBed.createComponent(StartSeite);
 
     await vi.waitFor(() => {

@@ -22,6 +22,8 @@ export const routes: Routes = [
     path: 'skilltree/:id',
     title: 'Skilltree',
     canActivate: [angemeldetGuard],
+    // The tree scales with the viewport, so this view uses the wide content column (D-024).
+    data: { breite: 'breit' },
     loadComponent: () =>
       import('./skilltree/skilltree-seite/skilltree-seite').then((m) => m.SkilltreeSeite),
   },
@@ -38,13 +40,6 @@ export const routes: Routes = [
     canActivate: [angemeldetGuard],
     loadComponent: () =>
       import('./meine-daten/meine-daten-seite/meine-daten-seite').then((m) => m.MeineDatenSeite),
-  },
-  {
-    path: 'admin/import',
-    title: 'Import und Daten – Skilltree',
-    canActivate: [rollenGuard('ADMIN')],
-    loadComponent: () =>
-      import('./admin/admin-import-seite/admin-import-seite').then((m) => m.AdminImportSeite),
   },
   { path: '**', redirectTo: '' },
 ];

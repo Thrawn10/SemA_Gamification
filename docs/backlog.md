@@ -3,9 +3,11 @@
 Ideas that are out of scope for the current milestones. Do not implement them without an explicit
 decision. The specification wins for product behaviour; anything not in it belongs here.
 
-- **M6 Excel import (APP/PLA).** In-browser reader for the original `.xlsx` files, dry-run report
-  from SPEC 7.2 and TF6/TF6b. Needs the files under `fixtures/excel/` and a decision on the `xlsx`
-  dependency (Q-002).
+- **Automated practice-trainer responses.** Decide whether confirmations stay manual (hidden mock
+  login) or are simulated after a request; automation may require a backend (Q-018).
+- **Re-introduce a Bildungsplan upload (optional).** The admin route and the Excel/PDF/template
+  import were removed from the validation build (D-021). The converter and JSON fixtures under
+  `fixtures/bildungsplaene/` remain available if a later build needs an import again.
 - **`angular-eslint`.** T-W5 requires a clean lint run; the package is not installed yet. Until then
   the gate is `ng build`, `npx ng test --no-watch` and `npx prettier --check .`.
 - **Playwright end-to-end tests.** SPEC 10.4 describes the learner and coach flows plus an axe run.

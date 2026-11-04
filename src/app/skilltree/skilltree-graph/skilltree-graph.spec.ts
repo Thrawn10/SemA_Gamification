@@ -75,4 +75,15 @@ describe('SkilltreeGraph', () => {
     );
     expect(inhalt.querySelectorAll('.graph__kante--verweis').length).toBeGreaterThan(0);
   });
+
+  it('skaliert die Bühne über die Kartenbreite und fällt ohne Messung auf die Referenz zurück (D-024)', () => {
+    const inhalt = erstelle().nativeElement as HTMLElement;
+    const buehne = inhalt.querySelector<HTMLElement>('.graph__buehne');
+
+    expect(buehne?.style.getPropertyValue('--skala').trim()).toBe('1');
+    expect(buehne?.style.getPropertyValue('--spalte').trim()).toBe('196px');
+    expect(buehne?.style.getPropertyValue('inline-size').trim()).toBe(
+      `${ansicht.bereiche.length * 196}px`,
+    );
+  });
 });

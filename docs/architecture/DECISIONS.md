@@ -95,6 +95,8 @@ reading that the human still has to confirm; it is also mirrored in
   fixtures are not in the repository and `xlsx` is not installed.
 - Grund: T-I3/T-I6 are testable with the JSON path; TF6/TF6b stay `skip` until the files exist
   (SPEC 10.3). Recorded in `backlog.md` and `open-questions.md`.
+- Hinweis: im Validierungsbuild durch D-021 abgelöst — Admin-Route und `ImportDienst` wurden
+  entfernt.
 - Status: ANNAHME
 
 ## D-011 `strict` in the root tsconfig
@@ -172,6 +174,8 @@ reading that the human still has to confirm; it is also mirrored in
 - Grund: a repeated code inside a competence is a copy-paste duplicate; the same code in two
   competences would attach one of them to the wrong parent, so the import must stop instead of
   silently dropping an objective.
+- Hinweis: die Regel bleibt im Adapter (`VorlageSpeicherAdapter`) erhalten, auch nachdem D-021 den
+  `ImportDienst` und die Admin-Route entfernt hat.
 - Status: ANNAHME
 
 ## D-018 Every component uses four files, never an inline template
@@ -219,3 +223,92 @@ reading that the human still has to confirm; it is also mirrored in
   (template, styles, test) together, matches the schematic naming, and stays consistent with the
   spec's subject-based folder rule.
 - Status: BESTÄTIGT
+
+## D-021 Validation build: preloaded seed, three learner accounts, hidden trainer login
+
+- Bezug: SPEC N-10, N-11, S-L01–S-L06, T-I1–T-I4, T-W6
+- Entscheid: the validation build ships no admin route and no in-browser Excel/PDF or template-JSON
+  import. The seed already contains the APP, PLA and MED plans plus one learner per profession
+  (Nora/Applikationsentwicklung, Luca/Plattformentwicklung, Sara/Media), so every account has a
+  populated skilltree without any upload step. The login page lists exactly those three learner
+  accounts. The practice-trainer accounts stay in the seed and remain reachable through a collapsed
+  "Prototyp-Zugang Praxisbildner/in" panel on the login page and through the violet prototype bar,
+  so the coach view (S-L01–S-L06) can still be demonstrated. The admin account is kept for the
+  data-management service tests, but it has no route and is hidden from the prototype switcher.
+  Whether trainer confirmations are entered by a facilitator or automated (which may need a backend)
+  is explicitly undecided (Q-018).
+- Hinweis: D-022 erweitert den Seed auf vier Lernende und fügt das PiBS-Studium als vierten Plan
+  hinzu.
+- Grund: test participants only exercise the learner flow; a visible trainer login would invite them
+  into the wrong role, and the original template upload was a setup step that added no value once the
+  seed was fixed. Keeping the hidden trainer login preserves the confirmation demo without committing
+  to an automation strategy.
+- Status: ANNAHME
+
+## D-022 PiBS as a fourth plan with a binary stage model
+
+- Bezug: `DeveloperFindings.md` point 3, SPEC N-10, N-13, R-S1, R-B5, Q-019
+- Entscheid: the validation build ships a fourth plan `INF-PIBS` (Praxisintegriertes Bachelor-Studium
+  Informatik, FFHS) and one learner (Mia), so test participants see a plan that is not an
+  apprenticeship. A plan and its Lehrberuf carry `stufenmodell: 'DREI_STUFEN' | 'BINAER'`. PiBS is
+  binary: an objective is either open or completed (`ABSCHLUSS_STUFE = 3`), a request targets stage 3
+  only, the confirmation UI offers only stage 3, progress, traffic light and badges use
+  «offen»/«abgeschlossen», and the seeded events contain only `BESTAETIGT` at stage 3.
+  `stufenmodellFuer`/`normalisiereStufenmodell` fall back to `DREI_STUFEN` for stored plans without
+  the field, so APP/PLA/MED keep working. The plan reuses the existing rules, services and UI; only
+  the stage labels and the allowed confirmation levels are model-dependent.
+- Grund: the PiBS study model has no cumulative apprenticeship levels, so mapping it onto
+  «erklärt/geübt/selbständig» would invent competence levels the study regulations do not define.
+  A per-plan model keeps the rules module pure and avoids a second data path.
+- Hinweis: apprenticeship concepts that PiBS does not use (Lehrjahr, Bbc/IPA/Lehrabschluss, the
+  Basislehrjahr fallback text) are still shown; see Q-019.
+- Status: ANNAHME
+
+## D-023 Seed version marker in the `meta` store
+
+- Bezug: D-002, D-021, D-022, SPEC N-12, T-W6
+- Entscheid: `DatenbestandSpeicherAdapter.initialisieren()` writes the deterministic seed when the
+  `benutzer` store is empty, when `meta/seed.version` differs from `SEED_VERSION`, or when the marker
+  is missing. The marker is written **after** `datenbestandSetzen` completes, so an interrupted seed
+  has no marker and is rebuilt on the next start. `IndexedDbSpeicher` opens the database at version 2
+  and creates the new `meta` store in `onupgradeneeded`; `onversionchange` closes stale connections so
+  an older tab cannot block the upgrade. `DatenbestandSpeicherAdapter.importieren` also writes the
+  marker, so an explicit import is not replaced on the next start. The marker is not part of
+  `DatenbestandJson` and is not exported.
+- Grund: the `skilltree-prototyp-v3` database name was a one-off reseed switch. Browsers that had
+  already created a v3 database from an earlier iteration (or whose first seed was interrupted) kept
+  an incomplete data set; concretely Mia existed without `az-mia`, so the start page showed «Noch kein
+  Lehrberuf zugeordnet» forever. A version marker makes seed changes explicit, heals partial writes
+  without heuristics about data completeness, and replaces the manual database-name bump.
+- Status: BESTÄTIGT
+
+## D-024 Larger, responsive skill tree plus per-area reward board
+
+- Bezug: SPEC 8.2, 8.3, R-B3, N-04, human request 2026-11-04, supersedes D-007, extends D-008
+- Entscheid: the skill-tree route opts into a wider content column with route
+  `data: { breite: 'breit' }`; the shell maps it to `.app-inhalt--breit` with the token
+  `--max-breite-breit: 1720px`. All other routes keep `--max-breite: 1280px`, so tables and forms stay
+  readable. The graph measures its card with a `ResizeObserver` and derives the column width as
+  `spaltenbreite(breite, aeste) = clamp(150, (breite − 16) / aeste, 284)`; without a measurement it
+  falls back to the 196 px reference. `baumSkala(spalte) = max(1, spalte / 196)` scales circle
+  radius, row height, font sizes and edge offsets through the `--skala` and `--spalte` custom
+  properties; below the measured minimum the card scrolls horizontally as before. The node button is
+  positioned at `punkt.x − radius`, so the ring centre sits exactly on the SVG edge endpoint (the old
+  offset was 20 px off at every scale). Below the graph a new presentational component
+  `belohnungen-uebersicht` shows one card per area with the existing `BEREICH_ABGESCHLOSSEN` badge
+  (R-B3), its progress, award date or inactivity, and the concrete competences of that area with
+  «erreicht / gesamt» on the top level plus a mini bar. The area sidebar shows the same badge and the
+  same per-competence counts. Everything is derived from the stage events by the pure helpers in
+  `belohnungen.ts`; no badge definition, no event and no stored field is added. Only
+  `BEREICH_ABGESCHLOSSEN` is presented as an area reward; `BEREICH_GESTARTET` stays in the Badges tab.
+  When `badges.ausgeblendet` is set, the board and the sidebar block hide their badge content and
+  show a note instead (N-04).
+- Grund: test participants asked for a tree they can read on a large screen and for a more
+  game-like sense of progress. The spec's 150–196 px range was chosen for the 1280 px column, so the
+  upper bound is deliberately raised to 284 px for the wide column only; below 196 px the layout is
+  unchanged. Reusing R-B3 keeps the reward board free of new business rules, and a derived-only
+  component keeps the «compute, never store» constraint.
+- Hinweis: `anyComponentStyle.maximumWarning` rises from 6 kB to 7 kB (error stays 8 kB), because the
+  graph stylesheet holds the scale rules and measures 6.7 kB. The 284 px cap and the board layout are
+  an assumption; the request for a larger tree itself is confirmed by the human.
+- Status: ANNAHME

@@ -13,9 +13,9 @@ The UI copy is German with Swiss spelling; the specification
   objectives, request form, history, badges, “Meine Daten”.
 - Coach view: sortable overview of assigned learners, collected requests with confirm/reject,
   direct confirmation and withdrawal in the tree, milestone confirmation.
-- Admin view: template JSON import with dry run, data set export/import/reset.
 - Violet prototype bar (`DEMO_MODE`) with role switch, requirement IDs, review and reset.
-- Seeds: three learning plans (APP, PLA, MED), seven accounts, deterministic demo events.
+- Preloaded seed: four learning plans (APP, PLA, MED and the binary PiBS plan) with one learner each,
+  deterministic stage events, requests, history and badges. No upload or setup step is required.
 
 Data lives in IndexedDB in the browser and is seeded on first start. There is no backend yet; the
 ports and adapters are prepared for one (see `docs/architecture/DECISIONS.md`).
@@ -29,17 +29,18 @@ npm start        # http://localhost:4200
 
 Choose a test account on the login page (no password, pseudonymised demo data):
 
-| Login    | Person      | Role                       |
-| -------- | ----------- | -------------------------- |
-| `nora`   | Nora Frei   | Learner (APP)              |
-| `luca`   | Luca Meier  | Learner (PLA)              |
-| `sara`   | Sara Huber  | Learner (MED)              |
-| `jan`    | Jan Bühler  | Learner without a training |
-| `daniel` | Daniel Roth | Practice trainer           |
-| `petra`  | Petra Lang  | Practice trainer           |
-| `admin`  | Admin       | Administration             |
+| Login  | Person     | Profession               |
+| ------ | ---------- | ------------------------ |
+| `nora` | Nora Frei  | Applikationsentwicklerin |
+| `luca` | Luca Meier | Plattformentwickler      |
+| `sara` | Sara Huber | Mediamatikerin           |
 
-Reset the demo data with the violet bar or under “Import und Daten” as admin.
+The practice-trainer accounts (`daniel`, `petra`) are not part of the participant flow. They stay
+reachable behind the collapsed “Prototyp-Zugang Praxisbildner/in” panel on the login page and in the
+violet prototype bar, so the coach view can still be demonstrated (D-021, Q-018). There is no admin
+route or file upload.
+
+Reset the demo data with the violet prototype bar.
 
 ## Checks
 
@@ -50,11 +51,10 @@ npm run check:components    # four-file component rule (D-018)
 npx prettier --check .      # formatting
 ```
 
-`ng lint` is not available yet (`angular-eslint` is not installed). The in-browser Excel import is
-still deferred (D-010; the source workbooks sit outside the repository), but an offline converter
-produces normalised `VorlageImport` JSON: `npm run import:bildungsplaene`. Template JSON import is
-available in the admin view. See
-[`docs/import/BILDUNGSPLAN-IMPORT.md`](docs/import/BILDUNGSPLAN-IMPORT.md),
+`ng lint` is not available yet (`angular-eslint` is not installed). The validation build has no
+Excel/PDF or template upload; the seed is the only data source. The offline converter and the
+normalised `VorlageImport` JSON remain available for later work: `npm run import:bildungsplaene`
+(D-010, D-021). See [`docs/import/BILDUNGSPLAN-IMPORT.md`](docs/import/BILDUNGSPLAN-IMPORT.md),
 [`docs/PROGRESS.md`](docs/PROGRESS.md) and [`docs/spec/open-questions.md`](docs/spec/open-questions.md).
 
 ## AI agent setup

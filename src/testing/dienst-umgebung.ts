@@ -5,7 +5,6 @@ import { UHR } from '../app/core/uhr';
 import { AnfrageDienst } from '../app/dienste/anfrage-dienst';
 import { BestaetigungDienst } from '../app/dienste/bestaetigung-dienst';
 import { DatenverwaltungDienst } from '../app/dienste/datenverwaltung-dienst';
-import { ImportDienst } from '../app/dienste/import-dienst';
 import { MeilensteinDienst } from '../app/dienste/meilenstein-dienst';
 import { SitzungDienst } from '../app/dienste/sitzung-dienst';
 import { SkilltreeDienst } from '../app/dienste/skilltree-dienst';
@@ -37,12 +36,14 @@ import {
 import appVorlage from '../../public/vorlagen/vorlage-inf-app.json';
 import plaVorlage from '../../public/vorlagen/vorlage-inf-pla.json';
 import medVorlage from '../../public/vorlagen/vorlage-med.json';
+import pibsVorlage from '../../public/vorlagen/vorlage-inf-pibs.json';
 
 /** Template fixtures used by the deterministic seed (SPEC 7.4). */
 export const VORLAGEN: readonly VorlageImport[] = [
   appVorlage as unknown as VorlageImport,
   plaVorlage as unknown as VorlageImport,
   medVorlage as unknown as VorlageImport,
+  pibsVorlage as unknown as VorlageImport,
 ];
 
 export const TEST_ZEITPUNKT = new Date('2026-11-03T09:00:00.000Z');
@@ -73,7 +74,6 @@ export interface TestUmgebung {
   meilenstein: MeilensteinDienst;
   uebersicht: UebersichtDienst;
   datenverwaltung: DatenverwaltungDienst;
-  importDienst: ImportDienst;
   zeit: { jetzt: Date };
   seed: DatenbestandJson;
 }
@@ -134,7 +134,6 @@ export async function erstelleUmgebung(): Promise<TestUmgebung> {
     meilenstein: TestBed.inject(MeilensteinDienst),
     uebersicht: TestBed.inject(UebersichtDienst),
     datenverwaltung: TestBed.inject(DatenverwaltungDienst),
-    importDienst: TestBed.inject(ImportDienst),
     zeit,
     seed,
   };

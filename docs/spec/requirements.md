@@ -65,33 +65,37 @@ every detail. IDs are the stable IDs used in the spec and in test names. Status 
 
 ## 4 All roles
 
-| ID    | Requirement (short)                                                                                      | Status |
-| ----- | -------------------------------------------------------------------------------------------------------- | ------ |
-| S-Q01 | “Meine Daten” reachable from the header, role-dependent data/permission table, no tracking note.         | done   |
-| N-03  | `UEBERNOMMEN` counts as confirmed and can be withdrawn.                                                  | done   |
-| N-04  | `Benutzereinstellung.badgesAusgeblendet`.                                                                | done   |
-| N-05  | Learning locations optional per objective, fallback to the competence.                                   | done   |
-| N-06  | Rejection requires a reason visible to the learner.                                                      | done   |
-| N-07  | One open request per objective.                                                                          | done   |
-| N-08  | Taxonomy column is authoritative.                                                                        | done   |
-| N-09  | Role name “Praxisbildner/in”.                                                                            | done   |
-| N-10  | Three professions in the MVP (APP, PLA, MED).                                                            | done   |
-| N-11  | Violet prototype control bar with role switch, requirement IDs, review and reset; app never uses violet. | done   |
-| N-12  | Frontend-first MVP with IndexedDB and replaceable adapters.                                              | done   |
-| N-13  | Angular 22 and the Angular style guide.                                                                  | done   |
+| ID    | Requirement (short)                                                                                        | Status |
+| ----- | ---------------------------------------------------------------------------------------------------------- | ------ |
+| S-Q01 | “Meine Daten” reachable from the header, role-dependent data/permission table, no tracking note.           | done   |
+| N-03  | `UEBERNOMMEN` counts as confirmed and can be withdrawn.                                                    | done   |
+| N-04  | `Benutzereinstellung.badgesAusgeblendet`.                                                                  | done   |
+| N-05  | Learning locations optional per objective, fallback to the competence.                                     | done   |
+| N-06  | Rejection requires a reason visible to the learner.                                                        | done   |
+| N-07  | One open request per objective.                                                                            | done   |
+| N-08  | Taxonomy column is authoritative.                                                                          | done   |
+| N-09  | Role name “Praxisbildner/in”.                                                                              | done   |
+| N-10  | Three apprenticeship professions in the MVP (APP, PLA, MED); PiBS is a fourth plan added by D-022 (Q-019). | done   |
+| N-11  | Violet prototype control bar with role switch, requirement IDs, review and reset; app never uses violet.   | done   |
+| N-12  | Frontend-first MVP with IndexedDB and replaceable adapters.                                                | done   |
+| N-13  | Angular 22 and the Angular style guide.                                                                    | done   |
 
 ## 5 Import
 
 | ID   | Requirement (short)                                                                                                        | Status  |
 | ---- | -------------------------------------------------------------------------------------------------------------------------- | ------- |
-| T-I1 | Import only via the admin route; guard and `ImportDienst` reject other roles; files are read in the browser, not uploaded. | done    |
-| T-I3 | Dry run produces a report without changing data.                                                                           | done    |
-| T-I4 | Dry-run report lists counts, errors and warnings in German.                                                                | done    |
-| T-I6 | Template versioning (new version deactivates the previous one).                                                            | partial |
-| T-I7 | Configuration per template type; PLA works without code changes.                                                           | partial |
+| T-I1 | Import only via the admin route; guard and `ImportDienst` reject other roles; files are read in the browser, not uploaded. | removed |
+| T-I3 | Dry run produces a report without changing data.                                                                           | removed |
+| T-I4 | Dry-run report lists counts, errors and warnings in German.                                                                | removed |
+| T-I6 | Template versioning (new version deactivates the previous one).                                                            | removed |
+| T-I7 | Configuration per template type; PLA works without code changes.                                                           | removed |
 | T-I8 | Taxonomy, learning locations and modules are imported and visible in the objective.                                        | done    |
 | T-I9 | Optional start state from an individual plan as `UEBERNOMMEN`.                                                             | partial |
-| —    | Excel reader for the original APP/PLA files.                                                                               | open    |
+| —    | Excel reader for the original APP/PLA files.                                                                               | removed |
+
+`removed` means the validation build intentionally drops the feature (D-021): the admin route and
+every file upload were deleted, and the seed ships the APP/PLA/MED plans with a start state already
+applied for Sara. T-I8 and T-I9 remain covered by the seeded data.
 
 ## 6 Non-functional
 
@@ -102,24 +106,24 @@ every detail. IDs are the stable IDs used in the spec and in test names. Status 
 | T-D3 | Append-only history with actor, action and timestamp.                           | done    |
 | T-D4 | Deletion concept after the retention period; pseudonymised validation data.     | open    |
 | T-W1 | Rules as pure functions with unit tests, coverage ≥ 90 %.                       | partial |
-| T-W2 | Import tests with the real APP and PLA templates as fixtures.                   | partial |
+| T-W2 | Import tests with the real APP and PLA templates as fixtures.                   | removed |
 | T-W3 | Start with one command; README with setup.                                      | done    |
 | T-W4 | Backend-ready architecture per 0.7 with automated checks.                       | done    |
 | T-W5 | Angular guidelines per 0.8; `angular-eslint` without errors or warnings.        | open    |
-| T-W6 | Data set exportable and importable as JSON.                                     | done    |
+| T-W6 | Data set exportable and importable as JSON.                                     | partial |
 | T-P1 | PLA tree (177 objectives) loads < 1 s; overview with 30 learners < 2 s.         | open    |
 | T-A1 | WCAG 2.1 AA / eCH-0059; stage and traffic light never conveyed by colour alone. | partial |
 
 ## 7 Test cases
 
-| ID        | Covered by                                          |
-| --------- | --------------------------------------------------- |
-| TF1–TF3c  | `packages/regeln/src/regeln.spec.ts`                |
-| TF4, TF5  | `src/app/dienste/dienste.spec.ts`                   |
-| TF6, TF6b | open — Excel fixtures missing (Q-002)               |
-| TF6c      | `src/app/dienste/dienste.spec.ts` (MED JSON import) |
-| TF7–TF12  | `packages/regeln/src/regeln.spec.ts`                |
-| TF13–TF15 | `src/app/dienste/dienste.spec.ts`                   |
-| TF16–TF19 | `packages/regeln/src/regeln.spec.ts`                |
-| TF20      | `src/app/dienste/dienste.spec.ts`                   |
-| TF21      | memory adapter only (Q-006)                         |
+| ID        | Covered by                                           |
+| --------- | ---------------------------------------------------- |
+| TF1–TF3c  | `packages/regeln/src/regeln.spec.ts`                 |
+| TF4, TF5  | `src/app/dienste/dienste.spec.ts`                    |
+| TF6, TF6b | removed with the upload route (D-021)                |
+| TF6c      | removed with the upload route; MED stays in the seed |
+| TF7–TF12  | `packages/regeln/src/regeln.spec.ts`                 |
+| TF13–TF15 | `src/app/dienste/dienste.spec.ts`                    |
+| TF16–TF19 | `packages/regeln/src/regeln.spec.ts`                 |
+| TF20      | `src/app/dienste/dienste.spec.ts`                    |
+| TF21      | memory adapter only (Q-006)                          |

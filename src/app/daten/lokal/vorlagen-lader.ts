@@ -1,6 +1,11 @@
 import type { VorlageImport } from '@skilltree/vertraege';
 
-const DATEIEN = ['vorlage-inf-app.json', 'vorlage-inf-pla.json', 'vorlage-med.json'];
+const DATEIEN = [
+  'vorlage-inf-app.json',
+  'vorlage-inf-pla.json',
+  'vorlage-med.json',
+  'vorlage-inf-pibs.json',
+];
 
 /** Loads the generated template JSON from `public/vorlagen` (SPEC 0.3 / 7.4). */
 export async function ladeVorlagen(): Promise<VorlageImport[]> {

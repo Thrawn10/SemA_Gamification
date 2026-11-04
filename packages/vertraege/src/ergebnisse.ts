@@ -18,6 +18,7 @@ import type {
   KantenZustand,
   MeilensteinCode,
   Stufe,
+  Stufenmodell,
 } from './stufe';
 
 export interface DatenbestandJson {
@@ -72,6 +73,9 @@ export interface KompetenzAnsicht {
   ampel: Ampel;
   istNaechster: boolean;
   offeneAnfragen: number;
+  /** Completed objectives, used by the binary model instead of the 0–6 competence value. */
+  abgeschlosseneLeistungsziele: number;
+  anzahlLeistungsziele: number;
 }
 
 export interface BereichAnsicht {
@@ -82,6 +86,8 @@ export interface BereichAnsicht {
   ampel: Ampel;
   roteKompetenzen: number;
   offeneAnfragen: number;
+  abgeschlosseneLeistungsziele: number;
+  anzahlLeistungsziele: number;
 }
 
 export interface KantenAnsicht {
@@ -109,6 +115,7 @@ export interface AktiveAnfrageAnsicht {
   kompetenz: Kompetenz;
   bereich: Bereich;
   aktuelleStufe: Stufe;
+  stufenmodell: Stufenmodell;
 }
 
 export interface BadgeAnsicht {
@@ -132,6 +139,7 @@ export interface SkilltreeAnsicht {
   lernende: Benutzer;
   lehrberuf: Lehrberuf;
   vorlage: Vorlage;
+  stufenmodell: Stufenmodell;
   rolle: Rolle;
   lehrjahr: number;
   fortschritt: number;
@@ -171,6 +179,7 @@ export interface UebersichtZeile {
   ausbildung: Ausbildung;
   lernende: Benutzer;
   lehrberuf: Lehrberuf;
+  stufenmodell: Stufenmodell;
   lehrjahr: number;
   fortschritt: number;
   bereiche: { code: string; ampel: Ampel; fortschritt: number }[];

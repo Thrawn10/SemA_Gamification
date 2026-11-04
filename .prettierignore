@@ -6,3 +6,6 @@ node_modules/
 dist/
 .angular/
 coverage/
+
+# Local, untracked developer notes; not part of the repository formatting.
+DeveloperFindings.md

@@ -41,4 +41,31 @@
       </ul>
     </section>
   }
+
+  @if (trainerKonten().length > 0) {
+    <details class="anmeldung__prototyp">
+      <summary>Prototyp-Zugang Praxisbildner/in</summary>
+      <p class="untertitel">
+        Nicht Teil des Testablaufs mit Lernenden. Der Zugang bleibt vorerst versteckt, damit die
+        Bestätigungen im Prototyp weiterhin von Hand ausgelöst werden können.
+      </p>
+      <ul class="anmeldung__konten">
+        @for (konto of trainerKonten(); track konto.id) {
+          <li>
+            <button
+              type="button"
+              class="anmeldung__konto"
+              [attr.aria-label]="'Als ' + konto.name + ' anmelden'"
+              (click)="anmelden(konto)"
+              [disabled]="laeuft()"
+            >
+              <span class="anmeldung__name">{{ konto.name }}</span>
+              <span class="anmeldung__login">{{ konto.login }}</span>
+              <span class="anmeldung__rolle">{{ rollenText(konto.rolle) }}</span>
+            </button>
+          </li>
+        }
+      </ul>
+    </details>
+  }
 </section>

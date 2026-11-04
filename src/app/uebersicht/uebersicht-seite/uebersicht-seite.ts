@@ -10,8 +10,13 @@ import {
   viewChild,
 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import type { AktiveAnfrageAnsicht, UebersichtZeile } from '@skilltree/vertraege';
-import { STUFEN_TEXTE } from '@skilltree/vertraege';
+import type {
+  AktiveAnfrageAnsicht,
+  Stufe,
+  Stufenmodell,
+  UebersichtZeile,
+} from '@skilltree/vertraege';
+import { stufenText } from '@skilltree/vertraege';
 import { DomaenenEreignisse } from '../../core/domaenen-ereignisse';
 import { fehlerText } from '../../core/fehler';
 import { UHR } from '../../core/uhr';
@@ -159,8 +164,8 @@ export class UebersichtSeite {
     return this.richtung() === 'auf' ? '↑' : '↓';
   }
 
-  protected stufeText(stufe: 0 | 1 | 2 | 3): string {
-    return STUFEN_TEXTE[stufe];
+  protected stufeText(modell: Stufenmodell, stufe: Stufe): string {
+    return stufenText(modell, stufe);
   }
 
   protected alterText(eintrag: AktiveAnfrageAnsicht): string {

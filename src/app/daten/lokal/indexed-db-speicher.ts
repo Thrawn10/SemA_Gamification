@@ -5,8 +5,12 @@ import {
   type SpeicherName,
 } from './daten-speicher';
 
-const DB_NAME = 'skilltree-prototyp';
-const DB_VERSION = 1;
+// v3: the seed gained the PiBS learner and its binary stage model (D-022). A new database name
+// reseeds every browser once instead of silently keeping the old accounts.
+const DB_NAME = 'skilltree-prototyp-v3';
+// v2: the `meta` store records which seed version a browser already has, so an interrupted or
+// outdated seed is replaced on the next start (D-023).
+const DB_VERSION = 2;
 
 export class IndexedDbSpeicher implements DatenSpeicher {
   private datenbank: Promise<IDBDatabase> | null = null;
@@ -25,7 +29,13 @@ export class IndexedDbSpeicher implements DatenSpeicher {
           }
         }
       };
-      anfrage.onsuccess = () => resolve(anfrage.result);
+      anfrage.onsuccess = () => {
+        const db = anfrage.result;
+        // Close this connection when another tab upgrades the schema, so the upgrade is not
+        // blocked by a stale tab (D-023).
+        db.onversionchange = () => db.close();
+        resolve(db);
+      };
       anfrage.onerror = () =>
         reject(anfrage.error ?? new Error('IndexedDB konnte nicht geöffnet werden.'));
       anfrage.onblocked = () => reject(new Error('IndexedDB ist blockiert.'));

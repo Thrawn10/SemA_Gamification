@@ -22,9 +22,11 @@ import type {
   VorlageStruktur,
   Zuordnung,
 } from '@skilltree/vertraege';
+import { stufenmodellFuer } from '@skilltree/vertraege';
 import { erstelleBadgeDefinitionen } from '@skilltree/regeln';
 import { erzeugeId, pruefsumme } from '../../core/ids';
 import type { UhrFn } from '../../core/uhr';
+import { SEED_VERSION } from './seed';
 import type {
   AnfrageRepository,
   AusbildungRepository,
@@ -106,6 +108,10 @@ export class VorlageSpeicherAdapter implements VorlageRepository {
 
   async speichern(importiert: VorlageImport): Promise<VorlageId> {
     const jetzt = this.jetzt().toISOString();
+    const stufenmodell = stufenmodellFuer(
+      importiert.stufenmodell,
+      importiert.lehrberuf.stufenmodell,
+    );
     let lehrberuf = (await this.speicher.alle<Lehrberuf>('lehrberufe')).find(
       (eintrag) => eintrag.code === importiert.lehrberuf.code,
     );
@@ -116,6 +122,7 @@ export class VorlageSpeicherAdapter implements VorlageRepository {
         name: importiert.lehrberuf.name,
         fachrichtung: importiert.lehrberuf.fachrichtung,
         lehrdauerJahre: importiert.lehrberuf.lehrdauerJahre,
+        stufenmodell,
         aktiv: true,
       };
       await this.speicher.setzen('lehrberufe', lehrberuf);
@@ -137,6 +144,7 @@ export class VorlageSpeicherAdapter implements VorlageRepository {
       quelle: importiert.quelle,
       importiertAm: jetzt,
       pruefsumme: pruefsumme(JSON.stringify(importiert)),
+      stufenmodell,
       aktiv: true,
     };
     await this.speicher.setzen('vorlagen', vorlage);
@@ -221,7 +229,7 @@ export class VorlageSpeicherAdapter implements VorlageRepository {
       }
     }
 
-    const badgeDefinitionen = erstelleBadgeDefinitionen(struktur, vorlage.id);
+    const badgeDefinitionen = erstelleBadgeDefinitionen(struktur, vorlage.id, stufenmodell);
     for (const definition of badgeDefinitionen) {
       await this.speicher.setzen('badgeDefinitionen', definition);
     }
@@ -411,6 +419,14 @@ export class BadgeSpeicherAdapter implements BadgeRepository {
   }
 }
 
+/** Record in the `meta` store that marks a completely written seed (D-023). */
+interface SeedStand {
+  id: string;
+  version: number;
+}
+
+const SEED_STAND_ID = 'seed';
+
 export class DatenbestandSpeicherAdapter implements DatenbestandPort, DatenInitialisierer {
   constructor(
     private readonly speicher: DatenSpeicher,
@@ -420,9 +436,15 @@ export class DatenbestandSpeicherAdapter implements DatenbestandPort, DatenIniti
 
   async initialisieren(): Promise<void> {
     const benutzer = await this.speicher.alle<Benutzer>('benutzer');
-    if (benutzer.length === 0) {
-      await datenbestandSetzen(this.speicher, await this.seed());
+    const stand = await this.speicher.holen<SeedStand>('meta', SEED_STAND_ID);
+    if (benutzer.length > 0 && stand?.version === SEED_VERSION) {
+      return;
     }
+    // Rebuild when the browser has no data, when the seed changed since it was written (D-022),
+    // or when an earlier start was interrupted before the marker was written (D-023). Without
+    // this, a browser that once stored an incomplete seed keeps a learner without a training and
+    // the start page shows "Kein Lehrberuf zugeordnet" forever.
+    await this.seedAnwenden();
   }
 
   async exportieren(): Promise<DatenbestandJson> {
@@ -449,10 +471,25 @@ export class DatenbestandSpeicherAdapter implements DatenbestandPort, DatenIniti
 
   async importieren(daten: DatenbestandJson): Promise<void> {
     await datenbestandSetzen(this.speicher, daten);
+    // An explicit import is the current state; do not replace it on the next start.
+    await this.seedStandSchreiben();
   }
 
   async zuruecksetzen(): Promise<void> {
+    await this.seedAnwenden();
+  }
+
+  private async seedAnwenden(): Promise<void> {
     await datenbestandSetzen(this.speicher, await this.seed());
+    // Written last, so an interrupted seed has no marker and is rebuilt on the next start.
+    await this.seedStandSchreiben();
+  }
+
+  private seedStandSchreiben(): Promise<void> {
+    return this.speicher.setzen<SeedStand>('meta', {
+      id: SEED_STAND_ID,
+      version: SEED_VERSION,
+    });
   }
 }
 

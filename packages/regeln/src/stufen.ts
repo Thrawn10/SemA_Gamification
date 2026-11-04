@@ -1,4 +1,5 @@
-import type { Stufe, Stufenereignis } from '@skilltree/vertraege';
+import type { Stufe, Stufenereignis, Stufenmodell } from '@skilltree/vertraege';
+import { ABSCHLUSS_STUFE } from '@skilltree/vertraege';
 
 /**
  * R-S1: Active confirmations are BESTAETIGT or UEBERNOMMEN events that are not
@@ -28,6 +29,25 @@ export function stufenMap(ereignisse: readonly Stufenereignis[]): Map<string, St
     }
   }
   return stufen;
+}
+
+/**
+ * D-022: the binary model has no partial levels, so any active confirmation
+ * counts as completed. Plan data always uses the three-stage default.
+ */
+export function stufenMapFuerModell(
+  ereignisse: readonly Stufenereignis[],
+  modell: Stufenmodell,
+): Map<string, Stufe> {
+  const stufen = stufenMap(ereignisse);
+  if (modell === 'DREI_STUFEN') {
+    return stufen;
+  }
+  const binaer = new Map<string, Stufe>();
+  for (const [leistungszielId, stufe] of stufen) {
+    binaer.set(leistungszielId, stufe > 0 ? ABSCHLUSS_STUFE : 0);
+  }
+  return binaer;
 }
 
 export function stufeFuer(stufen: ReadonlyMap<string, Stufe>, leistungszielId: string): Stufe {

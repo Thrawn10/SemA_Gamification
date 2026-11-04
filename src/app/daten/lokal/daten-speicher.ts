@@ -14,6 +14,7 @@ export const SPEICHER_NAMEN = [
   'anfragen',
   'badgeDefinitionen',
   'badgeVergaben',
+  'meta',
 ] as const;
 
 export type SpeicherName = (typeof SPEICHER_NAMEN)[number];

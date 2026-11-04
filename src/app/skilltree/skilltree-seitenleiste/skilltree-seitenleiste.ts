@@ -18,12 +18,14 @@ import type {
   MeilensteinCode,
   SkilltreeAnsicht,
 } from '@skilltree/vertraege';
-import { MEILENSTEIN_TEXTE } from '@skilltree/vertraege';
+import { ABSCHLUSS_STUFE, MEILENSTEIN_TEXTE, stufenText } from '@skilltree/vertraege';
 import { fehlerText } from '../../core/fehler';
 import { MeilensteinDienst } from '../../dienste/meilenstein-dienst';
 import { AmpelAnzeige } from '../../shared/ui/ampel-anzeige/ampel-anzeige';
 import { AnforderungId } from '../../shared/ui/anforderung-id/anforderung-id';
+import { BadgeKarte } from '../../shared/ui/badge-karte/badge-karte';
 import type { BaumAuswahl } from '../auswahl';
+import { belohnungFuerAst, type AstBelohnung } from '../belohnungen';
 import { LeistungszielEintrag } from '../leistungsziel-eintrag/leistungsziel-eintrag';
 import { VerlaufListe } from '../verlauf-liste/verlauf-liste';
 
@@ -38,6 +40,7 @@ interface KompetenzInhalt {
 interface AstInhalt {
   art: 'ast';
   bereich: BereichAnsicht;
+  belohnung: AstBelohnung | null;
 }
 
 interface MeilensteinInhalt {
@@ -56,7 +59,7 @@ const MEILENSTEIN_BESCHREIBUNGEN: Readonly<Record<MeilensteinCode, string>> = {
 /** Node and milestone sidebar (SPEC 8.2); closes with ×, backdrop or Esc. */
 @Component({
   selector: 'st-skilltree-seitenleiste',
-  imports: [AmpelAnzeige, AnforderungId, LeistungszielEintrag, VerlaufListe, DatePipe],
+  imports: [AmpelAnzeige, AnforderungId, BadgeKarte, LeistungszielEintrag, VerlaufListe, DatePipe],
   templateUrl: './skilltree-seitenleiste.html',
   styleUrl: './skilltree-seitenleiste.scss',
 })
@@ -82,6 +85,10 @@ export class SkilltreeSeitenleiste {
   protected readonly meldung = signal<string | null>(null);
   protected readonly fehler = signal<string | null>(null);
 
+  protected readonly hoechsteStufe = computed(() =>
+    stufenText(this.ansicht().stufenmodell, ABSCHLUSS_STUFE),
+  );
+
   protected readonly inhalt = computed<Inhalt | null>(() => {
     const auswahl = this.auswahl();
     const ansicht = this.ansicht();
@@ -99,7 +106,11 @@ export class SkilltreeSeitenleiste {
       return null;
     }
     if (auswahl.art === 'ast') {
-      return { art: 'ast', bereich };
+      return {
+        art: 'ast',
+        bereich,
+        belohnung: belohnungFuerAst(ansicht, bereich.bereich.code),
+      };
     }
     const index = bereich.kompetenzen.findIndex(
       (kompetenz) => kompetenz.kompetenz.id === auswahl.id,

@@ -1,9 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import type { DatenbestandJson, VorlageImport } from '@skilltree/vertraege';
+import type { DatenbestandJson } from '@skilltree/vertraege';
+import { ABSCHLUSS_STUFE } from '@skilltree/vertraege';
 import { indexierePlan, meilensteinBereitschaft, meilensteinStati } from '@skilltree/regeln';
-import { VORLAGE_REPOSITORY } from '../daten/ports';
-import { pruefeVorlageImport } from './import-dienst';
-import { erstelleUmgebung, VORLAGEN, type TestUmgebung } from '../../testing/dienst-umgebung';
+import { erstelleUmgebung, type TestUmgebung } from '../../testing/dienst-umgebung';
 
 function benutzerMit(umgebung: TestUmgebung, login: string) {
   const person = umgebung.seed.benutzer.find((eintrag) => eintrag.login === login);
@@ -272,7 +271,7 @@ describe('Anwendungsdienste und Rechte', () => {
   });
 });
 
-describe('Vorlagen-Import', () => {
+describe('Seed und Bildungsplan-Daten', () => {
   let umgebung: TestUmgebung;
 
   beforeEach(async () => {
@@ -283,120 +282,73 @@ describe('Vorlagen-Import', () => {
     TestBed.resetTestingModule();
   });
 
-  it('TF6c: Vorlagen-JSON MED importiert 6 Bereiche, 24 Kompetenzen, 158 Leistungsziele', async () => {
-    await umgebung.sitzung.anmelden('admin');
-    const med = VORLAGEN[2] as VorlageImport;
+  it('D-021/D-022: der Seed enthält eine Lernende pro Beruf plus die PiBS-Studentin', () => {
+    const lernende = umgebung.seed.benutzer.filter((person) => person.rolle === 'LERNENDE');
+    expect(lernende).toHaveLength(4);
 
-    const bericht = await umgebung.importDienst.trockenlauf(med);
-    expect(bericht.fehler).toBe(0);
-    expect(bericht.bereiche).toBe(6);
-    expect(bericht.kompetenzen).toBe(24);
-    expect(bericht.leistungsziele).toBe(158);
-
-    const { vorlageId } = await umgebung.importDienst.importieren(med);
-    const struktur = await TestBed.inject(VORLAGE_REPOSITORY).struktur(vorlageId);
-
-    expect(struktur.bereiche).toHaveLength(6);
-    expect(struktur.kompetenzen).toHaveLength(24);
-    expect(struktur.leistungsziele).toHaveLength(158);
-    expect(struktur.leistungsziele.some((ziel) => ziel.lernorte !== null)).toBe(true);
-  });
-
-  it('T-I3: Trockenlauf verändert keine Daten', async () => {
-    await umgebung.sitzung.anmelden('admin');
-    const vorher = await umgebung.speicher.alle('leistungsziele');
-
-    await umgebung.importDienst.trockenlauf(VORLAGEN[2] as VorlageImport);
-
-    expect(await umgebung.speicher.alle('leistungsziele')).toEqual(vorher);
-  });
-
-  it('T-I1: Import ist nur für die Administration erlaubt', async () => {
-    await umgebung.sitzung.anmelden('nora');
-
-    await expect(
-      umgebung.importDienst.trockenlauf(VORLAGEN[2] as VorlageImport),
-    ).rejects.toMatchObject({ code: 'KEINE_BERECHTIGUNG' });
-  });
-
-  it('T-I4: fehlerhafte Vorlagen werden mit Fehlern gemeldet', () => {
-    const bericht = pruefeVorlageImport({
-      lehrberuf: { code: '', name: '', lehrdauerJahre: 0 },
-      bildungsplanJahr: 2021,
-      quelle: 'Test',
-      bereiche: [
-        {
-          code: 'A',
-          titel: 'Bereich A',
-          kompetenzen: [
-            {
-              code: 'a1',
-              titel: 'Kompetenz a1',
-              beschreibung: '',
-              module: { basislehrjahr: [], berufsfachschule: [], uek: [] },
-              leistungsziele: [{ code: 'a1.1', text: '', taxonomie: 'K9' }],
-            },
-          ],
-        },
-      ],
+    const lehrberufe = lernende.map((person) => {
+      const ausbildung = umgebung.seed.ausbildungen.find(
+        (eintrag) => eintrag.lernendeId === person.id,
+      );
+      expect(ausbildung).toBeDefined();
+      expect(
+        umgebung.seed.stufenereignisse.some((ereignis) => ereignis.ausbildungId === ausbildung?.id),
+      ).toBe(true);
+      return ausbildung?.lehrberufId;
     });
 
-    expect(bericht.fehler).toBeGreaterThanOrEqual(3);
-    expect(bericht.meldungen.every((meldung) => meldung.art === 'FEHLER')).toBe(true);
+    expect(new Set(lehrberufe)).toEqual(
+      new Set(['lb-INF-APP', 'lb-INF-PLA', 'lb-MED', 'lb-INF-PIBS']),
+    );
   });
 
-  it('R-M1: MED zählt 126 Leistungsziele mit Lernort Basislehrjahr', async () => {
-    await umgebung.sitzung.anmelden('admin');
-    const { vorlageId } = await umgebung.importDienst.importieren(VORLAGEN[2] as VorlageImport);
-    const struktur = await TestBed.inject(VORLAGE_REPOSITORY).struktur(vorlageId);
-    const index = indexierePlan(struktur);
+  it('D-022: die PiBS-Ausbildung kennt nur abgeschlossene Leistungsziele', async () => {
+    const mia = ausbildungVon(umgebung, 'mia');
+    const plan = umgebung.seed.vorlagen.find((vorlage) => vorlage.id === mia.vorlageId);
+    expect(plan?.stufenmodell).toBe('BINAER');
+
+    const ereignisse = umgebung.seed.stufenereignisse.filter(
+      (ereignis) => ereignis.ausbildungId === mia.id,
+    );
+    expect(ereignisse.length).toBeGreaterThan(0);
+    expect(ereignisse.every((ereignis) => ereignis.stufe === ABSCHLUSS_STUFE)).toBe(true);
+    expect(new Set(ereignisse.map((ereignis) => ereignis.aktion))).toEqual(new Set(['BESTAETIGT']));
+
+    await umgebung.sitzung.anmelden('mia');
+    const ansicht = await umgebung.skilltree.laden(mia.id);
+    expect(ansicht.stufenmodell).toBe('BINAER');
+    expect(ansicht.fortschritt).toBeGreaterThan(25);
+    expect(ansicht.fortschritt).toBeLessThan(45);
+    const stufen = ansicht.bereiche.flatMap((bereich) =>
+      bereich.kompetenzen.flatMap((kompetenz) =>
+        kompetenz.leistungsziele.map((ziel) => ziel.stufe),
+      ),
+    );
+    expect(stufen.every((stufe) => stufe === 0 || stufe === ABSCHLUSS_STUFE)).toBe(true);
+  });
+
+  it('R-M1: MED zählt 126 Leistungsziele mit Lernort Basislehrjahr', () => {
+    const med = umgebung.seed.vorlagen.find((vorlage) => vorlage.lehrberufId === 'lb-MED');
+    expect(med).toBeDefined();
+    const bereiche = umgebung.seed.bereiche.filter((bereich) => bereich.vorlageId === med?.id);
+    const bereichIds = new Set(bereiche.map((bereich) => bereich.id));
+    const kompetenzen = umgebung.seed.kompetenzen.filter((kompetenz) =>
+      bereichIds.has(kompetenz.bereichId),
+    );
+    const kompetenzIds = new Set(kompetenzen.map((kompetenz) => kompetenz.id));
+    const leistungsziele = umgebung.seed.leistungsziele.filter((ziel) =>
+      kompetenzIds.has(ziel.kompetenzId),
+    );
+    const abhaengigkeiten = umgebung.seed.abhaengigkeiten.filter(
+      (abhaengigkeit) => abhaengigkeit.vorlageId === med?.id,
+    );
+    const index = indexierePlan({ bereiche, kompetenzen, leistungsziele, abhaengigkeiten });
 
     // 122 objectives name a Basislehrjahr module explicitly, 4 have no learning-location
     // record and inherit it from their competence; 32 explicitly are not taught there.
     expect(meilensteinBereitschaft('BBC', index, new Map(), meilensteinStati([]), 0)).toBe(
       '0 von 126 Leistungszielen mit Lernort Basislehrjahr mindestens erklärt.',
     );
-  });
-
-  it('T-I4: ein Code in zwei Kompetenzen ist ein Fehler im Trockenlauf', () => {
-    const bericht = pruefeVorlageImport({
-      lehrberuf: { code: 'INF', name: 'Informatiker/in', lehrdauerJahre: 4 },
-      bildungsplanJahr: 2021,
-      quelle: 'Test',
-      bereiche: [
-        {
-          code: 'A',
-          titel: 'Bereich A',
-          kompetenzen: [
-            {
-              code: 'a1',
-              titel: 'Kompetenz a1',
-              beschreibung: '',
-              module: { basislehrjahr: [], berufsfachschule: [], uek: [] },
-              leistungsziele: [
-                { code: 'a1.1', text: 'Ziel a1.1', taxonomie: 'K3' },
-                { code: 'a1.1', text: 'Ziel a1.1', taxonomie: 'K3' },
-              ],
-            },
-            {
-              code: 'a2',
-              titel: 'Kompetenz a2',
-              beschreibung: '',
-              module: { basislehrjahr: [], berufsfachschule: [], uek: [] },
-              leistungsziele: [{ code: 'a1.1', text: 'Ziel a1.1', taxonomie: 'K3' }],
-            },
-          ],
-        },
-      ],
-    });
-
-    expect(bericht.warnungen).toBe(1);
-    expect(
-      bericht.meldungen.some(
-        (meldung) => meldung.art === 'FEHLER' && meldung.text.includes('«a1.1»'),
-      ),
-    ).toBe(true);
-    expect(bericht.fehler).toBe(1);
   });
 
   it('TF21: die Dienst-Testsuite läuft gegen den In-Memory-Adapter', async () => {

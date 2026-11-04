@@ -8,8 +8,9 @@ import { SitzungDienst } from './sitzung-dienst';
 import { fordereRolle } from './zugriff';
 
 /**
- * Admin-only access to the whole data set (T-W6). The UI never talks to the
- * data-set port directly (SPEC 0.7).
+ * Access to the whole data set (T-W6). The admin route was removed from the validation build
+ * (D-021), so only the demo reset has a UI; export and import remain admin-only at service level
+ * for the data-management tests and a later backend build.
  */
 @Service()
 export class DatenverwaltungDienst {

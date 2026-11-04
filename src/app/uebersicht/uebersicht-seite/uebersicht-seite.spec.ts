@@ -20,12 +20,13 @@ describe('UebersichtSeite', () => {
     fixture.detectChanges();
 
     await warteBis(fixture, () => {
-      expect(element(fixture).querySelectorAll('tbody tr').length).toBe(2);
+      expect(element(fixture).querySelectorAll('tbody tr').length).toBe(3);
     });
 
     const kopf = element(fixture).querySelector('.seite__titel')?.textContent;
     expect(kopf).toContain('Meine Lernenden');
     expect(element(fixture).textContent).toContain('Nora Frei');
+    expect(element(fixture).textContent).toContain('Mia Keller');
   });
 
   it('Reiter «Offene Anfragen» listet die Anfragen', async () => {

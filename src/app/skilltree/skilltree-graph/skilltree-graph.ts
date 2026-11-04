@@ -1,5 +1,6 @@
 import {
   Component,
+  DestroyRef,
   ElementRef,
   afterNextRender,
   computed,
@@ -18,6 +19,12 @@ import type {
 } from '@skilltree/vertraege';
 import { AMPEL_SYMBOLE, AMPEL_TEXTE, MEILENSTEIN_TEXTE } from '@skilltree/vertraege';
 import { AnforderungId } from '../../shared/ui/anforderung-id/anforderung-id';
+import {
+  baumSkala,
+  KREIS_RADIUS,
+  spaltenbreite as spaltenbreiteFuer,
+  ZEILENABSTAND,
+} from '../baum-geometrie';
 
 interface Punkt {
   x: number;
@@ -67,14 +74,10 @@ interface Pfad {
   marker: 'erreicht' | 'offen';
 }
 
-const SPALTENBREITE = 180;
-const KREIS_RADIUS = 22;
-const ZEILENABSTAND = 66;
-
 /**
- * HTML buttons above an SVG edge layer (SPEC 8.2). The layout uses a fixed
- * column width inside the allowed 150-196 px range; the card scrolls sideways
- * on narrow screens and starts centred.
+ * HTML buttons above an SVG edge layer (SPEC 8.2). The column width follows the available card
+ * width between 150 and 284 px (D-024); all node geometry scales with it, so large screens show a
+ * larger tree. The card scrolls sideways on narrow screens and starts centred.
  */
 @Component({
   selector: 'st-skilltree-graph',
@@ -91,6 +94,8 @@ export class SkilltreeGraph {
   readonly meilensteinGewaehlt = output<MeilensteinCode>();
 
   private readonly baumkarte = viewChild<ElementRef<HTMLDivElement>>('baumkarte');
+  private readonly zerstoerer = inject(DestroyRef);
+  private readonly kartenBreite = signal(0);
   private readonly aktiverKnoten = signal<string | null>(null);
   private zentriert = false;
 
@@ -102,28 +107,44 @@ export class SkilltreeGraph {
   }));
 
   constructor() {
-    afterNextRender(() => this.zentriere());
+    afterNextRender(() => {
+      this.beobachteBreite();
+      this.zentriere();
+    });
     effect(() => {
       // Re-centre once the data is rendered after the first async load.
-      if (this.ansicht() && !this.zentriert) {
+      this.ansicht();
+      if (!this.zentriert) {
         queueMicrotask(() => this.zentriere());
       }
     });
   }
 
+  /** Column width for the current card width; 196 px until the layout can be measured. */
+  protected readonly spaltenbreite = computed(() =>
+    spaltenbreiteFuer(this.kartenBreite(), this.ansicht().bereiche.length),
+  );
+
+  /** Scale factor for circles, rows and fonts; never below the reference layout. */
+  protected readonly skala = computed(() => baumSkala(this.spaltenbreite()));
+
   protected readonly layout = computed(() => {
     const ansicht = this.ansicht();
-    const spalten = ansicht.bereiche.length;
-    const breite = spalten * SPALTENBREITE;
+    const skala = this.skala();
+    const spaltenbreite = this.spaltenbreite();
+    const spalten = Math.max(1, ansicht.bereiche.length);
+    const breite = spalten * spaltenbreite;
+    const radius = KREIS_RADIUS * skala;
+    const zeilenabstand = ZEILENABSTAND * skala;
     const maxZeilen = Math.max(1, ...ansicht.bereiche.map((bereich) => bereich.kompetenzen.length));
-    const ipaY = 104;
-    const obersteZeile = ipaY + 56 + KREIS_RADIUS;
-    const untersteZeile = obersteZeile + (maxZeilen - 1) * ZEILENABSTAND;
-    const astBasisY = untersteZeile + ZEILENABSTAND;
-    const bbcY = astBasisY + 54;
+    const ipaY = 104 * skala;
+    const obersteZeile = ipaY + 56 * skala + radius;
+    const untersteZeile = obersteZeile + (maxZeilen - 1) * zeilenabstand;
+    const astBasisY = untersteZeile + zeilenabstand;
+    const bbcY = astBasisY + 54 * skala;
 
     const astBasen: AstBasis[] = ansicht.bereiche.map((bereich, index) => {
-      const punkt = { x: index * SPALTENBREITE + 32, y: astBasisY };
+      const punkt = { x: index * spaltenbreite + 32 * skala, y: astBasisY };
       return {
         id: `AST-${bereich.bereich.code}`,
         code: bereich.bereich.code,
@@ -139,8 +160,8 @@ export class SkilltreeGraph {
     for (const [index, bereich] of ansicht.bereiche.entries()) {
       for (const [zeile, kompetenz] of bereich.kompetenzen.entries()) {
         const punkt = {
-          x: index * SPALTENBREITE + 32,
-          y: untersteZeile - zeile * ZEILENABSTAND,
+          x: index * spaltenbreite + 32 * skala,
+          y: untersteZeile - zeile * zeilenabstand,
         };
         kompetenzen.push({
           id: kompetenz.kompetenz.id,
@@ -168,7 +189,7 @@ export class SkilltreeGraph {
     }
 
     const meilensteine = ansicht.meilensteine.map((meilenstein) => {
-      const y = meilenstein.code === 'LAP' ? 40 : meilenstein.code === 'IPA' ? ipaY : bbcY;
+      const y = meilenstein.code === 'LAP' ? 40 * skala : meilenstein.code === 'IPA' ? ipaY : bbcY;
       return {
         code: meilenstein.code,
         kuerzel: MEILENSTEIN_TEXTE[meilenstein.code].kuerzel,
@@ -197,7 +218,10 @@ export class SkilltreeGraph {
 
     return {
       breite,
-      hoehe: bbcY + 48,
+      hoehe: bbcY + 48 * skala,
+      spaltenbreite,
+      skala,
+      radius,
       astBasen,
       kompetenzen,
       meilensteine,
@@ -207,7 +231,7 @@ export class SkilltreeGraph {
 
   protected readonly sichtbarePfade = computed<Pfad[]>(() => {
     const aktiv = this.aktiverKnoten() ?? this.aktiv();
-    const punkte = this.layout().punkte;
+    const { punkte, skala } = this.layout();
     const pfade: Pfad[] = [];
     for (const [index, kante] of this.ansicht().kanten.entries()) {
       const von = punkte.get(kante.von);
@@ -222,7 +246,7 @@ export class SkilltreeGraph {
       }
       pfade.push({
         id: `${kante.von}-${kante.nach}-${index}`,
-        d: this.pfad(von, nach, kante),
+        d: this.pfad(von, nach, kante, skala),
         typ: kante.typ,
         zustand: kante.zustand,
         beteiligt,
@@ -248,33 +272,55 @@ export class SkilltreeGraph {
     }
   }
 
-  private pfad(von: Punkt, nach: Punkt, kante: KantenAnsicht): string {
+  private pfad(von: Punkt, nach: Punkt, kante: KantenAnsicht, skala: number): string {
+    const radius = KREIS_RADIUS * skala;
+
     if (kante.typ === 'VERWEIS') {
       const richtung = nach.x >= von.x ? 1 : -1;
-      const startX = von.x + richtung * KREIS_RADIUS;
-      const zielX = nach.x - richtung * KREIS_RADIUS;
-      return `M ${startX} ${von.y} C ${startX + richtung * 60} ${von.y}, ${zielX - richtung * 60} ${nach.y}, ${zielX} ${nach.y}`;
+      const startX = von.x + richtung * radius;
+      const zielX = nach.x - richtung * radius;
+      return `M ${startX} ${von.y} C ${startX + richtung * 60 * skala} ${von.y}, ${zielX - richtung * 60 * skala} ${nach.y}, ${zielX} ${nach.y}`;
     }
 
     if (kante.von === 'BBC') {
-      const start = { x: von.x, y: von.y - 30 };
-      const ziel = { x: nach.x, y: nach.y + 18 };
-      return `M ${start.x} ${start.y} C ${start.x} ${start.y - 70}, ${ziel.x} ${ziel.y + 70}, ${ziel.x} ${ziel.y}`;
+      const start = { x: von.x, y: von.y - 30 * skala };
+      const ziel = { x: nach.x, y: nach.y + 18 * skala };
+      return `M ${start.x} ${start.y} C ${start.x} ${start.y - 70 * skala}, ${ziel.x} ${ziel.y + 70 * skala}, ${ziel.x} ${ziel.y}`;
     }
 
     if (kante.nach === 'IPA') {
-      const start = { x: von.x, y: von.y - KREIS_RADIUS };
-      const ziel = { x: nach.x, y: nach.y + 26 };
-      return `M ${start.x} ${start.y} C ${start.x} ${start.y - 50}, ${ziel.x} ${ziel.y + 50}, ${ziel.x} ${ziel.y}`;
+      const start = { x: von.x, y: von.y - radius };
+      const ziel = { x: nach.x, y: nach.y + 26 * skala };
+      return `M ${start.x} ${start.y} C ${start.x} ${start.y - 50 * skala}, ${ziel.x} ${ziel.y + 50 * skala}, ${ziel.x} ${ziel.y}`;
     }
 
     if (kante.von === 'IPA' || kante.von === 'LAP' || kante.nach === 'LAP') {
-      return `M ${von.x} ${von.y - 26} L ${nach.x} ${nach.y + 26}`;
+      return `M ${von.x} ${von.y - 26 * skala} L ${nach.x} ${nach.y + 26 * skala}`;
     }
 
-    const start = { x: von.x, y: von.y - KREIS_RADIUS };
-    const ziel = { x: nach.x, y: nach.y + KREIS_RADIUS };
-    return `M ${start.x} ${start.y} C ${start.x} ${start.y - 18}, ${ziel.x} ${ziel.y + 18}, ${ziel.x} ${ziel.y}`;
+    const start = { x: von.x, y: von.y - radius };
+    const ziel = { x: nach.x, y: nach.y + radius };
+    return `M ${start.x} ${start.y} C ${start.x} ${start.y - 18 * skala}, ${ziel.x} ${ziel.y + 18 * skala}, ${ziel.x} ${ziel.y}`;
+  }
+
+  /** Tracks the card width so the tree can use the space of large screens (D-024). */
+  private beobachteBreite(): void {
+    const element = this.baumkarte()?.nativeElement;
+    if (!element) {
+      return;
+    }
+    this.kartenBreite.set(Math.round(element.clientWidth));
+    if (typeof ResizeObserver === 'undefined') {
+      return;
+    }
+    const beobachter = new ResizeObserver(() => {
+      this.kartenBreite.set(Math.round(element.clientWidth));
+      if (!this.zentriert) {
+        queueMicrotask(() => this.zentriere());
+      }
+    });
+    beobachter.observe(element);
+    this.zerstoerer.onDestroy(() => beobachter.disconnect());
   }
 
   private zentriere(): void {

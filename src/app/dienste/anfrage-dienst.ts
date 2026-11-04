@@ -8,8 +8,8 @@ import type {
   Bestaetigungsanfrage,
   Stufe,
 } from '@skilltree/vertraege';
-import { FachlicherFehler } from '@skilltree/vertraege';
-import { indexierePlan, stufenMap } from '@skilltree/regeln';
+import { bestaetigungsStufen, FachlicherFehler, stufenmodellFuer } from '@skilltree/vertraege';
+import { indexierePlan, stufenMapFuerModell } from '@skilltree/regeln';
 import { DomaenenEreignisse } from '../core/domaenen-ereignisse';
 import { UHR } from '../core/uhr';
 import {
@@ -51,18 +51,28 @@ export class AnfrageDienst {
       );
     }
 
-    const [struktur, ereignisse, anfragen] = await Promise.all([
+    const [vorlage, struktur, ereignisse, anfragen] = await Promise.all([
+      this.vorlageRepository.laden(ausbildung.vorlageId),
       this.vorlageRepository.struktur(ausbildung.vorlageId),
       this.ereignisRepository.stufenereignisse(ausbildungId),
       this.anfrageRepository.fuerAusbildung(ausbildungId),
     ]);
+    const modell = stufenmodellFuer(vorlage.stufenmodell);
     const index = indexierePlan(struktur);
     const leistungsziel = index.leistungszielNachId.get(befehl.leistungszielId);
     if (!leistungsziel) {
       throw new FachlicherFehler('NICHT_GEFUNDEN', 'Leistungsziel nicht gefunden.');
     }
+    if (!bestaetigungsStufen(modell).includes(befehl.zielstufe)) {
+      throw new FachlicherFehler(
+        'UNGUELTIGE_EINGABE',
+        modell === 'BINAER'
+          ? 'Dieser Bildungsplan kennt nur den Abschluss: Bitte «abgeschlossen» anfragen.'
+          : `Die Zielstufe «${befehl.zielstufe}» ist nicht zulässig.`,
+      );
+    }
 
-    const stufe: Stufe = stufenMap(ereignisse).get(befehl.leistungszielId) ?? 0;
+    const stufe: Stufe = stufenMapFuerModell(ereignisse, modell).get(befehl.leistungszielId) ?? 0;
     if (befehl.zielstufe <= stufe) {
       throw new FachlicherFehler(
         'UNGUELTIGE_EINGABE',

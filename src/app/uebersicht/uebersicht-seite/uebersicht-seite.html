@@ -163,8 +163,9 @@
               {{ eintrag.leistungsziel.text }}
             </p>
             <p class="anfrage-karte__stufe">
-              Aktuell: {{ stufeText(eintrag.aktuelleStufe) }} → Ziel:
-              {{ stufeText(eintrag.anfrage.zielstufe) }} · {{ eintrag.bereich.code }}
+              Aktuell: {{ stufeText(eintrag.stufenmodell, eintrag.aktuelleStufe) }} → Ziel:
+              {{ stufeText(eintrag.stufenmodell, eintrag.anfrage.zielstufe) }} ·
+              {{ eintrag.bereich.code }}
             </p>
             <blockquote class="anfrage-karte__text">{{ eintrag.anfrage.text }}</blockquote>
 

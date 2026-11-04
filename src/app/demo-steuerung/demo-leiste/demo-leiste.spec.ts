@@ -14,20 +14,22 @@ describe('DemoLeiste', () => {
     TestBed.resetTestingModule();
   });
 
-  it('zeigt alle Testkonten und markiert die angemeldete Person (N-11)', async () => {
+  it('zeigt die vier Lernenden und den Praxisbildner-Mock, aber kein Admin-Konto (N-11, D-021, D-022)', async () => {
     await umgebung.sitzung.anmelden('luca');
     const fixture = TestBed.createComponent(DemoLeiste);
     fixture.detectChanges();
 
     await warteBis(fixture, () => {
-      expect(element(fixture).querySelectorAll('option').length).toBe(
-        umgebung.seed.benutzer.length,
-      );
+      expect(element(fixture).querySelectorAll('option').length).toBe(6);
     });
 
     const auswahl = element(fixture).querySelector<HTMLSelectElement>('select');
     expect(auswahl?.value).toBe('luca');
     expect(auswahl?.selectedOptions[0]?.value).toBe('luca');
+    expect(auswahl?.textContent).not.toContain('Admin');
+    expect(auswahl?.textContent).toContain('Mia Keller');
+    expect(auswahl?.textContent).toContain('Daniel Roth');
+    expect(auswahl?.textContent).toContain('Petra Lang');
   });
 
   it('fragt vor dem Zurücksetzen nach und gibt den Fokus zurück', async () => {

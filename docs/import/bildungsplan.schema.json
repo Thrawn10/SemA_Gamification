@@ -31,6 +31,10 @@
           "minimum": 2,
           "maximum": 6,
           "description": "Offizielle Lehrdauer in Jahren."
+        },
+        "stufenmodell": {
+          "$ref": "#/$defs/stufenmodell",
+          "description": "Optional pro Lehrberuf; ein Wert auf oberster Ebene hat Vorrang."
         }
       }
     },
@@ -45,6 +49,10 @@
       "minimum": 1,
       "description": "Optionale Vorlagenversion; der Loader setzt sie beim Import."
     },
+    "stufenmodell": {
+      "$ref": "#/$defs/stufenmodell",
+      "description": "DREI_STUFEN (Standard) oder BINAER für Pläne mit nur «offen/abgeschlossen» (D-022)."
+    },
     "quelle": {
       "type": "string",
       "minLength": 1,
@@ -58,6 +66,11 @@
     }
   },
   "$defs": {
+    "stufenmodell": {
+      "type": "string",
+      "enum": ["DREI_STUFEN", "BINAER"],
+      "description": "DREI_STUFEN: erklärt/geübt/selbständig. BINAER: nur offen/abgeschlossen."
+    },
     "bereich": {
       "type": "object",
       "additionalProperties": false,

@@ -7,9 +7,15 @@ import type {
   BestaetigungZuruecknehmen,
   StufeBestaetigen,
   Stufenereignis,
+  Stufenmodell,
   Zuordnung,
 } from '@skilltree/vertraege';
-import { FachlicherFehler, STUFEN_TEXTE } from '@skilltree/vertraege';
+import {
+  bestaetigungsStufen,
+  FachlicherFehler,
+  stufenmodellFuer,
+  stufenText,
+} from '@skilltree/vertraege';
 import {
   aktiveBestaetigungen,
   ampel,
@@ -18,7 +24,7 @@ import {
   fortschritt,
   indexierePlan,
   kompetenzwert,
-  stufenMap,
+  stufenMapFuerModell,
   type PlanIndex,
 } from '@skilltree/regeln';
 import { DomaenenEreignisse } from '../core/domaenen-ereignisse';
@@ -39,6 +45,7 @@ interface SchreibKontext {
   index: PlanIndex;
   ereignisse: Stufenereignis[];
   definitionen: BadgeDefinition[];
+  modell: Stufenmodell;
 }
 
 @Service()
@@ -67,8 +74,16 @@ export class BestaetigungDienst {
         'Der Kommentar darf höchstens 500 Zeichen enthalten.',
       );
     }
+    if (!bestaetigungsStufen(kontext.modell).includes(befehl.stufe)) {
+      throw new FachlicherFehler(
+        'UNGUELTIGE_EINGABE',
+        kontext.modell === 'BINAER'
+          ? 'Dieser Bildungsplan kennt nur den Abschluss: Bitte «abgeschlossen» bestätigen.'
+          : `Die Stufe «${befehl.stufe}» kann nicht bestätigt werden.`,
+      );
+    }
 
-    const stufen = stufenMap(kontext.ereignisse);
+    const stufen = stufenMapFuerModell(kontext.ereignisse, kontext.modell);
     const aktuelleStufe = stufen.get(befehl.leistungszielId) ?? 0;
     const vorherProzent = fortschritt(kontext.index.aktiveLeistungszielIds, stufen);
     const kompetenz = kontext.index.kompetenzNachId.get(leistungsziel.kompetenzId);
@@ -81,7 +96,7 @@ export class BestaetigungDienst {
         ampel: ampel(kompetenzwert(kompetenz?.leistungszielIds ?? [], stufen)),
         neueBadges: [],
         inaktiveBadges: [],
-        hinweis: `«${leistungsziel.code}» ist bereits «${STUFEN_TEXTE[aktuelleStufe]}». Es wurde nichts gespeichert.`,
+        hinweis: `«${leistungsziel.code}» ist bereits «${stufenText(kontext.modell, aktuelleStufe)}». Es wurde nichts gespeichert.`,
         geaenderteAnfragen: [],
       };
     }
@@ -118,7 +133,7 @@ export class BestaetigungDienst {
 
     const neueEreignisse = [...kontext.ereignisse, ereignis];
     const badgeErgebnis = await this.badgesNeuBerechnen(kontext, neueEreignisse, ausbildungId);
-    const nachherStufen = stufenMap(neueEreignisse);
+    const nachherStufen = stufenMapFuerModell(neueEreignisse, kontext.modell);
     const nachherProzent = fortschritt(kontext.index.aktiveLeistungszielIds, nachherStufen);
 
     const badgesText =
@@ -126,7 +141,7 @@ export class BestaetigungDienst {
         ? ` Neu erreichte Badges: ${badgeErgebnis.neue.map((badge) => badge.definition.titel).join(', ')}.`
         : '';
 
-    const hinweis = `«${leistungsziel.code}» als «${STUFEN_TEXTE[befehl.stufe]}» bestätigt. Fortschritt ${vorherProzent} % → ${nachherProzent} %.${badgesText}`;
+    const hinweis = `«${leistungsziel.code}» als «${stufenText(kontext.modell, befehl.stufe)}» bestätigt. Fortschritt ${vorherProzent} % → ${nachherProzent} %.${badgesText}`;
 
     this.domaenenEreignisse.melde({ art: 'EREIGNIS_ANGEFUEGT', ausbildungId });
 
@@ -186,9 +201,9 @@ export class BestaetigungDienst {
     const badgeErgebnis = await this.badgesNeuBerechnen(kontext, neueEreignisse, ausbildungId);
     const vorherProzent = fortschritt(
       kontext.index.aktiveLeistungszielIds,
-      stufenMap(kontext.ereignisse),
+      stufenMapFuerModell(kontext.ereignisse, kontext.modell),
     );
-    const nachherStufen = stufenMap(neueEreignisse);
+    const nachherStufen = stufenMapFuerModell(neueEreignisse, kontext.modell);
     const nachherProzent = fortschritt(kontext.index.aktiveLeistungszielIds, nachherStufen);
 
     const badgesText =
@@ -219,18 +234,20 @@ export class BestaetigungDienst {
     const zuordnungen = await this.ausbildungRepository.zuordnungen(ausbildungId);
     forderePraxisbildnerRecht(benutzer, zuordnungen, this.uhr());
 
-    const [struktur, ereignisse, gespeicherteDefinitionen] = await Promise.all([
+    const [vorlage, struktur, ereignisse, gespeicherteDefinitionen] = await Promise.all([
+      this.vorlageRepository.laden(ausbildung.vorlageId),
       this.vorlageRepository.struktur(ausbildung.vorlageId),
       this.ereignisRepository.stufenereignisse(ausbildungId),
       this.badgeRepository.definitionen(ausbildung.vorlageId),
     ]);
+    const modell = stufenmodellFuer(vorlage.stufenmodell);
     const index = indexierePlan(struktur);
     const definitionen =
       gespeicherteDefinitionen.length > 0
         ? gespeicherteDefinitionen
-        : erstelleBadgeDefinitionen(struktur, ausbildung.vorlageId);
+        : erstelleBadgeDefinitionen(struktur, ausbildung.vorlageId, modell);
 
-    return { ausbildung, zuordnungen, index, ereignisse, definitionen };
+    return { ausbildung, zuordnungen, index, ereignisse, definitionen, modell };
   }
 
   private async badgesNeuBerechnen(
@@ -246,12 +263,14 @@ export class BestaetigungDienst {
       kontext.index,
       kontext.ereignisse,
       ausbildungId,
+      kontext.modell,
     );
     const nachher = berechneBadgeVergaben(
       kontext.definitionen,
       kontext.index,
       ereignisse,
       ausbildungId,
+      kontext.modell,
     );
     const vorherMap = new Map(vorher.map((vergabe) => [vergabe.badgeId, vergabe]));
     const definitionMap = new Map(

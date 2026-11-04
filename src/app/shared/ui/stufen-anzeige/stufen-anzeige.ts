@@ -1,8 +1,8 @@
 import { Component, computed, input } from '@angular/core';
-import type { Stufe } from '@skilltree/vertraege';
-import { STUFEN_TEXTE } from '@skilltree/vertraege';
+import type { Stufe, Stufenmodell } from '@skilltree/vertraege';
+import { stufenText } from '@skilltree/vertraege';
 
-/** Three fields E, G, S filled up to the reached cumulative level (SPEC 8.5). */
+/** Three fields E, G, S (or one completion field for binary plans, D-022; SPEC 8.5). */
 @Component({
   selector: 'st-stufen',
   templateUrl: './stufen-anzeige.html',
@@ -10,11 +10,20 @@ import { STUFEN_TEXTE } from '@skilltree/vertraege';
 })
 export class StufenAnzeige {
   readonly stufe = input.required<Stufe>();
+  readonly stufenmodell = input<Stufenmodell>('DREI_STUFEN');
 
-  protected readonly felder = [
-    { stufe: 1 as const, kuerzel: 'E' },
-    { stufe: 2 as const, kuerzel: 'G' },
-    { stufe: 3 as const, kuerzel: 'S' },
-  ];
-  protected readonly text = computed(() => STUFEN_TEXTE[this.stufe()]);
+  protected readonly binaer = computed(() => this.stufenmodell() === 'BINAER');
+  protected readonly felder = computed(() =>
+    this.binaer()
+      ? [{ stufe: 3 as const, kuerzel: 'A' }]
+      : [
+          { stufe: 1 as const, kuerzel: 'E' },
+          { stufe: 2 as const, kuerzel: 'G' },
+          { stufe: 3 as const, kuerzel: 'S' },
+        ],
+  );
+  protected readonly text = computed(() => stufenText(this.stufenmodell(), this.stufe()));
+  protected readonly label = computed(() =>
+    this.binaer() ? `Status: ${this.text()}` : `Stufe: ${this.text()}`,
+  );
 }

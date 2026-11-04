@@ -19,9 +19,6 @@
         @case ('LERNENDE') {
           <a routerLink="/">Mein Skilltree</a>
         }
-        @case ('ADMIN') {
-          <a routerLink="/admin/import">Import und Daten</a>
-        }
       }
       <a routerLink="/meine-daten">Meine Daten</a>
     </nav>
@@ -36,6 +33,12 @@
   }
 </header>
 
-<main #hauptinhalt id="hauptinhalt" class="app-inhalt" tabindex="-1">
+<main
+  #hauptinhalt
+  id="hauptinhalt"
+  class="app-inhalt"
+  [class.app-inhalt--breit]="breiterInhalt()"
+  tabindex="-1"
+>
   <router-outlet />
 </main>

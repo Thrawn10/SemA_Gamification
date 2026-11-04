@@ -10,7 +10,7 @@
       <span class="lz__text">{{ lz().leistungsziel.text }}</span>
     </button>
     <div class="lz__stand">
-      <st-stufen [stufe]="lz().stufe" />
+      <st-stufen [stufe]="lz().stufe" [stufenmodell]="stufenmodell()" />
       @if (lz().offeneAnfrage; as anfrage) {
         <span class="lz__angefragt"> angefragt: {{ stufeText(anfrage.zielstufe) }} </span>
       }
@@ -67,7 +67,9 @@
           @if (modus() === 'anfrage') {
             <form class="lz__formular" (submit)="anfrageSenden($event)">
               <label class="feld">
-                <span class="feld__label">Zielstufe</span>
+                <span class="feld__label">{{
+                  stufenmodell() === 'BINAER' ? 'Ziel-Status' : 'Zielstufe'
+                }}</span>
                 <select class="eingabe" [value]="zielstufe()" (change)="zielstufeAendern($event)">
                   @for (stufe of stufenOptionen(); track stufe) {
                     <option [value]="stufe" [selected]="stufe === zielstufe()">
@@ -111,7 +113,7 @@
             </button>
           }
         } @else {
-          <p class="lz__status">Auf Stufe «selbständig» bestätigt.</p>
+          <p class="lz__status">Auf Stufe «{{ stufeText(3) }}» bestätigt.</p>
         }
       }
 
@@ -185,7 +187,9 @@
                   }
                 </p>
                 <label class="feld">
-                  <span class="feld__label">Stufe</span>
+                  <span class="feld__label">{{
+                    stufenmodell() === 'BINAER' ? 'Status' : 'Stufe'
+                  }}</span>
                   <select class="eingabe" [value]="zielstufe()" (change)="zielstufeAendern($event)">
                     @for (stufe of stufenOptionen(); track stufe) {
                       <option [value]="stufe" [selected]="stufe === zielstufe()">

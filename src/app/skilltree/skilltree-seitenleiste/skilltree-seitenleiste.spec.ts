@@ -22,9 +22,9 @@ describe('SkilltreeSeitenleiste', () => {
     TestBed.resetTestingModule();
   });
 
-  function erstelle(auswahl: BaumAuswahl) {
+  function erstelle(auswahl: BaumAuswahl, daten: SkilltreeAnsicht = ansicht) {
     const fixture = TestBed.createComponent(SkilltreeSeitenleiste);
-    fixture.componentRef.setInput('ansicht', ansicht);
+    fixture.componentRef.setInput('ansicht', daten);
     fixture.componentRef.setInput('auswahl', auswahl);
     fixture.detectChanges();
     return fixture;
@@ -56,6 +56,30 @@ describe('SkilltreeSeitenleiste', () => {
     expect(inhalt.querySelector('#seitenleiste-titel')?.textContent).toContain('Basismeilenstein');
     expect(inhalt.textContent).toContain('Bereitschaft');
     expect(inhalt.querySelector('st-verlauf-liste')).toBeTruthy();
+  });
+
+  it('zeigt für einen Ast die Belohnung und die Stufen der Kompetenzen', () => {
+    const bereich = ansicht.bereiche[0];
+    const inhalt = erstelle({ art: 'ast', code: bereich.bereich.code })
+      .nativeElement as HTMLElement;
+    const belohnung = inhalt.querySelector('.seitenleiste__belohnung');
+
+    expect(belohnung?.querySelector('st-badge-karte')).toBeTruthy();
+    expect(belohnung?.textContent).toContain('Bereich');
+    expect(inhalt.querySelector('.chip__meta')?.textContent).toContain(
+      `von ${bereich.kompetenzen[0].anzahlLeistungsziele}`,
+    );
+  });
+
+  it('versteckt die Belohnung, wenn Badges ausgeblendet sind (N-04)', () => {
+    const bereich = ansicht.bereiche[0];
+    const inhalt = erstelle(
+      { art: 'ast', code: bereich.bereich.code },
+      { ...ansicht, badges: { ...ansicht.badges, ausgeblendet: true } },
+    ).nativeElement as HTMLElement;
+
+    expect(inhalt.querySelector('.seitenleiste__belohnung')).toBeNull();
+    expect(inhalt.querySelector('.chip__meta')).toBeTruthy();
   });
 
   it('schliesst per Escape und hält den Fokus per Tab im Dialog (S-A04)', () => {

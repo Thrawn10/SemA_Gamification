@@ -53,4 +53,24 @@ describe('SkilltreeSeite', () => {
     expect(element(fixture).querySelector('st-badges-ansicht')).toBeTruthy();
     expect(element(fixture).querySelectorAll('.badge-karte').length).toBeGreaterThan(0);
   });
+
+  it('zeigt unter dem Baum die Belohnungen pro Ast und öffnet den Ast (D-024)', async () => {
+    await umgebung.sitzung.anmelden('nora');
+    const fixture = TestBed.createComponent(SkilltreeSeite);
+    fixture.componentRef.setInput('id', ausbildungVon(umgebung, 'nora').id);
+    fixture.detectChanges();
+    await warteBis(fixture, () => {
+      expect(element(fixture).querySelectorAll('.belohnung').length).toBeGreaterThan(0);
+    });
+
+    expect(element(fixture).querySelectorAll('.belohnung').length).toBe(
+      element(fixture).querySelectorAll('.graph__ast').length,
+    );
+
+    element(fixture).querySelector<HTMLButtonElement>('.belohnung__aktion')?.click();
+    fixture.detectChanges();
+
+    const dialog = element(fixture).querySelector('aside.seitenleiste');
+    expect(dialog?.textContent).toContain('Belohnung für diesen Ast');
+  });
 });

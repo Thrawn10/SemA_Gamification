@@ -27,30 +27,29 @@ export class AnmeldungSeite {
   protected readonly laeuft = signal(false);
   protected readonly fehler = signal<string | null>(null);
 
+  /** The four learner accounts, one per MVP profession plus the PiBS student (N-10, D-021, D-022). */
   protected readonly gruppen = computed<Kontogruppe[]>(() => {
-    const alle = this.konten();
-    const gruppen: Kontogruppe[] = [
-      {
-        rolle: 'LERNENDE',
-        titel: 'Lernende',
-        hinweis: 'Eigener Skilltree, Anfragen und Badges.',
-        konten: alle.filter((konto) => konto.rolle === 'LERNENDE'),
-      },
-      {
-        rolle: 'PRAXISBILDNER',
-        titel: 'Praxisbildner/innen',
-        hinweis: 'Übersicht der zugeordneten Lernenden und offene Anfragen.',
-        konten: alle.filter((konto) => konto.rolle === 'PRAXISBILDNER'),
-      },
-      {
-        rolle: 'ADMIN',
-        titel: 'Administration',
-        hinweis: 'Import, Datenbestand und Support.',
-        konten: alle.filter((konto) => konto.rolle === 'ADMIN'),
-      },
-    ];
-    return gruppen.filter((gruppe) => gruppe.konten.length > 0);
+    const lernende = this.konten().filter((konto) => konto.rolle === 'LERNENDE');
+    return lernende.length > 0
+      ? [
+          {
+            rolle: 'LERNENDE',
+            titel: 'Lernende',
+            hinweis:
+              'Je ein Testkonto für Applikationsentwicklung, Plattformentwicklung, Media und das PiBS-Studium.',
+            konten: lernende,
+          },
+        ]
+      : [];
   });
+
+  /**
+   * ANNAHME: the practice-trainer role is not part of the participant flow yet. The accounts stay
+   * reachable behind a collapsed panel so a facilitator can demo the coach view (D-021, Q-018).
+   */
+  protected readonly trainerKonten = computed(() =>
+    this.konten().filter((konto) => konto.rolle === 'PRAXISBILDNER'),
+  );
 
   constructor() {
     void this.laden();
