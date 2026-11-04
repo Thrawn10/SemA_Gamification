@@ -252,6 +252,8 @@ textarea.eingabe {
   block-size: 0.6rem;
   min-inline-size: 3rem;
   overflow: hidden;
+  /* The border keeps the track visible on card backgrounds (WCAG 1.4.11, 3:1 against surface and page). */
+  border: 1px solid var(--farbe-rand-stark);
   border-radius: var(--radius-rund);
   background: var(--farbe-flaeche-leise);
 }
@@ -319,8 +321,15 @@ textarea.eingabe {
   background: var(--farbe-flaeche-leise);
 }
 
+/* No opacity: dimming pushed the body text below 4.5:1 (WCAG 1.4.3). */
 .badge-karte--inaktiv {
-  opacity: 0.75;
+  border-color: var(--farbe-rand-stark);
+  border-style: dashed;
+}
+
+.badge-karte--inaktiv .badge-karte__medaille {
+  background: var(--farbe-flaeche-leise);
+  color: var(--farbe-text-leise);
 }
 
 .badge-karte__medaille {
@@ -356,6 +365,17 @@ textarea.eingabe {
 
 .badge-karte__meta {
   font-variant-numeric: tabular-nums;
+}
+
+/* Visible state word so "not earned yet" is not conveyed by colour or dash pattern alone. */
+.badge-karte__status {
+  align-self: flex-start;
+  padding: 1px var(--abstand-2);
+  border: 1px solid var(--farbe-rand-stark);
+  border-radius: var(--radius-rund);
+  color: var(--farbe-text-leise);
+  font-size: 0.74rem;
+  font-weight: 700;
 }
 
 .anforderung-id {

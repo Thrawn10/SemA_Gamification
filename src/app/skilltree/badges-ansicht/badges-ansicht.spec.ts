@@ -11,8 +11,8 @@ function badge(id: string, status: BadgeAnsicht['status']): BadgeAnsicht {
       code: id,
       titel: `Badge ${id}`,
       kriterium: 'Kriterium',
-      regeltyp: 'KOMPETENZ_SELBSTAENDIG',
-      parameter: {},
+      regeltyp: 'KOMPETENZ_ANZAHL',
+      parameter: { stufe: 3, anzahl: 5 },
       reihenfolge: 0,
     },
     vergabe: null,
@@ -57,6 +57,7 @@ describe('BadgesAnsichtKomponente', () => {
     expect(inhalt.textContent).toContain('Erhalten (1)');
     expect(inhalt.textContent).toContain('Derzeit nicht erfüllt (1)');
     expect(inhalt.textContent).toContain('Noch offen (1)');
+    expect(inhalt.textContent).toContain('1 von 3 Badges erhalten');
     expect(inhalt.querySelectorAll('st-badge-karte').length).toBe(3);
     // The visibility toggle belongs to the learner view only.
     expect(inhalt.querySelector('.badges__kopf button')).toBeNull();

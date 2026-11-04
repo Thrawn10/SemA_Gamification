@@ -21,6 +21,23 @@
   background: var(--farbe-flaeche);
   box-shadow: var(--schatten-karte);
   scroll-behavior: smooth;
+  cursor: grab;
+}
+
+.graph__karte:focus-visible {
+  outline: 2px solid var(--farbe-akzent);
+  outline-offset: 2px;
+}
+
+.graph__karte--zieht {
+  cursor: grabbing;
+  scroll-behavior: auto;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.graph__karte--zieht * {
+  cursor: grabbing;
 }
 
 .graph__buehne {
@@ -86,7 +103,7 @@
 
 .graph__knoten {
   inline-size: calc(var(--spalte) - 8px * var(--skala));
-  block-size: calc(66px * var(--skala));
+  block-size: var(--zeile, calc(84px * var(--skala)));
 }
 
 .graph__ring {
@@ -142,24 +159,84 @@
   hyphens: auto;
 }
 
-.graph__anfragen {
+.graph__anfragen,
+.graph__zustand {
   position: absolute;
-  inset-block-start: calc(2px * var(--skala));
-  inset-inline-start: calc(34px * var(--skala));
   display: grid;
   place-items: center;
-  inline-size: calc(1.15rem * var(--skala));
-  block-size: calc(1.15rem * var(--skala));
+  inline-size: calc(1.3rem * var(--skala));
+  block-size: calc(1.3rem * var(--skala));
   border-radius: var(--radius-rund);
+  font-size: calc(0.7rem * var(--skala));
+  font-weight: 700;
+  line-height: 1;
+}
+
+.graph__anfragen {
+  inset-block-start: calc(-6px * var(--skala));
+  inset-inline-end: calc(-6px * var(--skala));
   background: var(--farbe-akzent);
   color: var(--farbe-akzent-text);
-  font-size: calc(0.68rem * var(--skala));
-  font-weight: 700;
+}
+
+/*
+ * D-027: the three node states must be readable at a glance, without hovering and without losing
+ * the traffic-light ring. Completed fills the whole disc green, "Als Nächstes" keeps the dashed
+ * frame required by S-A04 but draws it thick and accent-coloured, and a "später" node goes quiet
+ * with a grey disc and a muted code. The corner badge and the code colour repeat the state, so the
+ * difference does not rely on colour alone.
+ */
+.graph__knoten--abgeschlossen .graph__ring::before {
+  background: var(--ampel-gruen);
+}
+
+.graph__knoten--abgeschlossen .graph__code {
+  color: var(--farbe-akzent-text);
+}
+
+.graph__knoten--abgeschlossen .graph__zustand {
+  box-shadow: 0 0 0 calc(2px * var(--skala)) var(--farbe-flaeche);
 }
 
 .graph__knoten--naechster .graph__ring {
-  outline: 2px dashed var(--farbe-text-leise);
-  outline-offset: calc(3px * var(--skala));
+  outline: calc(3px * var(--skala)) dashed var(--farbe-akzent);
+  outline-offset: calc(4px * var(--skala));
+}
+
+.graph__knoten--naechster .graph__code {
+  color: var(--farbe-akzent);
+}
+
+.graph__knoten--spaeter .graph__ring::before {
+  background: var(--farbe-flaeche-leise);
+}
+
+.graph__knoten--spaeter .graph__code {
+  color: var(--farbe-text-leise);
+}
+
+/* D-026: a corner badge states the node status without relying on colour alone. */
+.graph__zustand {
+  inset-block-end: calc(-6px * var(--skala));
+  inset-inline-end: calc(-6px * var(--skala));
+  border: 1px solid transparent;
+}
+
+.graph__zustand--abgeschlossen {
+  background: var(--ampel-gruen);
+  color: var(--farbe-flaeche);
+}
+
+.graph__zustand--naechster {
+  border-color: var(--farbe-akzent);
+  background: var(--farbe-akzent);
+  color: var(--farbe-akzent-text);
+}
+
+.graph__zustand--spaeter {
+  border-color: var(--farbe-rand-stark);
+  background: var(--farbe-flaeche-leise);
+  color: var(--farbe-text-leise);
 }
 
 .graph__knoten--beteiligt .graph__ring,
@@ -278,7 +355,6 @@
 }
 
 .graph__wischhinweis {
-  display: none;
   color: var(--farbe-text-leise);
   font-size: 0.85rem;
 }
@@ -318,8 +394,7 @@
   gap: var(--abstand-1);
 }
 
-.legende-ring,
-.legende-naechster {
+.legende-ring {
   inline-size: 0.9rem;
   block-size: 0.9rem;
   border-radius: var(--radius-rund);
@@ -327,9 +402,12 @@
   background: linear-gradient(90deg, var(--ampel-gruen) 50%, transparent 50%);
 }
 
-.legende-naechster {
-  border: 2px dashed var(--farbe-text-leise);
-  background: transparent;
+/* The legend reuses the node badge so symbol and colours cannot drift apart (D-026). */
+.graph__legende .graph__zustand {
+  position: static;
+  inline-size: 0.95rem;
+  block-size: 0.95rem;
+  font-size: 0.58rem;
 }
 
 .legende-ampel {
@@ -372,9 +450,5 @@
     margin-inline: calc(var(--abstand-3) * -1);
     border-radius: 0;
     border-inline: 0;
-  }
-
-  .graph__wischhinweis {
-    display: block;
   }
 }

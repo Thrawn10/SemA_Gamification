@@ -6,38 +6,40 @@ every detail. IDs are the stable IDs used in the spec and in test names. Status 
 
 ## 1 Rules (`packages/regeln`)
 
-| ID   | Requirement (short)                                                                                                                 | Status |
-| ---- | ----------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| R-S1 | Stufe = maximum of active `BESTAETIGT`/`UEBERNOMMEN` events without a `ZURUECKGENOMMEN` referencing them.                           | done   |
-| R-S2 | A higher stage includes the lower ones.                                                                                             | done   |
-| R-S3 | Only a currently assigned practice trainer may confirm or withdraw.                                                                 | done   |
-| R-S4 | Withdrawing a confirmation falls back to the previous active confirmation, otherwise to stage 0 (TF3b).                             | done   |
-| R-S5 | Confirming a stage marks open requests with target level ≤ confirmed level as `ERLEDIGT`.                                           | done   |
-| R-S6 | At most one open request per training and learning objective.                                                                       | done   |
-| R-F1 | Point value: 0 → 0, 1 → 1, 2 → 3, 3 → 6.                                                                                            | done   |
-| R-F2 | Competence value = mean point value of its non-archived learning objectives (0–6).                                                  | done   |
-| R-F3 | Progress % = points ÷ (6 × objectives) × 100, rounded half-up with epsilon 1e-9.                                                    | done   |
-| R-F4 | Traffic light per competence: < 2 red, 2–< 4 orange, ≥ 4 green; always with symbol and text (graph: ring colour plus tooltip/aria). | done   |
-| R-F5 | Traffic light per area uses the area mean with the same thresholds.                                                                 | done   |
-| R-F6 | Red competences are visible in the tree; area tooltip and coach table show the count.                                               | done   |
-| R-E1 | Nothing is locked; every objective can be requested and confirmed at any time.                                                      | done   |
-| R-E2 | Recommendation candidates: stage < 3, no open request, predecessor stage ≥ 2.                                                       | done   |
-| R-E3 | Replaced by R-T3 (node-level “next” per branch).                                                                                    | done   |
-| R-T1 | Follow edges within an area in template order (`REIHENFOLGE`).                                                                      | done   |
-| R-T2 | Cross edges from text references (`TEXTVERWEIS`): APP a1→g1, a3→g4, a3→h3; PLA a1→d1, a7→d4, a1→e1; MED none.                       | done   |
-| R-T3 | “Als Nächstes” = lowest non-green node per branch, at most one per branch.                                                          | done   |
-| R-T4 | Edge state: solid when the source is green/reached, dashed otherwise; cross edges dotted and only visible while involved.           | done   |
-| R-M1 | Milestone Bbc: root, readiness from Basislehrjahr objectives or a manual hint; reached manually.                                    | done   |
-| R-M2 | Milestone IPA: above the top nodes, readiness “n of N competences not red”; reached manually.                                       | done   |
-| R-M3 | Milestone Lehrabschluss (LAP): top, readiness “IPA passed/open · total progress”; reached manually.                                 | done   |
-| R-B1 | Badge `BEREICH_GESTARTET`: at least one objective of the area at stage ≥ 1.                                                         | done   |
-| R-B2 | Badge `KOMPETENZ_SELBSTAENDIG`: all objectives of the competence at stage 3.                                                        | done   |
-| R-B3 | Badge `BEREICH_ABGESCHLOSSEN`: all objectives of the area at stage 3.                                                               | done   |
-| R-B4 | Badge `MEILENSTEIN` at 25/50/75/100 % of objectives at stage 3.                                                                     | done   |
-| R-B5 | Recompute after every event; inactive badges are kept and reactivated; `vergeben_am` stays at the first fulfilment.                 | done   |
-| R-B6 | No badges for time, speed, rank, logins or activity.                                                                                | done   |
-| R-B7 | Badges visible to the learner and assigned trainers; hiding only changes the learner's view.                                        | done   |
-| R-B8 | `UEBERNOMMEN` events award badges marked `aus_startstand`.                                                                          | done   |
+| ID    | Requirement (short)                                                                                                                                                                        | Status |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------ |
+| R-S1  | Stufe = maximum of active `BESTAETIGT`/`UEBERNOMMEN` events without a `ZURUECKGENOMMEN` referencing them.                                                                                  | done   |
+| R-S2  | A higher stage includes the lower ones.                                                                                                                                                    | done   |
+| R-S3  | Only a currently assigned practice trainer may confirm or withdraw.                                                                                                                        | done   |
+| R-S4  | Withdrawing a confirmation falls back to the previous active confirmation, otherwise to stage 0 (TF3b).                                                                                    | done   |
+| R-S5  | Confirming a stage marks open requests with target level ≤ confirmed level as `ERLEDIGT`.                                                                                                  | done   |
+| R-S6  | At most one open request per training and learning objective.                                                                                                                              | done   |
+| R-F1  | Point value: 0 → 0, 1 → 1, 2 → 3, 3 → 6.                                                                                                                                                   | done   |
+| R-F2  | Competence value = mean point value of its non-archived learning objectives (0–6).                                                                                                         | done   |
+| R-F3  | Progress % = points ÷ (6 × objectives) × 100, rounded half-up with epsilon 1e-9.                                                                                                           | done   |
+| R-F4  | Traffic light per competence: < 2 red, 2–< 4 orange, ≥ 4 green; always with symbol and text (graph: ring colour plus tooltip/aria).                                                        | done   |
+| R-F5  | Traffic light per area uses the area mean with the same thresholds.                                                                                                                        | done   |
+| R-F6  | Red competences are visible in the tree; area tooltip and coach table show the count.                                                                                                      | done   |
+| R-E1  | Nothing is locked; every objective can be requested and confirmed at any time.                                                                                                             | done   |
+| R-E2  | Recommendation candidates: stage < 3, no open request, predecessor stage ≥ 2.                                                                                                              | done   |
+| R-E3  | Replaced by R-T3 (node-level “next” per branch).                                                                                                                                           | done   |
+| R-T1  | Follow edges within an area in template order (`REIHENFOLGE`).                                                                                                                             | done   |
+| R-T2  | Cross edges from text references (`TEXTVERWEIS`): APP a1→g1, a3→g4, a3→h3; PLA a1→d1, a7→d4, a1→e1; MED none.                                                                              | done   |
+| R-T3  | “Als Nächstes” = lowest non-green node per branch, at most one per branch.                                                                                                                 | done   |
+| R-T4  | Edge state: solid when the source is green/reached, dashed otherwise; cross edges dotted and only visible while involved.                                                                  | done   |
+| R-M1  | Milestone Bbc: root, readiness from Basislehrjahr objectives or a manual hint; reached manually.                                                                                           | done   |
+| R-M2  | Milestone IPA: above the top nodes, readiness “n of N competences not red”; reached manually. PiBS labels it «Bachelorarbeit».                                                             | done   |
+| R-M3  | Milestone Lehrabschluss (LAP): top, readiness “IPA passed/open · total progress”; reached manually. PiBS labels it «Bachelorabschluss».                                                    | done   |
+| R-B1  | Superseded by D-025: no `BEREICH_GESTARTET` badge is generated.                                                                                                                            | done   |
+| R-B2  | Superseded by D-025: no per-competence badge is generated.                                                                                                                                 | done   |
+| R-B3  | Badge `BEREICH_ABGESCHLOSSEN`: all objectives of the area at the top level; one badge per area.                                                                                            | done   |
+| R-B4  | Badge `MEILENSTEIN_ERREICHT`: one badge per primary node (Bbc, IPA/Lehrabschluss; PiBS: Bachelorarbeit/Bachelorabschluss). Redefined by D-025; the former 25/50/75/100 % rule was dropped. | done   |
+| R-B5  | Recompute after every event; inactive badges are kept and reactivated; `vergeben_am` stays at the first fulfilment.                                                                        | done   |
+| R-B6  | No badges for time, speed, rank, logins or activity.                                                                                                                                       | done   |
+| R-B7  | Badges visible to the learner and assigned trainers; hiding only changes the learner's view.                                                                                               | done   |
+| R-B8  | `UEBERNOMMEN` events award badges marked `aus_startstand`.                                                                                                                                 | done   |
+| R-B9  | Badge `KOMPETENZ_ANZAHL`: 5/10/15 competences per stage; a competence counts when all its objectives reach at least that stage.                                                            | done   |
+| R-B10 | Badge `ALLE_KOMPETENZEN`: every competence reaches the top level.                                                                                                                          | done   |
 
 ## 2 Learner stories
 

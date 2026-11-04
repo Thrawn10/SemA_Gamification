@@ -26,6 +26,11 @@
       Ansicht.
     </p>
 
+    <div class="badges__stand">
+      <st-fortschritt [wert]="anteil()" [label]="'Anteil erhaltener Badges'" />
+      <p class="badges__zaehlung">{{ erhalten() }} von {{ gesamt() }} Badges erhalten</p>
+    </div>
+
     @if (badges().erhalten.length > 0) {
       <h3>Erhalten ({{ badges().erhalten.length }})</h3>
       <div class="badge-raster">

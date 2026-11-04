@@ -1,1 +1,9 @@
-// Styles for this component (currently none; global tokens apply).
+.badge-karte__inhalt {
+  display: grid;
+  gap: var(--abstand-1);
+}
+
+.badge-karte__balken {
+  display: block;
+  margin-block-start: var(--abstand-1);
+}

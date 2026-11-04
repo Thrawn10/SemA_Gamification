@@ -22,12 +22,25 @@
         </p>
       }
       @case ('INAKTIV') {
+        <st-fortschritt
+          class="badge-karte__balken"
+          [wert]="anteil()"
+          [zeigeZahl]="false"
+          [label]="'Fortschritt bis zum Badge ' + ansicht().definition.titel"
+        />
         <p class="badge-karte__meta">
           Derzeit nicht erfüllt seit
           {{ ansicht().vergabe?.inaktivSeit | date: 'dd.MM.yyyy' }} · {{ fortschrittText() }}
         </p>
       }
       @default {
+        <span class="badge-karte__status">Noch offen</span>
+        <st-fortschritt
+          class="badge-karte__balken"
+          [wert]="anteil()"
+          [zeigeZahl]="false"
+          [label]="'Fortschritt bis zum Badge ' + ansicht().definition.titel"
+        />
         <p class="badge-karte__meta">{{ fortschrittText() }}</p>
       }
     }

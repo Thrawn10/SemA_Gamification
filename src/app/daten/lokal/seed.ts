@@ -32,9 +32,10 @@ const TAG = 86_400_000;
 /**
  * Bump when the deterministic demo data changes in a way that existing browsers must pick up.
  * `DatenbestandSpeicherAdapter` compares it with the value stored in the `meta` store and reseeds
- * when they differ (D-023). The PiBS learner and the binary stage model are version 1.
+ * when they differ (D-023). Version 1 introduced the PiBS learner and the binary stage model;
+ * version 2 introduces the reduced badge set (D-025).
  */
-export const SEED_VERSION = 1;
+export const SEED_VERSION = 2;
 
 /** Deterministic PRNG (mulberry32) so the demo data is stable per person. */
 function zufall(seed: number): () => number {
@@ -715,6 +716,9 @@ export function erstelleSeedDaten(importe: readonly VorlageImport[], jetzt: Date
     const ereignisse = stufenereignisse.filter(
       (ereignis) => ereignis.ausbildungId === pfad.ausbildung.id,
     );
+    const meilensteine = meilensteinereignisse.filter(
+      (ereignis) => ereignis.ausbildungId === pfad.ausbildung.id,
+    );
     badgeVergaben.push(
       ...berechneBadgeVergaben(
         definitionen,
@@ -722,6 +726,7 @@ export function erstelleSeedDaten(importe: readonly VorlageImport[], jetzt: Date
         ereignisse,
         pfad.ausbildung.id,
         pfad.stufenmodell,
+        meilensteine,
       ),
     );
   }

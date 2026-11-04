@@ -172,6 +172,8 @@ export interface AnfrageErgebnis {
 export interface MeilensteinErgebnis {
   ereignis: MeilensteinEreignis | null;
   erreicht: boolean;
+  neueBadges: BadgeDefinition[];
+  inaktiveBadges: BadgeDefinition[];
   hinweis: string;
 }
 

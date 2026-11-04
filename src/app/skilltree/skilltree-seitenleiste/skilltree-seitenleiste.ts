@@ -17,8 +17,9 @@ import type {
   MeilensteinAnsicht,
   MeilensteinCode,
   SkilltreeAnsicht,
+  Stufenmodell,
 } from '@skilltree/vertraege';
-import { ABSCHLUSS_STUFE, MEILENSTEIN_TEXTE, stufenText } from '@skilltree/vertraege';
+import { ABSCHLUSS_STUFE, meilensteinTexteFuer, stufenText } from '@skilltree/vertraege';
 import { fehlerText } from '../../core/fehler';
 import { MeilensteinDienst } from '../../dienste/meilenstein-dienst';
 import { AmpelAnzeige } from '../../shared/ui/ampel-anzeige/ampel-anzeige';
@@ -50,11 +51,20 @@ interface MeilensteinInhalt {
 
 type Inhalt = KompetenzInhalt | AstInhalt | MeilensteinInhalt;
 
-const MEILENSTEIN_BESCHREIBUNGEN: Readonly<Record<MeilensteinCode, string>> = {
-  BBC: 'Der Basismeilenstein schliesst das Basislehrjahr ab. Er wird durch die Praxisbildnerin oder den Praxisbildner bestätigt.',
-  IPA: 'Die individuelle praktische Arbeit (IPA) wird nach bestandener Prüfung durch die Praxisbildnerin oder den Praxisbildner bestätigt.',
-  LAP: 'Der Lehrabschluss (Qualifikationsverfahren) ist der oberste Meilenstein des Baums.',
-};
+const MEILENSTEIN_BESCHREIBUNGEN: Readonly<Record<Stufenmodell, Record<MeilensteinCode, string>>> =
+  {
+    DREI_STUFEN: {
+      BBC: 'Der Basismeilenstein schliesst das Basislehrjahr ab. Er wird durch die Praxisbildnerin oder den Praxisbildner bestätigt.',
+      IPA: 'Die individuelle praktische Arbeit (IPA) wird nach bestandener Prüfung durch die Praxisbildnerin oder den Praxisbildner bestätigt.',
+      LAP: 'Der Lehrabschluss (Qualifikationsverfahren) ist der oberste Meilenstein des Baums.',
+    },
+    // D-025: a study plan has a bachelor thesis and a bachelor's degree instead of IPA and LAP.
+    BINAER: {
+      BBC: 'Der Basismeilenstein schliesst die Basisphase ab. Er wird durch die Praxisbildnerin oder den Praxisbildner bestätigt.',
+      IPA: 'Die Bachelorarbeit wird durch die Praxisbildnerin oder den Praxisbildner bestätigt.',
+      LAP: 'Der Bachelorabschluss ist der oberste Meilenstein des Baums.',
+    },
+  };
 
 /** Node and milestone sidebar (SPEC 8.2); closes with ×, backdrop or Esc. */
 @Component({
@@ -163,7 +173,7 @@ export class SkilltreeSeitenleiste {
   }
 
   protected meilensteinText(code: MeilensteinCode): { name: string; untertitel: string } {
-    return MEILENSTEIN_TEXTE[code];
+    return meilensteinTexteFuer(code, this.ansicht().stufenmodell);
   }
 
   /** Opens the inline form and moves focus into its first field. */
@@ -195,7 +205,7 @@ export class SkilltreeSeitenleiste {
   }
 
   protected beschreibung(code: MeilensteinCode): string {
-    return MEILENSTEIN_BESCHREIBUNGEN[code];
+    return MEILENSTEIN_BESCHREIBUNGEN[this.ansicht().stufenmodell][code];
   }
 
   protected kommentarAendern(ereignis: Event): void {

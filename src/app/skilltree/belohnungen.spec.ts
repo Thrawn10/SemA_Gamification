@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import type { SkilltreeAnsicht } from '@skilltree/vertraege';
-import { anteilProzent, astBelohnungen, belohnungFuerAst, kompetenzStandText } from './belohnungen';
+import { astBelohnungen, belohnungFuerAst, kompetenzStandText } from './belohnungen';
 import { ausbildungVon, erstelleUmgebung, type TestUmgebung } from '../../testing/dienst-umgebung';
 
 describe('Belohnungen pro Ast', () => {
@@ -51,12 +51,6 @@ describe('Belohnungen pro Ast', () => {
 
     expect(belohnungFuerAst(ansicht, code)?.code).toBe(code);
     expect(belohnungFuerAst(ansicht, 'ZZ')).toBeNull();
-  });
-
-  it('rundet Anteile und behandelt leere Kompetenzen als 0 %', () => {
-    expect(anteilProzent(1, 3)).toBe(33);
-    expect(anteilProzent(3, 3)).toBe(100);
-    expect(anteilProzent(0, 0)).toBe(0);
   });
 
   it('formuliert den Kompetenzstand im Singular und Plural korrekt', () => {

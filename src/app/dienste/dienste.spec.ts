@@ -161,6 +161,7 @@ describe('Anwendungsdienste und Rechte', () => {
     });
     expect(ergebnis.erreicht).toBe(true);
     expect(ergebnis.ereignis).not.toBeNull();
+    expect(ergebnis.neueBadges.map((badge) => badge.code)).toContain('M-LAP');
 
     await expect(
       umgebung.meilenstein.zuruecknehmen(nora.id, {
@@ -174,6 +175,13 @@ describe('Anwendungsdienste und Rechte', () => {
       begruendung: 'Prüfung wurde aberkannt.',
     });
     expect(zurueck.erreicht).toBe(false);
+    expect(zurueck.inaktiveBadges.map((badge) => badge.code)).toContain('M-LAP');
+
+    const ansicht = await umgebung.skilltree.laden(nora.id);
+    const lap = [...ansicht.badges.erhalten, ...ansicht.badges.inaktiv].find(
+      (badge) => badge.definition.code === 'M-LAP',
+    );
+    expect(lap?.status).toBe('INAKTIV');
   });
 
   it('S-L01: Übersicht zeigt nur aktuell zugeordnete Lernende', async () => {

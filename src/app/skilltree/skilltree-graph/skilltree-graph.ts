@@ -17,19 +17,23 @@ import type {
   MeilensteinCode,
   SkilltreeAnsicht,
 } from '@skilltree/vertraege';
-import { AMPEL_SYMBOLE, AMPEL_TEXTE, MEILENSTEIN_TEXTE } from '@skilltree/vertraege';
+import { AMPEL_SYMBOLE, AMPEL_TEXTE, meilensteinTexteFuer } from '@skilltree/vertraege';
 import { AnforderungId } from '../../shared/ui/anforderung-id/anforderung-id';
 import {
   baumSkala,
+  ECKEN_RADIUS,
   KREIS_RADIUS,
+  pfadAstIpa,
+  pfadBbcAst,
+  pfadFolge,
+  pfadVerweis,
+  rundeKanten,
   spaltenbreite as spaltenbreiteFuer,
   ZEILENABSTAND,
+  type KantenLanes,
+  type Punkt,
 } from '../baum-geometrie';
-
-interface Punkt {
-  x: number;
-  y: number;
-}
+import { KNOTEN_ZUSTAND_TEXTE, knotenZustand, type KnotenZustand } from '../knoten-zustand';
 
 interface KompetenzKnoten {
   id: string;
@@ -38,6 +42,8 @@ interface KompetenzKnoten {
   fortschritt: number;
   ampel: KompetenzAnsicht['ampel'];
   istNaechster: boolean;
+  zustand: KnotenZustand;
+  zustandszeichen: string;
   offeneAnfragen: number;
   punkt: Punkt;
   astCode: string;
@@ -74,10 +80,25 @@ interface Pfad {
   marker: 'erreicht' | 'offen';
 }
 
+interface BaumLayout {
+  breite: number;
+  hoehe: number;
+  spaltenbreite: number;
+  skala: number;
+  radius: number;
+  zeilenabstand: number;
+  lanes: KantenLanes;
+  astBasen: AstBasis[];
+  kompetenzen: KompetenzKnoten[];
+  meilensteine: MeilensteinKnoten[];
+  punkte: Map<string, Punkt>;
+}
+
 /**
  * HTML buttons above an SVG edge layer (SPEC 8.2). The column width follows the available card
  * width between 150 and 284 px (D-024); all node geometry scales with it, so large screens show a
- * larger tree. The card scrolls sideways on narrow screens and starts centred.
+ * larger tree. Edges are routed on free lanes (D-026), nodes carry a derived state badge, and the
+ * card can be dragged with the mouse, scrolled with the arrow keys or with native touch scrolling.
  */
 @Component({
   selector: 'st-skilltree-graph',
@@ -97,6 +118,9 @@ export class SkilltreeGraph {
   private readonly zerstoerer = inject(DestroyRef);
   private readonly kartenBreite = signal(0);
   private readonly aktiverKnoten = signal<string | null>(null);
+  protected readonly zieht = signal(false);
+  private zug: { x: number; scrollLeft: number; griff: boolean; pointerId: number } | null = null;
+  private klickUnterdruecken = false;
   private zentriert = false;
 
   /** S-A02: visible legend of the three traffic-light levels with symbol and text. */
@@ -128,7 +152,7 @@ export class SkilltreeGraph {
   /** Scale factor for circles, rows and fonts; never below the reference layout. */
   protected readonly skala = computed(() => baumSkala(this.spaltenbreite()));
 
-  protected readonly layout = computed(() => {
+  protected readonly layout = computed<BaumLayout>(() => {
     const ansicht = this.ansicht();
     const skala = this.skala();
     const spaltenbreite = this.spaltenbreite();
@@ -141,7 +165,15 @@ export class SkilltreeGraph {
     const obersteZeile = ipaY + 56 * skala + radius;
     const untersteZeile = obersteZeile + (maxZeilen - 1) * zeilenabstand;
     const astBasisY = untersteZeile + zeilenabstand;
-    const bbcY = astBasisY + 54 * skala;
+    // D-026: an extra gap below the area row gives the Bbc edges their own free lane.
+    const bbcY = astBasisY + 96 * skala;
+    // D-027: the lanes sit on the top and bottom edge of a row, so they keep their clearance to a
+    // three-line title when the row spacing changes.
+    const lanes: KantenLanes = {
+      oben: obersteZeile - zeilenabstand / 2,
+      unten: untersteZeile + zeilenabstand / 2,
+      bbc: astBasisY + 52 * skala,
+    };
 
     const astBasen: AstBasis[] = ansicht.bereiche.map((bereich, index) => {
       const punkt = { x: index * spaltenbreite + 32 * skala, y: astBasisY };
@@ -163,6 +195,8 @@ export class SkilltreeGraph {
           x: index * spaltenbreite + 32 * skala,
           y: untersteZeile - zeile * zeilenabstand,
         };
+        const zustand = knotenZustand(kompetenz);
+        const zustandsText = KNOTEN_ZUSTAND_TEXTE[zustand].kurz;
         kompetenzen.push({
           id: kompetenz.kompetenz.id,
           code: kompetenz.kompetenz.code,
@@ -170,6 +204,8 @@ export class SkilltreeGraph {
           fortschritt: kompetenz.fortschritt,
           ampel: kompetenz.ampel,
           istNaechster: kompetenz.istNaechster,
+          zustand,
+          zustandszeichen: KNOTEN_ZUSTAND_TEXTE[zustand].zeichen,
           offeneAnfragen: kompetenz.offeneAnfragen,
           punkt,
           astCode: bereich.bereich.code,
@@ -177,7 +213,7 @@ export class SkilltreeGraph {
             `${kompetenz.kompetenz.code}: ${kompetenz.kompetenz.titel}`,
             `${kompetenz.fortschritt} %`,
             `Ampel: ${AMPEL_TEXTE[kompetenz.ampel]}`,
-            kompetenz.istNaechster ? 'Als Nächstes' : '',
+            zustandsText,
             kompetenz.offeneAnfragen > 0
               ? `${kompetenz.offeneAnfragen} offene Anfrage${kompetenz.offeneAnfragen === 1 ? '' : 'n'}`
               : '',
@@ -190,16 +226,16 @@ export class SkilltreeGraph {
 
     const meilensteine = ansicht.meilensteine.map((meilenstein) => {
       const y = meilenstein.code === 'LAP' ? 40 * skala : meilenstein.code === 'IPA' ? ipaY : bbcY;
+      // D-025: the binary study plan shows the bachelor milestone labels instead of IPA/LAP.
+      const texte = meilensteinTexteFuer(meilenstein.code, ansicht.stufenmodell);
       return {
         code: meilenstein.code,
-        kuerzel: MEILENSTEIN_TEXTE[meilenstein.code].kuerzel,
-        name: MEILENSTEIN_TEXTE[meilenstein.code].name,
-        untertitel: MEILENSTEIN_TEXTE[meilenstein.code].untertitel,
+        kuerzel: texte.kuerzel,
+        name: texte.name,
+        untertitel: texte.untertitel,
         erreicht: meilenstein.erreicht,
         punkt: { x: breite / 2, y },
-        tooltip: `${MEILENSTEIN_TEXTE[meilenstein.code].kuerzel} · ${
-          MEILENSTEIN_TEXTE[meilenstein.code].name
-        } · ${MEILENSTEIN_TEXTE[meilenstein.code].untertitel} · ${
+        tooltip: `${texte.kuerzel} · ${texte.name} · ${texte.untertitel} · ${
           meilenstein.erreicht ? 'erreicht' : meilenstein.bereitschaft
         }`,
       };
@@ -222,6 +258,8 @@ export class SkilltreeGraph {
       spaltenbreite,
       skala,
       radius,
+      zeilenabstand,
+      lanes,
       astBasen,
       kompetenzen,
       meilensteine,
@@ -231,7 +269,8 @@ export class SkilltreeGraph {
 
   protected readonly sichtbarePfade = computed<Pfad[]>(() => {
     const aktiv = this.aktiverKnoten() ?? this.aktiv();
-    const { punkte, skala } = this.layout();
+    const layout = this.layout();
+    const { punkte } = layout;
     const pfade: Pfad[] = [];
     for (const [index, kante] of this.ansicht().kanten.entries()) {
       const von = punkte.get(kante.von);
@@ -246,7 +285,7 @@ export class SkilltreeGraph {
       }
       pfade.push({
         id: `${kante.von}-${kante.nach}-${index}`,
-        d: this.pfad(von, nach, kante, skala),
+        d: this.pfad(von, nach, kante, layout),
         typ: kante.typ,
         zustand: kante.zustand,
         beteiligt,
@@ -272,35 +311,135 @@ export class SkilltreeGraph {
     }
   }
 
-  private pfad(von: Punkt, nach: Punkt, kante: KantenAnsicht, skala: number): string {
-    const radius = KREIS_RADIUS * skala;
+  private pfad(von: Punkt, nach: Punkt, kante: KantenAnsicht, layout: BaumLayout): string {
+    const { radius, skala, lanes, spaltenbreite: spalte } = layout;
+    const ecken = ECKEN_RADIUS * skala;
 
     if (kante.typ === 'VERWEIS') {
-      const richtung = nach.x >= von.x ? 1 : -1;
-      const startX = von.x + richtung * radius;
-      const zielX = nach.x - richtung * radius;
-      return `M ${startX} ${von.y} C ${startX + richtung * 60 * skala} ${von.y}, ${zielX - richtung * 60 * skala} ${nach.y}, ${zielX} ${nach.y}`;
+      return pfadVerweis({ von, nach, radius, spalte, skala, lanes, ecken });
     }
 
     if (kante.von === 'BBC') {
-      const start = { x: von.x, y: von.y - 30 * skala };
-      const ziel = { x: nach.x, y: nach.y + 18 * skala };
-      return `M ${start.x} ${start.y} C ${start.x} ${start.y - 70 * skala}, ${ziel.x} ${ziel.y + 70 * skala}, ${ziel.x} ${ziel.y}`;
+      // D-026: the milestone fan runs on its own lane below the area row instead of through it.
+      return pfadBbcAst(
+        { x: von.x, y: von.y - 26 * skala },
+        { x: nach.x, y: nach.y + 6 * skala },
+        lanes.bbc,
+        ecken,
+      );
     }
 
     if (kante.nach === 'IPA') {
-      const start = { x: von.x, y: von.y - radius };
-      const ziel = { x: nach.x, y: nach.y + 26 * skala };
-      return `M ${start.x} ${start.y} C ${start.x} ${start.y - 50 * skala}, ${ziel.x} ${ziel.y + 50 * skala}, ${ziel.x} ${ziel.y}`;
+      return pfadAstIpa(
+        { x: von.x, y: von.y - radius },
+        { x: nach.x, y: nach.y + 26 * skala },
+        lanes.oben,
+        ecken,
+      );
     }
 
     if (kante.von === 'IPA' || kante.von === 'LAP' || kante.nach === 'LAP') {
-      return `M ${von.x} ${von.y - 26 * skala} L ${nach.x} ${nach.y + 26 * skala}`;
+      return rundeKanten(
+        [
+          { x: von.x, y: von.y - 26 * skala },
+          { x: nach.x, y: nach.y + 26 * skala },
+        ],
+        0,
+      );
     }
 
-    const start = { x: von.x, y: von.y - radius };
-    const ziel = { x: nach.x, y: nach.y + radius };
-    return `M ${start.x} ${start.y} C ${start.x} ${start.y - 18 * skala}, ${ziel.x} ${ziel.y + 18 * skala}, ${ziel.x} ${ziel.y}`;
+    return pfadFolge(von, nach, radius);
+  }
+
+  /** Grabs the card with the mouse and scrolls it sideways while the pointer moves (D-026). */
+  protected starteZiehen(event: PointerEvent): void {
+    if (event.button !== 0 || event.pointerType === 'touch') {
+      return;
+    }
+    const element = this.baumkarte()?.nativeElement;
+    if (!element) {
+      return;
+    }
+    this.zug = {
+      x: event.clientX,
+      scrollLeft: element.scrollLeft,
+      griff: false,
+      pointerId: event.pointerId,
+    };
+    this.zieht.set(false);
+  }
+
+  protected ziehe(event: PointerEvent): void {
+    const zug = this.zug;
+    const element = this.baumkarte()?.nativeElement;
+    if (!zug || !element) {
+      return;
+    }
+    if (event.buttons === 0) {
+      // The pointer was released outside the card before the threshold; do not pan on hover.
+      this.beendeZiehen(event);
+      return;
+    }
+    const strecke = event.clientX - zug.x;
+    if (!zug.griff) {
+      if (Math.abs(strecke) <= 4) {
+        return;
+      }
+      // Capture only once the pointer really drags, so a plain click still reaches the node button.
+      zug.griff = true;
+      this.klickUnterdruecken = true;
+      this.zieht.set(true);
+      element.style.scrollBehavior = 'auto';
+      if (typeof element.setPointerCapture === 'function') {
+        element.setPointerCapture(zug.pointerId);
+      }
+    }
+    element.scrollLeft = zug.scrollLeft - strecke;
+    event.preventDefault();
+  }
+
+  protected beendeZiehen(event: PointerEvent): void {
+    const zug = this.zug;
+    const element = this.baumkarte()?.nativeElement;
+    if (!zug || !element) {
+      return;
+    }
+    this.zug = null;
+    this.zieht.set(false);
+    if (zug.griff) {
+      element.style.scrollBehavior = '';
+      if (
+        typeof element.hasPointerCapture === 'function' &&
+        element.hasPointerCapture(event.pointerId)
+      ) {
+        element.releasePointerCapture(event.pointerId);
+      }
+      // The click that follows a drag must not open a node; reset after that click was dispatched.
+      setTimeout(() => {
+        this.klickUnterdruecken = false;
+      });
+    }
+  }
+
+  protected knotenWaehlen(knotenId: string): void {
+    if (this.klickUnterdruecken) {
+      return;
+    }
+    this.knotenGewaehlt.emit(knotenId);
+  }
+
+  protected astWaehlen(astId: string): void {
+    if (this.klickUnterdruecken) {
+      return;
+    }
+    this.astGewaehlt.emit(astId);
+  }
+
+  protected meilensteinWaehlen(code: MeilensteinCode): void {
+    if (this.klickUnterdruecken) {
+      return;
+    }
+    this.meilensteinGewaehlt.emit(code);
   }
 
   /** Tracks the card width so the tree can use the space of large screens (D-024). */
@@ -325,12 +464,12 @@ export class SkilltreeGraph {
 
   private zentriere(): void {
     const element = this.baumkarte()?.nativeElement;
-    if (!element) {
+    if (!element || element.clientWidth === 0) {
       return;
     }
-    element.scrollLeft = Math.max(0, (element.scrollWidth - element.clientWidth) / 2);
-    if (element.clientWidth > 0) {
-      this.zentriert = true;
-    }
+    // Centre the stage itself, not `scrollWidth`: the invisible tooltips extend the scrollable
+    // area, so `scrollWidth` would start narrow screens at the right edge of the tree (D-026).
+    element.scrollLeft = Math.max(0, (this.layout().breite - element.clientWidth) / 2);
+    this.zentriert = true;
   }
 }

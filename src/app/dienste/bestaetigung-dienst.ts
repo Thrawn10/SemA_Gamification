@@ -2,9 +2,9 @@ import { inject, Service } from '@angular/core';
 import type {
   Ausbildung,
   BadgeDefinition,
-  BadgeVergabe,
   BestaetigungsErgebnis,
   BestaetigungZuruecknehmen,
+  MeilensteinEreignis,
   StufeBestaetigen,
   Stufenereignis,
   Stufenmodell,
@@ -19,10 +19,10 @@ import {
 import {
   aktiveBestaetigungen,
   ampel,
-  berechneBadgeVergaben,
   erstelleBadgeDefinitionen,
   fortschritt,
   indexierePlan,
+  istAktuellesBadgeSet,
   kompetenzwert,
   stufenMapFuerModell,
   type PlanIndex,
@@ -36,6 +36,7 @@ import {
   EREIGNIS_REPOSITORY,
   VORLAGE_REPOSITORY,
 } from '../daten/ports';
+import { ermittleBadgeAenderungen, type BadgeNeuberechnung } from './badge-vergabe';
 import { SitzungDienst } from './sitzung-dienst';
 import { forderePraxisbildnerRecht } from './zugriff';
 
@@ -44,6 +45,7 @@ interface SchreibKontext {
   zuordnungen: Zuordnung[];
   index: PlanIndex;
   ereignisse: Stufenereignis[];
+  meilensteinereignisse: MeilensteinEreignis[];
   definitionen: BadgeDefinition[];
   modell: Stufenmodell;
 }
@@ -234,63 +236,49 @@ export class BestaetigungDienst {
     const zuordnungen = await this.ausbildungRepository.zuordnungen(ausbildungId);
     forderePraxisbildnerRecht(benutzer, zuordnungen, this.uhr());
 
-    const [vorlage, struktur, ereignisse, gespeicherteDefinitionen] = await Promise.all([
-      this.vorlageRepository.laden(ausbildung.vorlageId),
-      this.vorlageRepository.struktur(ausbildung.vorlageId),
-      this.ereignisRepository.stufenereignisse(ausbildungId),
-      this.badgeRepository.definitionen(ausbildung.vorlageId),
-    ]);
+    const [vorlage, struktur, ereignisse, meilensteinereignisse, gespeicherteDefinitionen] =
+      await Promise.all([
+        this.vorlageRepository.laden(ausbildung.vorlageId),
+        this.vorlageRepository.struktur(ausbildung.vorlageId),
+        this.ereignisRepository.stufenereignisse(ausbildungId),
+        this.ereignisRepository.meilensteinereignisse(ausbildungId),
+        this.badgeRepository.definitionen(ausbildung.vorlageId),
+      ]);
     const modell = stufenmodellFuer(vorlage.stufenmodell);
     const index = indexierePlan(struktur);
+    // D-025: stored definitions from before the reduced badge set are replaced, not extended.
     const definitionen =
-      gespeicherteDefinitionen.length > 0
+      gespeicherteDefinitionen.length > 0 && istAktuellesBadgeSet(gespeicherteDefinitionen)
         ? gespeicherteDefinitionen
         : erstelleBadgeDefinitionen(struktur, ausbildung.vorlageId, modell);
 
-    return { ausbildung, zuordnungen, index, ereignisse, definitionen, modell };
+    return {
+      ausbildung,
+      zuordnungen,
+      index,
+      ereignisse,
+      meilensteinereignisse,
+      definitionen,
+      modell,
+    };
   }
 
   private async badgesNeuBerechnen(
     kontext: SchreibKontext,
     ereignisse: Stufenereignis[],
     ausbildungId: string,
-  ): Promise<{
-    neue: { definition: BadgeDefinition; vergabe: BadgeVergabe }[];
-    inaktive: { definition: BadgeDefinition; vergabe: BadgeVergabe }[];
-  }> {
-    const vorher = berechneBadgeVergaben(
+  ): Promise<BadgeNeuberechnung> {
+    const ergebnis = ermittleBadgeAenderungen(
       kontext.definitionen,
       kontext.index,
+      ausbildungId,
+      kontext.modell,
       kontext.ereignisse,
-      ausbildungId,
-      kontext.modell,
-    );
-    const nachher = berechneBadgeVergaben(
-      kontext.definitionen,
-      kontext.index,
       ereignisse,
-      ausbildungId,
-      kontext.modell,
+      kontext.meilensteinereignisse,
+      kontext.meilensteinereignisse,
     );
-    const vorherMap = new Map(vorher.map((vergabe) => [vergabe.badgeId, vergabe]));
-    const definitionMap = new Map(
-      kontext.definitionen.map((definition) => [definition.id, definition]),
-    );
-
-    const neue = nachher
-      .filter((vergabe) => {
-        const alt = vorherMap.get(vergabe.badgeId);
-        return vergabe.aktiv && (!alt || !alt.aktiv);
-      })
-      .map((vergabe) => ({ definition: definitionMap.get(vergabe.badgeId)!, vergabe }));
-    const inaktive = nachher
-      .filter((vergabe) => {
-        const alt = vorherMap.get(vergabe.badgeId);
-        return alt?.aktiv === true && !vergabe.aktiv;
-      })
-      .map((vergabe) => ({ definition: definitionMap.get(vergabe.badgeId)!, vergabe }));
-
-    await this.badgeRepository.vergabenSpeichern(ausbildungId, nachher);
-    return { neue, inaktive };
+    await this.badgeRepository.vergabenSpeichern(ausbildungId, ergebnis.vergaben);
+    return ergebnis;
   }
 }

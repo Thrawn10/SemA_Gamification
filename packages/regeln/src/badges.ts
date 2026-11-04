@@ -47,6 +47,17 @@ function kompetenzenAufStufe(
   return anzahl;
 }
 
+/** Competences that carry at least one active objective and can therefore count for a badge. */
+function kompetenzenMitZielen(index: PlanIndex): number {
+  let anzahl = 0;
+  for (const kompetenz of index.kompetenzNachId.values()) {
+    if (kompetenz.leistungszielIds.length > 0) {
+      anzahl += 1;
+    }
+  }
+  return anzahl;
+}
+
 /**
  * R-B1-R-B4 / R-B8: deterministic badge definitions for a template. The reduced set
  * contains milestone badges, one badge per area, three stage-count badges per stage
@@ -60,7 +71,14 @@ export function erstelleBadgeDefinitionen(
   const definitionen: BadgeDefinition[] = [];
   const bereiche = [...struktur.bereiche].sort((a, b) => a.reihenfolge - b.reihenfolge);
   const topLevel = stufenText(modell, ABSCHLUSS_STUFE);
-  const kompetenzAnzahl = struktur.kompetenzen.length;
+  // A competence without active objectives can never reach a stage and must not raise a threshold.
+  // Restricting the ids to the plan structure keeps the threshold in sync with the evaluation.
+  const bekannteKompetenzen = new Set(struktur.kompetenzen.map((kompetenz) => kompetenz.id));
+  const kompetenzAnzahl = new Set(
+    struktur.leistungsziele
+      .filter((ziel) => !ziel.archiviert && bekannteKompetenzen.has(ziel.kompetenzId))
+      .map((ziel) => ziel.kompetenzId),
+  ).size;
   let reihenfolge = 0;
 
   for (const code of MEILENSTEINE) {
@@ -149,9 +167,7 @@ export function badgeBedingung(
     }
     case 'BEREICH_ABGESCHLOSSEN': {
       const ziele = zieleFuerBereich(definition, index);
-      const aktuell = ziele.filter(
-        (id) => (stufen.get(id) ?? 0) === ABSCHLUSS_STUFE,
-      ).length;
+      const aktuell = ziele.filter((id) => (stufen.get(id) ?? 0) === ABSCHLUSS_STUFE).length;
       return {
         erfuellt: ziele.length > 0 && aktuell === ziele.length,
         aktuell,
@@ -161,13 +177,17 @@ export function badgeBedingung(
     case 'KOMPETENZ_ANZAHL': {
       const stufe = definition.parameter.stufe ?? ABSCHLUSS_STUFE;
       const anzahl = definition.parameter.anzahl ?? 0;
-      const aktuell = kompetenzenAufStufe(index, stufen, stufe);
-      const gesamt = index.kompetenzNachId.size;
-      return { erfuellt: anzahl > 0 && aktuell >= anzahl, aktuell, gesamt };
+      const erreicht = kompetenzenAufStufe(index, stufen, stufe);
+      // Progress is measured against the badge threshold, not against the whole plan.
+      return {
+        erfuellt: anzahl > 0 && erreicht >= anzahl,
+        aktuell: anzahl > 0 ? Math.min(erreicht, anzahl) : erreicht,
+        gesamt: anzahl,
+      };
     }
     case 'ALLE_KOMPETENZEN': {
       const aktuell = kompetenzenAufStufe(index, stufen, ABSCHLUSS_STUFE);
-      const gesamt = index.kompetenzNachId.size;
+      const gesamt = kompetenzenMitZielen(index);
       return { erfuellt: gesamt > 0 && aktuell === gesamt, aktuell, gesamt };
     }
   }
@@ -194,10 +214,17 @@ export function badgeFortschrittText(
     case 'BEREICH_ABGESCHLOSSEN':
       return `${bedingung.aktuell} von ${bedingung.gesamt} Leistungszielen ${stufenText(modell, ABSCHLUSS_STUFE)}`;
     case 'KOMPETENZ_ANZAHL': {
+      if (bedingung.gesamt <= 0) {
+        return 'Kein Schwellenwert für dieses Badge definiert';
+      }
       const stufe = definition.parameter.stufe ?? ABSCHLUSS_STUFE;
-      return `${bedingung.aktuell} von ${bedingung.gesamt} Kompetenzen ${stufenText(modell, stufe)}`;
+      // "nötigen" makes clear the second number is the badge threshold, not the plan size (D-025).
+      return `${bedingung.aktuell} von ${bedingung.gesamt} nötigen Kompetenzen ${stufenText(modell, stufe)}`;
     }
     case 'ALLE_KOMPETENZEN':
+      if (bedingung.gesamt <= 0) {
+        return 'Keine Kompetenzen für dieses Badge erfasst';
+      }
       return `${bedingung.aktuell} von ${bedingung.gesamt} Kompetenzen ${stufenText(modell, ABSCHLUSS_STUFE)}`;
   }
 }
@@ -263,8 +290,7 @@ export function berechneBadgeVergaben(
           badgeId: definition.id,
           vergebenAm: eintrag.zeitpunkt,
           aktiv: true,
-          ausStartstand:
-            eintrag.art === 'STUFE' && eintrag.ereignis.aktion === 'UEBERNOMMEN',
+          ausStartstand: eintrag.art === 'STUFE' && eintrag.ereignis.aktion === 'UEBERNOMMEN',
         });
       } else if (bedingung.erfuellt && vorhanden && !vorhanden.aktiv) {
         // Reactivation keeps the original award date (R-B5, TF3c).

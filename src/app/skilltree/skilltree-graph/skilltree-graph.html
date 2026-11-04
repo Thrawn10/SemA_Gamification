@@ -4,11 +4,23 @@
     <st-anforderung id="S-A03" />
   </p>
 
-  <div class="graph__karte" #baumkarte>
+  <div
+    class="graph__karte"
+    [class.graph__karte--zieht]="zieht()"
+    #baumkarte
+    tabindex="0"
+    role="group"
+    aria-label="Skilltree-Baum"
+    (pointerdown)="starteZiehen($event)"
+    (pointermove)="ziehe($event)"
+    (pointerup)="beendeZiehen($event)"
+    (pointercancel)="beendeZiehen($event)"
+  >
     <div
       class="graph__buehne"
       [style.--skala]="layout().skala"
       [style.--spalte]="layout().spaltenbreite + 'px'"
+      [style.--zeile]="layout().zeilenabstand + 'px'"
       [style.inline-size.px]="layout().breite"
       [style.block-size.px]="layout().hoehe"
     >
@@ -48,6 +60,7 @@
           <path
             [attr.d]="pfad.d"
             class="graph__kante"
+            [attr.data-kante]="pfad.typ"
             [class.graph__kante--erreicht]="pfad.zustand === 'ERREICHT'"
             [class.graph__kante--offen]="pfad.zustand === 'OFFEN'"
             [class.graph__kante--verweis]="pfad.typ === 'VERWEIS'"
@@ -67,7 +80,7 @@
           [attr.aria-label]="basis.tooltip"
           [attr.data-tip]="basis.tooltip"
           [attr.data-ast]="basis.code"
-          (click)="astGewaehlt.emit(basis.code)"
+          (click)="astWaehlen(basis.code)"
           (mouseenter)="aktiviere(basis.id)"
           (mouseleave)="deaktiviere(basis.id)"
           (focus)="aktiviere(basis.id)"
@@ -82,14 +95,16 @@
         <button
           type="button"
           class="graph__knoten"
-          [class.graph__knoten--naechster]="knoten.istNaechster"
+          [class.graph__knoten--naechster]="knoten.zustand === 'NAECHSTER'"
+          [class.graph__knoten--abgeschlossen]="knoten.zustand === 'ABGESCHLOSSEN'"
+          [class.graph__knoten--spaeter]="knoten.zustand === 'SPAETER'"
           [class.graph__knoten--beteiligt]="istBeteiligt(knoten.id)"
           [style.inset-inline-start.px]="knoten.punkt.x - layout().radius"
-          [style.inset-block-start.px]="knoten.punkt.y - 33 * layout().skala"
+          [style.inset-block-start.px]="knoten.punkt.y - layout().zeilenabstand / 2"
           [attr.aria-label]="knoten.tooltip"
           [attr.data-tip]="knoten.tooltip"
           [attr.data-knoten]="knoten.id"
-          (click)="knotenGewaehlt.emit(knoten.id)"
+          (click)="knotenWaehlen(knoten.id)"
           (mouseenter)="aktiviere(knoten.id)"
           (mouseleave)="deaktiviere(knoten.id)"
           (focus)="aktiviere(knoten.id)"
@@ -102,11 +117,16 @@
             aria-hidden="true"
           >
             <span class="graph__code">{{ knoten.code }}</span>
+            @if (knoten.offeneAnfragen > 0) {
+              <span class="graph__anfragen">{{ knoten.offeneAnfragen }}</span>
+            }
+            <span
+              class="graph__zustand"
+              [class]="'graph__zustand graph__zustand--' + knoten.zustand.toLowerCase()"
+              >{{ knoten.zustandszeichen }}</span
+            >
           </span>
           <span class="graph__titel" lang="de">{{ knoten.titel }}</span>
-          @if (knoten.offeneAnfragen > 0) {
-            <span class="graph__anfragen" aria-hidden="true">{{ knoten.offeneAnfragen }}</span>
-          }
         </button>
       }
 
@@ -120,7 +140,7 @@
           [attr.aria-label]="meilenstein.tooltip"
           [attr.data-tip]="meilenstein.tooltip"
           [attr.data-meilenstein]="meilenstein.code"
-          (click)="meilensteinGewaehlt.emit(meilenstein.code)"
+          (click)="meilensteinWaehlen(meilenstein.code)"
           (mouseenter)="aktiviere(meilenstein.code)"
           (mouseleave)="deaktiviere(meilenstein.code)"
           (focus)="aktiviere(meilenstein.code)"
@@ -136,7 +156,7 @@
     </div>
   </div>
 
-  <p class="graph__wischhinweis">Den Baum seitlich wischen.</p>
+  <p class="graph__wischhinweis">Den Baum ziehen oder mit den Pfeiltasten scrollen.</p>
 
   <div class="graph__fuss">
     <div class="graph__bereiche" role="group" aria-label="Bereichsschlüssel">
@@ -161,7 +181,18 @@
           {{ stufe.text }}
         </li>
       }
-      <li><span class="legende-naechster" aria-hidden="true"></span> Als Nächstes</li>
+      <li>
+        <span class="graph__zustand graph__zustand--abgeschlossen" aria-hidden="true">✓</span>
+        Abgeschlossen
+      </li>
+      <li>
+        <span class="graph__zustand graph__zustand--naechster" aria-hidden="true">▶</span>
+        Als Nächstes
+      </li>
+      <li>
+        <span class="graph__zustand graph__zustand--spaeter" aria-hidden="true">…</span>
+        Noch nicht dran
+      </li>
       <li><span class="legende-kante" aria-hidden="true"></span> erreicht</li>
       <li><span class="legende-kante legende-kante--offen" aria-hidden="true"></span> offen</li>
       <li><span class="legende-kante legende-kante--verweis" aria-hidden="true"></span> Verweis</li>

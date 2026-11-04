@@ -5,11 +5,11 @@ import { BadgeKarte } from './badge-karte';
 const DEFINITION: BadgeDefinition = {
   id: 'badge-1',
   vorlageId: 'vorlage-1',
-  code: 'KS-a1',
-  titel: 'Kompetenz a1 selbständig',
-  kriterium: 'Alle Leistungsziele der Kompetenz a1 selbständig.',
-  regeltyp: 'KOMPETENZ_SELBSTAENDIG',
-  parameter: { kompetenzId: 'a1' },
+  code: 'K3-5',
+  titel: '5 Kompetenzen selbständig',
+  kriterium: 'Mindestens 5 Kompetenzen haben alle Leistungsziele selbständig.',
+  regeltyp: 'KOMPETENZ_ANZAHL',
+  parameter: { stufe: 3, anzahl: 5 },
   reihenfolge: 1,
 };
 
@@ -33,28 +33,32 @@ describe('BadgeKarte', () => {
         ausStartstand: true,
       },
       status: 'ERHALTEN',
-      fortschrittText: '3 von 3',
-      aktuell: 3,
-      gesamt: 3,
+      fortschrittText: '5 von 5',
+      aktuell: 5,
+      gesamt: 5,
     });
 
-    expect(inhalt.textContent).toContain('Kompetenz a1 selbständig');
+    expect(inhalt.textContent).toContain('5 Kompetenzen selbständig');
     expect(inhalt.textContent).toContain('Erhalten am 04.03.2026');
     expect(inhalt.textContent).toContain('aus Startstand');
+    expect(inhalt.querySelector('st-fortschritt')).toBeNull();
   });
 
   it('markiert offene und inaktive Badges und nutzt eckige Medaillen für Meilensteine', () => {
     const offen = erstelle({
-      definition: { ...DEFINITION, regeltyp: 'MEILENSTEIN' },
+      definition: { ...DEFINITION, regeltyp: 'MEILENSTEIN_ERREICHT', code: 'M-IPA' },
       vergabe: null,
       status: 'OFFEN',
-      fortschrittText: '1 von 5',
-      aktuell: 1,
-      gesamt: 5,
+      fortschrittText: 'Meilenstein noch nicht erreicht',
+      aktuell: 0,
+      gesamt: 1,
     });
     expect(offen.querySelector('.badge-karte--offen')).toBeTruthy();
     expect(offen.querySelector('.badge-karte__medaille--eckig')).toBeTruthy();
-    expect(offen.textContent).toContain('1 von 5');
+    expect(offen.textContent).toContain('Meilenstein noch nicht erreicht');
+    // State is not conveyed by colour or dash pattern alone (WCAG 1.3.1 / 1.4.1).
+    expect(offen.textContent).toContain('Noch offen');
+    expect(offen.querySelector('st-fortschritt')).toBeTruthy();
 
     const inaktiv = erstelle({
       definition: DEFINITION,
@@ -75,5 +79,6 @@ describe('BadgeKarte', () => {
     expect(inaktiv.querySelector('.badge-karte--inaktiv')).toBeTruthy();
     expect(inaktiv.textContent).toContain('Derzeit nicht erfüllt seit');
     expect(inaktiv.textContent).toContain('01.03.2026');
+    expect(inaktiv.querySelector('st-fortschritt')).toBeTruthy();
   });
 });

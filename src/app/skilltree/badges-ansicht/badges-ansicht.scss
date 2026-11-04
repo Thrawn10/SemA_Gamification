@@ -1,1 +1,11 @@
-// Styles for this component (currently none; global tokens apply).
+.badges__stand {
+  display: grid;
+  gap: var(--abstand-1);
+  margin-block: var(--abstand-3);
+}
+
+.badges__zaehlung {
+  margin: 0;
+  color: var(--farbe-text-leise);
+  font-size: 0.95rem;
+}

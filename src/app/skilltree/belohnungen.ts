@@ -1,7 +1,7 @@
 import type { Ampel, BadgeAnsicht, SkilltreeAnsicht } from '@skilltree/vertraege';
 import { ABSCHLUSS_STUFE, stufenText } from '@skilltree/vertraege';
 
-/** One competence of an area, reduced to the level counts shown on the reward card. */
+/** One competence of an area, reduced to the level counts shown in the area sidebar. */
 export interface BelohnungSkill {
   id: string;
   code: string;
@@ -85,12 +85,4 @@ export function astBelohnungen(ansicht: SkilltreeAnsicht): AstBelohnung[] {
 /** Completion reward of a single area, used by the area sidebar. */
 export function belohnungFuerAst(ansicht: SkilltreeAnsicht, code: string): AstBelohnung | null {
   return astBelohnungen(ansicht).find((belohnung) => belohnung.code === code) ?? null;
-}
-
-/** Share of top-level objectives, used for the mini bars (never a stored value). */
-export function anteilProzent(erreicht: number, gesamt: number): number {
-  if (gesamt <= 0) {
-    return 0;
-  }
-  return Math.round((erreicht * 100) / gesamt);
 }

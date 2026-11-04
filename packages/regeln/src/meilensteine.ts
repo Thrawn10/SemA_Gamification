@@ -4,7 +4,7 @@ import type {
   Stufe,
   Stufenmodell,
 } from '@skilltree/vertraege';
-import { MEILENSTEINE } from '@skilltree/vertraege';
+import { MEILENSTEINE, meilensteinTexteFuer } from '@skilltree/vertraege';
 import { ampel, fortschritt, kompetenzwert } from './fortschritt';
 import type { PlanIndex } from './plan';
 
@@ -105,7 +105,8 @@ export function meilensteinBereitschaft(
       return `${nichtRot} von ${gesamt} Kompetenzen nicht rot.`;
     }
     case 'LAP': {
-      const ipa = stati.IPA.erreicht ? 'IPA bestanden' : 'IPA offen';
+      const vorstufe = meilensteinTexteFuer('IPA', modell).kuerzel;
+      const ipa = stati.IPA.erreicht ? `${vorstufe} bestanden` : `${vorstufe} offen`;
       return `${ipa} · Gesamtfortschritt ${fortschritt(index.aktiveLeistungszielIds, stufen)} %`;
     }
   }

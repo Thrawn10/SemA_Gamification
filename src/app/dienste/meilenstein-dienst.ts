@@ -1,23 +1,50 @@
 import { inject, Service } from '@angular/core';
 import type {
+  Ausbildung,
+  BadgeDefinition,
   MeilensteinBestaetigen,
   MeilensteinEreignis,
   MeilensteinErgebnis,
   MeilensteinZuruecknehmen,
+  Stufenereignis,
+  Stufenmodell,
 } from '@skilltree/vertraege';
-import { FachlicherFehler, MEILENSTEIN_TEXTE } from '@skilltree/vertraege';
-import { meilensteinStati } from '@skilltree/regeln';
+import { FachlicherFehler, meilensteinTexteFuer, stufenmodellFuer } from '@skilltree/vertraege';
+import {
+  erstelleBadgeDefinitionen,
+  indexierePlan,
+  istAktuellesBadgeSet,
+  meilensteinStati,
+  type PlanIndex,
+} from '@skilltree/regeln';
 import { DomaenenEreignisse } from '../core/domaenen-ereignisse';
 import { UHR } from '../core/uhr';
-import { AUSBILDUNG_REPOSITORY, EREIGNIS_REPOSITORY } from '../daten/ports';
+import {
+  AUSBILDUNG_REPOSITORY,
+  BADGE_REPOSITORY,
+  EREIGNIS_REPOSITORY,
+  VORLAGE_REPOSITORY,
+} from '../daten/ports';
+import { ermittleBadgeAenderungen, type BadgeNeuberechnung } from './badge-vergabe';
 import { SitzungDienst } from './sitzung-dienst';
 import { forderePraxisbildnerRecht } from './zugriff';
+
+interface SchreibKontext {
+  ausbildung: Ausbildung;
+  index: PlanIndex;
+  stufenereignisse: Stufenereignis[];
+  meilensteinereignisse: MeilensteinEreignis[];
+  definitionen: BadgeDefinition[];
+  modell: Stufenmodell;
+}
 
 @Service()
 export class MeilensteinDienst {
   private readonly sitzung = inject(SitzungDienst);
   private readonly ausbildungRepository = inject(AUSBILDUNG_REPOSITORY);
+  private readonly vorlageRepository = inject(VORLAGE_REPOSITORY);
   private readonly ereignisRepository = inject(EREIGNIS_REPOSITORY);
+  private readonly badgeRepository = inject(BADGE_REPOSITORY);
   private readonly uhr = inject(UHR);
   private readonly domaenenEreignisse = inject(DomaenenEreignisse);
 
@@ -25,7 +52,7 @@ export class MeilensteinDienst {
     ausbildungId: string,
     befehl: MeilensteinBestaetigen,
   ): Promise<MeilensteinErgebnis> {
-    await this.pruefeRecht(ausbildungId);
+    const kontext = await this.ladeKontext(ausbildungId);
     if ((befehl.kommentar ?? '').trim().length > 500) {
       throw new FachlicherFehler(
         'UNGUELTIGE_EINGABE',
@@ -33,12 +60,14 @@ export class MeilensteinDienst {
         { laenge: (befehl.kommentar ?? '').length },
       );
     }
-    const ereignisse = await this.ereignisRepository.meilensteinereignisse(ausbildungId);
-    if (meilensteinStati(ereignisse)[befehl.meilenstein].erreicht) {
+    const texte = meilensteinTexteFuer(befehl.meilenstein, kontext.modell);
+    if (meilensteinStati(kontext.meilensteinereignisse)[befehl.meilenstein].erreicht) {
       return {
         ereignis: null,
         erreicht: true,
-        hinweis: `«${MEILENSTEIN_TEXTE[befehl.meilenstein].name}» ist bereits als erreicht bestätigt.`,
+        neueBadges: [],
+        inaktiveBadges: [],
+        hinweis: `«${texte.name}» ist bereits als erreicht bestätigt.`,
       };
     }
 
@@ -51,11 +80,19 @@ export class MeilensteinDienst {
       ...(befehl.kommentar ? { kommentar: befehl.kommentar } : {}),
     })) as MeilensteinEreignis;
 
+    const badgeErgebnis = await this.badgesNeuBerechnen(kontext, [
+      ...kontext.meilensteinereignisse,
+      ereignis,
+    ]);
+    const badgesText = this.badgesHinweis(badgeErgebnis);
+
     this.domaenenEreignisse.melde({ art: 'EREIGNIS_ANGEFUEGT', ausbildungId });
     return {
       ereignis,
       erreicht: true,
-      hinweis: `«${MEILENSTEIN_TEXTE[befehl.meilenstein].name}» als erreicht bestätigt.`,
+      neueBadges: badgeErgebnis.neue.map((badge) => badge.definition),
+      inaktiveBadges: badgeErgebnis.inaktive.map((badge) => badge.definition),
+      hinweis: `«${texte.name}» als erreicht bestätigt.${badgesText}`,
     };
   }
 
@@ -63,7 +100,7 @@ export class MeilensteinDienst {
     ausbildungId: string,
     befehl: MeilensteinZuruecknehmen,
   ): Promise<MeilensteinErgebnis> {
-    await this.pruefeRecht(ausbildungId);
+    const kontext = await this.ladeKontext(ausbildungId);
     const begruendung = befehl.begruendung.trim();
     if (begruendung.length < 10) {
       throw new FachlicherFehler(
@@ -73,13 +110,12 @@ export class MeilensteinDienst {
       );
     }
 
-    const ereignisse = await this.ereignisRepository.meilensteinereignisse(ausbildungId);
     const zurueckgenommen = new Set(
-      ereignisse
+      kontext.meilensteinereignisse
         .filter((ereignis) => ereignis.aktion === 'ZURUECKGENOMMEN' && ereignis.refEreignisId)
         .map((ereignis) => ereignis.refEreignisId),
     );
-    const ziel = ereignisse.find(
+    const ziel = kontext.meilensteinereignisse.find(
       (ereignis) =>
         ereignis.id === befehl.ereignisId &&
         ereignis.aktion === 'ERREICHT' &&
@@ -102,20 +138,86 @@ export class MeilensteinDienst {
       refEreignisId: ziel.id,
     })) as MeilensteinEreignis;
 
+    const badgeErgebnis = await this.badgesNeuBerechnen(kontext, [
+      ...kontext.meilensteinereignisse,
+      ereignis,
+    ]);
+    const texte = meilensteinTexteFuer(ziel.meilenstein, kontext.modell);
+    const badgesText = this.badgesHinweis(badgeErgebnis);
+
     this.domaenenEreignisse.melde({ art: 'EREIGNIS_ANGEFUEGT', ausbildungId });
     return {
       ereignis,
       erreicht: false,
-      hinweis: `«${MEILENSTEIN_TEXTE[ziel.meilenstein].name}»: Rücknahme gespeichert.`,
+      neueBadges: badgeErgebnis.neue.map((badge) => badge.definition),
+      inaktiveBadges: badgeErgebnis.inaktive.map((badge) => badge.definition),
+      hinweis: `«${texte.name}»: Rücknahme gespeichert.${badgesText}`,
     };
   }
 
-  private async pruefeRecht(ausbildungId: string): Promise<void> {
+  /** R-B5: badge changes caused by the write, phrased for the confirmation message. */
+  private badgesHinweis(ergebnis: BadgeNeuberechnung): string {
+    const teile: string[] = [];
+    if (ergebnis.neue.length > 0) {
+      const titel = ergebnis.neue.map((badge) => badge.definition.titel).join(', ');
+      teile.push(`Neu erreichte Badges: ${titel}.`);
+    }
+    if (ergebnis.inaktive.length > 0) {
+      const titel = ergebnis.inaktive.map((badge) => badge.definition.titel).join(', ');
+      teile.push(`Inaktiv geworden: ${titel}.`);
+    }
+    return teile.length > 0 ? ` ${teile.join(' ')}` : '';
+  }
+
+  private async ladeKontext(ausbildungId: string): Promise<SchreibKontext> {
     const benutzer = this.sitzung.fordereBenutzer();
     const ausbildung = await this.ausbildungRepository.laden(ausbildungId).catch(() => {
       throw new FachlicherFehler('NICHT_GEFUNDEN', 'Ausbildung nicht gefunden.');
     });
     const zuordnungen = await this.ausbildungRepository.zuordnungen(ausbildung.id);
     forderePraxisbildnerRecht(benutzer, zuordnungen, this.uhr());
+
+    const [vorlage, struktur, stufenereignisse, meilensteinereignisse, gespeicherteDefinitionen] =
+      await Promise.all([
+        this.vorlageRepository.laden(ausbildung.vorlageId),
+        this.vorlageRepository.struktur(ausbildung.vorlageId),
+        this.ereignisRepository.stufenereignisse(ausbildungId),
+        this.ereignisRepository.meilensteinereignisse(ausbildungId),
+        this.badgeRepository.definitionen(ausbildung.vorlageId),
+      ]);
+    const modell = stufenmodellFuer(vorlage.stufenmodell);
+    const index = indexierePlan(struktur);
+    // D-025: stored definitions from before the reduced badge set are replaced, not extended.
+    const definitionen =
+      gespeicherteDefinitionen.length > 0 && istAktuellesBadgeSet(gespeicherteDefinitionen)
+        ? gespeicherteDefinitionen
+        : erstelleBadgeDefinitionen(struktur, ausbildung.vorlageId, modell);
+
+    return {
+      ausbildung,
+      index,
+      stufenereignisse,
+      meilensteinereignisse,
+      definitionen,
+      modell,
+    };
+  }
+
+  private async badgesNeuBerechnen(
+    kontext: SchreibKontext,
+    meilensteinereignisse: MeilensteinEreignis[],
+  ): Promise<BadgeNeuberechnung> {
+    const ergebnis = ermittleBadgeAenderungen(
+      kontext.definitionen,
+      kontext.index,
+      kontext.ausbildung.id,
+      kontext.modell,
+      kontext.stufenereignisse,
+      kontext.stufenereignisse,
+      kontext.meilensteinereignisse,
+      meilensteinereignisse,
+    );
+    await this.badgeRepository.vergabenSpeichern(kontext.ausbildung.id, ergebnis.vergaben);
+    return ergebnis;
   }
 }

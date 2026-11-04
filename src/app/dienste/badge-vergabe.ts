@@ -50,28 +50,18 @@ export function ermittleBadgeAenderungen(
     nachherMeilensteine,
   );
   const vorherMap = new Map(vorher.map((vergabe) => [vergabe.badgeId, vergabe]));
-  const definitionMap = new Map(
-    definitionen.map((definition) => [definition.id, definition]),
-  );
+  const definitionMap = new Map(definitionen.map((definition) => [definition.id, definition]));
 
-  const neue = nachher
-    .filter((vergabe) => {
-      const alt = vorherMap.get(vergabe.badgeId);
-      return vergabe.aktiv && (!alt || !alt.aktiv);
-    })
-    .map((vergabe) => ({
-      definition: definitionMap.get(vergabe.badgeId)!,
-      vergabe,
-    }));
-  const inaktive = nachher
-    .filter((vergabe) => {
-      const alt = vorherMap.get(vergabe.badgeId);
-      return alt?.aktiv === true && !vergabe.aktiv;
-    })
-    .map((vergabe) => ({
-      definition: definitionMap.get(vergabe.badgeId)!,
-      vergabe,
-    }));
+  const neue = nachher.flatMap((vergabe) => {
+    const alt = vorherMap.get(vergabe.badgeId);
+    const definition = definitionMap.get(vergabe.badgeId);
+    return definition && vergabe.aktiv && (!alt || !alt.aktiv) ? [{ definition, vergabe }] : [];
+  });
+  const inaktive = nachher.flatMap((vergabe) => {
+    const alt = vorherMap.get(vergabe.badgeId);
+    const definition = definitionMap.get(vergabe.badgeId);
+    return definition && alt?.aktiv === true && !vergabe.aktiv ? [{ definition, vergabe }] : [];
+  });
 
   return { neue, inaktive, vergaben: nachher };
 }

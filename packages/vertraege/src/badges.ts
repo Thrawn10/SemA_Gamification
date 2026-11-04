@@ -6,10 +6,7 @@ import type { MeilensteinCode, Stufe } from './stufe';
  * The former per-competence and area-started badges are no longer generated.
  */
 export type BadgeRegeltyp =
-  | 'MEILENSTEIN_ERREICHT'
-  | 'BEREICH_ABGESCHLOSSEN'
-  | 'KOMPETENZ_ANZAHL'
-  | 'ALLE_KOMPETENZEN';
+  'MEILENSTEIN_ERREICHT' | 'BEREICH_ABGESCHLOSSEN' | 'KOMPETENZ_ANZAHL' | 'ALLE_KOMPETENZEN';
 
 export interface BadgeParameter {
   bereichId?: string;

@@ -8,7 +8,12 @@ import type {
   Stufenereignis,
   VorlageStruktur,
 } from '@skilltree/vertraege';
-import { badgeFortschrittText, berechneBadgeVergaben, erstelleBadgeDefinitionen } from './badges';
+import {
+  badgeBedingung,
+  badgeFortschrittText,
+  berechneBadgeVergaben,
+  erstelleBadgeDefinitionen,
+} from './badges';
 import { ampel, anzahlRoteKompetenzen, fortschritt, kompetenzwert, punktwert } from './fortschritt';
 import { berechneLehrjahr, istZuordnungGueltig } from './lehrjahr';
 import { meilensteinBereitschaft, meilensteinStati, meilensteinStatusMap } from './meilensteine';
@@ -140,10 +145,10 @@ describe('R-S1 – active confirmations', () => {
     expect(aktiveBestaetigungen(verlauf).map((eintrag) => eintrag.id)).toEqual(['c', 'd', 'a']);
 
     const vergaben = berechneBadgeVergaben(definitionen, index, verlauf, 'az-1');
-    const kompetenzBadge = vergaben.find((vergabe) => vergabe.badgeId === 'app:KS-a1');
-    expect(kompetenzBadge?.aktiv).toBe(false);
-    expect(kompetenzBadge?.inaktivSeit).toBe('2026-01-05T08:00:00.000Z');
-    expect(kompetenzBadge?.vergebenAm).toBe('2026-01-04T08:00:00.000Z');
+    const bereichsBadge = vergaben.find((vergabe) => vergabe.badgeId === 'app:BA-A');
+    expect(bereichsBadge?.aktiv).toBe(false);
+    expect(bereichsBadge?.inaktivSeit).toBe('2026-01-05T08:00:00.000Z');
+    expect(bereichsBadge?.vergebenAm).toBe('2026-01-04T08:00:00.000Z');
   });
 
   it('TF3b falls back to zero when the only confirmation is reversed', () => {
@@ -167,7 +172,7 @@ describe('R-S1 – active confirmations', () => {
       ereignis('n', ziele[0], 3, 'BESTAETIGT', '2026-01-06T08:00:00.000Z'),
     ];
     const vergaben = berechneBadgeVergaben(definitionen, index, verlauf, 'az-1');
-    const badge = vergaben.find((vergabe) => vergabe.badgeId === 'app:KS-a1');
+    const badge = vergaben.find((vergabe) => vergabe.badgeId === 'app:BA-A');
     expect(badge?.aktiv).toBe(true);
     expect(badge?.vergebenAm).toBe('2026-01-04T08:00:00.000Z');
   });
@@ -362,20 +367,20 @@ describe('R-B8 / TF9 – badges from a start state', () => {
 
     expect(stufeFuer(stufenMap(verlauf), ziele[0])).toBe(3);
     const badge = berechneBadgeVergaben(definitionen, index, verlauf, 'az-1').find(
-      (vergabe) => vergabe.badgeId === 'app:KS-a1',
+      (vergabe) => vergabe.badgeId === 'app:BA-A',
     );
     expect(badge?.ausStartstand).toBe(true);
     expect(badge?.vergebenAm).toBe('2026-01-01T08:00:00.000Z');
   });
 
-  it('creates 39 badge definitions for APP, 49 for PLA and 40 for MED', () => {
+  it('creates 18 badge definitions for APP, 19 for PLA and 19 for MED (D-025)', () => {
     const anzahl = (struktur: VorlageStruktur) => {
       const definitionen: BadgeDefinition[] = erstelleBadgeDefinitionen(struktur, 'x');
       return definitionen.length;
     };
-    expect(anzahl(plan('app', [7, 4, 4, 6, 4]))).toBe(39);
-    expect(anzahl(plan('pla', [7, 4, 4, 5, 6, 7]))).toBe(49);
-    expect(anzahl(plan('med', [4, 4, 4, 4, 4, 4]))).toBe(40);
+    expect(anzahl(plan('app', [7, 4, 4, 6, 4]))).toBe(18);
+    expect(anzahl(plan('pla', [7, 4, 4, 5, 6, 7]))).toBe(19);
+    expect(anzahl(plan('med', [4, 4, 4, 4, 4, 4]))).toBe(19);
   });
 });
 
@@ -438,36 +443,148 @@ describe('R-M1 / N-05 – Bbc readiness', () => {
   });
 });
 
-describe('R-B4 – milestone badges count all active objectives', () => {
-  it('awards MS-25 at one of three and MS-100 only when all are self-employed', () => {
+describe('R-B4 / D-025 – milestone, count and all-competences badges', () => {
+  it('awards a milestone badge only while the milestone is reached', () => {
     const struktur = plan('app', [1]);
     const index = indexierePlan(struktur);
-    const ziele = index.aktiveLeistungszielIds;
     const definitionen = erstelleBadgeDefinitionen(struktur, 'app');
+    const ereignisse: MeilensteinEreignis[] = [
+      {
+        id: 'ms-1',
+        ausbildungId: 'az-1',
+        meilenstein: 'BBC',
+        aktion: 'ERREICHT',
+        akteurId: 'pb-1',
+        zeitpunkt: '2026-02-01T08:00:00.000Z',
+      },
+    ];
 
-    const teilweise = berechneBadgeVergaben(
+    const ohne = berechneBadgeVergaben(definitionen, index, [], 'az-1');
+    expect(ohne.some((vergabe) => vergabe.badgeId === 'app:M-BBC')).toBe(false);
+
+    const mit = berechneBadgeVergaben(definitionen, index, [], 'az-1', 'DREI_STUFEN', ereignisse);
+    const badge = mit.find((vergabe) => vergabe.badgeId === 'app:M-BBC');
+    expect(badge?.aktiv).toBe(true);
+    expect(badge?.vergebenAm).toBe('2026-02-01T08:00:00.000Z');
+
+    const ruecknahme: MeilensteinEreignis[] = [
+      ...ereignisse,
+      {
+        id: 'ms-2',
+        ausbildungId: 'az-1',
+        meilenstein: 'BBC',
+        aktion: 'ZURUECKGENOMMEN',
+        akteurId: 'pb-1',
+        zeitpunkt: '2026-02-02T08:00:00.000Z',
+        begruendung: 'Irrtum, bitte zurücknehmen.',
+        refEreignisId: 'ms-1',
+      },
+    ];
+    const inaktiv = berechneBadgeVergaben(
       definitionen,
       index,
-      [ereignis('a', ziele[0], 3, 'BESTAETIGT', '2026-01-02T08:00:00.000Z')],
+      [],
       'az-1',
-    );
-    expect(teilweise.find((vergabe) => vergabe.badgeId === 'app:MS-25')?.aktiv).toBe(true);
-    expect(teilweise.some((vergabe) => vergabe.badgeId === 'app:MS-50')).toBe(false);
-
-    const alle = berechneBadgeVergaben(
-      definitionen,
-      index,
-      ziele.map((ziel, position) =>
-        ereignis(`v${position}`, ziel, 3, 'BESTAETIGT', `2026-01-0${position + 2}T08:00:00.000Z`),
-      ),
-      'az-1',
-    );
-    for (const code of ['MS-25', 'MS-50', 'MS-75', 'MS-100']) {
-      expect(alle.find((vergabe) => vergabe.badgeId === `app:${code}`)?.aktiv).toBe(true);
-    }
+      'DREI_STUFEN',
+      ruecknahme,
+    ).find((vergabe) => vergabe.badgeId === 'app:M-BBC');
+    expect(inaktiv?.aktiv).toBe(false);
+    expect(inaktiv?.inaktivSeit).toBe('2026-02-02T08:00:00.000Z');
   });
 
-  it('deactivates MS-100 when a confirmation is withdrawn', () => {
+  it('awards the 5/10/15 badges by completed competences, not by objectives', () => {
+    const struktur = plan('app', [16]);
+    const index = indexierePlan(struktur);
+    const definitionen = erstelleBadgeDefinitionen(struktur, 'app');
+    const kompetenzen = [...index.kompetenzNachId.values()];
+    // Four competences are complete (12 objectives); a fifth has every objective at stage 2.
+    const verlauf = [
+      ...kompetenzen
+        .slice(0, 4)
+        .flatMap((kompetenz, position) =>
+          kompetenz.leistungszielIds.map((zielId, zielIndex) =>
+            ereignis(
+              `v${position}-${zielIndex}`,
+              zielId,
+              3,
+              'BESTAETIGT',
+              '2026-01-02T08:00:00.000Z',
+            ),
+          ),
+        ),
+      ...kompetenzen[4].leistungszielIds.map((zielId, zielIndex) =>
+        ereignis(`t${zielIndex}`, zielId, 2, 'BESTAETIGT', '2026-01-02T08:00:00.000Z'),
+      ),
+    ];
+
+    // 15 confirmed objectives would pass a threshold of 5 objectives; only 4 competences are complete.
+    const vergaben = berechneBadgeVergaben(definitionen, index, verlauf, 'az-1');
+    expect(vergaben.some((vergabe) => vergabe.badgeId === 'app:K3-5' && vergabe.aktiv)).toBe(false);
+
+    const fuenf = definitionen.find((definition) => definition.code === 'K3-5');
+    if (!fuenf) {
+      throw new Error('Expected badge K3-5 in the generated definitions.');
+    }
+    // Progress is measured against the badge threshold, not against the 16 competences of the plan.
+    const offen = badgeBedingung(fuenf, index, stufenMap(verlauf));
+    expect(offen).toEqual({ erfuellt: false, aktuell: 4, gesamt: 5 });
+    expect(badgeFortschrittText(fuenf, offen)).toBe('4 von 5 nötigen Kompetenzen selbständig');
+
+    const komplett = [
+      ...verlauf,
+      ...kompetenzen[4].leistungszielIds.map((zielId, zielIndex) =>
+        ereignis(`w${zielIndex}`, zielId, 3, 'BESTAETIGT', '2026-01-03T08:00:00.000Z'),
+      ),
+    ];
+    const danach = berechneBadgeVergaben(definitionen, index, komplett, 'az-1');
+    expect(danach.find((vergabe) => vergabe.badgeId === 'app:K3-5')?.aktiv).toBe(true);
+    expect(danach.some((vergabe) => vergabe.badgeId === 'app:K3-10' && vergabe.aktiv)).toBe(false);
+    // The all-competences badge is never awarded while one competence is still open.
+    expect(danach.some((vergabe) => vergabe.badgeId === 'app:K-ALLE' && vergabe.aktiv)).toBe(false);
+  });
+
+  it('replays stage and milestone events in chronological order regardless of array order', () => {
+    const struktur = plan('app', [1]);
+    const index = indexierePlan(struktur);
+    const definitionen = erstelleBadgeDefinitionen(struktur, 'app');
+    const frueh = {
+      id: 'm-frueh',
+      ausbildungId: 'az-1',
+      meilenstein: 'BBC',
+      aktion: 'ERREICHT',
+      akteurId: 'pb-1',
+      zeitpunkt: '2026-01-01T08:00:00.000Z',
+    } satisfies MeilensteinEreignis;
+    const spaet = {
+      id: 'm-spaet',
+      ausbildungId: 'az-1',
+      meilenstein: 'IPA',
+      aktion: 'ERREICHT',
+      akteurId: 'pb-1',
+      zeitpunkt: '2026-05-01T08:00:00.000Z',
+    } satisfies MeilensteinEreignis;
+    const stufenEreignisse = [
+      ereignis('s1', index.aktiveLeistungszielIds[0], 3, 'BESTAETIGT', '2026-03-01T08:00:00.000Z'),
+    ];
+
+    const vergaben = berechneBadgeVergaben(
+      definitionen,
+      index,
+      stufenEreignisse,
+      'az-1',
+      'DREI_STUFEN',
+      [spaet, frueh],
+    );
+
+    expect(vergaben.find((vergabe) => vergabe.badgeId === 'app:M-BBC')?.vergebenAm).toBe(
+      frueh.zeitpunkt,
+    );
+    expect(vergaben.find((vergabe) => vergabe.badgeId === 'app:M-IPA')?.vergebenAm).toBe(
+      spaet.zeitpunkt,
+    );
+  });
+
+  it('deactivates the all-competences badge when a confirmation is withdrawn', () => {
     const struktur = plan('app', [1]);
     const index = indexierePlan(struktur);
     const ziele = index.aktiveLeistungszielIds;
@@ -480,8 +597,16 @@ describe('R-B4 – milestone badges count all active objectives', () => {
     ];
 
     const vergaben = berechneBadgeVergaben(definitionen, index, verlauf, 'az-1');
-    expect(vergaben.find((vergabe) => vergabe.badgeId === 'app:MS-100')?.aktiv).toBe(false);
-    expect(vergaben.find((vergabe) => vergabe.badgeId === 'app:MS-50')?.aktiv).toBe(true);
+    expect(vergaben.find((vergabe) => vergabe.badgeId === 'app:K-ALLE')?.aktiv).toBe(false);
+    expect(vergaben.find((vergabe) => vergabe.badgeId === 'app:BA-A')?.aktiv).toBe(false);
+  });
+
+  it('omits count thresholds that a small plan can never reach', () => {
+    const definitionen = erstelleBadgeDefinitionen(plan('app', [1]), 'app');
+    expect(definitionen.some((definition) => definition.regeltyp === 'KOMPETENZ_ANZAHL')).toBe(
+      false,
+    );
+    expect(definitionen.some((definition) => definition.code === 'K-ALLE')).toBe(true);
   });
 });
 
@@ -524,30 +649,51 @@ describe('D-022 – binary stage model', () => {
   it('uses completion wording in badge definitions and progress texts', () => {
     const struktur = plan('p', [1]);
     const definitionen = erstelleBadgeDefinitionen(struktur, 'p', 'BINAER');
-    const meilenstein = definitionen.find((definition) => definition.code === 'MS-25');
-    const bereich = definitionen.find((definition) => definition.code === 'BG-A');
-    expect(meilenstein?.kriterium).toContain('abgeschlossen');
+    const meilenstein = definitionen.find((definition) => definition.code === 'M-IPA');
+    const bereich = definitionen.find((definition) => definition.code === 'BA-A');
+    expect(meilenstein?.titel).toBe('Bachelorarbeit erreicht');
     expect(bereich?.kriterium).toContain('abgeschlossen');
 
     const bedingung = { erfuellt: false, aktuell: 1, gesamt: 3 };
-    expect(badgeFortschrittText(meilenstein!, bedingung, 'BINAER')).toBe(
+    expect(badgeFortschrittText(bereich!, bedingung, 'BINAER')).toBe(
       '1 von 3 Leistungszielen abgeschlossen',
     );
-    expect(badgeFortschrittText(meilenstein!, bedingung)).toBe(
-      '1 von 3 Leistungszielen selbständig',
+    expect(badgeFortschrittText(bereich!, bedingung)).toBe('1 von 3 Leistungszielen selbständig');
+    expect(badgeFortschrittText(meilenstein!, { erfuellt: false, aktuell: 0, gesamt: 1 })).toBe(
+      'Meilenstein noch nicht erreicht',
     );
   });
 
-  it('awards the area badge after the first completion, not the competence badge', () => {
+  it('awards the area badge only when every objective of the area is completed', () => {
     const struktur = plan('p', [1]);
     const index = indexierePlan(struktur);
     const definitionen = erstelleBadgeDefinitionen(struktur, 'p', 'BINAER');
-    const [erstesZiel] = index.aktiveLeistungszielIds;
-    const verlauf = [ereignis('b1', erstesZiel, 1, 'BESTAETIGT', '2026-01-01T08:00:00.000Z')];
+    const [erstesZiel, zweitesZiel, drittesZiel] = index.aktiveLeistungszielIds;
 
-    const vergaben = berechneBadgeVergaben(definitionen, index, verlauf, 'az-1', 'BINAER');
-    expect(vergaben.find((vergabe) => vergabe.badgeId === 'p:BG-A')?.aktiv).toBe(true);
-    expect(vergaben.some((vergabe) => vergabe.badgeId === 'p:KS-a1')).toBe(false);
+    const teilweise = berechneBadgeVergaben(
+      definitionen,
+      index,
+      [ereignis('b1', erstesZiel, 1, 'BESTAETIGT', '2026-01-01T08:00:00.000Z')],
+      'az-1',
+      'BINAER',
+    );
+    expect(teilweise.some((vergabe) => vergabe.badgeId === 'p:BA-A' && vergabe.aktiv)).toBe(false);
+
+    const alle = berechneBadgeVergaben(
+      definitionen,
+      index,
+      [
+        ereignis('b1', erstesZiel, 1, 'BESTAETIGT', '2026-01-01T08:00:00.000Z'),
+        ereignis('b2', zweitesZiel, 3, 'BESTAETIGT', '2026-01-02T08:00:00.000Z'),
+        ereignis('b3', drittesZiel, 3, 'BESTAETIGT', '2026-01-03T08:00:00.000Z'),
+      ],
+      'az-1',
+      'BINAER',
+    );
+    expect(alle.find((vergabe) => vergabe.badgeId === 'p:BA-A')?.aktiv).toBe(true);
+    // D-025: per-competence and area-started badges are no longer generated.
+    expect(definitionen.some((definition) => definition.code.startsWith('KS-'))).toBe(false);
+    expect(definitionen.some((definition) => definition.code.startsWith('BG-'))).toBe(false);
   });
 
   it('reports milestone readiness as completed objectives', () => {

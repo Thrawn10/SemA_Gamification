@@ -312,3 +312,128 @@ reading that the human still has to confirm; it is also mirrored in
   graph stylesheet holds the scale rules and measures 6.7 kB. The 284 px cap and the board layout are
   an assumption; the request for a larger tree itself is confirmed by the human.
 - Status: ANNAHME
+
+## D-025 Reduced badge set with milestone, stage-count and all-competences badges
+
+- Bezug: SPEC §5.4 (R-B1–R-B8), S-A07, N-04, human request 2026-11-04, supersedes R-B1/R-B2/R-B4,
+  extends D-024
+- Entscheid: the generated badge set is reduced to four rule types. (1) `MEILENSTEIN_ERREICHT`
+  creates one badge per primary milestone (`M-BBC`, `M-IPA`, `M-LAP`); it is fulfilled while the
+  corresponding milestone has an active `ERREICHT` event, so milestone events are merged
+  chronologically with stage events during every badge replay. (2)
+  `BEREICH_ABGESCHLOSSEN` stays exactly as before: every objective of the area at the top level
+  (`BA-<code>`). (3) `KOMPETENZ_ANZAHL` creates three badges per stage (5, 10 and 15 competences,
+  `K<stufe>-<anzahl>`); a competence counts when it has objectives and all of them are at least that
+  stage. Thresholds above the plan's competence count are not generated, so a badge is never
+  unreachable by construction. The binary model (PiBS) has only stage 3. (4) `ALLE_KOMPETENZEN`
+  creates one `K-ALLE` badge when every competence is at the top level.
+  `BEREICH_GESTARTET` and `KOMPETENZ_SELBSTAENDIG` are no longer generated; old stored definition
+  sets are recognised with `istAktuellesBadgeSet` and replaced by freshly generated definitions.
+  `SEED_VERSION` rises to 2 so existing browsers reseed. The milestone badges for PiBS keep the
+  codes `IPA`/`LAP` but use the labels «Bachelorarbeit»/«Bachelorabschluss»
+  (`meilensteinTexteFuer`), because the binary study plan has neither an IPA nor an apprenticeship
+  qualification; graph, sidebar and readiness text use the same helper.
+- Grund: test participants should feel rewarded by a small, legible set of goals instead of dozens
+  of per-competence badges, and every badge must show visible progress. Counting 5/10/15 per stage
+  keeps the same threshold for each stage, matching the human's «of the same category» wording. The
+  milestone badge is derived from the existing append-only milestone events, so it obeys the
+  «compute, never store» constraint.
+- Hinweis: badge progress and the reward board read `BadgeAnsicht` and add no rule. Confirming or
+  withdrawing a milestone now returns `neueBadges`/`inaktiveBadges` and recomputes the stored grants
+  through the same `ermittleBadgeAenderungen` helper as stage confirmations. Per-area badges appear
+  both on the reward board and in the Badges tab; the deliberate duplication is presentation only.
+  The PiBS «Basisphase» wording for `BBC` is an assumption because the spec only names the
+  Basislehrjahr.
+- Status: ANNAHME
+
+## D-026 Orthogonal edge lanes, derived node states and mouse panning
+
+- Bezug: SPEC 8.2, 8.3, R-E1, R-T2, human request 2026-11-04, extends D-024
+- Entscheid: the graph routes every non-trivial edge with rounded orthogonal segments on reserved
+  free lanes instead of cubic beziers. `baum-geometrie.ts` exports `rundeKanten` plus `pfadFolge`,
+  `pfadBbcAst`, `pfadAstIpa` and `pfadVerweis`; the corner radius is `ECKEN_RADIUS = 8·s`, the
+  clearance between a lane and a ring/title is `KANTEN_ABSTAND = 11·s`, where `s` is the `--skala`
+  scale from D-024. Lanes: top competences → IPA at `ipaY + 36·s` (above the top row), Bbc → area at
+  `astBasisY + 52·s` (between the area row and the Bbc hexagon, which moves down to
+  `astBasisY + 96·s`), lowest cross edge at `untersteZeile + 33·s`. `FOLGE` edges and `IPA → LAP`
+  stay straight vertical. A `VERWEIS` edge (R-T2) uses the boundary lane when both competences share
+  a row or are one row apart; longer jumps use the outer lane (`oben`/`unten`) and the 8 px gutter
+  between two columns (`spalte − 26·s`), so no route crosses a ring or a competence title.
+  The node state is derived in `knoten-zustand.ts` from the existing view data:
+  `ABGESCHLOSSEN` when every top-level objective of the competence is confirmed, otherwise
+  `NAECHSTER` when the rules mark it as `istNaechster`, otherwise `SPAETER`. The graph shows a corner
+  badge ✓ / ▶ / … (`graph__zustand`) and an accent outline for `NAECHSTER`; the legend reuses the
+  same badge class so symbol and colours cannot drift. The card can be panned with mouse or pen:
+  `pointerdown`/`pointermove` on `.graph__karte` record the start, a move beyond 5 px sets pointer
+  capture, switches the smooth scroll behaviour to `auto`, scrolls `scrollLeft` and suppresses the
+  click that follows the drag; `pointerType === 'touch'` is ignored so native touch scrolling keeps
+  working. The card is `tabindex="0"` with `role="group"` and an aria-label, so the arrow keys scroll
+  it. The initial centring uses the measured stage width (`layout().breite`) instead of
+  `scrollWidth`, because the invisible tooltips extend the scrollable area and previously started
+  narrow screens at the right edge of the tree. `anyComponentStyle.maximumWarning` rises from 7 kB to
+  8 kB (error 9 kB).
+- Grund: the beziers crossed rings and competence titles at the start and end of the tree, which was
+  hard to read at the larger scale of D-024. Reserved lanes are predictable, keep all text uncovered
+  and degrade gracefully when an area has fewer competences. The three states answer the human's
+  request for visibly distinct «completed / can be completed / cannot yet be completed» nodes, but
+  they add no lock: every node stays clickable and requestable (R-E1). Panning removes the need to
+  hit the scrollbar on narrow screens, and skipping touch preserves the platform's momentum
+  scrolling. Reusing the node badge in the legend keeps the two views identical.
+- Hinweis: `SPAETER` is labelled «Noch nicht dran», not «gesperrt», because no rule blocks a request
+  (R-E1); the wording is a recommendation. The state depends on confirmed objectives, not on the
+  percentage: a competence with a green ring (≥ 67 %) can still be `SPAETER` (g1 is 88 % and
+  `SPAETER`); `NAECHSTER` is the rules' lowest non-green competence (S-A04). The state semantics are
+  recorded as Q-023. The
+  hidden tooltips still extend `scrollWidth`, so the card can be panned or scrolled a little into the
+  empty area right of the last column; flipping or clipping those tooltips is a follow-up. The state
+  glyphs are `aria-hidden`; the accessible name of the button carries the state text, and the legend
+  repeats it visibly.
+- Status: ANNAHME
+
+## D-027 Taller rows and a three-level node language inside the tree
+
+- Bezug: SPEC 8.2 (row spacing 66), S-A03, S-A04, R-E1, human request 2026-11-04, extends D-024/D-026
+- Entscheid: `ZEILENABSTAND` rises from 66 to 84 px; the node button spans the row (`--zeile` from
+  the layout instead of a CSS literal) and the request/state badges are children of the ring, so
+  they follow the ring when the row height changes. The top and bottom lanes are the row edges
+  (`obersteZeile − zeilenabstand/2`, `untersteZeile + zeilenabstand/2`), which keeps their clearance
+  to three-line titles independent of the row height. The three states get one shared visual
+  language: `ABGESCHLOSSEN` fills the inner disc green (`--ampel-gruen`), sets the code in
+  `--farbe-akzent-text` and separates the ✓ badge with a 2 px surface ring; `NAECHSTER` keeps the
+  dashed frame that S-A04 requires but draws it `3·s` thick in `--farbe-akzent` with a `4·s` offset,
+  sets the code in the accent colour and uses a solid accent ▶ badge; `SPAETER` keeps the
+  traffic-light ring but turns the inner disc `--farbe-flaeche-leise` and the code
+  `--farbe-text-leise`, with the grey … badge. The badges grow from 1.15 rem to 1.3 rem.
+- Grund: at the larger scale of D-024 the 66 px rows let three-line titles almost touch, which made
+  the tree hard to read; the human asked for more height. The three states were only distinguishable
+  through small corner badges; a filled disc (done), a bold dashed frame (next) and a quiet grey disc
+  (later) can be read across the whole tree without hovering, while the traffic-light ring still
+  shows progress and colour.
+- Hinweis: this deviates from SPEC 8.2's 66 px row spacing and extends the S-A03/S-A04 restriction
+  («no status in the tree, only the dashed frame and the request count», «all other nodes stay
+  normal»). It is presentation only: every node stays clickable and requestable (R-E1), the dashed
+  frame remains the «Als Nächstes» marker, and no rule or event is added. The bottom lane moves from
+  `+33·s` to the row edge (`+42·s` at the new spacing), so D-026's lane offsets are superseded here.
+  Contrast checked: the muted code is 5.6:1 on the grey disc, white on the completed green is about
+  6.5:1, the accent code/dashes are about 6:1 on white. The deviation is recorded as Q-024.
+- Status: ANNAHME
+
+## D-028 The skill tree is the page; the reward board below it is removed
+
+- Bezug: S-A01, S-A03, S-A07, R-B3, N-04, human request 2026-11-04, supersedes the board part of D-024
+- Entscheid: the skilltree page no longer renders the `belohnungen-uebersicht` board below the graph;
+  the component, its styles and its tests are deleted and the page imports only the tree, the sidebar,
+  the badges view and the header. The tree stays the core of the page. The per-area reward
+  (`BEREICH_ABGESCHLOSSEN`, R-B3) and the concrete competences of an area remain reachable _inside_
+  the tree through the existing area sidebar, which already shows the badge and the same
+  «erreicht / gesamt» counts; `badges.ausgeblendet` still hides that block (N-04). Milestone badges
+  stay in the Badges tab (S-A07); the Bbc/IPA/LAP hexagons remain the milestones of the tree (S-A03).
+- Grund: the human found the separate milestone cards and the per-area reward board below the tree
+  distracting and wants the tree itself to carry the relevant information. The board duplicated what
+  the tree and its sidebar already show and pushed the tree out of focus.
+- Hinweis: «Milestones» here means the board's badge group, not the Bbc/IPA/LAP nodes; those are part
+  of the tree and stay. No rule, event, badge definition or stored field changes. The board-only
+  helpers `belohnungsFortschritt` and `anteilProzent` are deleted; `belohnungen.ts` keeps
+  `astBelohnungen`/`belohnungFuerAst` for the sidebar. Q-020's reward-board part is resolved
+  (removed); the 284 px column cap is unaffected.
+- Status: BESTÄTIGT
